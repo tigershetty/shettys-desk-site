@@ -1,0 +1,92 @@
+{
+  "summary": "7+ years in supply chain at Tetra Pak, from thesis student to replenishment manager. Every role taught me something different about how operations actually work, and where they break.",
+  "primary": [
+    {
+      "company": "Tetra Pak",
+      "totalYears": "7 years 3 months",
+      "roles": [
+        {
+          "title": "Replenishment Manager",
+          "period": "Sep 2025 - Present",
+          "location": "Lund",
+          "lesson": "Owning the end-to-end. Right product, right place, right time."
+        },
+        {
+          "title": "Team Coordinator, Supply Planning",
+          "period": "May 2024 - Sep 2025",
+          "location": "Lund",
+          "lesson": "People leadership. Coordinating a team is its own supply chain."
+        },
+        {
+          "title": "Master Scheduler",
+          "period": "Oct 2021 - Sep 2025",
+          "location": "Lund",
+          "lesson": "180M+ euros COGS, 12+ suppliers across 6 countries. Global complexity."
+        },
+        {
+          "title": "Supply Chain Analyst",
+          "period": "Jun 2021 - Dec 2021",
+          "location": "Lund",
+          "lesson": "S&OP standardization. Making the plan actually match reality."
+        },
+        {
+          "title": "Junior Supply Chain Specialist",
+          "period": "Sep 2019 - Jun 2021",
+          "location": "Lund",
+          "lesson": "Where I first saw the gap between what the data says and what the room decides."
+        },
+        {
+          "title": "Master Thesis Student",
+          "period": "Jan 2019 - Aug 2019",
+          "location": "Lund",
+          "lesson": "S&OP in engineer-to-order environments. Where Tetra Pak started for me."
+        }
+      ]
+    }
+  ],
+  "earlier": [
+    {
+      "company": "Citadel Intelligent Systems",
+      "title": "Supply Chain Analyst",
+      "period": "Jun 2018 - Aug 2018",
+      "location": "Bangalore"
+    },
+    {
+      "company": "Jigsaw Thinking",
+      "title": "Creativity Lead",
+      "period": "Aug 2017",
+      "location": "Bangalore"
+    },
+    {
+      "company": "ITC Limited",
+      "title": "Industrial Engineering Intern",
+      "period": "Jan 2017 - May 2017",
+      "location": "Bangalore"
+    },
+    {
+      "company": "SELCO Foundation",
+      "title": "Industrial Engineering Intern",
+      "period": "Aug 2016 - Nov 2016",
+      "location": "Bangalore"
+    },
+    {
+      "company": "Biz Sherpa",
+      "title": "Program Coordinator",
+      "period": "Jun 2016 - Oct 2016",
+      "location": "Bangalore"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Lund University",
+      "degree": "MS Logistics & Supply Chain Management",
+      "period": "2017 - 2019"
+    },
+    {
+      "institution": "R. V. College of Engineering, Bangalore",
+      "degree": "BE Industrial Engineering & Management",
+      "period": "2013 - 2017"
+    }
+  ],
+  "languages": ["English", "Hindi", "Kannada", "Swedish"]
+}

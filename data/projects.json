@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Die with Zero Planner",
+    "description": "Interactive financial planner for Sweden, based on the book by Bill Perkins.",
+    "status": "In Progress",
+    "tag": "Web App"
+  },
+  {
+    "name": "ShettysDesk.com",
+    "description": "This website. Built with Claude Code, Next.js, and Tailwind.",
+    "status": "In Progress",
+    "tag": "Web"
+  },
+  {
+    "name": "Shetty's Desk Workflow Engine",
+    "description": "Automating the research-to-publish pipeline for content creation.",
+    "status": "In Progress",
+    "tag": "Automation"
+  },
+  {
+    "name": "Bucket List Compiler",
+    "description": "A tool to collect and organize life experiences worth having.",
+    "status": "In Progress",
+    "tag": "Web App"
+  }
+]

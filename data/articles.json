@@ -1,0 +1,97 @@
+[
+  {
+    "slug": "maersk-strategic-pivot",
+    "title": "Maersk's Strategic Pivot",
+    "hook": "Why is the world's second-largest shipping company buying warehouses instead of ships?",
+    "date": "2026-02-20",
+    "image": "/images/articles/maersk.png",
+    "tags": ["Strategy", "Logistics", "Integration"],
+    "featured": true,
+    "audienceBadge": "Read by Directors at Maersk, CMA CGM, Hapag-Lloyd",
+    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7430619872558174208",
+    "stats": {
+      "impressions": 55142,
+      "reactions": 361,
+      "comments": 36,
+      "reposts": 30,
+      "saves": 63
+    },
+    "caption": "Why is the world's second-largest shipping company buying warehouses instead of ships?\n\nMaersk used to move boxes. Port to port. That was the model for over a century. Revenue was volatile, margins were thin, and every boom was followed by a bust.\n\nThen they made a bet. Instead of competing on who has the most ships, they decided to control the entire journey. Factory to front door.\n\nThey acquired companies. Logistics firms, customs brokers, warehousing networks. They built a tech platform. They didn't just add services. They rebuilt the business model.\n\nToday, Maersk offers end-to-end supply chain solutions. You don't just book a container. You book the pickup, the customs clearance, the warehouse, the last mile.\n\nThe result? More predictable revenue. Stickier customer relationships. Higher margins. Less exposure to the spot market rollercoaster.\n\nBut it's not without risk. Integration is hard. Culture clashes, system migrations, service consistency across dozens of countries. And the ocean business still matters. You can't ignore the core while building the future.\n\nMy take: Maersk didn't just diversify. They redefined what a shipping company can be. The question now is whether the industry follows, or whether this becomes a competitive moat."
+  },
+  {
+    "slug": "zara-supply-chain-edge",
+    "title": "Zara's Edge",
+    "hook": "How do you get a customer to visit your store 17 times a year without spending 1 euro on advertising?",
+    "date": "2026-02-23",
+    "image": "/images/articles/zara.png",
+    "tags": ["Retail", "Fast Fashion", "Operations"],
+    "featured": false,
+    "audienceBadge": "Read by professionals in Retail & Fashion Supply Chain",
+    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7431664959534764032",
+    "stats": {
+      "impressions": 731,
+      "reactions": 13,
+      "comments": 2,
+      "reposts": 1,
+      "saves": 3
+    },
+    "caption": "How do you get a customer to visit your store 17 times a year without spending 1 euro on advertising?\n\nZara figured it out. And the answer isn't marketing. It's supply chain.\n\nWhile most fashion brands plan collections 6-9 months ahead, Zara designs, produces, and ships in 2-3 weeks. They don't predict trends. They react to them.\n\nThe secret? Vertical integration and small batches. Zara owns most of its production. They make less of each style, ship twice a week, and create artificial scarcity. If you see something you like, buy it now. It won't be there next week.\n\nThe average fashion brand gets 4-5 store visits a year. Zara gets 17. Not because of ads. Because the product changes constantly.\n\nInditex (Zara's parent) reported 35.9 billion euros in revenue in 2023. They spend less than 1% on advertising. Their supply chain IS their marketing.\n\nMy take: Zara didn't win by being the cheapest or the most fashionable. They won by being the fastest. Speed, in supply chain, is a strategy."
+  },
+  {
+    "slug": "nike-turnaround",
+    "title": "Nike's Turnaround",
+    "hook": "$28 billion in market cap, gone in a day. What went wrong?",
+    "date": "2026-02-27",
+    "image": "/images/articles/nike.png",
+    "tags": ["Strategy", "DTC", "Retail"],
+    "featured": false,
+    "audienceBadge": "Read by professionals in Retail & Consumer Goods",
+    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7432706601893056512",
+    "stats": {
+      "impressions": 565,
+      "reactions": 8,
+      "comments": 1,
+      "reposts": 0,
+      "saves": 2
+    },
+    "caption": "$28 billion in market cap, gone in a day. What went wrong?\n\nNike bet big on direct-to-consumer (DTC). Cut wholesale partners. Pulled products from retailers. Built their own digital channels.\n\nOn paper, it made sense. Higher margins. More data. Closer to the customer.\n\nIn practice? They lost shelf space they couldn't replace with apps. Foot Locker, Dick's Sporting Goods, independent retailers. Decades of relationships, reduced to a strategy slide.\n\nWhen the DTC growth slowed, there was no safety net. June 2024: Nike's stock dropped 20% in a single day. $28 billion in market value, gone.\n\nThe new CEO (Elliott Hill, a 32-year Nike veteran) is now reversing course. Rebuilding wholesale. Re-investing in innovation. Getting back to what made Nike, Nike.\n\nMy take: DTC isn't wrong. But treating it as a replacement for wholesale, instead of a complement, was the mistake. Distribution strategy is supply chain strategy. Cut too many channels and you cut your own reach."
+  },
+  {
+    "slug": "mumbai-dabbawalas",
+    "title": "Mumbai Dabbawalas",
+    "hook": "1 error in 16 million deliveries. No software. Since 1890.",
+    "date": "2026-03-01",
+    "image": "/images/articles/dabbawalas.png",
+    "tags": ["Operations", "Simplicity", "Last Mile"],
+    "featured": false,
+    "audienceBadge": "Read by professionals in Logistics & Operations",
+    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7433814989297278977",
+    "stats": {
+      "impressions": 335,
+      "reactions": 5,
+      "comments": 0,
+      "reposts": 0,
+      "saves": 1
+    },
+    "caption": "1 error in 16 million deliveries. No software. Since 1890.\n\nEvery day in Mumbai, around 5,000 dabbawalas pick up 200,000 home-cooked lunch boxes from homes and deliver them to offices across the city. By lunchtime. Every day. Rain or shine.\n\nThey use a simple color-coded system painted on each box. No GPS. No app. No scanning. Just a system everyone understands.\n\nThe result? A Six Sigma-level error rate. Harvard Business School studied them. Prince Charles visited them. And they've been doing this for over 130 years.\n\nHow? The system is simple enough that it doesn't break. No single point of failure. No dependency on technology that can crash. The process is the product.\n\nMy take: We spend billions on supply chain technology. Sometimes the answer isn't better software. It's a better system. The dabbawalas didn't build a tracking system. They built a system that doesn't need tracking."
+  },
+  {
+    "slug": "us-iran-hormuz",
+    "title": "US-Iran Hormuz",
+    "hook": "The world's most critical energy corridor took 48 hours to close.",
+    "date": "2026-03-02",
+    "image": null,
+    "tags": ["Geopolitics", "Energy", "Risk"],
+    "featured": false,
+    "audienceBadge": "Read by professionals in Energy & Logistics",
+    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7434176477258080256",
+    "stats": {
+      "impressions": 241,
+      "reactions": 5,
+      "comments": 1,
+      "reposts": 0,
+      "saves": 0
+    },
+    "caption": "The world's most critical energy corridor took 48 hours to close.\n\nThe Strait of Hormuz. 39 kilometers wide at its narrowest. 21% of global oil passes through it daily. That's roughly 21 million barrels.\n\nWhen tensions between the US and Iran escalate, this is the chokepoint everyone watches. It's not a hypothetical. It's happened before. Tankers have been seized. Drones have been shot down. Insurance premiums have spiked overnight.\n\nWhat makes Hormuz different from other supply chain risks? You can't reroute around it easily. The alternatives add weeks and cost billions. And the countries most dependent on it (Japan, South Korea, India, China) have limited leverage over the geopolitics.\n\nMy take: Supply chain risk isn't just about supplier bankruptcies or port congestion. Sometimes it's about 39 kilometers of water and two countries that don't get along. Geopolitical risk is supply chain risk. And most S&OP models don't account for it."
+  }
+]

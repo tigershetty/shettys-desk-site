@@ -1,0 +1,25 @@
+{
+  "name": "Shetty's.",
+  "subtitle": "Supply Chain | Content",
+  "greeting": "This is Shetty's Desk. I break down how supply chains actually work. One real topic at a time, for anyone curious enough to ask why.",
+  "availabilityBadge": "Open to speaking & collaborations",
+  "nav": {
+    "primary": [
+      { "label": "Home", "href": "/" },
+      { "label": "My Articles", "href": "/articles" },
+      { "label": "My Approach", "href": "/approach" },
+      { "label": "About Me", "href": "/about" },
+      { "label": "Experience", "href": "/experience" }
+    ],
+    "secondary": [
+      { "label": "The Workshop", "href": "/workshop" },
+      { "label": "Shetty's Desk", "href": "/shettys-desk" },
+      { "label": "Contact", "href": "/contact" }
+    ]
+  },
+  "marquee": "Made with curiosity - Made with Claude - Made with Gemini - Made with LinkedIn - Made with Vercel - Made with caffeine - Made with trial and error",
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/shettys-desk",
+    "email": "poornajithshetty@gmail.com"
+  }
+}
