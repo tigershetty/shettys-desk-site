@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand-dark: #0a1628;
+  --color-brand-mid: #1e3a5f;
+  --color-brand-accent: #0066ff;
+  --color-brand-glow: #3b82f6;
+  --color-brand-white: #f0f0f0;
+  --color-brand-muted: #94a3b8;
+  --color-brand-card: #0f2035;
+  --color-brand-border: #1e3a5f;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-brand-dark);
+  color: var(--color-brand-white);
+}
