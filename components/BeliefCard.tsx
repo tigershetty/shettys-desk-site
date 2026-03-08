@@ -14,16 +14,16 @@ export default function BeliefCard({
   return (
     <button
       onClick={() => setOpen(!open)}
-      className="w-full rounded-xl border border-brand-border bg-brand-card p-5 text-left transition-colors hover:border-brand-accent/30"
+      className="w-full rounded-xl border border-border bg-card p-5 text-left transition-colors hover:border-primary/30"
     >
       <div className="flex items-center justify-between">
-        <h3 className="font-medium text-brand-white">
+        <h3 className="font-medium text-foreground">
           &ldquo;{title}&rdquo;
         </h3>
-        <span className="ml-4 text-brand-muted">{open ? "-" : "+"}</span>
+        <span className="ml-4 text-muted-foreground">{open ? "-" : "+"}</span>
       </div>
       {open && (
-        <p className="mt-3 text-sm text-brand-muted leading-relaxed">{body}</p>
+        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{body}</p>
       )}
     </button>
   );

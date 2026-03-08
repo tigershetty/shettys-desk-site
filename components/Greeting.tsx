@@ -18,13 +18,13 @@ export default function Greeting() {
 
   return (
     <section className="mb-12">
-      <h1 className="text-3xl font-bold text-brand-white lg:text-4xl">
+      <h1 className="text-3xl font-bold text-foreground lg:text-4xl">
         {greeting}
       </h1>
-      <span className="mt-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/10 px-3 py-1 text-xs text-brand-accent">
+      <span className="mt-3 inline-block rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
         Open to speaking &amp; collaborations
       </span>
-      <p className="mt-4 max-w-xl text-brand-muted leading-relaxed">
+      <p className="mt-4 max-w-xl text-muted-foreground leading-relaxed">
         This is Shetty&apos;s Desk. I break down how supply chains actually
         work. One real topic at a time, for anyone curious enough to ask why.
       </p>

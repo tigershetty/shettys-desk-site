@@ -26,7 +26,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
     <article className="max-w-3xl">
       <Link
         href="/articles"
-        className="mb-6 inline-block text-sm text-brand-muted hover:text-brand-accent"
+        className="mb-6 inline-block text-sm text-muted-foreground hover:text-primary"
       >
         &larr; Back to articles
       </Link>
@@ -47,57 +47,57 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         {article.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-brand-accent/10 px-2.5 py-0.5 text-xs text-brand-accent"
+            className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs text-primary"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <h1 className="text-3xl font-bold text-brand-white lg:text-4xl">
+      <h1 className="text-3xl font-bold text-foreground lg:text-4xl">
         {article.title}
       </h1>
 
-      <p className="mt-2 text-sm text-brand-muted">{article.date}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{article.date}</p>
 
       {article.audienceBadge && (
-        <p className="mt-3 text-xs text-brand-accent/80 italic">
+        <p className="mt-3 text-xs text-primary/80 italic">
           {article.audienceBadge}
         </p>
       )}
 
-      <div className="mt-8 space-y-4 text-brand-white/90 leading-relaxed whitespace-pre-line">
+      <div className="mt-8 space-y-4 text-foreground/90 leading-relaxed whitespace-pre-line">
         {article.caption}
       </div>
 
-      <div className="mt-10 flex flex-wrap gap-6 rounded-xl border border-brand-border bg-brand-card p-5 text-sm">
+      <div className="mt-10 flex flex-wrap gap-6 rounded-xl border border-border bg-card p-5 text-sm">
         <div>
-          <p className="text-brand-muted">Impressions</p>
-          <p className="text-lg font-semibold text-brand-white">
+          <p className="text-muted-foreground">Impressions</p>
+          <p className="text-lg font-semibold text-foreground">
             {article.stats.impressions.toLocaleString()}
           </p>
         </div>
         <div>
-          <p className="text-brand-muted">Reactions</p>
-          <p className="text-lg font-semibold text-brand-white">
+          <p className="text-muted-foreground">Reactions</p>
+          <p className="text-lg font-semibold text-foreground">
             {article.stats.reactions}
           </p>
         </div>
         <div>
-          <p className="text-brand-muted">Comments</p>
-          <p className="text-lg font-semibold text-brand-white">
+          <p className="text-muted-foreground">Comments</p>
+          <p className="text-lg font-semibold text-foreground">
             {article.stats.comments}
           </p>
         </div>
         <div>
-          <p className="text-brand-muted">Reposts</p>
-          <p className="text-lg font-semibold text-brand-white">
+          <p className="text-muted-foreground">Reposts</p>
+          <p className="text-lg font-semibold text-foreground">
             {article.stats.reposts}
           </p>
         </div>
         <div>
-          <p className="text-brand-muted">Saves</p>
-          <p className="text-lg font-semibold text-brand-white">
+          <p className="text-muted-foreground">Saves</p>
+          <p className="text-lg font-semibold text-foreground">
             {article.stats.saves}
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         href={article.linkedinUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-block rounded-md bg-brand-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-accent/80"
+        className="mt-6 inline-block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/80"
       >
         View on LinkedIn
       </a>

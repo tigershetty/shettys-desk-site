@@ -10,24 +10,24 @@ const stats = [
 export default function StatsGrid() {
   return (
     <section className="mb-12">
-      <h2 className="mb-6 text-lg font-semibold text-brand-white">
+      <h2 className="mb-6 text-lg font-semibold text-foreground">
         My numbers
       </h2>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-brand-border bg-brand-card p-4"
+            className="rounded-xl border border-border bg-card p-4"
           >
-            <p className="text-2xl font-bold text-brand-accent">{stat.value}</p>
-            <p className="mt-1 text-sm text-brand-white">{stat.label}</p>
-            <p className="text-xs text-brand-muted">{stat.sublabel}</p>
+            <p className="text-2xl font-bold text-primary">{stat.value}</p>
+            <p className="mt-1 text-sm text-foreground">{stat.label}</p>
+            <p className="text-xs text-muted-foreground">{stat.sublabel}</p>
           </div>
         ))}
       </div>
       <Link
         href="/experience"
-        className="mt-4 inline-block text-sm text-brand-accent hover:underline"
+        className="mt-4 inline-block text-sm text-primary hover:underline"
       >
         View experience
       </Link>

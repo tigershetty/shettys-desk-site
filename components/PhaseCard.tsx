@@ -16,19 +16,19 @@ export default function PhaseCard({
   return (
     <button
       onClick={() => setOpen(!open)}
-      className="w-full rounded-xl border border-brand-border bg-brand-card p-5 text-left transition-colors hover:border-brand-accent/30"
+      className="w-full rounded-xl border border-border bg-card p-5 text-left transition-colors hover:border-primary/30"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent/10 text-xs font-bold text-brand-accent">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
             {number}
           </span>
-          <h3 className="font-medium text-brand-white">{title}</h3>
+          <h3 className="font-medium text-foreground">{title}</h3>
         </div>
-        <span className="text-brand-muted transition-transform">{open ? "-" : "+"}</span>
+        <span className="text-muted-foreground transition-transform">{open ? "-" : "+"}</span>
       </div>
       {open && (
-        <p className="mt-3 text-sm text-brand-muted leading-relaxed">
+        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
           {description}
         </p>
       )}

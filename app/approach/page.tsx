@@ -38,10 +38,10 @@ export default function ApproachPage() {
   return (
     <>
       <section className="mb-10">
-        <h1 className="text-3xl font-bold text-brand-white">
+        <h1 className="text-3xl font-bold text-foreground">
           How a breakdown gets made
         </h1>
-        <p className="mt-2 text-brand-muted">
+        <p className="mt-2 text-muted-foreground">
           There&apos;s no formula. But there&apos;s a rhythm.
         </p>
       </section>
@@ -59,8 +59,8 @@ export default function ApproachPage() {
         ))}
       </div>
 
-      <div className="mt-10 rounded-xl border border-brand-border bg-brand-card p-5">
-        <p className="text-sm text-brand-muted leading-relaxed">
+      <div className="mt-10 rounded-xl border border-border bg-card p-5">
+        <p className="text-sm text-muted-foreground leading-relaxed">
           I&apos;m building a workflow engine to speed up the repetitive parts
           (research aggregation, prompt templates, analytics tracking) so I can
           spend more time on the part that actually matters: the thinking.

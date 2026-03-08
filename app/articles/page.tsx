@@ -8,10 +8,10 @@ export default function ArticlesPage() {
   return (
     <>
       <section className="mb-10">
-        <h1 className="text-3xl font-bold text-brand-white">
+        <h1 className="text-3xl font-bold text-foreground">
           Supply chain, one breakdown at a time
         </h1>
-        <p className="mt-2 text-brand-muted">
+        <p className="mt-2 text-muted-foreground">
           Each one starts with a question I couldn&apos;t answer in one
           sentence.
         </p>

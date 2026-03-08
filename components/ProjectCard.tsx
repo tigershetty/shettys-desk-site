@@ -7,9 +7,9 @@ interface Project {
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="rounded-xl border border-brand-border bg-brand-card p-5">
+    <div className="rounded-xl border border-border bg-card p-5">
       <div className="mb-3 flex items-center justify-between">
-        <span className="rounded-full bg-brand-accent/10 px-2.5 py-0.5 text-xs text-brand-accent">
+        <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs text-primary">
           {project.tag}
         </span>
         <span
@@ -22,8 +22,8 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.status}
         </span>
       </div>
-      <h3 className="font-semibold text-brand-white">{project.name}</h3>
-      <p className="mt-2 text-sm text-brand-muted leading-relaxed">
+      <h3 className="font-semibold text-foreground">{project.name}</h3>
+      <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
         {project.description}
       </p>
     </div>

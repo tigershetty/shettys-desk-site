@@ -14,7 +14,7 @@ export default function Home() {
       <Greeting />
 
       <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-brand-white">
+        <h2 className="mb-6 text-lg font-semibold text-foreground">
           Featured articles
         </h2>
         <div className="space-y-6">

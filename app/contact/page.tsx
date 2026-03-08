@@ -5,20 +5,20 @@ export default function ContactPage() {
   return (
     <>
       <section className="mb-10">
-        <h1 className="text-3xl font-bold text-brand-white">
+        <h1 className="text-3xl font-bold text-foreground">
           Let&apos;s talk
         </h1>
       </section>
 
       {/* Badges */}
       <div className="mb-8 flex flex-wrap gap-3">
-        <span className="rounded-full border border-brand-border bg-brand-card px-3 py-1 text-xs text-brand-muted">
+        <span className="rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
           &lt;24h Response
         </span>
-        <span className="rounded-full border border-brand-border bg-brand-card px-3 py-1 text-xs text-brand-muted">
+        <span className="rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
           Open to Speaking
         </span>
-        <span className="rounded-full border border-brand-border bg-brand-card px-3 py-1 text-xs text-brand-muted">
+        <span className="rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
           Yes, Coffee Chats
         </span>
       </div>
@@ -30,13 +30,13 @@ export default function ContactPage() {
 
       {/* Direct contact */}
       <section>
-        <h2 className="mb-4 text-lg font-semibold text-brand-white">
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
           Or reach out directly
         </h2>
         <div className="flex flex-col gap-3 text-sm">
           <a
             href={`mailto:${siteData.social.email}`}
-            className="text-brand-accent hover:underline"
+            className="text-primary hover:underline"
           >
             {siteData.social.email}
           </a>
@@ -44,7 +44,7 @@ export default function ContactPage() {
             href={siteData.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-accent hover:underline"
+            className="text-primary hover:underline"
           >
             LinkedIn
           </a>

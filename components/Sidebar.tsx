@@ -13,11 +13,11 @@ export default function Sidebar() {
       {/* Mobile hamburger */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed top-4 left-4 z-50 rounded-md bg-brand-card p-2 lg:hidden"
+        className="fixed top-4 left-4 z-50 rounded-md bg-card p-2 lg:hidden"
         aria-label="Toggle menu"
       >
         <svg
-          className="h-5 w-5 text-brand-white"
+          className="h-5 w-5 text-foreground"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -50,16 +50,16 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-40 flex h-screen w-64 flex-col border-r border-brand-border bg-brand-dark p-6 transition-transform lg:static lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-40 flex h-screen w-64 flex-col border-r border-border bg-sidebar p-6 transition-transform lg:static lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Brand */}
         <div className="mb-8">
-          <h2 className="text-xl font-bold text-brand-white">
+          <h2 className="text-xl font-bold text-foreground">
             {siteData.name}
           </h2>
-          <p className="text-xs text-brand-muted">{siteData.subtitle}</p>
+          <p className="text-xs text-muted-foreground">{siteData.subtitle}</p>
         </div>
 
         {/* Navigation */}
@@ -72,7 +72,7 @@ export default function Sidebar() {
         </div>
 
         {/* Status indicator */}
-        <p className="mt-6 mb-2 text-xs text-brand-accent">building</p>
+        <p className="mt-6 mb-2 text-xs text-primary">building</p>
 
         {/* Terminal */}
         <div>
@@ -80,7 +80,7 @@ export default function Sidebar() {
         </div>
 
         {/* Share button */}
-        <button className="mt-4 w-full rounded-md border border-brand-border px-3 py-2 text-xs text-brand-muted transition-colors hover:border-brand-accent hover:text-brand-white">
+        <button className="mt-4 w-full rounded-md border border-border px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground">
           Share my site
         </button>
       </aside>

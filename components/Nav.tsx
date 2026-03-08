@@ -29,8 +29,8 @@ export default function Nav({
             onClick={onNavigate}
             className={`rounded-md px-3 py-2 text-sm transition-colors ${
               pathname === item.href
-                ? "bg-brand-accent/10 text-brand-accent font-medium"
-                : "text-brand-muted hover:text-brand-white hover:bg-brand-card"
+                ? "bg-primary/10 text-primary font-medium"
+                : "text-muted-foreground hover:text-foreground hover:bg-card"
             }`}
           >
             {item.label}
@@ -38,7 +38,7 @@ export default function Nav({
         ))}
       </div>
       <div>
-        <p className="mb-2 px-3 text-xs font-medium uppercase tracking-wider text-brand-muted/60">
+        <p className="mb-2 px-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">
           Other
         </p>
         <div className="flex flex-col gap-1">
@@ -49,8 +49,8 @@ export default function Nav({
               onClick={onNavigate}
               className={`rounded-md px-3 py-2 text-sm transition-colors ${
                 pathname === item.href
-                  ? "bg-brand-accent/10 text-brand-accent font-medium"
-                  : "text-brand-muted hover:text-brand-white hover:bg-brand-card"
+                  ? "bg-primary/10 text-primary font-medium"
+                  : "text-muted-foreground hover:text-foreground hover:bg-card"
               }`}
             >
               {item.label}

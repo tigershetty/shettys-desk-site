@@ -19,13 +19,13 @@ export default function ArticleCard({
   return (
     <Link
       href={`/articles/${article.slug}`}
-      className={`group block rounded-xl border border-brand-border bg-brand-card overflow-hidden transition-colors hover:border-brand-accent/40 ${
+      className={`group block rounded-xl border border-border bg-card overflow-hidden transition-colors hover:border-primary/40 ${
         featured ? "lg:flex lg:gap-6" : ""
       }`}
     >
       {article.image && (
         <div
-          className={`relative overflow-hidden bg-brand-dark ${
+          className={`relative overflow-hidden bg-background ${
             featured ? "lg:w-1/2 aspect-[4/3]" : "aspect-[4/3]"
           }`}
         >
@@ -43,23 +43,23 @@ export default function ArticleCard({
           {article.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-brand-accent/10 px-2 py-0.5 text-xs text-brand-accent"
+              className="rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary"
             >
               {tag}
             </span>
           ))}
         </div>
         <h3
-          className={`font-semibold text-brand-white ${
+          className={`font-semibold text-foreground ${
             featured ? "text-xl lg:text-2xl" : "text-lg"
           }`}
         >
           {article.title}
         </h3>
-        <p className="mt-2 text-sm text-brand-muted leading-relaxed line-clamp-2">
+        <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">
           {article.hook}
         </p>
-        <span className="mt-3 inline-block text-sm text-brand-accent group-hover:underline">
+        <span className="mt-3 inline-block text-sm text-primary group-hover:underline">
           Read the breakdown
         </span>
       </div>

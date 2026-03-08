@@ -8,7 +8,7 @@ export default function WorkshopPage() {
   return (
     <>
       <section className="mb-10">
-        <h1 className="text-3xl font-bold text-brand-white">
+        <h1 className="text-3xl font-bold text-foreground">
           Things I&apos;m building on the side
         </h1>
       </section>
@@ -16,18 +16,18 @@ export default function WorkshopPage() {
       {/* Stats bar */}
       <div className="mb-8 flex gap-6 text-sm">
         <div>
-          <span className="font-semibold text-brand-white">{finished}</span>{" "}
-          <span className="text-brand-muted">Finished</span>
+          <span className="font-semibold text-foreground">{finished}</span>{" "}
+          <span className="text-muted-foreground">Finished</span>
         </div>
         <div>
-          <span className="font-semibold text-brand-white">{inProgress}</span>{" "}
-          <span className="text-brand-muted">In Progress</span>
+          <span className="font-semibold text-foreground">{inProgress}</span>{" "}
+          <span className="text-muted-foreground">In Progress</span>
         </div>
         <div>
-          <span className="font-semibold text-brand-white">
+          <span className="font-semibold text-foreground">
             {projects.length}
           </span>{" "}
-          <span className="text-brand-muted">Total</span>
+          <span className="text-muted-foreground">Total</span>
         </div>
       </div>
 
