@@ -1,36 +1,52 @@
-import Greeting from "@/components/Greeting";
+import HeroBento from "@/components/HeroBento";
 import ArticleCard from "@/components/ArticleCard";
 import StatsGrid from "@/components/StatsGrid";
 import RadarSection from "@/components/RadarSection";
+import BlurFade from "@/components/BlurFade";
 import articles from "@/data/articles.json";
 
 export default function Home() {
   const featured = articles.filter((a) => a.featured);
-  const recent = articles.filter((a) => !a.featured).slice(0, 2);
-  const topArticles = [...featured, ...recent];
+  const secondary = articles.filter((a) => !a.featured).slice(0, 4);
 
   return (
-    <>
-      <Greeting />
+    <div className="grid gap-4 lg:grid-cols-4 lg:grid-rows-[auto_auto_auto_auto]">
+      {/* Hero - full width */}
+      <div className="lg:col-span-4">
+        <HeroBento />
+      </div>
 
-      <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          Featured articles
-        </h2>
-        <div className="space-y-6">
-          {topArticles.slice(0, 1).map((article) => (
-            <ArticleCard key={article.slug} article={article} featured />
-          ))}
-        </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {topArticles.slice(1).map((article) => (
-            <ArticleCard key={article.slug} article={article} />
-          ))}
-        </div>
-      </section>
+      {/* Featured article - 2 cols, 2 rows */}
+      <div className="lg:col-span-2 lg:row-span-2">
+        <BlurFade delay={0.1}>
+          {featured[0] && (
+            <ArticleCard article={featured[0]} featured />
+          )}
+        </BlurFade>
+      </div>
 
-      <StatsGrid />
-      <RadarSection />
-    </>
+      {/* My Numbers - top right */}
+      <div className="lg:col-span-2">
+        <BlurFade delay={0.2}>
+          <StatsGrid />
+        </BlurFade>
+      </div>
+
+      {/* Radar - bottom right */}
+      <div className="lg:col-span-2">
+        <BlurFade delay={0.3}>
+          <RadarSection />
+        </BlurFade>
+      </div>
+
+      {/* Secondary articles - 4 compact cards */}
+      {secondary.map((article, i) => (
+        <div key={article.slug} className="lg:col-span-1">
+          <BlurFade delay={0.4 + i * 0.05}>
+            <ArticleCard article={article} bento />
+          </BlurFade>
+        </div>
+      ))}
+    </div>
   );
 }
