@@ -34,7 +34,7 @@ export default function RadarSection() {
             <p className="font-medium text-foreground text-xs">{item.topic}</p>
             {expanded === i && (
               <p className="mt-1.5 text-xs text-muted-foreground italic leading-relaxed">
-                {item.commentary}
+                {item.description}
               </p>
             )}
           </button>
