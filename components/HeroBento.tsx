@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import BlurFade from "./BlurFade";
 import TextShimmer from "./TextShimmer";
+import AnimatedTextCycle from "./AnimatedTextCycle";
 
 function getGreeting(hour: number): { text: string; emoji: string } {
   if (hour >= 5 && hour < 12) return { text: "Good morning, friend", emoji: "sunrise" };
@@ -72,14 +73,20 @@ export default function HeroBento() {
         </BlurFade>
 
         <BlurFade delay={0.2}>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed">
-            <TextShimmer className="text-base font-medium">
-              I break down how supply chains actually work.
-            </TextShimmer>
-            <span className="block mt-1 text-muted-foreground">
-              One real topic at a time, for anyone curious enough to ask why.
+          <div className="mt-3 max-w-xl text-sm leading-relaxed">
+            <span className="text-base font-medium text-foreground">
+              I break down how{" "}
+              <AnimatedTextCycle
+                words={["supply chains", "logistics", "operations", "S&OP"]}
+                interval={3000}
+                className="text-primary"
+              />{" "}
+              actually works.
             </span>
-          </p>
+            <p className="mt-1 text-muted-foreground">
+              One real topic at a time, for anyone curious enough to ask why.
+            </p>
+          </div>
         </BlurFade>
 
         <BlurFade delay={0.3}>

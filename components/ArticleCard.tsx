@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 const accentColors: Record<string, { bg: string; border: string; tag: string; ring: string }> = {
   blue:    { bg: "bg-blue-500/8",    border: "border-blue-500/20",    tag: "bg-blue-500/15 text-blue-600",    ring: "hover:ring-blue-500/30" },
@@ -16,6 +15,7 @@ interface Article {
   image: string | null;
   tags: string[];
   accent?: string;
+  linkedinUrl?: string;
 }
 
 export default function ArticleCard({
@@ -29,11 +29,15 @@ export default function ArticleCard({
 }) {
   const colors = accentColors[article.accent || "blue"];
 
+  const articleUrl = `/articles/${article.slug}`;
+  const linkProps = {};
+
   // Compact bento card: thumbnail + title only
   if (bento) {
     return (
-      <Link
-        href={`/articles/${article.slug}`}
+      <a
+        href={articleUrl}
+        {...linkProps}
         className={`group flex items-center gap-3 rounded-xl border ${colors.border} bg-card p-3 transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
       >
         {article.image && (
@@ -50,19 +54,20 @@ export default function ArticleCard({
         <p className="text-sm font-medium text-foreground line-clamp-2 group-hover:text-primary transition-colors">
           {article.title}
         </p>
-      </Link>
+      </a>
     );
   }
 
   // Featured card: image background with overlay
   if (featured) {
     return (
-      <Link
-        href={`/articles/${article.slug}`}
+      <a
+        href={articleUrl}
+        {...linkProps}
         className="group relative block overflow-hidden rounded-2xl border border-border transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
       >
         {article.image && (
-          <div className="relative aspect-[16/10] max-h-[400px]">
+          <div className="relative aspect-[16/9]">
             <Image
               src={article.image}
               alt={article.title}
@@ -94,24 +99,25 @@ export default function ArticleCard({
             {article.hook}
           </p>
         </div>
-      </Link>
+      </a>
     );
   }
 
   // Default card (used on /articles page)
   return (
-    <Link
-      href={`/articles/${article.slug}`}
+    <a
+      href={articleUrl}
+      {...linkProps}
       className={`group block rounded-2xl border ${colors.border} ${colors.bg} overflow-hidden transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
     >
       {article.image && (
-        <div className="relative aspect-[16/10] max-h-[240px] overflow-hidden">
+        <div className="relative aspect-[16/9] overflow-hidden">
           <Image
             src={article.image}
             alt={article.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       )}
@@ -139,6 +145,6 @@ export default function ArticleCard({
           </svg>
         </span>
       </div>
-    </Link>
+    </a>
   );
 }

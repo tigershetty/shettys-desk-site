@@ -1,17 +1,20 @@
-import siteData from "@/data/site.json";
-
 export default function Footer() {
-  const text = siteData.marquee;
+  const items = ["Made with curiosity", "Made with Claude Code", "And a lot of trial and error"];
 
   return (
-    <footer className="border-t border-border bg-background py-3 overflow-hidden">
+    <footer className="border-t border-border bg-background py-4 overflow-hidden">
       <div className="flex animate-marquee whitespace-nowrap">
         {Array.from({ length: 4 }).map((_, i) => (
           <span
             key={i}
-            className="mx-4 text-xs text-muted-foreground/50"
+            className="text-xs text-muted-foreground/50"
           >
-            {text}
+            {items.map((item, j) => (
+              <span key={j}>
+                <span className="mx-6">{item}</span>
+                <span className="mx-6">●</span>
+              </span>
+            ))}
           </span>
         ))}
       </div>

@@ -149,7 +149,7 @@ const skillsConfig: SkillConfig[] = [
 // --- Orbit ring (pure CSS, no JS animation needed) ---
 function GlowingOrbitPath({ radius, glowColor = "blue", animationDelay = 0 }: { radius: number; glowColor?: GlowColor; animationDelay?: number }) {
   const colors = glowColor === "blue"
-    ? { primary: "rgba(6,133,142,0.3)", secondary: "rgba(6,133,142,0.12)", border: "rgba(6,133,142,0.2)" }
+    ? { primary: "rgba(79,70,229,0.3)", secondary: "rgba(79,70,229,0.12)", border: "rgba(79,70,229,0.2)" }
     : { primary: "rgba(245,158,11,0.25)", secondary: "rgba(245,158,11,0.1)", border: "rgba(245,158,11,0.18)" };
 
   return (
@@ -227,14 +227,14 @@ export default function OrbitingSkills() {
         className="relative w-[320px] h-[320px] sm:w-[360px] sm:h-[360px] flex items-center justify-center"
       >
         {/* Central icon */}
-        <div className="w-16 h-16 rounded-full flex items-center justify-center z-10 relative shadow-2xl" style={{ background: "linear-gradient(135deg, #0a4a55, #06858e)" }}>
-          <div className="absolute inset-0 rounded-full blur-xl animate-pulse" style={{ backgroundColor: "rgba(6,133,142,0.3)" }} />
+        <div className="w-16 h-16 rounded-full flex items-center justify-center z-10 relative shadow-2xl" style={{ background: "linear-gradient(135deg, #312e81, #4f46e5)" }}>
+          <div className="absolute inset-0 rounded-full blur-xl animate-pulse" style={{ backgroundColor: "rgba(79,70,229,0.3)" }} />
           <div className="absolute inset-0 rounded-full blur-2xl animate-pulse" style={{ backgroundColor: "rgba(245,158,11,0.15)", animationDelay: "1s" }} />
           <div className="relative z-10">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#orbitGrad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <defs>
                 <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#06858e" />
+                  <stop offset="0%" stopColor="#4f46e5" />
                   <stop offset="100%" stopColor="#f59e0b" />
                 </linearGradient>
               </defs>
@@ -273,7 +273,7 @@ export default function OrbitingSkills() {
               <div
                 className="relative w-full h-full p-2 backdrop-blur-sm rounded-full flex items-center justify-center cursor-pointer"
                 style={{
-                  backgroundColor: "rgba(10, 74, 85, 0.9)",
+                  backgroundColor: "rgba(79, 70, 229, 0.9)",
                   transition: "transform 0.2s, box-shadow 0.2s",
                   transform: isHovered ? "scale(1.25)" : "scale(1)",
                   boxShadow: isHovered
@@ -285,7 +285,7 @@ export default function OrbitingSkills() {
                 {isHovered && (
                   <div
                     className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-xs text-foreground whitespace-nowrap pointer-events-none"
-                    style={{ backgroundColor: "rgba(10, 74, 85, 0.95)", color: "#ffffff" }}
+                    style={{ backgroundColor: "rgba(79, 70, 229, 0.95)", color: "#ffffff" }}
                   >
                     {config.label}
                   </div>

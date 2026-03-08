@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Nav from "./Nav";
 import Terminal from "./Terminal";
+import AnimatedTextCycle from "./AnimatedTextCycle";
 import siteData from "@/data/site.json";
 
 export default function Sidebar() {
@@ -55,11 +57,15 @@ export default function Sidebar() {
         }`}
       >
         {/* Brand */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold text-foreground">
-            {siteData.name}
-          </h2>
-          <p className="text-xs text-muted-foreground">{siteData.subtitle}</p>
+        <div className="mb-8 flex flex-col items-center">
+          <Image
+            src="/images/logo.png"
+            alt="Shetty's Desk"
+            width={96}
+            height={96}
+            className="rounded-lg"
+          />
+          <p className="mt-2 text-xs text-muted-foreground">{siteData.subtitle}</p>
         </div>
 
         {/* Navigation */}
@@ -72,7 +78,13 @@ export default function Sidebar() {
         </div>
 
         {/* Status indicator */}
-        <p className="mt-6 mb-2 text-xs text-primary">building</p>
+        <div className="mt-6 mb-2 text-xs text-primary">
+          <AnimatedTextCycle
+            words={["building", "writing", "exploring", "shipping"]}
+            interval={4000}
+            className="text-primary text-xs"
+          />
+        </div>
 
         {/* Terminal */}
         <div>

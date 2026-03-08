@@ -1,5 +1,7 @@
 import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
+import AboutHeading from "@/components/AboutHeading";
+import GlobeSection from "@/components/GlobeSection";
 import beliefs from "@/data/beliefs.json";
 import siteData from "@/data/site.json";
 
@@ -7,9 +9,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="mb-10">
-        <h1 className="text-3xl font-bold text-foreground">
-          The person behind the desk
-        </h1>
+        <AboutHeading />
       </section>
 
       {/* Intro + Orbiting Skills */}
@@ -70,6 +70,9 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+
+      {/* Globe - places I've lived */}
+      <GlobeSection />
 
       {/* Beliefs in grid */}
       <section className="mb-12">

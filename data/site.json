@@ -6,7 +6,7 @@
   "nav": {
     "primary": [
       { "label": "Home", "href": "/" },
-      { "label": "My Articles", "href": "/articles" },
+      { "label": "Published Posts", "href": "/articles" },
       { "label": "My Approach", "href": "/approach" },
       { "label": "About Me", "href": "/about" },
       { "label": "Experience", "href": "/experience" }

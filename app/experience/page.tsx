@@ -1,4 +1,4 @@
-import RoleTimeline from "@/components/RoleTimeline";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
 import experienceData from "@/data/experience.json";
 
 export default function ExperiencePage() {
@@ -33,7 +33,7 @@ export default function ExperiencePage() {
             {primary.totalYears}
           </span>
         </div>
-        <RoleTimeline roles={primary.roles} />
+        <ExperienceTimeline roles={primary.roles} />
       </section>
 
       {/* Earlier roles */}
