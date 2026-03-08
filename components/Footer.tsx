@@ -9,7 +9,7 @@ export default function Footer() {
         {Array.from({ length: 4 }).map((_, i) => (
           <span
             key={i}
-            className="mx-8 text-xs text-brand-muted/50 font-mono"
+            className="mx-4 text-xs text-brand-muted/50"
           >
             {text}
           </span>

@@ -67,11 +67,15 @@ export default function Sidebar() {
           <Nav
             primary={siteData.nav.primary}
             secondary={siteData.nav.secondary}
+            onNavigate={() => setOpen(false)}
           />
         </div>
 
+        {/* Status indicator */}
+        <p className="mt-6 mb-2 text-xs text-brand-accent">building</p>
+
         {/* Terminal */}
-        <div className="mt-6">
+        <div>
           <Terminal />
         </div>
 

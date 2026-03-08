@@ -11,9 +11,11 @@ interface NavItem {
 export default function Nav({
   primary,
   secondary,
+  onNavigate,
 }: {
   primary: NavItem[];
   secondary: NavItem[];
+  onNavigate?: () => void;
 }) {
   const pathname = usePathname();
 
@@ -24,6 +26,7 @@ export default function Nav({
           <Link
             key={item.href}
             href={item.href}
+            onClick={onNavigate}
             className={`rounded-md px-3 py-2 text-sm transition-colors ${
               pathname === item.href
                 ? "bg-brand-accent/10 text-brand-accent font-medium"
@@ -43,6 +46,7 @@ export default function Nav({
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={`rounded-md px-3 py-2 text-sm transition-colors ${
                 pathname === item.href
                   ? "bg-brand-accent/10 text-brand-accent font-medium"

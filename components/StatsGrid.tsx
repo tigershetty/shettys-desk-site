@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const stats = [
   { value: "7+", label: "Years in supply chain", sublabel: "2019 - Now" },
   { value: "5", label: "Articles published", sublabel: "LinkedIn" },
@@ -23,6 +25,12 @@ export default function StatsGrid() {
           </div>
         ))}
       </div>
+      <Link
+        href="/experience"
+        className="mt-4 inline-block text-sm text-brand-accent hover:underline"
+      >
+        View experience
+      </Link>
     </section>
   );
 }
