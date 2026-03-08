@@ -62,7 +62,7 @@ export default function ArticleCard({
         className="group relative block overflow-hidden rounded-2xl border border-border transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
       >
         {article.image && (
-          <div className="relative aspect-[16/10]">
+          <div className="relative aspect-[16/10] max-h-[400px]">
             <Image
               src={article.image}
               alt={article.title}
@@ -105,7 +105,7 @@ export default function ArticleCard({
       className={`group block rounded-2xl border ${colors.border} ${colors.bg} overflow-hidden transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
     >
       {article.image && (
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/10] max-h-[240px] overflow-hidden">
           <Image
             src={article.image}
             alt={article.title}
