@@ -17,8 +17,8 @@ export default function Home() {
       </div>
 
       {/* Featured article - 2 cols, 2 rows */}
-      <div className="lg:col-span-2 lg:row-span-2">
-        <BlurFade delay={0.1}>
+      <div className="lg:col-span-2 lg:row-span-2 min-h-0">
+        <BlurFade delay={0.1} className="h-full">
           {featured[0] && (
             <ArticleCard article={featured[0]} featured />
           )}

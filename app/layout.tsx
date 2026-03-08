@@ -34,12 +34,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sourceCodePro.variable} antialiased flex min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sourceCodePro.variable} antialiased flex min-h-screen overflow-x-hidden`}
       >
         <BrandMoment />
         <Sidebar />
-        <main className="flex-1 flex flex-col min-h-screen lg:ml-0">
-          <div className="flex-1 overflow-y-auto px-6 pt-16 pb-8 lg:px-12 lg:pt-10 lg:pb-10">
+        <main className="flex-1 min-w-0 flex flex-col min-h-screen lg:ml-0">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden px-6 pt-16 pb-8 lg:px-12 lg:pt-10 lg:pb-10">
             {children}
           </div>
           <Footer />
