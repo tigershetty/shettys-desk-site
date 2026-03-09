@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Upload } from "lucide-react";
 import Nav from "./Nav";
 import Terminal from "./Terminal";
 import AnimatedTextCycle from "./AnimatedTextCycle";
@@ -17,10 +16,10 @@ export default function Sidebar() {
       {/* Mobile hamburger */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed top-4 left-4 z-50 rounded-xl bg-white/30 p-2 backdrop-blur-md lg:hidden"
+        className="fixed top-4 left-4 z-50 rounded-xl bg-white/15 p-2 backdrop-blur-sm lg:hidden"
         style={{
           boxShadow:
-            "0 2px 8px rgba(0,0,0,0.1), inset 1px 1px 1px rgba(255,255,255,0.4)",
+            "0 2px 8px rgba(0,0,0,0.06), inset 1px 1px 0 rgba(255,255,255,0.35)",
         }}
         aria-label="Toggle menu"
       >
@@ -58,7 +57,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <GlassPanel
-        className={`fixed top-0 left-0 z-40 h-screen w-64 rounded-none border-r border-white/20 transition-transform lg:static lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-40 h-screen w-64 rounded-none border-r border-white/10 transition-transform lg:static lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -103,18 +102,6 @@ export default function Sidebar() {
           <div>
             <Terminal />
           </div>
-
-          {/* Share button */}
-          <button
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/15 px-3 py-2 text-xs text-muted-foreground transition-all hover:bg-white/25 hover:text-foreground"
-            style={{
-              boxShadow:
-                "inset 1px 1px 1px rgba(255,255,255,0.3), 0 1px 3px rgba(0,0,0,0.06)",
-            }}
-          >
-            <Upload className="h-3 w-3" />
-            Share my site
-          </button>
         </div>
       </GlassPanel>
     </>

@@ -76,32 +76,32 @@ export function GlassPanel({
       className={`relative overflow-hidden ${className}`}
       style={{
         boxShadow:
-          "0 8px 32px rgba(0, 0, 0, 0.12), 0 0 20px rgba(0, 0, 0, 0.06)",
+          "0 6px 24px rgba(0, 0, 0, 0.08), 0 0 12px rgba(0, 0, 0, 0.04)",
       }}
     >
-      {/* Layer 1: backdrop blur + distortion */}
+      {/* Layer 1: very light backdrop blur — keeps background visible */}
       <div
         className="absolute inset-0 z-0 overflow-hidden rounded-[inherit]"
         style={{
-          backdropFilter: "blur(12px) saturate(1.2)",
-          WebkitBackdropFilter: "blur(12px) saturate(1.2)",
+          backdropFilter: "blur(2px) saturate(1.3)",
+          WebkitBackdropFilter: "blur(2px) saturate(1.3)",
           filter: "url(#glass-distortion)",
           isolation: "isolate",
         }}
       />
 
-      {/* Layer 2: frosted tint */}
+      {/* Layer 2: ultra-thin tint so background shows through */}
       <div
         className="absolute inset-0 z-10 rounded-[inherit]"
-        style={{ background: "rgba(255, 255, 255, 0.18)" }}
+        style={{ background: "rgba(255, 255, 255, 0.08)" }}
       />
 
-      {/* Layer 3: inner light edges */}
+      {/* Layer 3: inner light refraction edges */}
       <div
-        className="absolute inset-0 z-20 rounded-[inherit] overflow-hidden"
+        className="absolute inset-0 z-20 rounded-[inherit] overflow-hidden pointer-events-none"
         style={{
           boxShadow:
-            "inset 1px 1px 1px 0 rgba(255, 255, 255, 0.45), inset -1px -1px 1px 0 rgba(255, 255, 255, 0.25)",
+            "inset 1px 1px 0 0 rgba(255, 255, 255, 0.5), inset -1px -1px 0 0 rgba(255, 255, 255, 0.2)",
         }}
       />
 
