@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface MorphingTextProps {
   className?: string;
@@ -14,7 +14,8 @@ const useMorphingText = (
   texts: string[],
   morphDuration: number,
   cooldown: number,
-  maxBlur: number
+  maxBlur: number,
+  onIndexChange: (index: number) => void
 ) => {
   const textIndexRef = useRef(0);
   const morphRef = useRef(0);
@@ -61,8 +62,9 @@ const useMorphingText = (
 
     if (fraction === 1) {
       textIndexRef.current++;
+      onIndexChange((textIndexRef.current + 1) % texts.length);
     }
-  }, [setStyles, morphDuration, cooldown]);
+  }, [setStyles, morphDuration, cooldown, onIndexChange, texts.length]);
 
   const doCooldown = useCallback(() => {
     morphRef.current = 0;
@@ -105,12 +107,14 @@ const Texts: React.FC<{
   morphDuration: number;
   cooldown: number;
   maxBlur: number;
-}> = ({ texts, morphDuration, cooldown, maxBlur }) => {
+  onIndexChange: (index: number) => void;
+}> = ({ texts, morphDuration, cooldown, maxBlur, onIndexChange }) => {
   const { text1Ref, text2Ref } = useMorphingText(
     texts,
     morphDuration,
     cooldown,
-    maxBlur
+    maxBlur,
+    onIndexChange
   );
   return (
     <>
@@ -132,15 +136,26 @@ export const MorphingText: React.FC<MorphingTextProps> = ({
   morphTime = 1,
   cooldownTime = 3,
   blurAmount = 3,
-}) => (
-  <div
-    className={`relative inline-block text-left ${className ?? ""}`}
-  >
-    <Texts
-      texts={texts}
-      morphDuration={morphTime}
-      cooldown={cooldownTime}
-      maxBlur={blurAmount}
-    />
-  </div>
-);
+}) => {
+  // Track which text is currently "next" so the sizer span drives width
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  return (
+    <span
+      className={`relative inline-flex text-left ${className ?? ""}`}
+      style={{ transition: "width 0.4s ease" }}
+    >
+      {/* Invisible sizer — takes up space so the container auto-sizes */}
+      <span className="invisible whitespace-nowrap" aria-hidden="true">
+        {texts[activeIndex]}
+      </span>
+      <Texts
+        texts={texts}
+        morphDuration={morphTime}
+        cooldown={cooldownTime}
+        maxBlur={blurAmount}
+        onIndexChange={setActiveIndex}
+      />
+    </span>
+  );
+};

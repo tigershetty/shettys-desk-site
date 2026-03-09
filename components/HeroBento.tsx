@@ -109,7 +109,7 @@ export default function HeroBento() {
                   "Open to brainstorming",
                   "Available for collaborations",
                 ]}
-                className="h-4 w-[165px] text-xs font-medium text-primary"
+                className="text-xs font-medium text-primary"
               />
             </span>
           </div>

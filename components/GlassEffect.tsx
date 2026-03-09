@@ -4,7 +4,8 @@ import React from "react";
 
 /**
  * SVG filter that produces the liquid glass distortion.
- * Rendered once (hidden) and referenced by id.
+ * Best on smaller elements (cards, buttons). On large surfaces
+ * like the sidebar, we skip this and rely on backdrop-filter only.
  */
 export function GlassFilter() {
   return (
@@ -63,6 +64,8 @@ export function GlassFilter() {
 
 /**
  * Wraps children in the liquid glass layered effect.
+ * The container MUST NOT have any opaque background — it relies on
+ * backdrop-filter to show what's behind it.
  */
 export function GlassPanel({
   children,
@@ -73,35 +76,36 @@ export function GlassPanel({
 }) {
   return (
     <div
-      className={`relative overflow-hidden ${className}`}
+      className={`relative ${className}`}
       style={{
-        boxShadow:
-          "0 6px 24px rgba(0, 0, 0, 0.08), 0 0 12px rgba(0, 0, 0, 0.04)",
+        background: "transparent",
       }}
     >
-      {/* Layer 1: very light backdrop blur — keeps background visible */}
+      {/* Layer 1: backdrop blur — this is what makes the background visible but softened */}
       <div
-        className="absolute inset-0 z-0 overflow-hidden rounded-[inherit]"
+        className="absolute inset-0 z-0 rounded-[inherit]"
         style={{
-          backdropFilter: "blur(2px) saturate(1.3)",
-          WebkitBackdropFilter: "blur(2px) saturate(1.3)",
-          filter: "url(#glass-distortion)",
-          isolation: "isolate",
+          backdropFilter: "blur(16px) saturate(1.4)",
+          WebkitBackdropFilter: "blur(16px) saturate(1.4)",
+          background: "rgba(255, 255, 255, 0.12)",
         }}
       />
 
-      {/* Layer 2: ultra-thin tint so background shows through */}
+      {/* Layer 2: specular highlight gradient — simulates light hitting glass */}
       <div
-        className="absolute inset-0 z-10 rounded-[inherit]"
-        style={{ background: "rgba(255, 255, 255, 0.08)" }}
+        className="absolute inset-0 z-10 rounded-[inherit] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.06) 100%)",
+        }}
       />
 
       {/* Layer 3: inner light refraction edges */}
       <div
-        className="absolute inset-0 z-20 rounded-[inherit] overflow-hidden pointer-events-none"
+        className="absolute inset-0 z-20 rounded-[inherit] pointer-events-none"
         style={{
           boxShadow:
-            "inset 1px 1px 0 0 rgba(255, 255, 255, 0.5), inset -1px -1px 0 0 rgba(255, 255, 255, 0.2)",
+            "inset 1px 1px 0 0 rgba(255, 255, 255, 0.4), inset -1px -1px 0 0 rgba(255, 255, 255, 0.15), 0 4px 24px rgba(0, 0, 0, 0.06)",
         }}
       />
 
