@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import BrandMoment from "@/components/BrandMoment";
 import SpotlightBackground from "@/components/SpotlightBackground";
 import { BGPattern } from "@/components/BGPattern";
+import { GlassFilter } from "@/components/GlassEffect";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${sourceCodePro.variable} antialiased flex min-h-screen overflow-x-hidden`}
       >
+        <GlassFilter />
         <BrandMoment />
         <BGPattern
           variant="dots"

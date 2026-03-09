@@ -56,8 +56,8 @@ export default function Nav({
               onClick={onNavigate}
               className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all ${
                 active
-                  ? "bg-primary/10 text-primary font-medium"
-                  : "text-muted-foreground hover:text-foreground hover:bg-card"
+                  ? "bg-white/25 text-primary font-medium shadow-sm"
+                  : "text-muted-foreground hover:text-foreground hover:bg-white/20"
               }`}
             >
               {Icon && <Icon className={`h-4 w-4 shrink-0 ${active ? "text-primary" : ""}`} />}
@@ -81,8 +81,8 @@ export default function Nav({
                 onClick={onNavigate}
                 className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all ${
                   active
-                    ? "bg-primary/10 text-primary font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-card"
+                    ? "bg-white/25 text-primary font-medium shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/20"
                 }`}
               >
                 {Icon && <Icon className={`h-4 w-4 shrink-0 ${active ? "text-primary" : ""}`} />}
