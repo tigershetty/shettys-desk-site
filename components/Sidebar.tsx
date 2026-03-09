@@ -57,7 +57,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <GlassPanel
-        className={`fixed top-0 left-0 z-40 h-screen w-64 rounded-none border-r border-white/10 transition-transform lg:static lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-40 h-screen w-64 rounded-none border-r border-white/10 transition-transform lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >

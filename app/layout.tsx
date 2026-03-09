@@ -50,7 +50,7 @@ export default function RootLayout({
         />
         <SpotlightBackground />
         <Sidebar />
-        <main className="flex-1 min-w-0 flex flex-col min-h-screen lg:ml-0">
+        <main className="flex-1 min-w-0 flex flex-col min-h-screen lg:pl-64">
           <div className="flex-1 overflow-y-auto overflow-x-hidden px-6 pt-16 pb-8 lg:px-12 lg:pt-10 lg:pb-10">
             {children}
           </div>
