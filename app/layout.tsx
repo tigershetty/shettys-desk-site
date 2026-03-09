@@ -54,7 +54,7 @@ export default function RootLayout({
           className="fixed top-0 left-0 h-screen w-64 z-[35] pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 30% 20%, rgba(79,70,229,0.12) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(20,184,166,0.10) 0%, transparent 60%), radial-gradient(ellipse at 20% 60%, rgba(245,158,11,0.08) 0%, transparent 70%)",
+              "radial-gradient(ellipse at 20% 15%, rgba(79,70,229,0.25) 0%, transparent 50%), radial-gradient(ellipse at 80% 85%, rgba(20,184,166,0.22) 0%, transparent 50%), radial-gradient(ellipse at 30% 60%, rgba(245,158,11,0.18) 0%, transparent 55%), radial-gradient(ellipse at 60% 30%, rgba(236,72,153,0.12) 0%, transparent 50%)",
           }}
         />
         <Sidebar />

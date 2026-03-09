@@ -85,9 +85,9 @@ export function GlassPanel({
       <div
         className="absolute inset-0 z-0 rounded-[inherit]"
         style={{
-          backdropFilter: "blur(16px) saturate(1.4)",
-          WebkitBackdropFilter: "blur(16px) saturate(1.4)",
-          background: "rgba(255, 255, 255, 0.12)",
+          backdropFilter: "blur(12px) saturate(1.5)",
+          WebkitBackdropFilter: "blur(12px) saturate(1.5)",
+          background: "rgba(255, 255, 255, 0.06)",
         }}
       />
 
