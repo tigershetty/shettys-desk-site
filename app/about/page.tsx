@@ -80,11 +80,12 @@ export default function AboutPage() {
           What I believe
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
-          {beliefs.map((belief) => (
+          {beliefs.map((belief, i) => (
             <BeliefCard
               key={belief.title}
               title={belief.title}
               body={belief.body}
+              index={i}
             />
           ))}
         </div>

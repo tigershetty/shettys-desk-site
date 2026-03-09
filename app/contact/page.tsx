@@ -12,13 +12,13 @@ export default function ContactPage() {
 
       {/* Badges */}
       <div className="mb-8 flex flex-wrap gap-3">
-        <span className="rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
+        <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-600">
           &lt;24h Response
         </span>
-        <span className="rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
+        <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-600">
           Open to Speaking
         </span>
-        <span className="rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
+        <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-600">
           Yes, Coffee Chats
         </span>
       </div>

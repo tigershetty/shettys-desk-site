@@ -82,7 +82,7 @@ export default function ExperiencePage() {
           {experienceData.languages.map((lang) => (
             <span
               key={lang}
-              className="rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground"
+              className="rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground transition-all hover:border-primary/30 hover:text-foreground hover:shadow-sm"
             >
               {lang}
             </span>
