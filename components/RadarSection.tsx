@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import radarData from "@/data/radar.json";
 
 const radarColors = [
@@ -11,11 +12,13 @@ const radarColors = [
   "border-chart-5/30 bg-chart-5/8 hover:bg-chart-5/15 hover:border-chart-5/50",
 ];
 
+const floatDelays = [0, 0.5, 1.0, 1.5, 2.0];
+
 export default function RadarSection() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section className="rounded-2xl border border-border bg-card p-5">
+    <section className="rounded-3xl border border-border bg-card p-5">
       <h2 className="mb-1 text-sm font-semibold text-foreground uppercase tracking-wider">
         Supply Chain Radar
       </h2>
@@ -24,20 +27,37 @@ export default function RadarSection() {
       </p>
       <div className="flex flex-wrap gap-2">
         {radarData.map((item, i) => (
-          <button
+          <motion.button
             key={item.topic}
+            animate={{
+              y: [0, -3, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              delay: floatDelays[i],
+              ease: "easeInOut",
+            }}
             onClick={() => setExpanded(expanded === i ? null : i)}
             className={`rounded-xl border px-3 py-1.5 text-left text-sm transition-all duration-300 ${radarColors[i]} ${
               expanded === i ? "basis-full" : ""
             }`}
           >
             <p className="font-medium text-foreground text-xs">{item.topic}</p>
-            {expanded === i && (
-              <p className="mt-1.5 text-xs text-muted-foreground italic leading-relaxed">
-                {item.description}
-              </p>
-            )}
-          </button>
+            <AnimatePresence>
+              {expanded === i && (
+                <motion.p
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden text-xs text-muted-foreground italic leading-relaxed"
+                >
+                  <span className="block pt-1.5">{item.description}</span>
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.button>
         ))}
       </div>
     </section>

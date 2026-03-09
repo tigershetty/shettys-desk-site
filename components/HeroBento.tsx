@@ -5,6 +5,7 @@ import Link from "next/link";
 import BlurFade from "./BlurFade";
 import TextShimmer from "./TextShimmer";
 import AnimatedTextCycle from "./AnimatedTextCycle";
+import { MorphingText } from "./MorphingText";
 
 function getGreeting(hour: number): { text: string; emoji: string } {
   if (hour >= 5 && hour < 12) return { text: "Good morning, friend", emoji: "sunrise" };
@@ -62,16 +63,6 @@ export default function HeroBento() {
           </h1>
         </BlurFade>
 
-        <BlurFade delay={0.1}>
-          <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-            </span>
-            Open to speaking &amp; collaborations
-          </span>
-        </BlurFade>
-
         <BlurFade delay={0.2}>
           <div className="mt-3 max-w-xl text-sm leading-relaxed">
             <span className="text-base font-medium text-foreground">
@@ -79,7 +70,7 @@ export default function HeroBento() {
               <AnimatedTextCycle
                 words={["supply chains", "logistics", "operations", "S&OP"]}
                 interval={3000}
-                className="text-primary"
+                className="text-primary font-bold"
               />{" "}
               actually works.
             </span>
@@ -90,19 +81,37 @@ export default function HeroBento() {
         </BlurFade>
 
         <BlurFade delay={0.3}>
-          <div className="mt-4 flex gap-3">
-            <Link
-              href="/articles"
-              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Read my articles
-            </Link>
-            <Link
-              href="/about"
-              className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-            >
-              About me
-            </Link>
+          <div className="mt-4 flex items-center justify-between gap-3">
+            <div className="flex gap-3">
+              <Link
+                href="/articles"
+                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                Read my articles
+              </Link>
+              <Link
+                href="/about"
+                className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              >
+                About me
+              </Link>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
+              <MorphingText
+                texts={[
+                  "Open to networking",
+                  "Open to partnerships",
+                  "Open to experiences",
+                  "Open to brainstorming",
+                  "Available for collaborations",
+                ]}
+                className="h-4 w-[165px] text-xs font-medium text-primary"
+              />
+            </span>
           </div>
         </BlurFade>
       </div>

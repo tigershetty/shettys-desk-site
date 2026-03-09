@@ -1,22 +1,26 @@
 [
   {
     "title": "The best systems don't need software",
-    "body": "The Dabbawalas didn't build a better tracking system. They built a system that doesn't need one. Supply chain complexity is expensive."
+    "body": "The Dabbawalas didn't build a better tracking system. They built a system that doesn't need one. Supply chain complexity is expensive. The goal isn't more tools. It's fewer decisions that need to be made in the first place."
   },
   {
     "title": "Leadership is a supply chain problem",
-    "body": "Getting the right information to the right person at the right time. That's replenishment. That's also leadership."
+    "body": "Getting the right information to the right person at the right time. That's replenishment. That's also leadership. After coordinating a planning team at Tetra Pak, I realized the bottleneck is rarely the data. It's always the translation layer between people."
   },
   {
     "title": "If both levels engage, the translation worked",
-    "body": "When senior directors and entry-level analysts both react to the same post, I know the message landed."
+    "body": "When senior directors and entry-level analysts both react to the same post, I know the message landed. That's the test. Can you make a 180M euro supply chain decision sound as clear to someone in their first year as to someone in their twentieth?"
   },
   {
     "title": "Curiosity over perfection",
-    "body": "Got inspired by Tiny Experiments by Anne-Laure Le Cunff. I'd rather ship something imperfect and learn than wait for perfect and learn nothing."
+    "body": "Got inspired by Tiny Experiments by Anne-Laure Le Cunff. I'd rather ship something imperfect and learn than wait for perfect and learn nothing. This site itself is a tiny experiment. Built with Claude Code, shipped in days, iterated live."
   },
   {
     "title": "Inclusion is operational",
-    "body": "DE&I isn't a side project. It's the same gap as supply chain: the information exists, the execution doesn't."
+    "body": "DE&I isn't a side project. As a Culture Champion and DE&I Europe Panelist at Tetra Pak, I've seen the same pattern: the information exists, the execution doesn't. Inclusion gaps and supply chain gaps have the same root cause."
+  },
+  {
+    "title": "Simplicity is the hard part",
+    "body": "Anyone can make something complicated. Making something simple enough that it sticks, whether it's a production schedule or a LinkedIn post, that's the actual skill. Complexity is the default. Clarity takes work."
   }
 ]

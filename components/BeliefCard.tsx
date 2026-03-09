@@ -21,7 +21,7 @@ export default function BeliefCard({
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.4, delay: index * 0.08 }}
       onClick={() => setOpen(!open)}
-      className={`w-full rounded-xl border bg-card p-5 text-left transition-all duration-300 ${
+      className={`w-full rounded-2xl border bg-card p-5 text-left transition-all duration-300 ${
         open
           ? "border-primary/40 shadow-md shadow-primary/5"
           : "border-border hover:border-primary/30 hover:shadow-sm"

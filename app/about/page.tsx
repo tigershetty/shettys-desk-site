@@ -2,8 +2,46 @@ import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
+import BoardingPass from "@/components/BoardingPass";
 import beliefs from "@/data/beliefs.json";
 import siteData from "@/data/site.json";
+
+const onRotation = {
+  reading: [
+    { title: "Tiny Experiments", author: "Anne-Laure Le Cunff", note: "Ship imperfect, learn fast" },
+    { title: "The Goal", author: "Eliyahu Goldratt", note: "Theory of constraints. Still holds up." },
+  ],
+  listening: [
+    { title: "Acquired", note: "Business deep dives" },
+    { title: "Supply Chain Revolution", note: "Industry trends and case studies" },
+  ],
+  watching: [
+    { title: "How I Built This", note: "Founder stories, operational lessons" },
+  ],
+};
+
+const workingWithMe = [
+  {
+    icon: "📐",
+    title: "I default to structure",
+    body: "I think in frameworks and systems. If something can be structured, I'll structure it before discussing it.",
+  },
+  {
+    icon: "🎯",
+    title: "I lead with questions",
+    body: "My first instinct in any room is to ask what problem we're actually solving. Not what tool we're buying.",
+  },
+  {
+    icon: "📝",
+    title: "I write to think",
+    body: "LinkedIn posts, internal documents, this site. Writing is how I process complex topics and test whether I actually understand them.",
+  },
+  {
+    icon: "🤝",
+    title: "I value directness",
+    body: "Say what you mean. Disagree openly. I'd rather have an honest 'no' than a polite delay.",
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -36,7 +74,7 @@ export default function AboutPage() {
       </div>
 
       {/* Personal letter in gradient card */}
-      <section className="mb-12 rounded-2xl border border-border bg-gradient-to-br from-card to-background p-8">
+      <section className="mb-12 rounded-3xl border border-border bg-gradient-to-br from-card to-background p-8">
         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary">Personal note</p>
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
@@ -74,6 +112,32 @@ export default function AboutPage() {
       {/* Globe - places I've lived */}
       <GlobeSection />
 
+      {/* Boarding Pass */}
+      <section className="mb-12">
+        <BoardingPass />
+      </section>
+
+      {/* Working With Me */}
+      <section className="mb-12">
+        <h2 className="mb-6 text-lg font-semibold text-foreground">
+          Working with me
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {workingWithMe.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-sm"
+            >
+              <div className="mb-2 flex items-center gap-2.5">
+                <span className="text-lg">{item.icon}</span>
+                <h3 className="font-medium text-foreground">{item.title}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Beliefs in grid */}
       <section className="mb-12">
         <h2 className="mb-6 text-lg font-semibold text-foreground">
@@ -91,17 +155,58 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* On Rotation placeholder */}
-      <section className="rounded-2xl border border-border bg-card p-6">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/15 text-purple-400">
+      {/* On Rotation */}
+      <section className="mb-12 rounded-3xl border border-border bg-card p-6">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-500/15 text-purple-500">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z" />
             </svg>
           </div>
           <h2 className="font-semibold text-foreground">On Rotation</h2>
         </div>
-        <p className="text-sm text-muted-foreground">Coming soon. Current reads, listens, and watches.</p>
+
+        <div className="grid gap-6 sm:grid-cols-3">
+          {/* Reading */}
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Reading</p>
+            <div className="space-y-3">
+              {onRotation.reading.map((item) => (
+                <div key={item.title} className="rounded-xl border border-border/50 p-3">
+                  <p className="text-sm font-medium text-foreground">{item.title}</p>
+                  <p className="text-xs text-muted-foreground">{item.author}</p>
+                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Listening */}
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Listening</p>
+            <div className="space-y-3">
+              {onRotation.listening.map((item) => (
+                <div key={item.title} className="rounded-xl border border-border/50 p-3">
+                  <p className="text-sm font-medium text-foreground">{item.title}</p>
+                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Watching */}
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Watching</p>
+            <div className="space-y-3">
+              {onRotation.watching.map((item) => (
+                <div key={item.title} className="rounded-xl border border-border/50 p-3">
+                  <p className="text-sm font-medium text-foreground">{item.title}</p>
+                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

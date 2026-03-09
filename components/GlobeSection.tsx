@@ -9,7 +9,7 @@ const locations = [
 
 export default function GlobeSection() {
   return (
-    <section className="mb-12 rounded-2xl border border-border bg-card p-6">
+    <section className="mb-12 rounded-3xl border border-border bg-card p-6">
       <div className="flex items-center gap-3 mb-4">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/15 text-amber-500">
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

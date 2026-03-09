@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Upload } from "lucide-react";
 import Nav from "./Nav";
 import Terminal from "./Terminal";
 import AnimatedTextCycle from "./AnimatedTextCycle";
@@ -92,7 +93,8 @@ export default function Sidebar() {
         </div>
 
         {/* Share button */}
-        <button className="mt-4 w-full rounded-md border border-border px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground">
+        <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-md border border-border px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-foreground">
+          <Upload className="h-3 w-3" />
           Share my site
         </button>
       </aside>

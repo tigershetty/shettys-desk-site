@@ -30,15 +30,13 @@ export default function ArticleCard({
   const colors = accentColors[article.accent || "blue"];
 
   const articleUrl = `/articles/${article.slug}`;
-  const linkProps = {};
 
   // Compact bento card: thumbnail + title only
   if (bento) {
     return (
       <a
         href={articleUrl}
-        {...linkProps}
-        className={`group flex items-center gap-3 rounded-xl border ${colors.border} bg-card p-3 transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
+        className={`group flex items-center gap-3 rounded-2xl border ${colors.border} bg-card p-3 transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
       >
         {article.image && (
           <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
@@ -58,16 +56,15 @@ export default function ArticleCard({
     );
   }
 
-  // Featured card: image background with overlay
+  // Featured card: white card inside dark wrapper
   if (featured) {
     return (
       <a
         href={articleUrl}
-        {...linkProps}
-        className="group relative block overflow-hidden rounded-2xl border border-border transition-all duration-300 hover:shadow-lg hover:ring-1 hover:ring-primary/20"
+        className="group block overflow-hidden rounded-3xl bg-card transition-all duration-300 hover:shadow-lg"
       >
         {article.image && (
-          <div className="relative aspect-[16/9]">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-t-3xl">
             <Image
               src={article.image}
               alt={article.title}
@@ -75,29 +72,34 @@ export default function ArticleCard({
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-transparent" />
+            <span className="absolute top-3 right-3 rounded-full bg-accent px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wider text-foreground">
+              Featured
+            </span>
           </div>
         )}
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <span className="mb-2 inline-block rounded-full bg-primary/90 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wider text-primary-foreground">
-            Featured
-          </span>
+        <div className="p-4">
           <div className="mb-2 flex flex-wrap gap-1.5">
             {article.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm"
+                className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${colors.tag}`}
               >
                 {tag}
               </span>
             ))}
           </div>
-          <h3 className="text-xl font-semibold text-white lg:text-2xl">
+          <h3 className="text-lg font-semibold text-foreground">
             {article.title}
           </h3>
-          <p className="mt-1 text-sm text-white/70 line-clamp-2">
+          <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
             {article.hook}
           </p>
+          <span className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-2.5 text-sm font-medium text-primary-foreground transition-colors group-hover:bg-primary/90">
+            Peek inside {article.title}
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </span>
         </div>
       </a>
     );
@@ -107,8 +109,7 @@ export default function ArticleCard({
   return (
     <a
       href={articleUrl}
-      {...linkProps}
-      className={`group block rounded-2xl border ${colors.border} ${colors.bg} overflow-hidden transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
+      className={`group block rounded-3xl border ${colors.border} ${colors.bg} overflow-hidden transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
     >
       {article.image && (
         <div className="relative aspect-[16/9] overflow-hidden">
@@ -139,7 +140,7 @@ export default function ArticleCard({
           {article.hook}
         </p>
         <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary group-hover:gap-2.5 transition-all">
-          Read the breakdown
+          Peek inside
           <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>

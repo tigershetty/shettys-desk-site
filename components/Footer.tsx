@@ -1,5 +1,13 @@
 export default function Footer() {
-  const items = ["Made with curiosity", "Made with Claude Code", "And a lot of trial and error"];
+  const items = [
+    "Made with curiosity",
+    "Made with Claude Code",
+    "Made with Next.js",
+    "Made with Tailwind",
+    "Made with Vercel",
+    "Made with coffee",
+    "And a lot of trial and error",
+  ];
 
   return (
     <footer className="border-t border-border bg-background py-4 overflow-hidden">

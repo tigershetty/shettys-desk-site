@@ -16,12 +16,17 @@ export default function Home() {
         <HeroBento />
       </div>
 
-      {/* Featured article - 2 cols, 2 rows */}
+      {/* Dark wrapper for featured article */}
       <div className="lg:col-span-2 lg:row-span-2 min-h-0">
         <BlurFade delay={0.1} className="h-full">
-          {featured[0] && (
-            <ArticleCard article={featured[0]} featured />
-          )}
+          <div className="h-full rounded-3xl bg-gradient-to-br from-foreground via-foreground/95 to-foreground/85 p-5">
+            <h2 className="mb-4 text-sm font-semibold text-primary-foreground/80 uppercase tracking-wider">
+              Latest articles
+            </h2>
+            {featured[0] && (
+              <ArticleCard article={featured[0]} featured />
+            )}
+          </div>
         </BlurFade>
       </div>
 
