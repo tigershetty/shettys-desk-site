@@ -76,7 +76,7 @@ export function GlassPanel({
 }) {
   return (
     <div
-      className={`relative ${className}`}
+      className={`${className}`}
       style={{
         background: "transparent",
       }}
