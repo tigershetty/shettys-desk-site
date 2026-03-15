@@ -1,4 +1,5 @@
-import ExperienceTimeline from "@/components/ExperienceTimeline";
+import FlowingMenu from "@/components/FlowingMenu";
+import DecryptedText from "@/components/DecryptedText";
 import experienceData from "@/data/experience.json";
 
 export default function ExperiencePage() {
@@ -8,7 +9,10 @@ export default function ExperiencePage() {
     <>
       <section className="mb-10">
         <h1 className="text-3xl font-bold text-foreground">
-          Where I&apos;ve been and what it taught me
+          <DecryptedText
+            text="Where I've been and what it taught me"
+            speed={30}
+          />
         </h1>
         <a
           href="#"
@@ -33,7 +37,7 @@ export default function ExperiencePage() {
             {primary.totalYears}
           </span>
         </div>
-        <ExperienceTimeline roles={primary.roles} />
+        <FlowingMenu items={primary.roles} />
       </section>
 
       {/* Earlier roles */}

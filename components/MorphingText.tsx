@@ -137,17 +137,20 @@ export const MorphingText: React.FC<MorphingTextProps> = ({
   cooldownTime = 3,
   blurAmount = 3,
 }) => {
-  // Track which text is currently "next" so the sizer span drives width
+  // Track which text is currently visible (text2 at 100% opacity during cooldown)
   const [activeIndex, setActiveIndex] = useState(1);
+
+  // Use the longest text width to prevent layout jumps
+  // We measure with a hidden canvas-based approach via the widest sizer
+  const longestText = texts.reduce((a, b) => (a.length > b.length ? a : b), "");
 
   return (
     <span
       className={`relative inline-flex text-left ${className ?? ""}`}
-      style={{ transition: "width 0.4s ease" }}
     >
-      {/* Invisible sizer — takes up space so the container auto-sizes */}
+      {/* Invisible sizer — use the longest text so width never jumps */}
       <span className="invisible whitespace-nowrap" aria-hidden="true">
-        {texts[activeIndex]}
+        {longestText}
       </span>
       <Texts
         texts={texts}

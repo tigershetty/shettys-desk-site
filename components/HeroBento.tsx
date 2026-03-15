@@ -6,6 +6,7 @@ import BlurFade from "./BlurFade";
 import TextShimmer from "./TextShimmer";
 import AnimatedTextCycle from "./AnimatedTextCycle";
 import { MorphingText } from "./MorphingText";
+import DecryptedText from "./DecryptedText";
 
 function getGreeting(hour: number): { text: string; emoji: string } {
   if (hour >= 5 && hour < 12) return { text: "Good morning, friend", emoji: "sunrise" };
@@ -45,7 +46,9 @@ export default function HeroBento() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden rounded-2xl bg-card border border-border p-6 lg:p-8">
+    <section
+      className="relative overflow-hidden rounded-2xl bg-card border border-border p-6 lg:p-8 shadow-sm"
+    >
       {/* Animated gradient mesh background */}
       <div
         className="absolute inset-0 opacity-20 animate-gradient-mesh"
@@ -58,7 +61,12 @@ export default function HeroBento() {
       <div className="relative z-10">
         <BlurFade delay={0}>
           <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground lg:text-3xl">
-            {greetingData.text}
+            <DecryptedText
+              text={greetingData.text}
+              speed={35}
+              delay={200}
+              key={greetingData.text}
+            />
             {emojiIcons[greetingData.emoji]}
           </h1>
         </BlurFade>
@@ -81,7 +89,7 @@ export default function HeroBento() {
         </BlurFade>
 
         <BlurFade delay={0.3}>
-          <div className="mt-4 flex items-center justify-between gap-3">
+          <div className="mt-4 flex flex-wrap items-center gap-3">
             <div className="flex gap-3">
               <Link
                 href="/articles"
@@ -91,12 +99,14 @@ export default function HeroBento() {
               </Link>
               <Link
                 href="/about"
-                className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
               >
                 About me
               </Link>
             </div>
-            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
+            <span
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary"
+            >
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />

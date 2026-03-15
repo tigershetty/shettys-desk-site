@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import articles from "@/data/articles.json";
+import ArticleStats from "@/components/ArticleStats";
 
 export function generateStaticParams() {
   return articles.map((article) => ({
@@ -56,7 +57,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         ))}
       </div>
 
-      <h1 className="text-3xl font-bold text-foreground lg:text-4xl">
+      <h1 className="text-2xl font-bold text-foreground sm:text-3xl lg:text-4xl">
         {article.title}
       </h1>
 
@@ -72,38 +73,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         {article.caption}
       </div>
 
-      <div className="mt-10 flex flex-wrap gap-6 rounded-xl border border-border bg-card p-5 text-sm">
-        <div>
-          <p className="text-muted-foreground">Impressions</p>
-          <p className="text-lg font-semibold text-foreground">
-            {article.stats.impressions.toLocaleString()}
-          </p>
-        </div>
-        <div>
-          <p className="text-muted-foreground">Reactions</p>
-          <p className="text-lg font-semibold text-foreground">
-            {article.stats.reactions}
-          </p>
-        </div>
-        <div>
-          <p className="text-muted-foreground">Comments</p>
-          <p className="text-lg font-semibold text-foreground">
-            {article.stats.comments}
-          </p>
-        </div>
-        <div>
-          <p className="text-muted-foreground">Reposts</p>
-          <p className="text-lg font-semibold text-foreground">
-            {article.stats.reposts}
-          </p>
-        </div>
-        <div>
-          <p className="text-muted-foreground">Saves</p>
-          <p className="text-lg font-semibold text-foreground">
-            {article.stats.saves}
-          </p>
-        </div>
-      </div>
+      <ArticleStats stats={article.stats} />
 
       <a
         href={article.linkedinUrl}

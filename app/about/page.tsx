@@ -52,10 +52,10 @@ export default function AboutPage() {
 
       {/* Intro + Orbiting Skills */}
       <div className="mb-10 flex flex-col items-center gap-6 sm:flex-row sm:items-center">
-        <div className="shrink-0">
+        <div className="shrink-0 w-full sm:w-auto">
           <OrbitingSkillsLoader />
         </div>
-        <div>
+        <div className="text-center sm:text-left">
           <p className="text-lg font-medium text-foreground">Poornajith Shetty</p>
           <p className="text-sm text-muted-foreground">Replenishment Manager at Tetra Pak, Malm&ouml;</p>
           <p className="mt-2 text-xs text-muted-foreground/60">Hover the orbits to explore tools &amp; domains</p>
@@ -74,7 +74,7 @@ export default function AboutPage() {
       </div>
 
       {/* Personal letter in gradient card */}
-      <section className="mb-12 rounded-3xl border border-border bg-gradient-to-br from-card to-background p-8">
+      <section className="mb-12 rounded-3xl border border-border bg-gradient-to-br from-card to-background p-5 sm:p-8">
         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary">Personal note</p>
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>

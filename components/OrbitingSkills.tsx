@@ -224,7 +224,7 @@ export default function OrbitingSkills() {
     <div className="w-full flex items-center justify-center overflow-hidden py-4">
       <div
         ref={containerRef}
-        className="relative w-[320px] h-[320px] sm:w-[360px] sm:h-[360px] flex items-center justify-center"
+        className="relative w-[360px] h-[360px] flex items-center justify-center origin-center scale-[0.78] sm:scale-100"
       >
         {/* Central icon */}
         <div className="w-16 h-16 rounded-full flex items-center justify-center z-10 relative shadow-2xl" style={{ background: "linear-gradient(135deg, #312e81, #4f46e5)" }}>

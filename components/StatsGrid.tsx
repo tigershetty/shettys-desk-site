@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Briefcase, FileText, TrendingUp, Users } from "lucide-react";
-import AnimatedCounter from "./AnimatedCounter";
+import CountUp from "./CountUp";
 
 const stats = [
   {
@@ -81,7 +81,9 @@ function ArticleDots() {
 
 export default function StatsGrid() {
   return (
-    <section className="rounded-3xl border border-border bg-card p-5">
+    <section
+      className="rounded-3xl border border-border bg-card p-5 shadow-sm"
+    >
       <h2 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wider">
         My numbers
       </h2>
@@ -89,11 +91,12 @@ export default function StatsGrid() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-border/50 p-4 transition-all hover:border-border hover:shadow-sm"
+            className="rounded-xl border border-border/50 bg-background/50 p-4 transition-all hover:border-border hover:shadow-sm"
           >
             <div className="flex items-start justify-between">
               <p className={`text-2xl font-bold ${stat.color}`}>
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                <CountUp to={stat.value} duration={1.5} separator="," />
+                {stat.suffix}
               </p>
               <div className={`flex h-7 w-7 items-center justify-center rounded-lg ${stat.iconBg}`}>
                 <stat.Icon className={`h-3.5 w-3.5 ${stat.iconColor}`} />

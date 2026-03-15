@@ -1,12 +1,36 @@
+"use client";
+
 import ContactForm from "@/components/ContactForm";
+import DecryptedText from "@/components/DecryptedText";
+import ProfileCard from "@/components/ProfileCard";
 import siteData from "@/data/site.json";
+import { useCallback, useRef } from "react";
 
 export default function ContactPage() {
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = useCallback(() => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
   return (
     <>
+      {/* Profile Card */}
+      <section className="mb-12 flex justify-center">
+        <ProfileCard
+          avatarUrl="/images/profile.png"
+          name="Poornajith Shetty"
+          title="Supply Chain Leader"
+          handle="Shetty's Desk"
+          status="Open to collaborations"
+          contactText="Contact"
+          onContactClick={scrollToForm}
+        />
+      </section>
+
       <section className="mb-10">
         <h1 className="text-3xl font-bold text-foreground">
-          Let&apos;s talk
+          <DecryptedText text="Let's talk" speed={50} />
         </h1>
       </section>
 
@@ -24,7 +48,7 @@ export default function ContactPage() {
       </div>
 
       {/* Form */}
-      <div className="mb-12 max-w-lg">
+      <div ref={formRef} className="mb-12 max-w-lg">
         <ContactForm />
       </div>
 

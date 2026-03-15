@@ -50,7 +50,9 @@ export default function RadarSection() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-5">
+    <section
+      className="rounded-3xl border border-border bg-card p-5 shadow-sm"
+    >
       <h2 className="mb-1 text-sm font-semibold text-foreground uppercase tracking-wider">
         Supply Chain Radar
       </h2>
