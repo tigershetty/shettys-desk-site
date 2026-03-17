@@ -48,6 +48,7 @@ const sizeClasses = ["px-3.5 py-2", "px-3 py-1.5", "px-4 py-2", "px-3 py-1.5", "
 
 export default function RadarSection() {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const hasExpanded = expanded !== null;
 
   return (
     <section
@@ -68,23 +69,25 @@ export default function RadarSection() {
           return (
             <motion.button
               key={item.topic}
-              layout
+              layout="position"
               animate={{
-                y: isExpanded ? 0 : [0, -4, 0],
-                marginTop: isExpanded ? 0 : spatialOffsets[i],
+                y: hasExpanded ? 0 : [0, -4, 0],
+                marginTop: hasExpanded ? 0 : spatialOffsets[i],
               }}
               transition={{
-                y: {
-                  duration: floatDurations[i],
-                  repeat: isExpanded ? 0 : Infinity,
-                  delay: floatDelays[i],
-                  ease: "easeInOut",
-                },
-                marginTop: { duration: 0.3 },
-                layout: { duration: 0.3, ease: [0.25, 0.4, 0, 1] },
+                y: hasExpanded
+                  ? { duration: 0.25, ease: "easeOut" }
+                  : {
+                      duration: floatDurations[i],
+                      repeat: Infinity,
+                      delay: floatDelays[i],
+                      ease: "easeInOut",
+                    },
+                marginTop: { duration: 0.25, ease: "easeOut" },
+                layout: { duration: 0.25, ease: [0.25, 0.4, 0, 1] },
               }}
               onClick={() => setExpanded(isExpanded ? null : i)}
-              className={`rounded-2xl border text-left transition-all duration-300 ${sizeClasses[i]} ${
+              className={`rounded-2xl border text-left transition-colors duration-200 ${sizeClasses[i]} ${
                 isExpanded
                   ? `basis-full ${style.activeColors}`
                   : style.colors
@@ -99,13 +102,13 @@ export default function RadarSection() {
                 <span className={`h-1.5 w-1.5 rounded-full ${style.dotColor} shrink-0`} />
                 <p className="font-medium text-foreground text-xs">{item.topic}</p>
               </div>
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 {isExpanded && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.25, 0.4, 0, 1] }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                     className="overflow-hidden"
                   >
                     <p className="pt-2 text-xs text-muted-foreground leading-relaxed">

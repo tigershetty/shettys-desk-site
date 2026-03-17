@@ -45,3 +45,18 @@ next-env.d.ts
 
 # worktrees
 .worktrees/
+
+# tooling
+.claude/
+.playwright-mcp/
+
+# dev reference screenshots
+*.png
+!public/**/*.png
+
+# personal assets (not site code)
+Profile.pdf
+Analytics/
+Development photos/
+Frontend/
+Infographic Render/

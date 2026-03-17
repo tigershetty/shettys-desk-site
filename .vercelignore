@@ -1,0 +1,21 @@
+# Working directories - never deploy
+.claude/
+.playwright-mcp/
+.worktrees/
+.firecrawl/
+Analytics/
+Frontend/
+Development photos/
+Infographic Render/
+docs/
+
+# Root-level screenshots and dev assets
+*.png
+*.jpg
+*.jpeg
+*.pdf
+!public/**
+
+# Loose dev files
+Untitled design*.png
+Profile.pdf

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Nav from "./Nav";
 import Terminal from "./Terminal";
 import AnimatedTextCycle from "./AnimatedTextCycle";
+import ElectricBorder from "./ElectricBorder";
 import siteData from "@/data/site.json";
 
 export default function Sidebar() {
@@ -94,9 +95,9 @@ export default function Sidebar() {
           </div>
 
           {/* Terminal */}
-          <div>
+          <ElectricBorder color="#4f46e5" speed={0.2} chaos={0.08} borderRadius={8}>
             <Terminal />
-          </div>
+          </ElectricBorder>
         </div>
       </aside>
     </>
