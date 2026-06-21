@@ -53,7 +53,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-40 h-screen w-64 border-r border-border bg-sidebar transition-transform lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-40 h-screen w-64 border-r border-white/10 bg-[#9e4526] transition-transform lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -61,17 +61,17 @@ export default function Sidebar() {
         <div className="relative z-10 flex h-full flex-col p-6">
           {/* Brand */}
           <div className="mb-8 flex flex-col items-center">
-            <Image
-              src="/images/logo.png"
-              alt="Shetty's Desk"
-              width={96}
-              height={96}
-              className="rounded-2xl"
-              style={{
-                boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-              }}
-            />
-            <p className="mt-2 text-xs text-muted-foreground">
+            <div className="rounded-2xl bg-[#f7f9f3] p-3 shadow-sm">
+              <Image
+                src="/images/logo-full.png"
+                alt="Shetty's Desk"
+                width={150}
+                height={150}
+                priority
+                className="h-auto w-[120px]"
+              />
+            </div>
+            <p className="mt-3 text-xs text-white/70">
               {siteData.subtitle}
             </p>
           </div>
@@ -86,11 +86,11 @@ export default function Sidebar() {
           </div>
 
           {/* Status indicator */}
-          <div className="mt-6 mb-2 text-xs text-primary">
+          <div className="mt-6 mb-2 text-xs text-white/80">
             <AnimatedTextCycle
               words={["building", "writing", "exploring", "shipping"]}
               interval={4000}
-              className="text-primary text-xs"
+              className="text-white/80 text-xs"
             />
           </div>
 

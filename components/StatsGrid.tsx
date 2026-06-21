@@ -79,14 +79,9 @@ function ArticleDots() {
   );
 }
 
-export default function StatsGrid() {
-  return (
-    <section
-      className="rounded-3xl border border-border bg-card p-5 shadow-sm"
-    >
-      <h2 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wider">
-        My numbers
-      </h2>
+export default function StatsGrid({ bare = false }: { bare?: boolean }) {
+  const content = (
+    <>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((stat) => (
           <div
@@ -117,6 +112,17 @@ export default function StatsGrid() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
       </Link>
+    </>
+  );
+
+  if (bare) return content;
+
+  return (
+    <section className="rounded-3xl border border-border bg-card p-5 shadow-sm">
+      <h2 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wider">
+        My numbers
+      </h2>
+      {content}
     </section>
   );
 }

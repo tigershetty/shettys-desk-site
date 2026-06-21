@@ -4,7 +4,7 @@ import StatsGrid from "@/components/StatsGrid";
 import RadarSection from "@/components/RadarSection";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
-import Folder from "@/components/Folder";
+import FolderCard from "@/components/FolderCard";
 import articles from "@/data/articles.json";
 
 export default function Home() {
@@ -18,30 +18,39 @@ export default function Home() {
         <HeroBento />
       </div>
 
-      {/* Dark wrapper for featured article */}
+      {/* Latest articles - folder */}
       <div className="lg:col-span-2 lg:row-span-2 min-h-0">
         <Reveal className="h-full">
-          <div className="h-full rounded-3xl bg-gradient-to-br from-foreground via-foreground/95 to-foreground/85 p-5">
-            <h2 className="mb-4 text-sm font-semibold text-primary-foreground/80 uppercase tracking-wider">
-              Latest articles
-            </h2>
+          <FolderCard label="Latest articles" color="indigo" className="h-full">
             {featured[0] && <ArticleCard article={featured[0]} featured />}
-          </div>
+          </FolderCard>
         </Reveal>
       </div>
 
-      {/* My Numbers - top right */}
+      {/* My numbers - folder */}
       <div className="lg:col-span-2">
         <Reveal>
-          <StatsGrid />
+          <FolderCard label="My numbers" color="amber">
+            <StatsGrid bare />
+          </FolderCard>
         </Reveal>
       </div>
 
-      {/* Radar - bottom right */}
+      {/* Supply chain radar - folder */}
       <div className="lg:col-span-2">
         <Reveal>
-          <RadarSection />
+          <FolderCard label="Supply chain radar" color="teal">
+            <RadarSection bare />
+          </FolderCard>
         </Reveal>
+      </div>
+
+      {/* More reads */}
+      <div className="lg:col-span-4 mt-2">
+        <SplitHeading
+          text="More from the desk"
+          className="text-lg font-bold text-foreground lg:text-xl"
+        />
       </div>
 
       {/* Secondary articles - 4 compact cards */}
@@ -52,23 +61,6 @@ export default function Home() {
           </Reveal>
         </div>
       ))}
-
-      {/* Explore - brand folder cards */}
-      <div className="lg:col-span-4 mt-2">
-        <SplitHeading
-          text="Explore the desk"
-          className="text-xl font-bold text-foreground lg:text-2xl"
-        />
-        <Reveal
-          stagger={0.08}
-          className="mt-6 flex flex-wrap justify-center gap-6 sm:justify-start sm:gap-8"
-        >
-          <Folder color="indigo" size="md" label="Articles" href="/articles" />
-          <Folder color="amber" size="md" label="Approach" href="/approach" />
-          <Folder color="teal" size="md" label="About" href="/about" />
-          <Folder color="dark" size="md" label="Experience" href="/experience" />
-        </Reveal>
-      </div>
     </div>
   );
 }

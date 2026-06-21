@@ -34,7 +34,8 @@ export default function Preloader() {
   const [active, setActive] = useState(true);
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
+  const logoTopRef = useRef<HTMLImageElement>(null);
+  const logoBottomRef = useRef<HTMLImageElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
@@ -65,7 +66,10 @@ export default function Preloader() {
     const ctx = gsap.context(() => {
       if (prefersReduced) {
         // Minimal, accessible version: hold briefly, then fade out.
-        gsap.set([logoRef.current, contentRef.current], { opacity: 1 });
+        gsap.set(
+          [logoTopRef.current, logoBottomRef.current, contentRef.current],
+          { opacity: 1, y: 0 }
+        );
         if (barRef.current) gsap.set(barRef.current, { scaleX: 1 });
         if (counterRef.current) counterRef.current.textContent = "100";
         gsap.to(rootRef.current, {
@@ -81,24 +85,27 @@ export default function Preloader() {
       const counter = { v: 0 };
       const tl = gsap.timeline();
 
-      tl.from(logoRef.current, {
-        opacity: 0,
-        y: 10,
-        scale: 0.94,
-        filter: "blur(10px)",
-        duration: 0.6,
-        ease: "power3.out",
-      })
+      // The two logo halves slide together to assemble the mark.
+      tl.from(
+        logoTopRef.current,
+        { y: -48, opacity: 0, duration: 0.75, ease: "power3.out" },
+        0
+      )
+        .from(
+          logoBottomRef.current,
+          { y: 48, opacity: 0, duration: 0.75, ease: "power3.out" },
+          0
+        )
         .from(
           contentRef.current,
           { opacity: 0, y: 8, duration: 0.5, ease: "power2.out" },
-          "-=0.25"
+          0.55
         )
         .to(
           counter,
           {
             v: 100,
-            duration: 3,
+            duration: 2.7,
             ease: "power1.inOut",
             onUpdate: () => {
               if (counterRef.current) {
@@ -106,15 +113,15 @@ export default function Preloader() {
               }
             },
           },
-          0.4
+          0.8
         )
         .to(
           barRef.current,
-          { scaleX: 1, duration: 3, ease: "power1.inOut" },
-          0.4
+          { scaleX: 1, duration: 2.7, ease: "power1.inOut" },
+          0.8
         )
         // Hold on the finished state so the full line stays readable.
-        .to({}, { duration: 0.55 })
+        .to({}, { duration: 0.5 })
         // Signature reveal: wipe the curtain upward to expose the page.
         .to(
           contentRef.current,
@@ -149,14 +156,24 @@ export default function Preloader() {
       className="fixed inset-0 z-[10000] flex flex-col items-center justify-center"
       style={{ clipPath: "inset(0 0 0% 0)", backgroundColor: PRELOADER_BG }}
     >
-      <div ref={logoRef} className="flex flex-col items-center">
+      <div className="relative aspect-square w-[clamp(150px,40vw,208px)]">
         <Image
-          src="/images/logo-mark.png"
+          ref={logoTopRef}
+          src="/images/logo-mark-top.png"
           alt="Shetty's Desk"
-          width={208}
-          height={208}
+          fill
           priority
-          className="h-auto w-[clamp(150px,40vw,208px)] select-none"
+          sizes="208px"
+          className="select-none object-contain"
+          draggable={false}
+        />
+        <Image
+          ref={logoBottomRef}
+          src="/images/logo-mark-bottom.png"
+          alt=""
+          fill
+          sizes="208px"
+          className="select-none object-contain"
           draggable={false}
         />
       </div>

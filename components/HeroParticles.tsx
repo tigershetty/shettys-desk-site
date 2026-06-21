@@ -4,11 +4,14 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 /**
- * Lightweight "logistics network" hero backdrop: drifting nodes connected by
- * faint routes, in the brand palette. Perf-budgeted (DPR cap, low node count on
- * mobile, paused offscreen / when the tab is hidden) and disabled under
- * prefers-reduced-motion (renders a single static frame). Renders into the
- * nearest positioned ancestor; mount inside a `relative` container.
+ * Logistics-network hero backdrop, weighted to the right of the card so it
+ * doesn't fight the headline. Reads clearly as a supply-chain network:
+ *   - hubs (distribution centres) with soft halos
+ *   - curved routes between hubs
+ *   - shipments (bright packets) travelling along the routes
+ *   - faint ambient demand points drifting behind it
+ * Perf-budgeted (DPR cap, fewer elements on mobile, paused offscreen / hidden);
+ * reduced-motion renders a single static frame.
  */
 export default function HeroParticles() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,12 +22,6 @@ export default function HeroParticles() {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobile = window.matchMedia("(max-width: 640px)").matches;
-
-    const COUNT = isMobile ? 40 : 90;
-    const MAX_DIST = isMobile ? 1.0 : 1.15;
-    const RANGE_X = 4.4;
-    const RANGE_Y = 2.4;
-    const RANGE_Z = 1.2;
 
     let width = el.clientWidth || 1;
     let height = el.clientHeight || 1;
@@ -44,51 +41,141 @@ export default function HeroParticles() {
     canvas.style.height = "100%";
     el.appendChild(canvas);
 
-    const palette = [0x4f46e5, 0x14b8a6, 0xf59e0b];
-    const positions = new Float32Array(COUNT * 3);
-    const velocities = new Float32Array(COUNT * 3);
-    const colors = new Float32Array(COUNT * 3);
-    const tmpColor = new THREE.Color();
+    const group = new THREE.Group();
+    // Push the whole network toward the right of the hero.
+    group.position.x = isMobile ? 0.2 : 1.3;
+    scene.add(group);
 
-    for (let i = 0; i < COUNT; i++) {
-      positions[i * 3] = (Math.random() * 2 - 1) * RANGE_X;
-      positions[i * 3 + 1] = (Math.random() * 2 - 1) * RANGE_Y;
-      positions[i * 3 + 2] = (Math.random() * 2 - 1) * RANGE_Z;
-      velocities[i * 3] = (Math.random() * 2 - 1) * 0.07;
-      velocities[i * 3 + 1] = (Math.random() * 2 - 1) * 0.07;
-      velocities[i * 3 + 2] = (Math.random() * 2 - 1) * 0.04;
-      tmpColor.setHex(palette[i % palette.length]);
-      colors[i * 3] = tmpColor.r;
-      colors[i * 3 + 1] = tmpColor.g;
-      colors[i * 3 + 2] = tmpColor.b;
-    }
+    const INDIGO = 0x4f46e5;
+    const TEAL = 0x14b8a6;
+    const AMBER = 0xf59e0b;
+    const S = isMobile ? 0.5 : 1;
 
-    const pointGeo = new THREE.BufferGeometry();
-    pointGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    pointGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    const pointMat = new THREE.PointsMaterial({
-      size: isMobile ? 0.08 : 0.07,
+    // ---- Hubs (distribution centres) ----
+    const hubBase = [
+      [0.2, 1.2, 0.2],
+      [1.6, 0.4, -0.3],
+      [2.9, 1.3, 0.1],
+      [3.4, -0.5, -0.2],
+      [1.9, -1.3, 0.2],
+      [0.6, -0.5, -0.1],
+    ].map(([x, y, z]) => new THREE.Vector3(x * S, y * S, z * S));
+
+    const hubPos = new Float32Array(hubBase.length * 3);
+    const hubCol = new Float32Array(hubBase.length * 3);
+    const col = new THREE.Color();
+    hubBase.forEach((v, i) => {
+      hubPos[i * 3] = v.x;
+      hubPos[i * 3 + 1] = v.y;
+      hubPos[i * 3 + 2] = v.z;
+      col.setHex(i % 2 === 0 ? INDIGO : TEAL);
+      hubCol[i * 3] = col.r;
+      hubCol[i * 3 + 1] = col.g;
+      hubCol[i * 3 + 2] = col.b;
+    });
+    const hubGeo = new THREE.BufferGeometry();
+    hubGeo.setAttribute("position", new THREE.BufferAttribute(hubPos, 3));
+    hubGeo.setAttribute("color", new THREE.BufferAttribute(hubCol, 3));
+    const hubMat = new THREE.PointsMaterial({
+      size: 0.18 * (isMobile ? 0.8 : 1),
       vertexColors: true,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.95,
       sizeAttenuation: true,
     });
-    const points = new THREE.Points(pointGeo, pointMat);
-
-    const linePositions = new Float32Array(COUNT * COUNT * 3);
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0x4f46e5,
+    const hubs = new THREE.Points(hubGeo, hubMat);
+    const haloMat = new THREE.PointsMaterial({
+      size: 0.5 * (isMobile ? 0.8 : 1),
+      vertexColors: true,
       transparent: true,
-      opacity: 0.12,
+      opacity: 0.16,
+      sizeAttenuation: true,
     });
-    const lines = new THREE.LineSegments(lineGeo, lineMat);
+    const halos = new THREE.Points(hubGeo, haloMat);
+    group.add(halos);
+    group.add(hubs);
 
-    const group = new THREE.Group();
-    group.add(points);
-    group.add(lines);
-    scene.add(group);
+    // ---- Routes (curved arcs between hubs) ----
+    const edges = [
+      [0, 1],
+      [1, 2],
+      [2, 3],
+      [1, 4],
+      [4, 5],
+      [5, 0],
+      [1, 3],
+    ];
+    const curves: THREE.QuadraticBezierCurve3[] = [];
+    const routeMat = new THREE.LineBasicMaterial({
+      color: INDIGO,
+      transparent: true,
+      opacity: 0.35,
+    });
+    edges.forEach(([a, b]) => {
+      const start = hubBase[a];
+      const end = hubBase[b];
+      const mid = start.clone().add(end).multiplyScalar(0.5);
+      mid.z += 0.7 * S;
+      mid.y += 0.25 * S;
+      const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
+      curves.push(curve);
+      const geo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(36));
+      group.add(new THREE.Line(geo, routeMat));
+    });
+
+    // ---- Packets (shipments moving along routes) ----
+    const packetPos = new Float32Array(curves.length * 3);
+    const packetT = curves.map(() => Math.random());
+    const packetSpeed = curves.map(() => 0.12 + Math.random() * 0.16);
+    const packetGeo = new THREE.BufferGeometry();
+    packetGeo.setAttribute("position", new THREE.BufferAttribute(packetPos, 3));
+    const packetMat = new THREE.PointsMaterial({
+      color: AMBER,
+      size: 0.16 * (isMobile ? 0.85 : 1),
+      transparent: true,
+      opacity: 1,
+      sizeAttenuation: true,
+    });
+    const packets = new THREE.Points(packetGeo, packetMat);
+    group.add(packets);
+
+    // ---- Ambient demand points ----
+    const AMBIENT = isMobile ? 26 : 54;
+    const ambPos = new Float32Array(AMBIENT * 3);
+    const ambVel = new Float32Array(AMBIENT * 3);
+    const AX = 4.0 * S;
+    const AY = 1.7 * S;
+    const AZ = 0.5 * S;
+    for (let i = 0; i < AMBIENT; i++) {
+      ambPos[i * 3] = (Math.random() * 1.4 - 0.3) * AX;
+      ambPos[i * 3 + 1] = (Math.random() * 2 - 1) * AY;
+      ambPos[i * 3 + 2] = (Math.random() * 2 - 1) * AZ;
+      ambVel[i * 3] = (Math.random() * 2 - 1) * 0.05;
+      ambVel[i * 3 + 1] = (Math.random() * 2 - 1) * 0.05;
+      ambVel[i * 3 + 2] = (Math.random() * 2 - 1) * 0.03;
+    }
+    const ambGeo = new THREE.BufferGeometry();
+    ambGeo.setAttribute("position", new THREE.BufferAttribute(ambPos, 3));
+    const ambMat = new THREE.PointsMaterial({
+      color: TEAL,
+      size: 0.05,
+      transparent: true,
+      opacity: 0.5,
+      sizeAttenuation: true,
+    });
+    const ambient = new THREE.Points(ambGeo, ambMat);
+    group.add(ambient);
+
+    const ambLinePos = new Float32Array(AMBIENT * AMBIENT * 3);
+    const ambLineGeo = new THREE.BufferGeometry();
+    ambLineGeo.setAttribute("position", new THREE.BufferAttribute(ambLinePos, 3));
+    const ambLineMat = new THREE.LineBasicMaterial({
+      color: INDIGO,
+      transparent: true,
+      opacity: 0.08,
+    });
+    const ambLines = new THREE.LineSegments(ambLineGeo, ambLineMat);
+    group.add(ambLines);
 
     const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
     const onPointerMove = (e: PointerEvent) => {
@@ -99,52 +186,66 @@ export default function HeroParticles() {
     window.addEventListener("pointermove", onPointerMove);
 
     const clock = new THREE.Clock();
+    const tmp = new THREE.Vector3();
     let raf = 0;
     let running = false;
 
     const renderFrame = () => {
       const dt = Math.min(clock.getDelta(), 0.05);
+      const t = clock.elapsedTime;
 
-      for (let i = 0; i < COUNT; i++) {
-        positions[i * 3] += velocities[i * 3] * dt;
-        positions[i * 3 + 1] += velocities[i * 3 + 1] * dt;
-        positions[i * 3 + 2] += velocities[i * 3 + 2] * dt;
-        if (positions[i * 3] > RANGE_X || positions[i * 3] < -RANGE_X)
-          velocities[i * 3] *= -1;
-        if (positions[i * 3 + 1] > RANGE_Y || positions[i * 3 + 1] < -RANGE_Y)
-          velocities[i * 3 + 1] *= -1;
-        if (positions[i * 3 + 2] > RANGE_Z || positions[i * 3 + 2] < -RANGE_Z)
-          velocities[i * 3 + 2] *= -1;
+      // packets travel along their route
+      for (let i = 0; i < curves.length; i++) {
+        packetT[i] = (packetT[i] + packetSpeed[i] * dt) % 1;
+        curves[i].getPoint(packetT[i], tmp);
+        packetPos[i * 3] = tmp.x;
+        packetPos[i * 3 + 1] = tmp.y;
+        packetPos[i * 3 + 2] = tmp.z;
       }
-      pointGeo.attributes.position.needsUpdate = true;
+      packetGeo.attributes.position.needsUpdate = true;
+
+      // hub halo pulse
+      haloMat.opacity = 0.12 + 0.06 * (0.5 + 0.5 * Math.sin(t * 1.5));
+
+      // ambient drift + faint links
+      for (let i = 0; i < AMBIENT; i++) {
+        ambPos[i * 3] += ambVel[i * 3] * dt;
+        ambPos[i * 3 + 1] += ambVel[i * 3 + 1] * dt;
+        ambPos[i * 3 + 2] += ambVel[i * 3 + 2] * dt;
+        if (ambPos[i * 3] > 1.1 * AX || ambPos[i * 3] < -0.4 * AX) ambVel[i * 3] *= -1;
+        if (ambPos[i * 3 + 1] > AY || ambPos[i * 3 + 1] < -AY) ambVel[i * 3 + 1] *= -1;
+        if (ambPos[i * 3 + 2] > AZ || ambPos[i * 3 + 2] < -AZ) ambVel[i * 3 + 2] *= -1;
+      }
+      ambGeo.attributes.position.needsUpdate = true;
 
       let v = 0;
-      const maxDistSq = MAX_DIST * MAX_DIST;
-      for (let i = 0; i < COUNT; i++) {
-        const ax = positions[i * 3];
-        const ay = positions[i * 3 + 1];
-        const az = positions[i * 3 + 2];
-        for (let j = i + 1; j < COUNT; j++) {
-          const dx = ax - positions[j * 3];
-          const dy = ay - positions[j * 3 + 1];
-          const dz = az - positions[j * 3 + 2];
-          if (dx * dx + dy * dy + dz * dz < maxDistSq) {
-            linePositions[v++] = ax;
-            linePositions[v++] = ay;
-            linePositions[v++] = az;
-            linePositions[v++] = positions[j * 3];
-            linePositions[v++] = positions[j * 3 + 1];
-            linePositions[v++] = positions[j * 3 + 2];
+      const maxD = (0.85 * S) * (0.85 * S);
+      for (let i = 0; i < AMBIENT; i++) {
+        const ax = ambPos[i * 3];
+        const ay = ambPos[i * 3 + 1];
+        const az = ambPos[i * 3 + 2];
+        for (let j = i + 1; j < AMBIENT; j++) {
+          const dx = ax - ambPos[j * 3];
+          const dy = ay - ambPos[j * 3 + 1];
+          const dz = az - ambPos[j * 3 + 2];
+          if (dx * dx + dy * dy + dz * dz < maxD) {
+            ambLinePos[v++] = ax;
+            ambLinePos[v++] = ay;
+            ambLinePos[v++] = az;
+            ambLinePos[v++] = ambPos[j * 3];
+            ambLinePos[v++] = ambPos[j * 3 + 1];
+            ambLinePos[v++] = ambPos[j * 3 + 2];
           }
         }
       }
-      lineGeo.setDrawRange(0, v / 3);
-      lineGeo.attributes.position.needsUpdate = true;
+      ambLineGeo.setDrawRange(0, v / 3);
+      ambLineGeo.attributes.position.needsUpdate = true;
 
+      // pointer parallax
       pointer.x += (pointer.tx - pointer.x) * 0.05;
       pointer.y += (pointer.ty - pointer.y) * 0.05;
-      group.rotation.y = pointer.x * 0.25;
-      group.rotation.x = pointer.y * 0.15;
+      group.rotation.y = pointer.x * 0.2;
+      group.rotation.x = pointer.y * 0.12;
 
       renderer.render(scene, camera);
       raf = requestAnimationFrame(renderFrame);
@@ -162,6 +263,13 @@ export default function HeroParticles() {
     };
 
     if (reduce) {
+      for (let i = 0; i < curves.length; i++) {
+        curves[i].getPoint(packetT[i], tmp);
+        packetPos[i * 3] = tmp.x;
+        packetPos[i * 3 + 1] = tmp.y;
+        packetPos[i * 3 + 2] = tmp.z;
+      }
+      packetGeo.attributes.position.needsUpdate = true;
       renderer.render(scene, camera);
     } else {
       start();
@@ -198,10 +306,14 @@ export default function HeroParticles() {
       ro.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("visibilitychange", onVisibility);
-      pointGeo.dispose();
-      pointMat.dispose();
-      lineGeo.dispose();
-      lineMat.dispose();
+      scene.traverse((obj) => {
+        const any = obj as unknown as {
+          geometry?: THREE.BufferGeometry;
+          material?: THREE.Material;
+        };
+        any.geometry?.dispose?.();
+        any.material?.dispose?.();
+      });
       renderer.dispose();
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
     };

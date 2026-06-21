@@ -56,19 +56,19 @@ export default function Nav({
               onClick={onNavigate}
               className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all ${
                 active
-                  ? "bg-primary/8 text-primary font-medium"
-                  : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+                  ? "bg-white/15 text-white font-medium"
+                  : "text-white/75 hover:text-white hover:bg-white/10"
               }`}
               style={undefined}
             >
-              {Icon && <Icon className={`h-4 w-4 shrink-0 ${active ? "text-primary" : ""}`} />}
+              {Icon && <Icon className="h-4 w-4 shrink-0" />}
               {item.label}
             </Link>
           );
         })}
       </div>
       <div>
-        <p className="mb-2 px-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">
+        <p className="mb-2 px-3 text-xs font-medium uppercase tracking-wider text-white/50">
           Other
         </p>
         <div className="flex flex-col gap-1">

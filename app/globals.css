@@ -171,58 +171,6 @@ html.intro-active body {
   overflow: hidden;
 }
 
-/* Custom cursor (desktop only; activated by CustomCursor via .has-custom-cursor) */
-.has-custom-cursor,
-.has-custom-cursor * {
-  cursor: none !important;
-}
-.has-custom-cursor input,
-.has-custom-cursor textarea,
-.has-custom-cursor select,
-.has-custom-cursor [contenteditable="true"] {
-  cursor: text !important;
-}
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9998;
-  pointer-events: none;
-  border-radius: 9999px;
-  will-change: transform;
-  display: none;
-}
-.has-custom-cursor .cursor-dot,
-.has-custom-cursor .cursor-ring {
-  display: block;
-}
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  background: var(--primary);
-}
-.cursor-ring {
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
-  border: 1.5px solid color-mix(in srgb, var(--primary) 55%, transparent);
-  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease,
-    background-color 0.2s ease, border-color 0.2s ease;
-}
-.cursor-ring.is-active {
-  width: 54px;
-  height: 54px;
-  margin: -27px 0 0 -27px;
-  background: color-mix(in srgb, var(--primary) 12%, transparent);
-}
-.cursor-ring.is-down {
-  width: 26px;
-  height: 26px;
-  margin: -13px 0 0 -13px;
-}
-
 /* Scrollbar - light theme */
 ::-webkit-scrollbar {
   width: 6px;
