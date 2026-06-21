@@ -52,15 +52,29 @@
 }
 
 /* White cards: locally flip text/border tokens to their light-surface values so
-   content inside any card reads dark, while bare page text stays light. */
+   content inside any card reads dark, while bare page text stays light. Covers
+   plain `bg-card`/`bg-popover` and gradient cards that fade `to-card`/`from-card`
+   (e.g. FolderCard bodies). */
 .bg-card,
-.bg-popover {
+.bg-popover,
+[class*="to-card"],
+[class*="from-card"] {
   --foreground: #2a1710;
   --muted-foreground: #6b5544;
   --card-foreground: #2a1710;
   --border: #e8ddd0;
   --muted: #f3ece4;
   --input: #d8ccbe;
+}
+
+/* Legible link/accent colour for the few links that sit directly on the
+   terracotta background (terracotta-on-terracotta would vanish). */
+.link-on-terracotta {
+  color: #f6c8ad;
+}
+.link-on-terracotta:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .dark {

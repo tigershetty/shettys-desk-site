@@ -39,7 +39,7 @@ export default function Pipeline() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.08 + 0.15 }}
-              className="hidden px-2 text-primary sm:block"
+              className="hidden px-2 text-white/40 sm:block"
             >
               &rarr;
             </motion.span>

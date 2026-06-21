@@ -44,7 +44,7 @@ export default function ContactPage() {
             <div className="flex flex-col gap-3 text-sm">
               <a
                 href={`mailto:${siteData.social.email}`}
-                className="text-primary hover:underline"
+                className="link-on-terracotta"
               >
                 {siteData.social.email}
               </a>
@@ -52,7 +52,7 @@ export default function ContactPage() {
                 href={siteData.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline"
+                className="link-on-terracotta"
               >
                 LinkedIn
               </a>
