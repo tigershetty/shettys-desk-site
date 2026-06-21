@@ -59,7 +59,7 @@ export default function ShettysDesk() {
         href={siteData.social.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block rounded-md bg-[#cf6b41] px-5 py-2.5 text-sm font-medium text-white shadow-md shadow-black/20 transition-all hover:bg-[#c2603a]"
+        className="inline-block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-primary/80 hover:shadow-md hover:shadow-primary/10"
       >
         Follow Shetty&apos;s Desk on LinkedIn
       </a>

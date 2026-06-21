@@ -18,7 +18,7 @@ export default function ExperiencePage() {
           href={experienceData.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-sm link-on-terracotta"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
         >
           View full profile on LinkedIn
           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

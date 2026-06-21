@@ -63,7 +63,7 @@ export default function ApproachPage() {
       </div>
 
       {/* The bet */}
-      <div className="mt-10 rounded-2xl border-2 border-[#c2603a]/30 bg-card p-6">
+      <div className="mt-10 rounded-2xl border border-primary/20 bg-primary/5 p-6">
         <h2 className="text-sm font-semibold text-primary uppercase tracking-wider">
           The bet
         </h2>

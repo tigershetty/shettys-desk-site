@@ -63,7 +63,7 @@ export default function AboutPage() {
             href={siteData.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium link-on-terracotta"
+            className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
           >
             Connect on LinkedIn
             <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -74,7 +74,7 @@ export default function AboutPage() {
       </div>
 
       {/* Personal letter in gradient card */}
-      <section className="mb-12 rounded-3xl border border-border bg-card p-5 sm:p-8">
+      <section className="mb-12 rounded-3xl border border-border bg-gradient-to-br from-card to-background p-5 sm:p-8">
         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary">Personal note</p>
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>

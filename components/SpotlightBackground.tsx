@@ -31,7 +31,7 @@ const SpotlightBackground = () => {
           width: isMoving ? "55px" : "70px",
           height: isMoving ? "55px" : "70px",
           transform: "translate(-50%, -50%)",
-          background: "radial-gradient(circle, rgba(255,233,209,0.45) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(56,189,248,0.7) 0%, transparent 70%)",
         }}
       />
     </div>
