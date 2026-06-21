@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
@@ -55,7 +56,17 @@ export default function AboutPage() {
         <div className="shrink-0 w-full sm:w-auto">
           <OrbitingSkillsLoader />
         </div>
-        <div className="text-center sm:text-left">
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <Avatar className="mb-3 h-20 w-20 border-2 border-primary/30 shadow-md ring-4 ring-background">
+            <AvatarImage
+              src="/images/profile.png"
+              alt="Poornajith Shetty"
+              className="object-cover"
+            />
+            <AvatarFallback className="bg-primary/10 text-sm font-semibold text-primary">
+              PS
+            </AvatarFallback>
+          </Avatar>
           <p className="text-lg font-medium text-foreground">Poornajith Shetty</p>
           <p className="text-sm text-muted-foreground">Replenishment Manager at Tetra Pak, Malm&ouml;</p>
           <p className="mt-2 text-xs text-muted-foreground/60">Hover the orbits to explore tools &amp; domains</p>

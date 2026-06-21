@@ -1,6 +1,11 @@
 import FlowingMenu from "@/components/FlowingMenu";
 import DecryptedText from "@/components/DecryptedText";
+import { InteractiveRobotSpline } from "@/components/InteractiveRobotSpline";
 import experienceData from "@/data/experience.json";
+
+// Public Spline "interactive robot" scene (follows the cursor). Swap this for a
+// custom scene URL any time; single source of truth.
+const ROBOT_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
 export default function ExperiencePage() {
   const primary = experienceData.primary[0];
@@ -27,10 +32,15 @@ export default function ExperiencePage() {
         </a>
       </section>
 
-      {/* Summary */}
-      <p className="mb-10 max-w-2xl text-muted-foreground leading-relaxed">
-        {experienceData.summary}
-      </p>
+      {/* Summary + interactive robot */}
+      <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
+        <p className="max-w-2xl text-muted-foreground leading-relaxed">
+          {experienceData.summary}
+        </p>
+        <div className="relative h-64 w-full shrink-0 overflow-hidden rounded-2xl border border-border bg-card sm:h-72 lg:h-80 lg:w-80">
+          <InteractiveRobotSpline scene={ROBOT_SCENE} className="h-full w-full" />
+        </div>
+      </div>
 
       {/* Core competencies */}
       <section className="mb-12">

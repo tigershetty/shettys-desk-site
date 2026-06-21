@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import BlurFade from "./BlurFade";
 import AnimatedTextCycle from "./AnimatedTextCycle";
 import { MorphingText } from "./MorphingText";
@@ -137,6 +138,23 @@ export default function HeroBento() {
             </span>
           </div>
         </BlurFade>
+      </div>
+
+      {/* Profile thumbnail anchored to the right of the network */}
+      <div className="relative z-10 mt-8 flex flex-col items-center gap-2 lg:absolute lg:right-8 lg:top-1/2 lg:mt-0 lg:-translate-y-1/2">
+        <Avatar className="h-24 w-24 border-2 border-primary/30 shadow-md ring-4 ring-card">
+          <AvatarImage
+            src="/images/profile.png"
+            alt="Poornajith Shetty"
+            className="object-cover"
+          />
+          <AvatarFallback className="bg-primary/10 text-base font-semibold text-primary">
+            PS
+          </AvatarFallback>
+        </Avatar>
+        <span className="text-sm font-medium text-foreground">
+          Poornajith Shetty
+        </span>
       </div>
     </section>
   );

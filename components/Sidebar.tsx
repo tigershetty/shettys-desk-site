@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Nav from "./Nav";
 import Terminal from "./Terminal";
 import AnimatedTextCycle from "./AnimatedTextCycle";
@@ -61,7 +62,12 @@ export default function Sidebar() {
         <div className="relative z-10 flex h-full flex-col p-6">
           {/* Brand */}
           <div className="mb-8 flex flex-col items-center">
-            <div className="rounded-2xl border border-border bg-card p-3 shadow-sm">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              aria-label="Go to homepage"
+              className="rounded-2xl border border-border bg-card p-3 shadow-sm transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
               <Image
                 src="/images/logo-full.png"
                 alt="Shetty's Desk"
@@ -70,7 +76,7 @@ export default function Sidebar() {
                 priority
                 className="h-auto w-[120px]"
               />
-            </div>
+            </Link>
             <p className="mt-3 text-xs text-muted-foreground">
               {siteData.subtitle}
             </p>
