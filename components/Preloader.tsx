@@ -9,11 +9,11 @@ import TextTypewriter from "./TextTypewriter";
 
 const SESSION_KEY = "agent-intro-played";
 
-// Warm brand backdrop for the intro: a deepened tone of the logo's terracotta
-// (the bright `--accent` amber is too light for the logo's white wordmark, and a
-// lighter terracotta hides the scribble mark). This shade keeps the mark legible,
-// the wordmark crisp, and the feel warm. Single source of truth; tweak here.
-const PRELOADER_BG = "#9e4526";
+// Intro backdrop: the page's primary accent (indigo `--primary`). Keeping the
+// loading screen on-brand with the rest of the site, the white wordmark and
+// scribble mark stay crisp and legible against it. Single source of truth;
+// tweak here.
+const PRELOADER_BG = "#4f46e5";
 
 // useLayoutEffect warns during SSR; fall back to useEffect on the server.
 const useIsoLayoutEffect =
@@ -216,7 +216,7 @@ export default function Preloader() {
           className="pointer-events-none absolute inset-0 -z-0"
           style={{
             background:
-              "radial-gradient(circle at center, rgba(255,255,255,0.55) 0%, rgba(255,231,200,0.25) 35%, transparent 65%)",
+              "radial-gradient(circle at center, rgba(255,255,255,0.6) 0%, rgba(199,210,254,0.3) 35%, transparent 65%)",
             filter: "blur(8px)",
           }}
         />

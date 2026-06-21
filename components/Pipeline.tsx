@@ -18,8 +18,7 @@ export default function Pipeline() {
         <div key={step} className="flex items-center sm:flex-1">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{
               duration: 0.35,
               delay: i * 0.08,
@@ -36,8 +35,7 @@ export default function Pipeline() {
           {i < steps.length - 1 && (
             <motion.span
               initial={{ opacity: 0, x: -5 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: i * 0.08 + 0.15 }}
               className="hidden px-2 text-primary sm:block"
             >
