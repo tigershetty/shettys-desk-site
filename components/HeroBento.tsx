@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import BlurFade from "./BlurFade";
-import TextShimmer from "./TextShimmer";
 import AnimatedTextCycle from "./AnimatedTextCycle";
 import { MorphingText } from "./MorphingText";
 import DecryptedText from "./DecryptedText";
+import Magnetic from "./Magnetic";
+
+const HeroParticles = dynamic(() => import("./HeroParticles"), { ssr: false });
 
 function getGreeting(hour: number): { text: string; emoji: string } {
   if (hour >= 5 && hour < 12) return { text: "Good morning, friend", emoji: "sunrise" };
@@ -42,6 +45,9 @@ export default function HeroBento() {
   const [greetingData, setGreetingData] = useState({ text: "Hey there, friend", emoji: "sunrise" });
 
   useEffect(() => {
+    // Client-only: derive the greeting from local time after mount to avoid an
+    // SSR/client hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setGreetingData(getGreeting(new Date().getHours()));
   }, []);
 
@@ -57,6 +63,9 @@ export default function HeroBento() {
           backgroundSize: "200% 200%",
         }}
       />
+
+      {/* three.js logistics-node field */}
+      <HeroParticles />
 
       <div className="relative z-10">
         <BlurFade delay={0}>
@@ -91,18 +100,22 @@ export default function HeroBento() {
         <BlurFade delay={0.3}>
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <div className="flex gap-3">
-              <Link
-                href="/articles"
-                className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-              >
-                Read my articles
-              </Link>
-              <Link
-                href="/about"
-                className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-              >
-                About me
-              </Link>
+              <Magnetic>
+                <Link
+                  href="/articles"
+                  className="block rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Read my articles
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link
+                  href="/about"
+                  className="block rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                >
+                  About me
+                </Link>
+              </Magnetic>
             </div>
             <span
               className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary"

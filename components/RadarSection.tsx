@@ -46,17 +46,12 @@ const floatDelays = [0, 0.6, 1.2, 0.3, 0.9];
 /* Varying pill sizes */
 const sizeClasses = ["px-3.5 py-2", "px-3 py-1.5", "px-4 py-2", "px-3 py-1.5", "px-3.5 py-2"];
 
-export default function RadarSection() {
+export default function RadarSection({ bare = false }: { bare?: boolean }) {
   const [expanded, setExpanded] = useState<number | null>(null);
   const hasExpanded = expanded !== null;
 
-  return (
-    <section
-      className="rounded-3xl border border-border bg-card p-5 shadow-sm"
-    >
-      <h2 className="mb-1 text-sm font-semibold text-foreground uppercase tracking-wider">
-        Supply Chain Radar
-      </h2>
+  const content = (
+    <>
       <p className="mb-4 text-xs text-muted-foreground">
         What I&apos;m currently exploring
       </p>
@@ -121,6 +116,17 @@ export default function RadarSection() {
           );
         })}
       </div>
+    </>
+  );
+
+  if (bare) return content;
+
+  return (
+    <section className="rounded-3xl border border-border bg-card p-5 shadow-sm">
+      <h2 className="mb-1 text-sm font-semibold text-foreground uppercase tracking-wider">
+        Supply Chain Radar
+      </h2>
+      {content}
     </section>
   );
 }

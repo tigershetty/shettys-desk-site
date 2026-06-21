@@ -8,6 +8,7 @@ interface FlowingMenuItem {
   period: string;
   location: string;
   lesson: string;
+  highlights?: string[];
 }
 
 interface FlowingMenuProps {
@@ -109,6 +110,21 @@ export default function FlowingMenu({ items }: FlowingMenuProps) {
                     <p className="mt-3 text-sm text-muted-foreground leading-relaxed italic">
                       {item.lesson}
                     </p>
+                    {item.highlights && item.highlights.length > 0 && (
+                      <ul className="mt-3 space-y-2">
+                        {item.highlights.map((h, hi) => (
+                          <li
+                            key={hi}
+                            className="flex gap-2.5 text-sm text-muted-foreground leading-relaxed"
+                          >
+                            <span
+                              className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${accent}`}
+                            />
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

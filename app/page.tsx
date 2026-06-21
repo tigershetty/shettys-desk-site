@@ -2,7 +2,9 @@ import HeroBento from "@/components/HeroBento";
 import ArticleCard from "@/components/ArticleCard";
 import StatsGrid from "@/components/StatsGrid";
 import RadarSection from "@/components/RadarSection";
-import BlurFade from "@/components/BlurFade";
+import Reveal from "@/components/Reveal";
+import SplitHeading from "@/components/SplitHeading";
+import FolderCard from "@/components/FolderCard";
 import articles from "@/data/articles.json";
 
 export default function Home() {
@@ -16,40 +18,47 @@ export default function Home() {
         <HeroBento />
       </div>
 
-      {/* Dark wrapper for featured article */}
+      {/* Latest articles - folder */}
       <div className="lg:col-span-2 lg:row-span-2 min-h-0">
-        <BlurFade delay={0.1} className="h-full">
-          <div className="h-full rounded-3xl bg-gradient-to-br from-foreground via-foreground/95 to-foreground/85 p-5">
-            <h2 className="mb-4 text-sm font-semibold text-primary-foreground/80 uppercase tracking-wider">
-              Latest articles
-            </h2>
-            {featured[0] && (
-              <ArticleCard article={featured[0]} featured />
-            )}
-          </div>
-        </BlurFade>
+        <Reveal className="h-full">
+          <FolderCard label="Latest articles" color="indigo" className="h-full">
+            {featured[0] && <ArticleCard article={featured[0]} featured />}
+          </FolderCard>
+        </Reveal>
       </div>
 
-      {/* My Numbers - top right */}
+      {/* My numbers - folder */}
       <div className="lg:col-span-2">
-        <BlurFade delay={0.2}>
-          <StatsGrid />
-        </BlurFade>
+        <Reveal>
+          <FolderCard label="My numbers" color="amber">
+            <StatsGrid bare />
+          </FolderCard>
+        </Reveal>
       </div>
 
-      {/* Radar - bottom right */}
+      {/* Supply chain radar - folder */}
       <div className="lg:col-span-2">
-        <BlurFade delay={0.3}>
-          <RadarSection />
-        </BlurFade>
+        <Reveal>
+          <FolderCard label="Supply chain radar" color="teal">
+            <RadarSection bare />
+          </FolderCard>
+        </Reveal>
+      </div>
+
+      {/* More reads */}
+      <div className="lg:col-span-4 mt-2">
+        <SplitHeading
+          text="More from the desk"
+          className="text-lg font-bold text-foreground lg:text-xl"
+        />
       </div>
 
       {/* Secondary articles - 4 compact cards */}
-      {secondary.map((article, i) => (
+      {secondary.map((article) => (
         <div key={article.slug} className="lg:col-span-1">
-          <BlurFade delay={0.4 + i * 0.05}>
+          <Reveal>
             <ArticleCard article={article} bento />
-          </BlurFade>
+          </Reveal>
         </div>
       ))}
     </div>

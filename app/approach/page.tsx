@@ -10,7 +10,7 @@ const phases = [
   {
     title: "Research",
     description:
-      "YouTube deep dives, industry reports, annual filings. I go until the story connects.",
+      "YouTube deep dives, industry reports, annual filings. I go until the story connects, the same way I'd pressure-test a supply plan before I trust it.",
   },
   {
     title: "Synthesize",
@@ -30,7 +30,7 @@ const phases = [
   {
     title: "Reflect",
     description:
-      "Who read it? What seniority? What industry? The analytics tell me if the message landed.",
+      "Who read it? What seniority? What industry? The analytics tell me if the message landed, then they feed the next question.",
   },
 ];
 
@@ -41,8 +41,11 @@ export default function ApproachPage() {
         <h1 className="text-3xl font-bold text-foreground">
           How a breakdown gets made
         </h1>
-        <p className="mt-2 text-muted-foreground">
-          There&apos;s no formula. But there&apos;s a rhythm.
+        <p className="mt-2 max-w-2xl text-muted-foreground leading-relaxed">
+          There&apos;s no formula. But there&apos;s a rhythm. Shetty&apos;s Desk
+          is an agentic supply-chain content workflow built on Claude Code,
+          applying the same instinct for automation I bring to planning at Tetra
+          Pak to explaining how supply chains actually work.
         </p>
       </section>
 
@@ -59,11 +62,29 @@ export default function ApproachPage() {
         ))}
       </div>
 
-      <div className="mt-10 rounded-xl border border-border bg-card p-5">
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          I&apos;m building a workflow engine to speed up the repetitive parts
-          (research aggregation, prompt templates, analytics tracking) so I can
-          spend more time on the part that actually matters: the thinking.
+      {/* The bet */}
+      <div className="mt-10 rounded-2xl border border-primary/20 bg-primary/5 p-6">
+        <h2 className="text-sm font-semibold text-primary uppercase tracking-wider">
+          The bet
+        </h2>
+        <p className="mt-3 text-sm text-foreground leading-relaxed">
+          Dashboards and BI are table stakes now. My bet is that the supply-chain
+          professionals who understand how to deploy{" "}
+          <span className="font-semibold">agentic AI</span> will operate at a
+          different level over the next few years. That&apos;s where I&apos;m
+          investing.
+        </p>
+        <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+          It&apos;s not theory. At Tetra Pak I built and deployed{" "}
+          <span className="font-medium text-foreground">
+            &ldquo;Optimus Prime at P&amp;Q&rdquo;
+          </span>
+          , an AI agent over our Quality Management System and 200+ work
+          instructions serving 50+ global users, cutting query and review time by
+          over 90%. Shetty&apos;s Desk runs on the same idea: let agents handle
+          the repetitive parts (research aggregation, prompt templates, analytics
+          tracking) so I can spend more time on the part that actually matters:
+          the thinking.
         </p>
       </div>
     </>
