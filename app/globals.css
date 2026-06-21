@@ -136,6 +136,7 @@
   --animate-brand-fade: brand-fade 0.5s ease-out 1.2s forwards;
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-move: move 6s ease-in-out infinite;
 }
 
 body {
@@ -199,6 +200,11 @@ html.intro-active body {
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+@keyframes move {
+  0%, 100% { transform: translateY(-24px); }
+  50% { transform: translateY(24px); }
 }
 
 @keyframes shimmer {
