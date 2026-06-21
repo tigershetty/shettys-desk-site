@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
-/* Terracotta theme (experiment): warm terracotta surfaces, white text. */
+/* Terracotta theme (experiment): terracotta page with white dots + white text,
+   white "complement" cards. Page-level (bare) text is light; any .bg-card /
+   .bg-popover surface flips its text dark via the scoped block below, so white
+   cards read correctly with no per-component edits. */
 :root {
-  --card: #88391f;
+  --card: #fffaf5;
   --ring: #c2603a;
-  --input: rgba(255, 255, 255, 0.22);
-  --muted: #7c3318;
+  --input: #d8ccbe;
+  --muted: #f3ece4;
   --accent: #f59e0b;
-  --border: rgba(255, 255, 255, 0.16);
+  --border: rgba(255, 255, 255, 0.18);
   --radius: 1rem;
-  --chart-1: #f0a878;
-  --chart-2: #2dd4bf;
-  --chart-3: #fcd34d;
-  --chart-4: #f472b6;
-  --chart-5: #4ade80;
-  --popover: #88391f;
+  --chart-1: #4f46e5;
+  --chart-2: #14b8a6;
+  --chart-3: #f59e0b;
+  --chart-4: #ec4899;
+  --chart-5: #22c55e;
+  --popover: #fffaf5;
   --primary: #c2603a;
   --sidebar: #9e4526;
   --spacing: 0.25rem;
@@ -24,28 +27,40 @@
   --background: #9e4526;
   --font-serif: var(--font-geist-sans), serif;
   --foreground: #fdeee4;
-  --destructive: #f87171;
+  --destructive: #ef4444;
   --shadow-blur: 0px;
-  --shadow-color: #000000;
+  --shadow-color: #4a1f0e;
   --sidebar-ring: #c2603a;
   --shadow-spread: 0px;
   --letter-spacing: normal;
-  --shadow-opacity: 0.2;
+  --shadow-opacity: 0.1;
   --sidebar-accent: #f59e0b;
   --sidebar-border: rgba(255, 255, 255, 0.12);
-  --card-foreground: #fdeee4;
+  --card-foreground: #2a1710;
   --shadow-offset-x: 0px;
   --shadow-offset-y: 0px;
   --sidebar-primary: #c2603a;
-  --muted-foreground: #ecccba;
+  --muted-foreground: #f0d6c6;
   --accent-foreground: #3a2a06;
-  --popover-foreground: #fdeee4;
+  --popover-foreground: #2a1710;
   --primary-foreground: #ffffff;
   --sidebar-foreground: #ffffff;
   --secondary-foreground: #ffffff;
   --destructive-foreground: #ffffff;
   --sidebar-accent-foreground: #3a2a06;
   --sidebar-primary-foreground: #ffffff;
+}
+
+/* White cards: locally flip text/border tokens to their light-surface values so
+   content inside any card reads dark, while bare page text stays light. */
+.bg-card,
+.bg-popover {
+  --foreground: #2a1710;
+  --muted-foreground: #6b5544;
+  --card-foreground: #2a1710;
+  --border: #e8ddd0;
+  --muted: #f3ece4;
+  --input: #d8ccbe;
 }
 
 .dark {
