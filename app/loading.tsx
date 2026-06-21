@@ -11,7 +11,7 @@ export default function Loading() {
         duration={2.2}
         className="font-mono text-sm text-muted-foreground"
       >
-        a (gent) is thinking
+        a(gent) is thinking....
       </TextTypewriter>
     </div>
   );

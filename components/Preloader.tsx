@@ -169,7 +169,7 @@ export default function Preloader() {
           duration={2}
           className="text-center font-mono text-base text-white/90 sm:text-lg"
         >
-          a (gent) is thinking
+          a(gent) is thinking....
         </TextTypewriter>
 
         <div className="mt-6 flex w-full items-center gap-3">
