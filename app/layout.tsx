@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import SmoothScroll from "@/components/SmoothScroll";
+import CustomCursor from "@/components/CustomCursor";
 import SpotlightBackground from "@/components/SpotlightBackground";
 import { BGPattern } from "@/components/BGPattern";
 
@@ -41,6 +42,7 @@ export default function RootLayout({
       >
         <Preloader />
         <SmoothScroll />
+        <CustomCursor />
         <BGPattern
           variant="dots"
           mask="fade-center"
