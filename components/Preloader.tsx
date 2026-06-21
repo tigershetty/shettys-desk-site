@@ -9,6 +9,11 @@ import TextTypewriter from "./TextTypewriter";
 
 const SESSION_KEY = "agent-intro-played";
 
+// Warm brand backdrop for the intro — a deepened tone of the logo's terracotta
+// (the bright `--accent` amber is too light for the logo's white wordmark).
+// Single source of truth; tweak here to restyle the whole preloader background.
+const PRELOADER_BG = "#c25f3a";
+
 // useLayoutEffect warns during SSR; fall back to useEffect on the server.
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
@@ -92,7 +97,7 @@ export default function Preloader() {
           counter,
           {
             v: 100,
-            duration: 1.9,
+            duration: 3,
             ease: "power1.inOut",
             onUpdate: () => {
               if (counterRef.current) {
@@ -100,15 +105,15 @@ export default function Preloader() {
               }
             },
           },
-          0.3
+          0.4
         )
         .to(
           barRef.current,
-          { scaleX: 1, duration: 1.9, ease: "power1.inOut" },
-          0.3
+          { scaleX: 1, duration: 3, ease: "power1.inOut" },
+          0.4
         )
-        // Hold on the finished state for a beat.
-        .to({}, { duration: 0.35 })
+        // Hold on the finished state so the full line stays readable.
+        .to({}, { duration: 0.55 })
         // Signature reveal: wipe the curtain upward to expose the page.
         .to(
           contentRef.current,
@@ -140,41 +145,41 @@ export default function Preloader() {
       ref={rootRef}
       aria-label="Loading"
       role="status"
-      className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-background"
-      style={{ clipPath: "inset(0 0 0% 0)" }}
+      className="fixed inset-0 z-[10000] flex flex-col items-center justify-center"
+      style={{ clipPath: "inset(0 0 0% 0)", backgroundColor: PRELOADER_BG }}
     >
       <div ref={logoRef} className="flex flex-col items-center">
         <Image
-          src="/images/logo.png"
+          src="/images/logo-mark.png"
           alt="Shetty's Desk"
-          width={88}
-          height={88}
+          width={208}
+          height={208}
           priority
-          className="rounded-2xl"
-          style={{ boxShadow: "0 4px 16px rgba(0,0,0,0.10)" }}
+          className="h-auto w-[clamp(150px,40vw,208px)] select-none"
+          draggable={false}
         />
       </div>
 
       <div
         ref={contentRef}
-        className="mt-6 flex w-[min(78vw,320px)] flex-col items-center"
+        className="mt-2 flex w-[min(78vw,320px)] flex-col items-center"
       >
         <TextTypewriter
-          duration={2.5}
-          className="text-center font-mono text-base text-foreground sm:text-lg"
+          duration={2}
+          className="text-center font-mono text-base text-white/90 sm:text-lg"
         >
           a (gent) is thinking
         </TextTypewriter>
 
         <div className="mt-6 flex w-full items-center gap-3">
-          <div className="h-px flex-1 overflow-hidden bg-foreground/10">
+          <div className="h-px flex-1 overflow-hidden bg-white/25">
             <div
               ref={barRef}
-              className="h-full w-full origin-left bg-primary"
+              className="h-full w-full origin-left bg-white"
               style={{ transform: "scaleX(0)" }}
             />
           </div>
-          <span className="font-mono text-[11px] tabular-nums text-muted-foreground">
+          <span className="font-mono text-[11px] tabular-nums text-white/70">
             <span ref={counterRef}>0</span>
           </span>
         </div>
