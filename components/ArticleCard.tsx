@@ -22,14 +22,65 @@ export default function ArticleCard({
   article,
   featured = false,
   bento = false,
+  folder = false,
+  wide = false,
 }: {
   article: Article;
   featured?: boolean;
   bento?: boolean;
+  folder?: boolean;
+  wide?: boolean;
 }) {
   const colors = accentColors[article.accent || "blue"];
 
   const articleUrl = `/articles/${article.slug}`;
+
+  // Bare content designed to sit inside a FolderCard body (no card chrome).
+  if (folder) {
+    return (
+      <a href={articleUrl} className={`group block ${wide ? "sm:flex sm:gap-5" : ""}`}>
+        {article.image && (
+          <div
+            className={`relative overflow-hidden rounded-xl ${
+              wide ? "aspect-[16/10] sm:w-2/5 sm:shrink-0" : "aspect-[16/9]"
+            }`}
+          >
+            <Image
+              src={article.image}
+              alt={article.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+          </div>
+        )}
+        <div className={wide ? "mt-4 sm:mt-0 sm:flex-1" : "mt-3"}>
+          <div className="mb-2 flex flex-wrap gap-1.5">
+            {article.tags.map((tag) => (
+              <span
+                key={tag}
+                className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${colors.tag}`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
+            {article.title}
+          </h3>
+          <p className="mt-1 text-sm text-muted-foreground leading-relaxed line-clamp-3">
+            {article.hook}
+          </p>
+          <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all group-hover:gap-2.5">
+            Peek inside
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </span>
+        </div>
+      </a>
+    );
+  }
 
   // Compact bento card: thumbnail + title only
   if (bento) {

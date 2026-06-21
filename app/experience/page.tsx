@@ -15,10 +15,15 @@ export default function ExperiencePage() {
           />
         </h1>
         <a
-          href="#"
-          className="mt-3 inline-block text-sm text-primary hover:underline"
+          href={experienceData.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
         >
-          Download resume (PDF)
+          View full profile on LinkedIn
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
         </a>
       </section>
 
@@ -27,9 +32,29 @@ export default function ExperiencePage() {
         {experienceData.summary}
       </p>
 
+      {/* Core competencies */}
+      <section className="mb-12">
+        <h2 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wider">
+          Core competencies
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {experienceData.competencies.map((c) => (
+            <div
+              key={c.area}
+              className="rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm"
+            >
+              <p className="text-sm font-semibold text-foreground">{c.area}</p>
+              <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                {c.detail}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Primary: Tetra Pak */}
       <section className="mb-12">
-        <div className="mb-6 flex items-baseline gap-3">
+        <div className="mb-2 flex items-baseline gap-3">
           <h2 className="text-xl font-semibold text-foreground">
             {primary.company}
           </h2>
@@ -37,6 +62,9 @@ export default function ExperiencePage() {
             {primary.totalYears}
           </span>
         </div>
+        <p className="mb-6 text-sm text-muted-foreground">
+          Hover or tap a role to see the detail.
+        </p>
         <FlowingMenu items={primary.roles} />
       </section>
 
