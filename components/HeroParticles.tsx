@@ -28,7 +28,7 @@ export default function HeroParticles() {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
-    camera.position.z = 5;
+    camera.position.z = isMobile ? 5.8 : 5;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
@@ -42,9 +42,17 @@ export default function HeroParticles() {
     el.appendChild(canvas);
 
     const group = new THREE.Group();
-    // Push the whole network toward the right of the hero.
-    group.position.x = isMobile ? 0.2 : 1.3;
+    // Push the network to the right on desktop; centre it on mobile.
+    group.position.x = isMobile ? 0 : 1.4;
     scene.add(group);
+
+    // Soft edge mask so the network melts into the card — and clears the
+    // headline on the left on desktop.
+    const mask = isMobile
+      ? "radial-gradient(120% 85% at 50% 42%, #000 50%, transparent 100%)"
+      : "linear-gradient(to right, transparent 0%, #000 44%)";
+    el.style.setProperty("mask-image", mask);
+    el.style.setProperty("-webkit-mask-image", mask);
 
     const INDIGO = 0x4f46e5;
     const TEAL = 0x14b8a6;
@@ -109,7 +117,7 @@ export default function HeroParticles() {
     const routeMat = new THREE.LineBasicMaterial({
       color: INDIGO,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.42,
     });
     edges.forEach(([a, b]) => {
       const start = hubBase[a];
@@ -129,9 +137,10 @@ export default function HeroParticles() {
     const packetSpeed = curves.map(() => 0.12 + Math.random() * 0.16);
     const packetGeo = new THREE.BufferGeometry();
     packetGeo.setAttribute("position", new THREE.BufferAttribute(packetPos, 3));
+    const basePacketSize = 0.17 * (isMobile ? 0.9 : 1);
     const packetMat = new THREE.PointsMaterial({
       color: AMBER,
-      size: 0.16 * (isMobile ? 0.85 : 1),
+      size: basePacketSize,
       transparent: true,
       opacity: 1,
       sizeAttenuation: true,
@@ -203,6 +212,7 @@ export default function HeroParticles() {
         packetPos[i * 3 + 2] = tmp.z;
       }
       packetGeo.attributes.position.needsUpdate = true;
+      packetMat.size = basePacketSize * (1 + 0.18 * Math.sin(t * 3));
 
       // hub halo pulse
       haloMat.opacity = 0.12 + 0.06 * (0.5 + 0.5 * Math.sin(t * 1.5));
