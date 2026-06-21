@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FlowingMenuItem {
   title: string;
@@ -33,22 +33,8 @@ const accentTextColors = [
   "text-chart-1",
 ];
 
-function MarqueeText({ text, className }: { text: string; className?: string }) {
-  return (
-    <div className="overflow-hidden">
-      <div className="flex animate-marquee whitespace-nowrap">
-        <span className={`mr-8 ${className}`}>{text}</span>
-        <span className={`mr-8 ${className}`}>{text}</span>
-        <span className={`mr-8 ${className}`}>{text}</span>
-        <span className={`mr-8 ${className}`}>{text}</span>
-      </div>
-    </div>
-  );
-}
-
 export default function FlowingMenu({ items }: FlowingMenuProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const prefersReducedMotion = useReducedMotion();
 
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">
@@ -60,7 +46,6 @@ export default function FlowingMenu({ items }: FlowingMenuProps) {
         return (
           <motion.div
             key={item.title}
-            layout={!prefersReducedMotion}
             className={`relative border-b border-border last:border-b-0 cursor-pointer transition-colors ${
               isActive ? "bg-background/50" : "hover:bg-background/30"
             }`}
@@ -80,18 +65,11 @@ export default function FlowingMenu({ items }: FlowingMenuProps) {
             <div className="px-5 py-4 pl-6">
               {/* Title row */}
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                {isActive && !prefersReducedMotion ? (
-                  <MarqueeText
-                    text={item.title}
-                    className={`text-lg font-semibold ${accentText}`}
-                  />
-                ) : (
-                  <h4 className={`text-lg font-semibold transition-colors ${
-                    isActive ? accentText : "text-foreground"
-                  }`}>
-                    {item.title}
-                  </h4>
-                )}
+                <h4 className={`text-lg font-semibold transition-colors ${
+                  isActive ? accentText : "text-foreground"
+                }`}>
+                  {item.title}
+                </h4>
                 <span className="shrink-0 text-sm text-muted-foreground">
                   {item.period} &middot; {item.location}
                 </span>
