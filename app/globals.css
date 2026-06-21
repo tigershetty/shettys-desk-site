@@ -1,49 +1,50 @@
 @import "tailwindcss";
 
+/* Terracotta theme (experiment): warm terracotta surfaces, white text. */
 :root {
-  --card: #ffffff;
-  --ring: #a5b4fc;
-  --input: #737373;
-  --muted: #f0f0f0;
+  --card: #88391f;
+  --ring: #c2603a;
+  --input: rgba(255, 255, 255, 0.22);
+  --muted: #7c3318;
   --accent: #f59e0b;
-  --border: #000000;
+  --border: rgba(255, 255, 255, 0.16);
   --radius: 1rem;
-  --chart-1: #4f46e5;
-  --chart-2: #14b8a6;
-  --chart-3: #f59e0b;
-  --chart-4: #ec4899;
-  --chart-5: #22c55e;
-  --popover: #ffffff;
-  --primary: #4f46e5;
-  --sidebar: #f7f9f3;
+  --chart-1: #f0a878;
+  --chart-2: #2dd4bf;
+  --chart-3: #fcd34d;
+  --chart-4: #f472b6;
+  --chart-5: #4ade80;
+  --popover: #88391f;
+  --primary: #c2603a;
+  --sidebar: #9e4526;
   --spacing: 0.25rem;
   --font-mono: var(--font-geist-mono), monospace;
   --font-sans: var(--font-geist-sans), sans-serif;
   --secondary: #14b8a6;
-  --background: #f7f9f3;
+  --background: #9e4526;
   --font-serif: var(--font-geist-sans), serif;
-  --foreground: #000000;
-  --destructive: #ef4444;
+  --foreground: #fdeee4;
+  --destructive: #f87171;
   --shadow-blur: 0px;
-  --shadow-color: #1a1a1a;
-  --sidebar-ring: #a5b4fc;
+  --shadow-color: #000000;
+  --sidebar-ring: #c2603a;
   --shadow-spread: 0px;
   --letter-spacing: normal;
-  --shadow-opacity: 0.05;
+  --shadow-opacity: 0.2;
   --sidebar-accent: #f59e0b;
-  --sidebar-border: #000000;
-  --card-foreground: #000000;
+  --sidebar-border: rgba(255, 255, 255, 0.12);
+  --card-foreground: #fdeee4;
   --shadow-offset-x: 0px;
   --shadow-offset-y: 0px;
-  --sidebar-primary: #4f46e5;
-  --muted-foreground: #333333;
-  --accent-foreground: #000000;
-  --popover-foreground: #000000;
+  --sidebar-primary: #c2603a;
+  --muted-foreground: #ecccba;
+  --accent-foreground: #3a2a06;
+  --popover-foreground: #fdeee4;
   --primary-foreground: #ffffff;
-  --sidebar-foreground: #000000;
+  --sidebar-foreground: #ffffff;
   --secondary-foreground: #ffffff;
   --destructive-foreground: #ffffff;
-  --sidebar-accent-foreground: #000000;
+  --sidebar-accent-foreground: #3a2a06;
   --sidebar-primary-foreground: #ffffff;
 }
 
@@ -191,8 +192,8 @@ html.intro-active body {
 
 /* Selection */
 ::selection {
-  background: hsl(244 58% 51% / 0.2);
-  color: var(--foreground);
+  background: rgba(245, 158, 11, 0.35);
+  color: #ffffff;
 }
 
 /* Animations */

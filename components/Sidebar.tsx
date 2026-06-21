@@ -95,7 +95,7 @@ export default function Sidebar() {
           </div>
 
           {/* Terminal */}
-          <ElectricBorder color="#4f46e5" speed={0.2} chaos={0.08} borderRadius={8}>
+          <ElectricBorder color="#f59e0b" speed={0.2} chaos={0.08} borderRadius={8}>
             <Terminal />
           </ElectricBorder>
         </div>

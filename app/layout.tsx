@@ -45,7 +45,7 @@ export default function RootLayout({
           variant="dots"
           mask="fade-center"
           size={24}
-          fill="rgba(0,0,0,0.15)"
+          fill="rgba(255,255,255,0.13)"
           className="fixed inset-0 -z-10"
         />
         <SpotlightBackground />

@@ -17,28 +17,28 @@ const tones: Record<
   { tab: string; body: string; shadow: string; back: string }
 > = {
   indigo: {
-    tab: "bg-linear-to-b from-[#6366f1] to-[#4f46e5] text-white",
-    body: "border-[#4f46e5]/15 bg-linear-to-b from-[#eef2ff] to-card",
-    shadow: "shadow-[0_18px_44px_-20px_rgba(79,70,229,0.5)]",
-    back: "bg-[#4f46e5]/10",
+    tab: "bg-linear-to-b from-[#e8946a] to-[#c2603a] text-white",
+    body: "border-white/10 bg-card",
+    shadow: "shadow-[0_18px_44px_-18px_rgba(0,0,0,0.55)]",
+    back: "bg-[#c2603a]/25",
   },
   amber: {
     tab: "bg-linear-to-b from-[#fbbf24] to-[#f59e0b] text-[#3a2a06]",
-    body: "border-[#f59e0b]/20 bg-linear-to-b from-[#fffbeb] to-card",
-    shadow: "shadow-[0_18px_44px_-20px_rgba(245,158,11,0.5)]",
-    back: "bg-[#f59e0b]/12",
+    body: "border-white/10 bg-card",
+    shadow: "shadow-[0_18px_44px_-18px_rgba(0,0,0,0.55)]",
+    back: "bg-[#f59e0b]/25",
   },
   teal: {
     tab: "bg-linear-to-b from-[#2dd4bf] to-[#14b8a6] text-white",
-    body: "border-[#14b8a6]/20 bg-linear-to-b from-[#f0fdfa] to-card",
-    shadow: "shadow-[0_18px_44px_-20px_rgba(20,184,166,0.5)]",
-    back: "bg-[#14b8a6]/12",
+    body: "border-white/10 bg-card",
+    shadow: "shadow-[0_18px_44px_-18px_rgba(0,0,0,0.55)]",
+    back: "bg-[#14b8a6]/25",
   },
   dark: {
-    tab: "bg-linear-to-b from-neutral-700 to-neutral-900 text-white",
-    body: "border-border bg-linear-to-b from-neutral-50 to-card",
-    shadow: "shadow-[0_18px_44px_-20px_rgba(0,0,0,0.45)]",
-    back: "bg-foreground/10",
+    tab: "bg-linear-to-b from-[#fdeee4] to-[#e8cdb9] text-[#5a2c17]",
+    body: "border-white/10 bg-card",
+    shadow: "shadow-[0_18px_44px_-18px_rgba(0,0,0,0.55)]",
+    back: "bg-white/12",
   },
 };
 
