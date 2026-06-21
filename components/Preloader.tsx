@@ -10,9 +10,10 @@ import TextTypewriter from "./TextTypewriter";
 const SESSION_KEY = "agent-intro-played";
 
 // Warm brand backdrop for the intro — a deepened tone of the logo's terracotta
-// (the bright `--accent` amber is too light for the logo's white wordmark).
-// Single source of truth; tweak here to restyle the whole preloader background.
-const PRELOADER_BG = "#c25f3a";
+// (the bright `--accent` amber is too light for the logo's white wordmark, and a
+// lighter terracotta hides the scribble mark). This shade keeps the mark legible,
+// the wordmark crisp, and the feel warm. Single source of truth — tweak here.
+const PRELOADER_BG = "#9e4526";
 
 // useLayoutEffect warns during SSR; fall back to useEffect on the server.
 const useIsoLayoutEffect =
