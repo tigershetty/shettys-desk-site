@@ -2,11 +2,14 @@ import ArticleCard from "@/components/ArticleCard";
 import ArticlesHeading from "@/components/ArticlesHeading";
 import FolderCard from "@/components/FolderCard";
 import Reveal from "@/components/Reveal";
-import articles from "@/data/articles.json";
+import { getArticles } from "@/lib/articles";
 
 const folderColors = ["teal", "amber", "indigo", "dark"] as const;
 
-export default function ArticlesPage() {
+export const revalidate = 600;
+
+export default async function ArticlesPage() {
+  const articles = await getArticles();
   const featured = articles.find((a) => a.featured);
   const rest = articles.filter((a) => !a.featured);
 
