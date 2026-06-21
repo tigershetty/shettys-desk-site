@@ -32,12 +32,12 @@ export default function ExperiencePage() {
         </a>
       </section>
 
-      {/* Summary + interactive robot */}
+      {/* Summary + interactive robot (free-standing, no card chrome) */}
       <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
         <p className="max-w-2xl text-muted-foreground leading-relaxed">
           {experienceData.summary}
         </p>
-        <div className="relative h-64 w-full shrink-0 overflow-hidden rounded-2xl border border-border bg-card sm:h-72 lg:h-80 lg:w-80">
+        <div className="relative h-72 w-full shrink-0 sm:h-80 lg:h-96 lg:w-96">
           <InteractiveRobotSpline scene={ROBOT_SCENE} className="h-full w-full" />
         </div>
       </div>
