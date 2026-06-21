@@ -1,5 +1,5 @@
 {
-  "summary": "Supply chain planning leader with 6+ years at Tetra Pak — across global replenishment operations, master scheduling, and cross-functional S&OP/IBP execution. I lead teams and budgets, and I build the automation and AI agents that take the repetitive work off the table. Beyond the day job I run Shetty's Desk, an agentic supply-chain content workflow built on Claude Code.",
+  "summary": "Supply chain planning leader with 6+ years at Tetra Pak, across global replenishment operations, master scheduling, and cross-functional S&OP/IBP execution. I lead teams and budgets, and I build the automation and AI agents that take the repetitive work off the table. Beyond the day job I run Shetty's Desk, an agentic supply-chain content workflow built on Claude Code.",
   "resumeUrl": "https://www.linkedin.com/in/shettys-desk",
   "competencies": [
     {
@@ -33,36 +33,36 @@
       "totalYears": "6+ years",
       "roles": [
         {
-          "title": "Replenishment Manager — Planning & Quality, Services Supply Network",
+          "title": "Replenishment Manager, Planning & Quality (Services Supply Network)",
           "period": "Oct 2025 - Present",
           "location": "Lund",
           "lesson": "Owning the end-to-end at the scale of a global service network: right part, right place, right time.",
           "highlights": [
-            "Lead a team of 10 purchasing & sourcing specialists with full headcount and budget ownership — 450M+ EUR annual purchasing volume, 250,000+ purchase orders, and 150,000+ spare parts across 1,000+ suppliers globally.",
+            "Lead a team of 10 purchasing & sourcing specialists with full headcount and budget ownership: 450M+ EUR annual purchasing volume, 250,000+ purchase orders, and 150,000+ spare parts across 1,000+ suppliers globally.",
             "Cut average sourcing lead time 20% on 1,500+ parts/year by securing direct CAD-drawing access; automating sourcing-case creation reduced backlog 45% post-implementation.",
-            "Rescued a stalled order-confirmation automation blocked by an SAP defect — drove it to resolution through IT; post go-live it saves ~9 hours/day, ~2,200 hours/year (≈1 FTE).",
-            "Built and deployed 'Optimus Prime at P&Q', an AI agent (Microsoft Copilot Studio) over our Quality Management System and 200+ work instructions for 50+ global users — query & review time down over 90%."
+            "Rescued a stalled order-confirmation automation blocked by an SAP defect, driving it to resolution through IT; post go-live it saves ~9 hours/day, ~2,200 hours/year (≈1 FTE).",
+            "Built and deployed 'Optimus Prime at P&Q', an AI agent (Microsoft Copilot Studio) over our Quality Management System and 200+ work instructions for 50+ global users, cutting query and review time by over 90%."
           ]
         },
         {
-          "title": "Team Leader / Coordinator & Master Scheduler — Supply Planning",
+          "title": "Team Leader / Coordinator & Master Scheduler, Supply Planning",
           "period": "Oct 2021 - Sep 2025",
           "location": "Lund",
-          "lesson": "Leading people is its own supply chain — coordinating a team across borders while keeping supply intact under pressure.",
+          "lesson": "Leading people is its own supply chain: coordinating a team across borders while keeping supply intact under pressure.",
           "highlights": [
             "Led a cross-functional planning team of 8 (from May 2024) across Sweden, Italy and China, resolving 15+ critical planning deviations monthly while protecting 180M+ EUR in annual revenue.",
-            "Owned mid-term master scheduling for 9 key products across 6 countries — pacing 2 internal factories and 12+ external suppliers in Sweden, Italy, Portugal, Austria, China and the USA.",
+            "Owned mid-term master scheduling for 9 key products across 6 countries, pacing 2 internal factories and 12+ external suppliers in Sweden, Italy, Portugal, Austria, China and the USA.",
             "Lifted supply availability from 85% to 98% through the semiconductor shortage via scenario planning and rapid replanning.",
             "Improved on-time delivery 25% through capacity scenario modelling, master-data work, and structured demand/supply alignment."
           ]
         },
         {
-          "title": "Jr. Supply Chain Specialist / Analyst — Global Supply Planning",
+          "title": "Jr. Supply Chain Specialist / Analyst, Global Supply Planning",
           "period": "Sep 2019 - Sep 2021",
           "location": "Lund",
           "lesson": "Where I learned the gap between what the data says and what the room decides.",
           "highlights": [
-            "Standardised the S&OP planning model globally across Commercial, Supply and Operations — the cross-functional foundation that fed Tetra Pak's 2020 S&OP rollout and later the IBP process.",
+            "Standardised the S&OP planning model globally across Commercial, Supply and Operations, the cross-functional foundation that fed Tetra Pak's 2020 S&OP rollout and later the IBP process.",
             "Built long-term supply plans covering 25+ products through introduction and phase-out cycles."
           ]
         }

@@ -46,7 +46,7 @@ export default function HeroParticles() {
     group.position.x = isMobile ? 0 : 1.4;
     scene.add(group);
 
-    // Soft edge mask so the network melts into the card — and clears the
+    // Soft edge mask so the network melts into the card, and clears the
     // headline on the left on desktop.
     const mask = isMobile
       ? "radial-gradient(120% 85% at 50% 42%, #000 50%, transparent 100%)"

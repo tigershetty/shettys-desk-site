@@ -14,7 +14,7 @@ type SplitHeadingProps = {
 };
 
 /**
- * Heading whose characters mask-reveal up, line by line, on scroll — GSAP
+ * Heading whose characters mask-reveal up, line by line, on scroll, via GSAP
  * SplitText + ScrollTrigger. Renders plain text (and stays fully visible) under
  * reduced motion or before hydration, so it's accessible without JS.
  */

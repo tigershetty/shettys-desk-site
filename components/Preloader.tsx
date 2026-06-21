@@ -9,10 +9,10 @@ import TextTypewriter from "./TextTypewriter";
 
 const SESSION_KEY = "agent-intro-played";
 
-// Warm brand backdrop for the intro — a deepened tone of the logo's terracotta
+// Warm brand backdrop for the intro: a deepened tone of the logo's terracotta
 // (the bright `--accent` amber is too light for the logo's white wordmark, and a
 // lighter terracotta hides the scribble mark). This shade keeps the mark legible,
-// the wordmark crisp, and the feel warm. Single source of truth — tweak here.
+// the wordmark crisp, and the feel warm. Single source of truth; tweak here.
 const PRELOADER_BG = "#9e4526";
 
 // useLayoutEffect warns during SSR; fall back to useEffect on the server.
@@ -45,7 +45,7 @@ export default function Preloader() {
   useIsoLayoutEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Skip the intro for repeat visits within the same session — before paint.
+    // Skip the intro for repeat visits within the same session, before paint.
     if (sessionStorage.getItem(SESSION_KEY)) {
       setActive(false);
       return;

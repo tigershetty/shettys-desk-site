@@ -10,7 +10,7 @@ const phases = [
   {
     title: "Research",
     description:
-      "YouTube deep dives, industry reports, annual filings. I go until the story connects — the same way I'd pressure-test a supply plan before I trust it.",
+      "YouTube deep dives, industry reports, annual filings. I go until the story connects, the same way I'd pressure-test a supply plan before I trust it.",
   },
   {
     title: "Synthesize",
@@ -30,7 +30,7 @@ const phases = [
   {
     title: "Reflect",
     description:
-      "Who read it? What seniority? What industry? The analytics tell me if the message landed — then they feed the next question.",
+      "Who read it? What seniority? What industry? The analytics tell me if the message landed, then they feed the next question.",
   },
 ];
 
@@ -43,9 +43,9 @@ export default function ApproachPage() {
         </h1>
         <p className="mt-2 max-w-2xl text-muted-foreground leading-relaxed">
           There&apos;s no formula. But there&apos;s a rhythm. Shetty&apos;s Desk
-          is an agentic supply-chain content workflow built on Claude Code — the
-          same instinct for automation I bring to planning at Tetra Pak, pointed
-          at explaining how supply chains actually work.
+          is an agentic supply-chain content workflow built on Claude Code,
+          applying the same instinct for automation I bring to planning at Tetra
+          Pak to explaining how supply chains actually work.
         </p>
       </section>
 
@@ -82,8 +82,8 @@ export default function ApproachPage() {
           , an AI agent over our Quality Management System and 200+ work
           instructions serving 50+ global users, cutting query and review time by
           over 90%. Shetty&apos;s Desk runs on the same idea: let agents handle
-          the repetitive parts — research aggregation, prompt templates, analytics
-          tracking — so I can spend more time on the part that actually matters:
+          the repetitive parts (research aggregation, prompt templates, analytics
+          tracking) so I can spend more time on the part that actually matters:
           the thinking.
         </p>
       </div>
