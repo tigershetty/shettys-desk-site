@@ -66,7 +66,7 @@ export default function Sidebar() {
               href="/"
               onClick={() => setOpen(false)}
               aria-label="Go to homepage"
-              className="rounded-2xl border border-border bg-card p-3 shadow-sm transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="rounded-md transition-transform hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <Image
                 src="/images/logo-full.png"
