@@ -85,8 +85,8 @@ export default function AboutPage() {
         </div>
 
         {/* Tiny themed Pong that spells "Prompting is all you need" */}
-        <div className="w-full sm:ml-auto sm:w-[26rem]">
-          <div className="relative h-52 w-full overflow-hidden rounded-xl border border-border shadow-sm">
+        <div className="w-full sm:ml-auto sm:w-[32.5rem]">
+          <div className="relative h-[16.25rem] w-full overflow-hidden rounded-xl border border-border shadow-sm">
             <PromptingIsAllYouNeed />
           </div>
         </div>

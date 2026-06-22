@@ -258,8 +258,8 @@ export function PromptingIsAllYouNeed() {
       })
 
       // Ball speed proportional to the rendered pixel size, kept slow for a
-      // calming feel (~60% slower than the original).
-      const ballSpeed = Math.max(0.5, adjustedLargePixelSize * 0.28)
+      // calming feel.
+      const ballSpeed = Math.max(0.2, adjustedLargePixelSize * 0.112)
 
       const ballStartX = canvas.width * 0.9
       const ballStartY = canvas.height * 0.1
