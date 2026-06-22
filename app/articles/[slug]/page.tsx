@@ -1,10 +1,13 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import articles from "@/data/articles.json";
+import { getArticles, getArticle } from "@/lib/articles";
 import ArticleStats from "@/components/ArticleStats";
 
-export function generateStaticParams() {
+export const revalidate = 600;
+
+export async function generateStaticParams() {
+  const articles = await getArticles();
   return articles.map((article) => ({
     slug: article.slug,
   }));
@@ -12,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = articles.find((a) => a.slug === slug);
+  const article = await getArticle(slug);
   if (!article) return { title: "Article Not Found" };
   return {
     title: `${article.title} | Shetty's Desk`,
@@ -22,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = articles.find((a) => a.slug === slug);
+  const article = await getArticle(slug);
   if (!article) notFound();
 
   return (

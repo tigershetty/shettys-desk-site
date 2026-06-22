@@ -5,9 +5,12 @@ import RadarSection from "@/components/RadarSection";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
 import FolderCard from "@/components/FolderCard";
-import articles from "@/data/articles.json";
+import { getArticles } from "@/lib/articles";
 
-export default function Home() {
+export const revalidate = 600;
+
+export default async function Home() {
+  const articles = await getArticles();
   const featured = articles.filter((a) => a.featured);
   const secondary = articles.filter((a) => !a.featured).slice(0, 4);
 

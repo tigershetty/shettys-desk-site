@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { PromptingIsAllYouNeed } from "@/components/ui/prompting-pong";
 import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
@@ -81,6 +82,13 @@ export default function AboutPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
             </svg>
           </a>
+        </div>
+
+        {/* Tiny themed Pong that spells "Prompting is all you need" */}
+        <div className="w-full sm:ml-auto sm:w-[32.5rem]">
+          <div className="relative h-[16.25rem] w-full overflow-hidden rounded-xl border border-border shadow-sm">
+            <PromptingIsAllYouNeed />
+          </div>
         </div>
       </div>
 
