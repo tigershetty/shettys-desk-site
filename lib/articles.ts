@@ -122,14 +122,29 @@ async function fetchFromNotion(): Promise<Article[]> {
  * NOTION_DATABASE_ID are set; otherwise (and on any Notion error) falls back to
  * the bundled data/articles.json so the site always renders.
  */
+// Log the resolved source once per process (build/lambda) for easy diagnostics.
+let sourceLogged = false;
+function logSource(source: string, count: number) {
+  if (sourceLogged) return;
+  sourceLogged = true;
+  console.info(`[articles] source=${source} count=${count}`);
+}
+
 export async function getArticles(): Promise<Article[]> {
   if (NOTION_TOKEN && NOTION_DATABASE_ID) {
     try {
       const articles = await fetchFromNotion();
-      if (articles.length > 0) return articles;
+      if (articles.length > 0) {
+        logSource("notion", articles.length);
+        return articles;
+      }
+      logSource("fallback (notion returned 0 published rows)", 0);
     } catch (err) {
       console.error("[articles] Notion fetch failed; using local fallback:", err);
+      logSource("fallback (notion error)", 0);
     }
+  } else {
+    logSource("fallback (NOTION_TOKEN/NOTION_DATABASE_ID not set)", 0);
   }
   return localArticles as Article[];
 }
