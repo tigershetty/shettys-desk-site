@@ -1,5 +1,6 @@
 import HeroBento from "@/components/HeroBento";
 import WhatIDo from "@/components/WhatIDo";
+import LogoStrip from "@/components/LogoStrip";
 import ArticleCard from "@/components/ArticleCard";
 import StatsGrid from "@/components/StatsGrid";
 import RadarSection from "@/components/RadarSection";
@@ -16,7 +17,7 @@ export default async function Home() {
   const secondary = articles.filter((a) => !a.featured).slice(0, 4);
 
   return (
-    <div className="grid gap-4 lg:grid-cols-4 lg:grid-rows-[auto_auto_auto_auto]">
+    <div className="grid gap-5 lg:grid-cols-4 lg:grid-rows-[auto_auto_auto_auto]">
       {/* Hero - full width */}
       <div className="lg:col-span-4">
         <HeroBento />
@@ -70,6 +71,13 @@ export default async function Home() {
           </Reveal>
         </div>
       ))}
+
+      {/* Credibility strip - full width closer */}
+      <div className="lg:col-span-4 mt-2">
+        <Reveal>
+          <LogoStrip />
+        </Reveal>
+      </div>
     </div>
   );
 }
