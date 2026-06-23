@@ -5,17 +5,14 @@ import ShettysAnimation from "@/components/ShettysAnimation";
 export default function ShettysDesk() {
   return (
     <>
-      <header className="max-w-2xl py-6">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+      <section className="mb-10">
+        <h1 className="text-3xl font-bold text-foreground">
           Shetty&apos;s Desk
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-          A how-to for supply chain.
         </h1>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-          One real topic at a time.
+        <p className="mt-2 text-muted-foreground">
+          A how-to for supply chain, one real topic at a time.
         </p>
-      </header>
+      </section>
 
       {/* The problem */}
       <section className="mb-12">
@@ -62,12 +59,9 @@ export default function ShettysDesk() {
         href={siteData.social.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+        className="inline-block rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-primary/80 hover:shadow-md hover:shadow-primary/10"
       >
         Follow Shetty&apos;s Desk on LinkedIn
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-        </svg>
       </a>
     </>
   );

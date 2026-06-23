@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Source_Code_Pro } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import SmoothScroll from "@/components/SmoothScroll";
+import SpotlightBackground from "@/components/SpotlightBackground";
+import { BGPattern } from "@/components/BGPattern";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,17 +37,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sourceCodePro.variable} antialiased flex min-h-screen flex-col overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sourceCodePro.variable} antialiased flex min-h-screen overflow-x-hidden`}
       >
         <Preloader />
         <SmoothScroll />
-        <Header />
-        <main className="flex-1">
-          <div className="mx-auto w-full max-w-6xl px-6 pt-28 pb-20 sm:px-8 sm:pt-32 sm:pb-28">
+        <BGPattern
+          variant="dots"
+          mask="fade-center"
+          size={24}
+          fill="rgba(0,0,0,0.15)"
+          className="fixed inset-0 -z-10"
+        />
+        <SpotlightBackground />
+        <Sidebar />
+        <main className="w-full flex flex-col min-h-screen">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden px-6 pt-16 pb-8 lg:pl-[calc(16rem+2rem)] lg:pr-12 lg:pt-10 lg:pb-10">
             {children}
           </div>
+          <Footer />
         </main>
-        <Footer />
       </body>
     </html>
   );

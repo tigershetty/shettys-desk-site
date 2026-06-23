@@ -179,7 +179,7 @@ export default function ContactForm() {
             disabled={status === "sending"}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-all hover:bg-foreground/90 disabled:opacity-50"
+            className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-primary/80 hover:shadow-md hover:shadow-primary/10 disabled:opacity-50"
           >
             {status === "sending" ? (
               <span className="flex items-center gap-2">
@@ -190,7 +190,7 @@ export default function ContactForm() {
                     duration: 0.8,
                     ease: "linear",
                   }}
-                  className="inline-block h-4 w-4 rounded-full border-2 border-background/30 border-t-background"
+                  className="inline-block h-4 w-4 rounded-full border-2 border-white/30 border-t-white"
                 />
                 Sending...
               </span>

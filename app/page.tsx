@@ -1,68 +1,69 @@
-import Link from "next/link";
-import Hero from "@/components/Hero";
-import WhatIDo from "@/components/WhatIDo";
-import StatsGrid from "@/components/StatsGrid";
-import LogoStrip from "@/components/LogoStrip";
+import HeroBento from "@/components/HeroBento";
 import ArticleCard from "@/components/ArticleCard";
+import StatsGrid from "@/components/StatsGrid";
+import RadarSection from "@/components/RadarSection";
 import Reveal from "@/components/Reveal";
+import SplitHeading from "@/components/SplitHeading";
+import FolderCard from "@/components/FolderCard";
 import { getArticles } from "@/lib/articles";
 
 export const revalidate = 600;
 
 export default async function Home() {
   const articles = await getArticles();
-  const featured = articles.find((a) => a.featured) ?? articles[0];
-  const rest = articles.filter((a) => a.slug !== featured?.slug).slice(0, 6);
+  const featured = articles.filter((a) => a.featured);
+  const secondary = articles.filter((a) => !a.featured).slice(0, 4);
 
   return (
-    <>
-      <Hero />
+    <div className="grid gap-4 lg:grid-cols-4 lg:grid-rows-[auto_auto_auto_auto]">
+      {/* Hero - full width */}
+      <div className="lg:col-span-4">
+        <HeroBento />
+      </div>
 
-      <LogoStrip />
+      {/* Latest articles - folder */}
+      <div className="lg:col-span-2 lg:row-span-2 min-h-0">
+        <Reveal className="h-full">
+          <FolderCard label="Latest articles" color="indigo" className="h-full">
+            {featured[0] && <ArticleCard article={featured[0]} featured />}
+          </FolderCard>
+        </Reveal>
+      </div>
 
-      <WhatIDo />
+      {/* My numbers - folder */}
+      <div className="lg:col-span-2">
+        <Reveal>
+          <FolderCard label="My numbers" color="amber">
+            <StatsGrid bare />
+          </FolderCard>
+        </Reveal>
+      </div>
 
-      <StatsGrid />
+      {/* Supply chain radar - folder */}
+      <div className="lg:col-span-2">
+        <Reveal>
+          <FolderCard label="Supply chain radar" color="teal">
+            <RadarSection bare />
+          </FolderCard>
+        </Reveal>
+      </div>
 
-      {/* Latest writing */}
-      <section className="py-16 sm:py-24">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div className="max-w-2xl">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-              From the desk
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Latest writing.
-            </h2>
-          </div>
-          <Link
-            href="/articles"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-all hover:gap-2.5"
-          >
-            View all articles
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
+      {/* More reads */}
+      <div className="lg:col-span-4 mt-2">
+        <SplitHeading
+          text="More from the desk"
+          className="text-lg font-bold text-foreground lg:text-xl"
+        />
+      </div>
 
-        {featured && (
+      {/* Secondary articles - 4 compact cards */}
+      {secondary.map((article) => (
+        <div key={article.slug} className="lg:col-span-1">
           <Reveal>
-            <ArticleCard article={featured} featured />
+            <ArticleCard article={article} bento />
           </Reveal>
-        )}
-
-        {rest.length > 0 && (
-          <Reveal
-            stagger={0.1}
-            className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {rest.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
-            ))}
-          </Reveal>
-        )}
-      </section>
-    </>
+        </div>
+      ))}
+    </div>
   );
 }
