@@ -144,7 +144,13 @@ export async function getArticles(): Promise<Article[]> {
       logSource("fallback (notion error)", 0);
     }
   } else {
-    logSource("fallback (NOTION_TOKEN/NOTION_DATABASE_ID not set)", 0);
+    const missing = [
+      NOTION_TOKEN ? null : "NOTION_TOKEN",
+      NOTION_DATABASE_ID ? null : "NOTION_DATABASE_ID",
+    ]
+      .filter(Boolean)
+      .join(", ");
+    logSource(`fallback (missing env: ${missing})`, 0);
   }
   return localArticles as Article[];
 }
