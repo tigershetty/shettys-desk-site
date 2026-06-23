@@ -144,7 +144,8 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis drives scrolling in JS; native CSS smooth-scroll would fight it. */
+  scroll-behavior: auto;
 }
 
 /* Lenis smooth scroll */

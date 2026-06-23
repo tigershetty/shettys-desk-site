@@ -1,4 +1,5 @@
 import HeroBento from "@/components/HeroBento";
+import WhatIDo from "@/components/WhatIDo";
 import ArticleCard from "@/components/ArticleCard";
 import StatsGrid from "@/components/StatsGrid";
 import RadarSection from "@/components/RadarSection";
@@ -19,6 +20,11 @@ export default async function Home() {
       {/* Hero - full width */}
       <div className="lg:col-span-4">
         <HeroBento />
+      </div>
+
+      {/* What I do - full width triad */}
+      <div className="lg:col-span-4">
+        <WhatIDo />
       </div>
 
       {/* Latest articles - folder */}
