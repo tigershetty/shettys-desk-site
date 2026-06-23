@@ -9,11 +9,10 @@ import TextTypewriter from "./TextTypewriter";
 
 const SESSION_KEY = "agent-intro-played";
 
-// Intro backdrop: the page's primary accent (indigo `--primary`). Keeping the
-// loading screen on-brand with the rest of the site, the white wordmark and
-// scribble mark stay crisp and legible against it. Single source of truth;
-// tweak here.
-const PRELOADER_BG = "#4f46e5";
+// Intro backdrop: near-black for a premium, minimal first impression. The white
+// wordmark and scribble mark stay crisp and legible against it. Single source of
+// truth; tweak here.
+const PRELOADER_BG = "#0a0a0a";
 
 // useLayoutEffect warns during SSR; fall back to useEffect on the server.
 const useIsoLayoutEffect =

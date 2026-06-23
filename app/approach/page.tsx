@@ -37,17 +37,23 @@ const phases = [
 export default function ApproachPage() {
   return (
     <>
-      <section className="mb-10">
-        <h1 className="text-3xl font-bold text-foreground">
-          How a breakdown gets made
+      <header className="max-w-2xl py-6">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          Approach
+        </p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          How a breakdown gets made.
         </h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground leading-relaxed">
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
           There&apos;s no formula. But there&apos;s a rhythm. Shetty&apos;s Desk
           is an agentic supply-chain content workflow built on Claude Code,
           applying the same instinct for automation I bring to planning at Tetra
           Pak to explaining how supply chains actually work.
         </p>
-      </section>
+      </header>
+
+      <div className="mt-6" />
+
 
       <Pipeline />
 

@@ -1,10 +1,6 @@
 import ArticleCard from "@/components/ArticleCard";
-import ArticlesHeading from "@/components/ArticlesHeading";
-import FolderCard from "@/components/FolderCard";
 import Reveal from "@/components/Reveal";
 import { getArticles } from "@/lib/articles";
-
-const folderColors = ["teal", "amber", "indigo", "dark"] as const;
 
 export const revalidate = 600;
 
@@ -15,35 +11,35 @@ export default async function ArticlesPage() {
 
   return (
     <>
-      <section className="mb-10">
-        <ArticlesHeading />
-        <p className="mt-2 text-muted-foreground">
-          Each one starts with a question I couldn&apos;t answer in one
-          sentence.
+      <header className="max-w-2xl py-6">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          Published posts
         </p>
-      </section>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          Writing from the desk.
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+          Each one starts with a question I couldn&apos;t answer in one sentence.
+        </p>
+      </header>
 
-      <section>
-        <div className="grid gap-7 sm:grid-cols-2">
-          {featured && (
-            <Reveal className="sm:col-span-2">
-              <FolderCard label="Featured" color="indigo">
-                <ArticleCard article={featured} folder wide />
-              </FolderCard>
-            </Reveal>
-          )}
+      <section className="mt-12">
+        {featured && (
+          <Reveal>
+            <ArticleCard article={featured} featured />
+          </Reveal>
+        )}
 
-          {rest.map((article, i) => (
-            <Reveal key={article.slug}>
-              <FolderCard
-                label={article.tags[0] ?? "Post"}
-                color={folderColors[i % folderColors.length]}
-              >
-                <ArticleCard article={article} folder />
-              </FolderCard>
-            </Reveal>
-          ))}
-        </div>
+        {rest.length > 0 && (
+          <Reveal
+            stagger={0.1}
+            className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {rest.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </Reveal>
+        )}
       </section>
     </>
   );

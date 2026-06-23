@@ -1,5 +1,4 @@
 import FlowingMenu from "@/components/FlowingMenu";
-import DecryptedText from "@/components/DecryptedText";
 import { InteractiveRobotSpline } from "@/components/InteractiveRobotSpline";
 import experienceData from "@/data/experience.json";
 
@@ -12,25 +11,25 @@ export default function ExperiencePage() {
 
   return (
     <>
-      <section className="mb-10">
-        <h1 className="text-3xl font-bold text-foreground">
-          <DecryptedText
-            text="Where I've been and what it taught me"
-            speed={30}
-          />
+      <header className="max-w-2xl py-6">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          Experience
+        </p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          Where I&apos;ve been &mdash; and what it taught me.
         </h1>
         <a
           href={experienceData.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+          className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-all hover:gap-2.5"
         >
           View full profile on LinkedIn
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>
         </a>
-      </section>
+      </header>
 
       {/* Summary + interactive robot (free-standing, no card chrome) */}
       <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">

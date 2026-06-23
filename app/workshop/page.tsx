@@ -7,11 +7,14 @@ export default function WorkshopPage() {
 
   return (
     <>
-      <section className="mb-10">
-        <h1 className="text-3xl font-bold text-foreground">
-          Things I&apos;m building on the side
+      <header className="max-w-2xl py-6">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          The Workshop
+        </p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          Things I&apos;m building on the side.
         </h1>
-      </section>
+      </header>
 
       {/* Stats bar */}
       <div className="mb-8 flex flex-wrap gap-3 sm:gap-6 text-sm">

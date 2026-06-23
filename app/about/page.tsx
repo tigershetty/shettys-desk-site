@@ -2,7 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PromptingIsAllYouNeed } from "@/components/ui/prompting-pong";
 import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
-import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
 import BoardingPass from "@/components/BoardingPass";
 import beliefs from "@/data/beliefs.json";
@@ -48,9 +47,14 @@ const workingWithMe = [
 export default function AboutPage() {
   return (
     <>
-      <section className="mb-10">
-        <AboutHeading />
-      </section>
+      <header className="max-w-2xl py-6">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          About me
+        </p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          The person behind the desk.
+        </h1>
+      </header>
 
       {/* Intro + Orbiting Skills */}
       <div className="mb-10 flex flex-col items-center gap-6 sm:flex-row sm:items-center">
@@ -93,7 +97,7 @@ export default function AboutPage() {
       </div>
 
       {/* Personal letter in gradient card */}
-      <section className="mb-12 rounded-3xl border border-border bg-gradient-to-br from-card to-background p-5 sm:p-8">
+      <section className="mb-12 rounded-3xl border border-border bg-muted/40 p-5 sm:p-8">
         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary">Personal note</p>
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>

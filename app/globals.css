@@ -1,28 +1,29 @@
 @import "tailwindcss";
 
 :root {
+  /* USVC-minimal: near-monochrome, soft borders, indigo as a single restrained accent. */
   --card: #ffffff;
   --ring: #a5b4fc;
-  --input: #737373;
-  --muted: #f0f0f0;
-  --accent: #f59e0b;
-  --border: #000000;
-  --radius: 1rem;
+  --input: #e4e4e7;
+  --muted: #f4f4f5;
+  --accent: #f4f4f5;
+  --border: #e4e4e7;
+  --radius: 0.75rem;
   --chart-1: #4f46e5;
-  --chart-2: #14b8a6;
-  --chart-3: #f59e0b;
-  --chart-4: #ec4899;
-  --chart-5: #22c55e;
+  --chart-2: #6366f1;
+  --chart-3: #818cf8;
+  --chart-4: #a5b4fc;
+  --chart-5: #c7d2fe;
   --popover: #ffffff;
   --primary: #4f46e5;
-  --sidebar: #f7f9f3;
+  --sidebar: #ffffff;
   --spacing: 0.25rem;
   --font-mono: var(--font-geist-mono), monospace;
   --font-sans: var(--font-geist-sans), sans-serif;
-  --secondary: #14b8a6;
-  --background: #f7f9f3;
+  --secondary: #f4f4f5;
+  --background: #ffffff;
   --font-serif: var(--font-geist-sans), serif;
-  --foreground: #000000;
+  --foreground: #0a0a0a;
   --destructive: #ef4444;
   --shadow-blur: 0px;
   --shadow-color: #1a1a1a;
@@ -30,20 +31,20 @@
   --shadow-spread: 0px;
   --letter-spacing: normal;
   --shadow-opacity: 0.05;
-  --sidebar-accent: #f59e0b;
-  --sidebar-border: #000000;
-  --card-foreground: #000000;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-border: #e4e4e7;
+  --card-foreground: #0a0a0a;
   --shadow-offset-x: 0px;
   --shadow-offset-y: 0px;
   --sidebar-primary: #4f46e5;
-  --muted-foreground: #333333;
-  --accent-foreground: #000000;
-  --popover-foreground: #000000;
+  --muted-foreground: #71717a;
+  --accent-foreground: #0a0a0a;
+  --popover-foreground: #0a0a0a;
   --primary-foreground: #ffffff;
-  --sidebar-foreground: #000000;
-  --secondary-foreground: #ffffff;
+  --sidebar-foreground: #0a0a0a;
+  --secondary-foreground: #0a0a0a;
   --destructive-foreground: #ffffff;
-  --sidebar-accent-foreground: #000000;
+  --sidebar-accent-foreground: #0a0a0a;
   --sidebar-primary-foreground: #ffffff;
 }
 
@@ -144,7 +145,8 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis drives scrolling in JS; native CSS smooth-scroll would fight it. */
+  scroll-behavior: auto;
 }
 
 /* Lenis smooth scroll */

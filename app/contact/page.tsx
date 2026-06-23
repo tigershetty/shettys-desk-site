@@ -1,7 +1,6 @@
 "use client";
 
 import ContactForm from "@/components/ContactForm";
-import DecryptedText from "@/components/DecryptedText";
 import ProfileCard from "@/components/ProfileCard";
 import siteData from "@/data/site.json";
 
@@ -12,23 +11,27 @@ export default function ContactPage() {
       <div className="flex flex-col-reverse lg:flex-row lg:items-start lg:gap-12">
         {/* Left column: heading, badges, form, direct contact */}
         <div className="flex-1 min-w-0">
-          <section className="mb-10">
-            <h1 className="text-3xl font-bold text-foreground">
-              <DecryptedText text="Let's talk" speed={50} />
+          <section className="mb-8 py-6">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+              Contact
+            </p>
+            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              Let&apos;s talk.
             </h1>
           </section>
 
           {/* Badges */}
-          <div className="mb-8 flex flex-wrap gap-3">
-            <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-600">
-              &lt;24h Response
-            </span>
-            <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-600">
-              Open to Speaking
-            </span>
-            <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-600">
-              Yes, Coffee Chats
-            </span>
+          <div className="mb-8 flex flex-wrap gap-2.5">
+            {["< 24h response", "Open to speaking", "Yes, coffee chats"].map(
+              (badge) => (
+                <span
+                  key={badge}
+                  className="rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"
+                >
+                  {badge}
+                </span>
+              ),
+            )}
           </div>
 
           {/* Form */}

@@ -1,12 +1,5 @@
 import Image from "next/image";
-
-const accentColors: Record<string, { bg: string; border: string; tag: string; ring: string }> = {
-  blue:    { bg: "bg-blue-500/8",    border: "border-blue-500/20",    tag: "bg-blue-500/15 text-blue-600",    ring: "hover:ring-blue-500/30" },
-  emerald: { bg: "bg-emerald-500/8", border: "border-emerald-500/20", tag: "bg-emerald-500/15 text-emerald-600", ring: "hover:ring-emerald-500/30" },
-  orange:  { bg: "bg-orange-500/8",  border: "border-orange-500/20",  tag: "bg-orange-500/15 text-orange-600",  ring: "hover:ring-orange-500/30" },
-  amber:   { bg: "bg-amber-500/8",   border: "border-amber-500/20",   tag: "bg-amber-500/15 text-amber-600",   ring: "hover:ring-amber-500/30" },
-  rose:    { bg: "bg-rose-500/8",    border: "border-rose-500/20",    tag: "bg-rose-500/15 text-rose-600",    ring: "hover:ring-rose-500/30" },
-};
+import Link from "next/link";
 
 interface Article {
   slug: string;
@@ -14,153 +7,105 @@ interface Article {
   hook: string;
   image: string | null;
   tags: string[];
-  accent?: string;
   linkedinUrl?: string;
+}
+
+function Tags({ tags }: { tags: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {tags.slice(0, 3).map((tag) => (
+        <span
+          key={tag}
+          className="rounded-full bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ReadMore({ label = "Read" }: { label?: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-all group-hover:gap-2.5">
+      {label}
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
+    </span>
+  );
 }
 
 export default function ArticleCard({
   article,
   featured = false,
   bento = false,
-  folder = false,
-  wide = false,
 }: {
   article: Article;
   featured?: boolean;
   bento?: boolean;
-  folder?: boolean;
-  wide?: boolean;
 }) {
-  const colors = accentColors[article.accent || "blue"];
-
   const articleUrl = `/articles/${article.slug}`;
 
-  // Bare content designed to sit inside a FolderCard body (no card chrome).
-  if (folder) {
-    return (
-      <a href={articleUrl} className={`group block ${wide ? "sm:flex sm:gap-5" : ""}`}>
-        {article.image && (
-          <div
-            className={`relative overflow-hidden rounded-xl ${
-              wide ? "aspect-[16/10] sm:w-2/5 sm:shrink-0" : "aspect-[16/9]"
-            }`}
-          >
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 40vw"
-            />
-          </div>
-        )}
-        <div className={wide ? "mt-4 sm:mt-0 sm:flex-1" : "mt-3"}>
-          <div className="mb-2 flex flex-wrap gap-1.5">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${colors.tag}`}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
-            {article.title}
-          </h3>
-          <p className="mt-1 text-sm text-muted-foreground leading-relaxed line-clamp-3">
-            {article.hook}
-          </p>
-          <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all group-hover:gap-2.5">
-            Peek inside
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </span>
-        </div>
-      </a>
-    );
-  }
-
-  // Compact bento card: thumbnail + title only
+  // Compact row: small thumbnail + title.
   if (bento) {
     return (
-      <a
+      <Link
         href={articleUrl}
-        className={`group flex items-center gap-3 rounded-2xl border ${colors.border} bg-card p-3 transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
+        className="group flex items-center gap-3 rounded-2xl border border-border bg-card p-3 transition-all duration-300 hover:border-foreground/20 hover:shadow-sm"
       >
         {article.image && (
-          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg">
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              className="object-cover"
-              sizes="48px"
-            />
+          <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl">
+            <Image src={article.image} alt={article.title} fill className="object-cover" sizes="56px" />
           </div>
         )}
-        <p className="text-sm font-medium text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+        <p className="line-clamp-2 text-sm font-medium text-foreground transition-colors group-hover:text-primary">
           {article.title}
         </p>
-      </a>
+      </Link>
     );
   }
 
-  // Featured card: white card inside dark wrapper
+  // Large horizontal feature card.
   if (featured) {
     return (
-      <a
+      <Link
         href={articleUrl}
-        className="group block overflow-hidden rounded-3xl bg-card transition-all duration-300 hover:shadow-lg"
+        className="group grid overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:border-foreground/20 hover:shadow-md sm:grid-cols-2"
       >
         {article.image && (
-          <div className="relative aspect-[16/9] overflow-hidden rounded-t-3xl">
+          <div className="relative aspect-[16/10] overflow-hidden sm:aspect-auto sm:h-full sm:min-h-[18rem]">
             <Image
               src={article.image}
               alt={article.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 640px) 100vw, 50vw"
+              priority
             />
-            <span className="absolute top-3 right-3 rounded-full bg-accent px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-wider text-foreground">
-              Featured
-            </span>
           </div>
         )}
-        <div className="p-4">
-          <div className="mb-2 flex flex-wrap gap-1.5">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${colors.tag}`}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <h3 className="text-lg font-semibold text-foreground">
+        <div className="flex flex-col justify-center p-7 sm:p-9">
+          <Tags tags={article.tags} />
+          <h3 className="mt-4 text-2xl font-semibold leading-tight tracking-tight text-foreground">
             {article.title}
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3">
             {article.hook}
           </p>
-          <span className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-2.5 text-sm font-medium text-primary-foreground transition-colors group-hover:bg-primary/90">
-            Peek inside {article.title}
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </span>
+          <div className="mt-6">
+            <ReadMore label="Read article" />
+          </div>
         </div>
-      </a>
+      </Link>
     );
   }
 
-  // Default card (used on /articles page)
+  // Default vertical card.
   return (
-    <a
+    <Link
       href={articleUrl}
-      className={`group block rounded-3xl border ${colors.border} ${colors.bg} overflow-hidden transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
+      className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all duration-300 hover:border-foreground/20 hover:shadow-md"
     >
       {article.image && (
         <div className="relative aspect-[16/9] overflow-hidden">
@@ -173,30 +118,18 @@ export default function ArticleCard({
           />
         </div>
       )}
-      <div className="p-6">
-        <div className="mb-3 flex flex-wrap gap-2">
-          {article.tags.map((tag) => (
-            <span
-              key={tag}
-              className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${colors.tag}`}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h3 className="text-lg font-semibold text-foreground">
+      <div className="flex flex-1 flex-col p-6">
+        <Tags tags={article.tags} />
+        <h3 className="mt-3 text-lg font-semibold tracking-tight text-foreground">
           {article.title}
         </h3>
-        <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">
           {article.hook}
         </p>
-        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary group-hover:gap-2.5 transition-all">
-          Peek inside
-          <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
-        </span>
+        <div className="mt-4">
+          <ReadMore />
+        </div>
       </div>
-    </a>
+    </Link>
   );
 }
