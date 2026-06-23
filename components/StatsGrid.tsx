@@ -89,7 +89,7 @@ export default function StatsGrid({ bare = false }: { bare?: boolean }) {
             className="rounded-xl border border-border/50 bg-background/50 p-4 transition-all hover:border-border hover:shadow-sm"
           >
             <div className="flex items-start justify-between">
-              <p className={`text-2xl font-bold ${stat.color}`}>
+              <p className={`text-3xl font-bold tracking-tight ${stat.color}`}>
                 <CountUp to={stat.value} duration={1.5} separator="," />
                 {stat.suffix}
               </p>
