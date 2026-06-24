@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import SmoothScroll from "@/components/SmoothScroll";
 import SpotlightBackground from "@/components/SpotlightBackground";
+import SmoothCursor from "@/components/SmoothCursor";
 import { BGPattern } from "@/components/BGPattern";
 
 const geistSans = Geist({
@@ -49,6 +50,7 @@ export default function RootLayout({
           className="fixed inset-0 -z-10"
         />
         <SpotlightBackground />
+        <SmoothCursor />
         <Sidebar />
         <main className="w-full flex flex-col min-h-screen">
           <div className="flex-1 overflow-y-auto overflow-x-hidden px-6 pt-16 pb-8 lg:pl-[calc(16rem+2rem)] lg:pr-12 lg:pt-10 lg:pb-10">

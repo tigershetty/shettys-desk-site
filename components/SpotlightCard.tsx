@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 type SpotlightCardProps = {
   children: React.ReactNode;
   className?: string;
+  /** Classes for the inner content wrapper (e.g. flex layout passthrough). */
+  innerClassName?: string;
   /** Diameter of the cursor glow, in px. */
   size?: number;
 };
@@ -20,6 +22,7 @@ type SpotlightCardProps = {
 export default function SpotlightCard({
   children,
   className,
+  innerClassName,
   size = 240,
 }: SpotlightCardProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -45,7 +48,7 @@ export default function SpotlightCard({
           background: `radial-gradient(${size}px circle at var(--spot-x, 50%) var(--spot-y, 50%), color-mix(in oklab, var(--primary) 16%, transparent), transparent 70%)`,
         }}
       />
-      <div className="relative">{children}</div>
+      <div className={cn("relative", innerClassName)}>{children}</div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PenLine, Boxes, Mic } from "lucide-react";
 import Reveal from "./Reveal";
+import SpotlightCard from "./SpotlightCard";
 
 const pillars = [
   {
@@ -43,27 +44,28 @@ export default function WhatIDo() {
 
       <Reveal stagger={0.1} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {pillars.map((p) => (
-          <Link
-            key={p.no}
-            href={p.href}
-            className="group flex flex-col rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-sm"
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <p.Icon className="h-5 w-5" />
+          <Link key={p.no} href={p.href} className="group block h-full">
+            <SpotlightCard
+              className="flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-all group-hover:border-primary/30 group-hover:shadow-sm"
+              innerClassName="flex flex-1 flex-col"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <p.Icon className="h-5 w-5" />
+                </span>
+                <span className="font-mono text-xs text-muted-foreground/50">{p.no}</span>
+              </div>
+              <h3 className="font-semibold text-foreground">{p.title}</h3>
+              <p className="mt-1.5 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {p.body}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all group-hover:gap-2.5">
+                {p.cta}
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
               </span>
-              <span className="font-mono text-xs text-muted-foreground/50">{p.no}</span>
-            </div>
-            <h3 className="font-semibold text-foreground">{p.title}</h3>
-            <p className="mt-1.5 flex-1 text-sm leading-relaxed text-muted-foreground">
-              {p.body}
-            </p>
-            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all group-hover:gap-2.5">
-              {p.cta}
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </span>
+            </SpotlightCard>
           </Link>
         ))}
       </Reveal>
