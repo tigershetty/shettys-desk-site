@@ -7,10 +7,17 @@ export default function WorkshopPage() {
 
   return (
     <>
-      <section className="mb-12">
+      <section className="mb-10">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          The workshop
+        </p>
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Things I&apos;m building on the side
         </h1>
+        <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">
+          Side projects, experiments, and half-finished ideas. Some shipped,
+          some still cooking &mdash; all of them ways I learn by building.
+        </p>
       </section>
 
       {/* Stats bar */}

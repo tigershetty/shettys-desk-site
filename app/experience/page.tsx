@@ -1,6 +1,7 @@
 import FlowingMenu from "@/components/FlowingMenu";
 import DecryptedText from "@/components/DecryptedText";
 import { InteractiveRobotSpline } from "@/components/InteractiveRobotSpline";
+import SectionHeading from "@/components/SectionHeading";
 import experienceData from "@/data/experience.json";
 
 // Public Spline "interactive robot" scene (follows the cursor). Swap this for a
@@ -44,9 +45,7 @@ export default function ExperiencePage() {
 
       {/* Core competencies */}
       <section className="mb-12">
-        <h2 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wider">
-          Core competencies
-        </h2>
+        <SectionHeading eyebrow="What I'm good at" title="Core competencies" />
         <div className="grid gap-3 sm:grid-cols-2">
           {experienceData.competencies.map((c) => (
             <div
@@ -64,8 +63,11 @@ export default function ExperiencePage() {
 
       {/* Primary: Tetra Pak */}
       <section className="mb-12">
+        <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+          Where I am now
+        </p>
         <div className="mb-2 flex items-baseline gap-3">
-          <h2 className="text-xl font-semibold text-foreground">
+          <h2 className="text-xl font-bold tracking-tight text-foreground lg:text-2xl">
             {primary.company}
           </h2>
           <span className="text-sm text-muted-foreground">
@@ -100,9 +102,7 @@ export default function ExperiencePage() {
 
       {/* Education */}
       <section className="mb-12">
-        <h2 className="mb-4 text-lg font-semibold text-foreground">
-          Education
-        </h2>
+        <SectionHeading eyebrow="Background" title="Education" />
         <div className="space-y-4">
           {experienceData.education.map((edu) => (
             <div key={edu.institution}>
@@ -117,9 +117,7 @@ export default function ExperiencePage() {
 
       {/* Languages */}
       <section>
-        <h2 className="mb-4 text-lg font-semibold text-foreground">
-          Languages
-        </h2>
+        <SectionHeading eyebrow="Also" title="Languages" />
         <div className="flex flex-wrap gap-2">
           {experienceData.languages.map((lang) => (
             <span

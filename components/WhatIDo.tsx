@@ -33,10 +33,10 @@ export default function WhatIDo() {
   return (
     <section className="mt-2">
       <div className="mb-5">
-        <p className="text-xs font-medium uppercase tracking-wider text-primary">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
           What I do
         </p>
-        <h2 className="mt-1 text-lg font-bold text-foreground lg:text-xl">
+        <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground lg:text-2xl">
           Three ways the work shows up
         </h2>
       </div>

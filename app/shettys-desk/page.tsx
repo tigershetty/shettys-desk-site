@@ -1,6 +1,7 @@
 import siteData from "@/data/site.json";
 import radarData from "@/data/radar.json";
 import ShettysAnimation from "@/components/ShettysAnimation";
+import SectionHeading from "@/components/SectionHeading";
 
 export default function ShettysDesk() {
   return (
@@ -16,9 +17,7 @@ export default function ShettysDesk() {
 
       {/* The problem */}
       <section className="mb-12">
-        <h2 className="mb-4 text-lg font-semibold text-foreground">
-          The problem
-        </h2>
+        <SectionHeading eyebrow="Why this exists" title="The problem" />
         <p className="max-w-2xl text-foreground/90 leading-relaxed">
           Most supply chain content is either buried in academic papers or
           oversimplified by people who&apos;ve never managed a supplier
@@ -29,17 +28,13 @@ export default function ShettysDesk() {
 
       {/* Who reads it */}
       <section className="mb-12">
-        <h2 className="mb-4 text-lg font-semibold text-foreground">
-          Who reads it
-        </h2>
+        <SectionHeading eyebrow="The audience" title="Who reads it" />
         <ShettysAnimation />
       </section>
 
       {/* What's next */}
       <section className="mb-12">
-        <h2 className="mb-4 text-lg font-semibold text-foreground">
-          What&apos;s next
-        </h2>
+        <SectionHeading eyebrow="Coming up" title="What's next" />
         <div className="flex flex-wrap gap-2">
           {radarData.map((item) => (
             <div

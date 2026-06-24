@@ -59,7 +59,7 @@ export default async function Home() {
       <div className="lg:col-span-4 mt-2">
         <SplitHeading
           text="More from the desk"
-          className="text-lg font-bold text-foreground lg:text-xl"
+          className="text-xl font-bold tracking-tight text-foreground lg:text-2xl"
         />
       </div>
 

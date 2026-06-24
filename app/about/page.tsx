@@ -3,6 +3,7 @@ import { PromptingIsAllYouNeed } from "@/components/ui/prompting-pong";
 import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
+import SectionHeading from "@/components/SectionHeading";
 import GlobeSection from "@/components/GlobeSection";
 import BoardingPass from "@/components/BoardingPass";
 import beliefs from "@/data/beliefs.json";
@@ -138,9 +139,7 @@ export default function AboutPage() {
 
       {/* Working With Me */}
       <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          Working with me
-        </h2>
+        <SectionHeading eyebrow="How I work" title="Working with me" />
         <div className="grid gap-3 sm:grid-cols-2">
           {workingWithMe.map((item) => (
             <div
@@ -159,9 +158,7 @@ export default function AboutPage() {
 
       {/* Beliefs in grid */}
       <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          What I believe
-        </h2>
+        <SectionHeading eyebrow="Principles" title="What I believe" />
         <div className="grid gap-3 sm:grid-cols-2">
           {beliefs.map((belief, i) => (
             <BeliefCard

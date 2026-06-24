@@ -70,7 +70,10 @@ export default function HeroBento() {
 
       <div className="relative z-10">
         <BlurFade delay={0}>
-          <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground lg:text-3xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+            Shetty&apos;s Desk &middot; Supply chain, decoded
+          </p>
+          <h1 className="flex items-center gap-2 text-3xl font-bold tracking-tight text-foreground lg:text-4xl">
             <DecryptedText
               text={greetingData.text}
               speed={35}
@@ -82,8 +85,8 @@ export default function HeroBento() {
         </BlurFade>
 
         <BlurFade delay={0.2}>
-          <div className="mt-3 max-w-xl text-sm leading-relaxed">
-            <span className="text-base font-medium text-foreground">
+          <div className="mt-4 max-w-xl leading-relaxed">
+            <span className="text-lg font-medium text-foreground lg:text-xl">
               I break down how{" "}
               <AnimatedTextCycle
                 words={["supply chains", "logistics", "operations", "S&OP"]}
@@ -92,7 +95,7 @@ export default function HeroBento() {
               />{" "}
               actually works.
             </span>
-            <p className="mt-1 text-muted-foreground">
+            <p className="mt-1.5 text-sm text-muted-foreground lg:text-base">
               One real topic at a time, for anyone curious enough to ask why.
             </p>
           </div>
