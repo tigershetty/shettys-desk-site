@@ -7,8 +7,8 @@ export default function WorkshopPage() {
 
   return (
     <>
-      <section className="mb-10">
-        <h1 className="text-3xl font-bold text-foreground">
+      <section className="mb-12">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Things I&apos;m building on the side
         </h1>
       </section>

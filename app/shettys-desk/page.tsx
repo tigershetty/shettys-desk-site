@@ -5,8 +5,8 @@ import ShettysAnimation from "@/components/ShettysAnimation";
 export default function ShettysDesk() {
   return (
     <>
-      <section className="mb-10">
-        <h1 className="text-3xl font-bold text-foreground">
+      <section className="mb-12">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Shetty&apos;s Desk
         </h1>
         <p className="mt-2 text-muted-foreground">

@@ -13,7 +13,7 @@ export default function ContactPage() {
         {/* Left column: heading, badges, form, direct contact */}
         <div className="flex-1 min-w-0">
           <section className="mb-10">
-            <h1 className="text-3xl font-bold text-foreground">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               <DecryptedText text="Let's talk" speed={50} />
             </h1>
           </section>
