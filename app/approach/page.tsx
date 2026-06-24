@@ -51,15 +51,31 @@ export default function ApproachPage() {
 
       <Pipeline />
 
-      <div className="space-y-3">
-        {phases.map((phase, i) => (
-          <PhaseCard
-            key={phase.title}
-            number={i + 1}
-            title={phase.title}
-            description={phase.description}
-          />
-        ))}
+      {/* Sticky storytelling: the framing pins while the steps scroll past it. */}
+      <div className="mt-12 lg:grid lg:grid-cols-[0.85fr_1.55fr] lg:gap-12 lg:items-start">
+        <div className="mb-6 lg:mb-0 lg:sticky lg:top-24 lg:self-start">
+          <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+            The process
+          </p>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground">
+            Six steps, one rhythm
+          </h2>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            From a question I can&apos;t shake to the analytics that feed the
+            next one &mdash; here&apos;s how a breakdown actually gets made.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          {phases.map((phase, i) => (
+            <PhaseCard
+              key={phase.title}
+              number={i + 1}
+              title={phase.title}
+              description={phase.description}
+            />
+          ))}
+        </div>
       </div>
 
       {/* The bet */}
