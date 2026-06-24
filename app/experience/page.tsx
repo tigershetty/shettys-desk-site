@@ -2,6 +2,7 @@ import FlowingMenu from "@/components/FlowingMenu";
 import DecryptedText from "@/components/DecryptedText";
 import { InteractiveRobotSpline } from "@/components/InteractiveRobotSpline";
 import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 import experienceData from "@/data/experience.json";
 
 // Public Spline "interactive robot" scene (follows the cursor). Swap this for a
@@ -46,7 +47,7 @@ export default function ExperiencePage() {
       {/* Core competencies */}
       <section className="mb-12">
         <SectionHeading eyebrow="What I'm good at" title="Core competencies" />
-        <div className="grid gap-3 sm:grid-cols-2">
+        <Reveal stagger={0.08} className="grid gap-3 sm:grid-cols-2">
           {experienceData.competencies.map((c) => (
             <div
               key={c.area}
@@ -58,7 +59,7 @@ export default function ExperiencePage() {
               </p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* Primary: Tetra Pak */}

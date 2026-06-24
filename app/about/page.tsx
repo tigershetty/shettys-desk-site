@@ -4,6 +4,7 @@ import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 import GlobeSection from "@/components/GlobeSection";
 import BoardingPass from "@/components/BoardingPass";
 import beliefs from "@/data/beliefs.json";
@@ -93,10 +94,10 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Personal letter in gradient card */}
+      {/* Personal letter in gradient card — paragraphs unfold as you read */}
       <section className="mb-12 rounded-3xl border border-border bg-gradient-to-br from-card to-background p-5 sm:p-8">
         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary">Personal note</p>
-        <div className="space-y-4 text-foreground/90 leading-relaxed">
+        <Reveal stagger={0.12} y={16} className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
             Originally from Bangalore. Moved to Sweden for a master&apos;s in
             Logistics &amp; Supply Chain at Lund University, and stayed. I&apos;ve
@@ -126,7 +127,7 @@ export default function AboutPage() {
             experiments have yielded positive results.&rdquo; (Trial and error,
             they call it.)
           </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* Globe - places I've lived */}
@@ -140,7 +141,7 @@ export default function AboutPage() {
       {/* Working With Me */}
       <section className="mb-12">
         <SectionHeading eyebrow="How I work" title="Working with me" />
-        <div className="grid gap-3 sm:grid-cols-2">
+        <Reveal stagger={0.1} className="grid gap-3 sm:grid-cols-2">
           {workingWithMe.map((item) => (
             <div
               key={item.title}
@@ -153,7 +154,7 @@ export default function AboutPage() {
               <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* Beliefs in grid */}

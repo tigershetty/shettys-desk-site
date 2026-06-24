@@ -58,7 +58,7 @@ export default function HeroBento() {
     >
       {/* Animated gradient mesh background */}
       <div
-        className="absolute inset-0 opacity-20 animate-gradient-mesh"
+        className="absolute inset-0 opacity-20 animate-gradient-mesh motion-reduce:animate-none"
         style={{
           background: "radial-gradient(ellipse at 20% 50%, var(--primary) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, var(--accent) 0%, transparent 50%)",
           backgroundSize: "200% 200%",
