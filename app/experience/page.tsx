@@ -3,6 +3,7 @@ import DecryptedText from "@/components/DecryptedText";
 import { InteractiveRobotSpline } from "@/components/InteractiveRobotSpline";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import SpotlightCard from "@/components/SpotlightCard";
 import experienceData from "@/data/experience.json";
 
 // Public Spline "interactive robot" scene (follows the cursor). Swap this for a
@@ -49,7 +50,7 @@ export default function ExperiencePage() {
         <SectionHeading eyebrow="What I'm good at" title="Core competencies" />
         <Reveal stagger={0.08} className="grid gap-3 sm:grid-cols-2">
           {experienceData.competencies.map((c) => (
-            <div
+            <SpotlightCard
               key={c.area}
               className="rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/30 hover:shadow-sm"
             >
@@ -57,7 +58,7 @@ export default function ExperiencePage() {
               <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
                 {c.detail}
               </p>
-            </div>
+            </SpotlightCard>
           ))}
         </Reveal>
       </section>

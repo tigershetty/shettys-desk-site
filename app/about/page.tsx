@@ -5,6 +5,7 @@ import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import SpotlightCard from "@/components/SpotlightCard";
 import GlobeSection from "@/components/GlobeSection";
 import BoardingPass from "@/components/BoardingPass";
 import beliefs from "@/data/beliefs.json";
@@ -143,7 +144,7 @@ export default function AboutPage() {
         <SectionHeading eyebrow="How I work" title="Working with me" />
         <Reveal stagger={0.1} className="grid gap-3 sm:grid-cols-2">
           {workingWithMe.map((item) => (
-            <div
+            <SpotlightCard
               key={item.title}
               className="rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-sm"
             >
@@ -152,7 +153,7 @@ export default function AboutPage() {
                 <h3 className="font-medium text-foreground">{item.title}</h3>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
-            </div>
+            </SpotlightCard>
           ))}
         </Reveal>
       </section>
