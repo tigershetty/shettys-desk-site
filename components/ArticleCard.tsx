@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const accentColors: Record<string, { bg: string; border: string; tag: string; ring: string }> = {
   blue:    { bg: "bg-blue-500/8",    border: "border-blue-500/20",    tag: "bg-blue-500/15 text-blue-600",    ring: "hover:ring-blue-500/30" },
@@ -38,7 +39,7 @@ export default function ArticleCard({
   // Bare content designed to sit inside a FolderCard body (no card chrome).
   if (folder) {
     return (
-      <a href={articleUrl} className={`group block ${wide ? "sm:flex sm:gap-5" : ""}`}>
+      <Link href={articleUrl} className={`group block ${wide ? "sm:flex sm:gap-5" : ""}`}>
         {article.image && (
           <div
             className={`relative overflow-hidden rounded-xl ${
@@ -78,14 +79,14 @@ export default function ArticleCard({
             </svg>
           </span>
         </div>
-      </a>
+      </Link>
     );
   }
 
   // Compact bento card: thumbnail + title only
   if (bento) {
     return (
-      <a
+      <Link
         href={articleUrl}
         className={`group flex items-center gap-3 rounded-2xl border ${colors.border} bg-card p-3 transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
       >
@@ -103,14 +104,14 @@ export default function ArticleCard({
         <p className="text-sm font-medium text-foreground line-clamp-2 group-hover:text-primary transition-colors">
           {article.title}
         </p>
-      </a>
+      </Link>
     );
   }
 
   // Featured card: white card inside dark wrapper
   if (featured) {
     return (
-      <a
+      <Link
         href={articleUrl}
         className="group block overflow-hidden rounded-3xl bg-card transition-all duration-300 hover:shadow-lg"
       >
@@ -152,13 +153,13 @@ export default function ArticleCard({
             </svg>
           </span>
         </div>
-      </a>
+      </Link>
     );
   }
 
   // Default card (used on /articles page)
   return (
-    <a
+    <Link
       href={articleUrl}
       className={`group block rounded-3xl border ${colors.border} ${colors.bg} overflow-hidden transition-all duration-300 hover:shadow-md hover:ring-1 ${colors.ring}`}
     >
@@ -197,6 +198,6 @@ export default function ArticleCard({
           </svg>
         </span>
       </div>
-    </a>
+    </Link>
   );
 }
