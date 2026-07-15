@@ -2,7 +2,9 @@
 
 ## Decision
 
-Use **beehiiv Launch** for the Phase 1 resource library.
+Defer newsletter integration for Phase 1. The first resource ships as a direct download with no email requirement.
+
+If Shetty's Desk later starts a recurring field-notes newsletter, use **beehiiv Launch** as the first provider to evaluate. The research below is retained so the integration can be resumed without repeating the provider audit.
 
 ## Why beehiiv Wins This Specific Use Case
 
@@ -31,11 +33,11 @@ The June 2026 update reduced the free allowance to 250 active subscribers and 2,
 
 Official update: https://www.mailerlite.com/help/free-plan-update-faq
 
-## Integration Shape
+## Deferred Integration Shape
 
-The website owns the landing page, consent language, and signed download. The resource API calls a provider-neutral `NewsletterProvider` interface; the selected adapter owns the subscriber record and future broadcasts. Phase 1 ships with a beehiiv adapter, while resource pages and API routes remain vendor-independent. A later provider change should require a new adapter and environment change, not a rewrite of the download flow.
+The current website owns the landing page and direct download. It does not collect a subscriber record. If newsletter capture is introduced later, the resource API should call a provider-neutral adapter so landing pages remain vendor-independent.
 
-Required Vercel variables:
+Potential future Vercel variables:
 
 ```text
 NEWSLETTER_PROVIDER=beehiiv
@@ -45,6 +47,4 @@ RESOURCE_DOWNLOAD_SECRET
 NEXT_PUBLIC_SITE_URL
 ```
 
-For beehiiv, `NEWSLETTER_AUDIENCE_ID` is the Publication ID. The adapter temporarily accepts the legacy `BEEHIIV_API_KEY` and `BEEHIIV_PUBLICATION_ID` names so an existing preview cannot break during migration.
-
-No credential belongs in Git. Local visual testing uses `RESOURCE_SIGNUP_PREVIEW=true`; production refuses to issue a download if the selected provider or signing secret is missing.
+For beehiiv, `NEWSLETTER_AUDIENCE_ID` would be the Publication ID. No credential belongs in Git. None of these variables are required for the Phase 1 direct-download release.

@@ -31,11 +31,11 @@ Every Shetty's Desk resource page should include:
 - package contents and expected outputs;
 - synthetic sample data;
 - a version, update date, and validation status;
-- an email-gated signed download;
+- a direct, controlled download with no personal information required;
 - an installable skill plus deterministic scripts where calculations matter;
 - a clear human approval boundary;
 - a short privacy and consent statement.
 
 ## Phase 1 Decision
 
-Use the benchmark's clarity and progressive disclosure, but make the downloadable package runnable, versioned, and reviewable. The page should demonstrate enough value to earn the email rather than use the form as a blind gate.
+Use the benchmark's clarity and progressive disclosure, but make the downloadable package runnable, versioned, and reviewable. Phase 1 uses a direct download so the resource can launch without newsletter infrastructure; audience capture can be added later only when there is a clear publishing promise.

@@ -22,7 +22,7 @@ export const resources: Resource[] = [
     description:
       "A planner-reviewable Claude workflow for separating frequent sensing, monthly planning, and special-method exceptions without treating demand sensing as the answer for every SKU.",
     version: "1.0.0",
-    updated: "July 14, 2026",
+    updated: "July 15, 2026",
     readTime: "10 min setup",
     visual: "/resources/demand-sensing-router/visual.png",
     motion: "/resources/demand-sensing-router/motion.gif",

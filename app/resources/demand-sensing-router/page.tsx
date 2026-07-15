@@ -14,7 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import ResourcePreview from "@/components/ResourcePreview";
-import ResourceSignup from "@/components/ResourceSignup";
+import ResourceDownload from "@/components/ResourceDownload";
 import { getResource } from "@/data/resources";
 
 const resource = getResource("demand-sensing-router")!;
@@ -224,7 +224,7 @@ export default function DemandSensingRouterPage() {
               ))}
             </ul>
           </div>
-          <ResourceSignup />
+          <ResourceDownload />
         </div>
       </section>
 
