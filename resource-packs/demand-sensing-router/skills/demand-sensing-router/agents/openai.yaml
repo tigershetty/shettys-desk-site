@@ -1,0 +1,4 @@
+interface:
+  display_name: "Demand Sensing Router"
+  short_description: "Route SKU-location combinations to the right planning cadence."
+  default_prompt: "Build a planner-reviewable demand sensing routing board from the supplied portfolio data."

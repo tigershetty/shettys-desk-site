@@ -1,0 +1,2 @@
+sku,location,field,issue,required_action
+F660,TOR,demand_history,Phase-in history is not representative,Confirm launch curve and analog item before choosing a permanent method

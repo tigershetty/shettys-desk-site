@@ -1,0 +1,2 @@
+sku,location,previous_cadence,proposed_cadence,change_reason,planner_decision
+A100,TOR,PLAN MONTHLY,SENSE FREQUENTLY,Daily POS changed while a 3-day replenishment window remains open,PENDING
