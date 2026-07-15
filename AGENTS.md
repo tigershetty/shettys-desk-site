@@ -20,5 +20,6 @@ Next.js website for the Shetty's Desk brand. Git-connected Vercel previews are t
 - Private release archives: `private/resources/`
 - Public preview media: `public/resources/<slug>/`
 - Signup APIs: `app/api/resources/<slug>/`
+- Newsletter adapters: `lib/newsletter/`; pages and resource routes must not import a vendor SDK or API directly.
 
 The downloadable pack is the product. The landing page must demonstrate the method before asking for an email address.
