@@ -95,6 +95,7 @@ export default async function ArticlePage({
           title={article.title}
           still={article.image}
           motion={article.motion}
+          motionMp4={article.motionMp4}
           width={article.imageWidth}
           height={article.imageHeight}
         />

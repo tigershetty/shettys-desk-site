@@ -25,6 +25,7 @@ export interface Article {
   imageWidth: number;
   imageHeight: number;
   motion: string | null;
+  motionMp4: string | null;
   tags: string[];
   featured: boolean;
   audienceBadge: string;
@@ -96,6 +97,7 @@ function mapPage(page: NotionPage): Article {
     imageWidth: 1024,
     imageHeight: 1536,
     motion: plain(p["Motion"]) || null,
+    motionMp4: plain(p["Motion MP4"]) || null,
     tags: (p["Tags"]?.multi_select ?? []).map((option) => option.name),
     featured: p["Featured"]?.checkbox ?? false,
     audienceBadge: plain(p["Audience Badge"]),

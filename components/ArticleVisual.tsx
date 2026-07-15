@@ -10,12 +10,14 @@ export default function ArticleVisual({
   title,
   still,
   motion,
+  motionMp4,
   width,
   height,
 }: {
   title: string;
   still: string;
   motion: string | null;
+  motionMp4?: string | null;
   width: number;
   height: number;
 }) {
@@ -64,13 +66,28 @@ export default function ArticleVisual({
 
       <div className="relative mx-auto w-full max-w-[760px] overflow-hidden rounded-lg border border-border bg-white shadow-[0_24px_70px_-36px_rgba(15,23,42,0.45)]">
         {mode === "motion" && motion ? (
-          // The GIF is the exact source-fidelity asset approved for the post.
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={motion}
-            alt={`${title} motion graphic`}
-            className="block h-auto w-full"
-          />
+          motionMp4 ? (
+            <video
+              src={motionMp4}
+              poster={still}
+              aria-label={`${title} motion graphic`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="block h-auto w-full"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={motion} alt={`${title} motion graphic`} />
+            </video>
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={motion}
+              alt={`${title} motion graphic`}
+              className="block h-auto w-full"
+            />
+          )
         ) : (
           <Image
             src={still}

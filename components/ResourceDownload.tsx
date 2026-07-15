@@ -13,7 +13,7 @@ export default function ResourceDownload() {
             The complete pack is ready.
           </h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-            Download v1.1.0 as a ZIP. No email address, account, or newsletter
+            Download v1.2.0 as a ZIP. No email address, account, or newsletter
             signup is required.
           </p>
           <a
@@ -21,7 +21,7 @@ export default function ResourceDownload() {
             className="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-primary px-5 text-[13px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto sm:text-sm"
           >
             <Download className="h-4 w-4" aria-hidden />
-            Download the complete pack
+            Download v1.2.0 ZIP
           </a>
           <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground">
             <ShieldCheck

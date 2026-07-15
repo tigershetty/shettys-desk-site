@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Build the branded Demand Sensing Router beginner guide PDF."""
+"""Build the compact Shetty's Desk Demand Sensing Router field guide."""
+
+from __future__ import annotations
 
 from pathlib import Path
-
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
@@ -12,6 +13,7 @@ from reportlab.platypus import (
     BaseDocTemplate,
     Frame,
     Image,
+    KeepTogether,
     PageBreak,
     PageTemplate,
     Paragraph,
@@ -22,114 +24,131 @@ from reportlab.platypus import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "resource-packs" / "demand-sensing-router" / "START-HERE.pdf"
-VISUAL = ROOT / "public" / "resources" / "demand-sensing-router" / "visual.png"
+PACK = ROOT / "resource-packs" / "demand-sensing-router"
+OUTPUT = PACK / "START-HERE.pdf"
+VISUAL = ROOT / "scripts" / "assets" / "demand-sensing-visual-cover.jpg"
+LOGO = ROOT / "scripts" / "assets" / "shettys-desk-logo-small.png"
 
-INDIGO = colors.HexColor("#4F46E5")
+TERRACOTTA = colors.HexColor("#D97656")
+OLIVE = colors.HexColor("#3C3828")
+BLUE = colors.HexColor("#247BE1")
+NAVY = colors.HexColor("#1939A5")
 TEAL = colors.HexColor("#14B8A6")
 AMBER = colors.HexColor("#F59E0B")
-INK = colors.HexColor("#111827")
-MUTED = colors.HexColor("#64748B")
-BORDER = colors.HexColor("#D9DEE8")
-PALE_INDIGO = colors.HexColor("#EEF2FF")
-PALE_TEAL = colors.HexColor("#F0FDFA")
-PALE_AMBER = colors.HexColor("#FFFBEB")
+INK = colors.HexColor("#15315C")
+MUTED = colors.HexColor("#5D7599")
+LINE = colors.HexColor("#DCEAF8")
+PAPER = colors.HexColor("#FBFCFE")
+PALE_BLUE = colors.HexColor("#EFF6FF")
+PALE_TEAL = colors.HexColor("#ECFDF8")
+PALE_AMBER = colors.HexColor("#FFF8E8")
+PALE_TERRACOTTA = colors.HexColor("#FFF3EE")
 
 
-def make_styles():
+def make_styles() -> dict[str, ParagraphStyle]:
     base = getSampleStyleSheet()
     return {
         "title": ParagraphStyle(
             "Title",
             parent=base["Title"],
             fontName="Helvetica-Bold",
-            fontSize=30,
-            leading=34,
+            fontSize=27,
+            leading=30,
             textColor=INK,
-            spaceAfter=12,
+            alignment=TA_LEFT,
+            spaceAfter=10,
         ),
         "subtitle": ParagraphStyle(
             "Subtitle",
             parent=base["BodyText"],
             fontName="Helvetica",
-            fontSize=12,
-            leading=18,
+            fontSize=11,
+            leading=16,
             textColor=MUTED,
+            spaceAfter=8,
         ),
         "eyebrow": ParagraphStyle(
             "Eyebrow",
             parent=base["BodyText"],
             fontName="Helvetica-Bold",
-            fontSize=8,
-            leading=10,
-            textColor=INDIGO,
-            spaceAfter=8,
+            fontSize=7.5,
+            leading=9,
+            textColor=TERRACOTTA,
+            spaceAfter=6,
         ),
         "h1": ParagraphStyle(
             "H1",
             parent=base["Heading1"],
             fontName="Helvetica-Bold",
-            fontSize=21,
-            leading=25,
+            fontSize=18,
+            leading=21,
             textColor=INK,
-            spaceAfter=12,
+            spaceAfter=8,
         ),
         "h2": ParagraphStyle(
             "H2",
             parent=base["Heading2"],
             fontName="Helvetica-Bold",
-            fontSize=13,
-            leading=16,
+            fontSize=10.5,
+            leading=13,
             textColor=INK,
-            spaceBefore=8,
-            spaceAfter=6,
+            spaceBefore=4,
+            spaceAfter=4,
         ),
         "body": ParagraphStyle(
             "Body",
             parent=base["BodyText"],
             fontName="Helvetica",
-            fontSize=9.5,
-            leading=14,
+            fontSize=8.2,
+            leading=11.7,
             textColor=INK,
-            spaceAfter=7,
+            spaceAfter=5,
         ),
         "small": ParagraphStyle(
             "Small",
             parent=base["BodyText"],
             fontName="Helvetica",
-            fontSize=7.5,
-            leading=11,
+            fontSize=7,
+            leading=9.5,
             textColor=MUTED,
+        ),
+        "mini": ParagraphStyle(
+            "Mini",
+            parent=base["BodyText"],
+            fontName="Helvetica",
+            fontSize=6.4,
+            leading=8.4,
+            textColor=INK,
         ),
         "code": ParagraphStyle(
             "Code",
             parent=base["Code"],
             fontName="Courier",
-            fontSize=7.5,
-            leading=11,
+            fontSize=6.9,
+            leading=9.4,
             textColor=INK,
-            backColor=colors.HexColor("#F8FAFC"),
-            borderColor=BORDER,
-            borderWidth=0.5,
-            borderPadding=8,
-            spaceBefore=5,
-            spaceAfter=9,
+            backColor=colors.HexColor("#F7FAFF"),
+            borderColor=LINE,
+            borderWidth=0.6,
+            borderPadding=7,
+            spaceBefore=3,
+            spaceAfter=6,
         ),
         "callout": ParagraphStyle(
             "Callout",
             parent=base["BodyText"],
             fontName="Helvetica-Bold",
-            fontSize=9,
-            leading=14,
+            fontSize=8,
+            leading=11.5,
             textColor=INK,
         ),
-        "cover_meta": ParagraphStyle(
-            "CoverMeta",
+        "metric": ParagraphStyle(
+            "Metric",
             parent=base["BodyText"],
             fontName="Helvetica-Bold",
             fontSize=8,
-            leading=12,
-            textColor=INDIGO,
+            leading=10,
+            textColor=INK,
             alignment=TA_CENTER,
         ),
     }
@@ -138,12 +157,12 @@ def make_styles():
 STYLES = make_styles()
 
 
-def para(text, style="body"):
+def para(text: str, style: str = "body") -> Paragraph:
     return Paragraph(text, STYLES[style])
 
 
-def bullet(text, color=TEAL):
-    item = Table([["", para(text)]], colWidths=[0.12 * inch, 6.28 * inch])
+def bullet(text: str, color=TEAL, width=6.35 * inch) -> Table:
+    item = Table([["", para(text)]], colWidths=[0.09 * inch, width - 0.09 * inch])
     item.setStyle(
         TableStyle(
             [
@@ -151,412 +170,364 @@ def bullet(text, color=TEAL):
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
                 ("LEFTPADDING", (0, 0), (0, 0), 0),
                 ("RIGHTPADDING", (0, 0), (0, 0), 0),
-                ("TOPPADDING", (0, 0), (0, 0), 5),
-                ("BOTTOMPADDING", (0, 0), (0, 0), 5),
-                ("LEFTPADDING", (1, 0), (1, 0), 8),
+                ("TOPPADDING", (0, 0), (0, 0), 3),
+                ("BOTTOMPADDING", (0, 0), (0, 0), 3),
+                ("LEFTPADDING", (1, 0), (1, 0), 6),
                 ("RIGHTPADDING", (1, 0), (1, 0), 0),
                 ("TOPPADDING", (1, 0), (1, 0), 0),
-                ("BOTTOMPADDING", (1, 0), (1, 0), 4),
+                ("BOTTOMPADDING", (1, 0), (1, 0), 3),
             ]
         )
     )
     return item
 
 
-def section_header(label, title):
+def section_header(label: str, title: str) -> list:
     return [para(label.upper(), "eyebrow"), para(title, "h1")]
 
 
-def styled_table(rows, widths, header=True, font_size=7.5):
+def styled_table(rows, widths, font_size=6.8, header_fill=PALE_BLUE) -> Table:
     wrapped = []
     for row_index, row in enumerate(rows):
         cells = []
         for value in row:
             cell_style = ParagraphStyle(
-                f"Cell-{row_index}",
-                parent=STYLES["small"],
-                fontName="Helvetica-Bold" if header and row_index == 0 else "Helvetica",
+                f"Cell-{row_index}-{len(cells)}",
+                parent=STYLES["mini"],
+                fontName="Helvetica-Bold" if row_index == 0 else "Helvetica",
                 fontSize=font_size,
-                leading=font_size + 3,
+                leading=font_size + 2.3,
                 textColor=INK,
             )
             cells.append(Paragraph(str(value), cell_style))
         wrapped.append(cells)
-    table = Table(wrapped, colWidths=widths, repeatRows=1 if header else 0)
+    table = Table(wrapped, colWidths=widths, repeatRows=1)
     commands = [
-        ("GRID", (0, 0), (-1, -1), 0.5, BORDER),
+        ("GRID", (0, 0), (-1, -1), 0.45, LINE),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("LEFTPADDING", (0, 0), (-1, -1), 7),
-        ("RIGHTPADDING", (0, 0), (-1, -1), 7),
-        ("TOPPADDING", (0, 0), (-1, -1), 6),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+        ("LEFTPADDING", (0, 0), (-1, -1), 5),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 5),
+        ("TOPPADDING", (0, 0), (-1, -1), 4.5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 4.5),
+        ("BACKGROUND", (0, 0), (-1, 0), header_fill),
     ]
-    if header:
-        commands.append(("BACKGROUND", (0, 0), (-1, 0), PALE_INDIGO))
-    for row_index in range(1 if header else 0, len(rows)):
-        if row_index % 2 == 0:
-            commands.append(
-                ("BACKGROUND", (0, row_index), (-1, row_index), colors.HexColor("#F8FAFC"))
-            )
+    for row_index in range(2, len(rows), 2):
+        commands.append(("BACKGROUND", (0, row_index), (-1, row_index), PAPER))
     table.setStyle(TableStyle(commands))
     return table
 
 
-def callout(label, text, fill, line):
-    box = Table(
-        [[para(label, "callout"), para(text)]],
-        colWidths=[1.65 * inch, 4.75 * inch],
-    )
+def callout(label: str, text: str, fill, line, widths=(1.25 * inch, 5.1 * inch)) -> Table:
+    box = Table([[para(label, "callout"), para(text)]], colWidths=list(widths))
     box.setStyle(
         TableStyle(
             [
                 ("BACKGROUND", (0, 0), (-1, -1), fill),
-                ("BOX", (0, 0), (-1, -1), 0.7, line),
+                ("BOX", (0, 0), (-1, -1), 0.65, line),
+                ("LINEBEFORE", (0, 0), (0, -1), 3, line),
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                ("LEFTPADDING", (0, 0), (-1, -1), 10),
-                ("RIGHTPADDING", (0, 0), (-1, -1), 10),
-                ("TOPPADDING", (0, 0), (-1, -1), 10),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 7),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
             ]
         )
     )
     return box
 
 
+def draw_logo(canvas, image_path: Path, x, y, width):
+    canvas.drawImage(str(image_path), x, y, width=width, height=width, mask="auto", preserveAspectRatio=True)
+
+
 def page_decor(canvas, doc):
     canvas.saveState()
     width, height = LETTER
-    canvas.setStrokeColor(BORDER)
-    canvas.setLineWidth(0.5)
-    canvas.line(0.7 * inch, height - 0.52 * inch, width - 0.7 * inch, height - 0.52 * inch)
+    logo = Path(doc.logo_path)
+    draw_logo(canvas, logo, 0.62 * inch, height - 0.49 * inch, 0.28 * inch)
     canvas.setFont("Helvetica-Bold", 7)
-    canvas.setFillColor(INK)
-    canvas.drawString(0.7 * inch, height - 0.38 * inch, "SHETTY'S DESK")
-    canvas.setFont("Helvetica", 7)
+    canvas.setFillColor(OLIVE)
+    canvas.drawString(0.95 * inch, height - 0.35 * inch, "SHETTY'S DESK")
+    canvas.setFont("Helvetica", 6.8)
     canvas.setFillColor(MUTED)
-    canvas.drawRightString(
-        width - 0.7 * inch,
-        height - 0.38 * inch,
-        "DEMAND SENSING ROUTER - START HERE",
-    )
-    canvas.line(0.7 * inch, 0.5 * inch, width - 0.7 * inch, 0.5 * inch)
-    canvas.drawString(0.7 * inch, 0.32 * inch, "Version 1.1.0 - July 2026")
-    canvas.drawRightString(width - 0.7 * inch, 0.32 * inch, f"Page {doc.page}")
+    canvas.drawRightString(width - 0.62 * inch, height - 0.35 * inch, "DEMAND SENSING ROUTER / FIELD GUIDE")
+    canvas.setStrokeColor(LINE)
+    canvas.setLineWidth(0.5)
+    canvas.line(0.62 * inch, height - 0.55 * inch, width - 0.62 * inch, height - 0.55 * inch)
+    canvas.line(0.62 * inch, 0.45 * inch, width - 0.62 * inch, 0.45 * inch)
+    canvas.setFont("Helvetica", 6.6)
+    canvas.setFillColor(MUTED)
+    canvas.drawString(0.62 * inch, 0.27 * inch, "Version 1.2.0 / July 2026")
+    canvas.drawRightString(width - 0.62 * inch, 0.27 * inch, f"Page {doc.page} of 4")
     canvas.restoreState()
 
 
-def cover_page(canvas, _doc):
+def cover_decor(canvas, doc):
     canvas.saveState()
     width, height = LETTER
-    canvas.setFillColor(PALE_INDIGO)
-    canvas.rect(0, height - 0.18 * inch, width, 0.18 * inch, stroke=0, fill=1)
-    canvas.setFillColor(TEAL)
-    canvas.rect(0, 0, width, 0.12 * inch, stroke=0, fill=1)
+    canvas.setFillColor(PAPER)
+    canvas.rect(0, 0, width, height, stroke=0, fill=1)
+    canvas.setFillColor(TERRACOTTA)
+    canvas.rect(0, height - 0.12 * inch, width, 0.12 * inch, stroke=0, fill=1)
+    canvas.setFillColor(OLIVE)
+    canvas.rect(0, 0, width, 0.09 * inch, stroke=0, fill=1)
+    draw_logo(canvas, Path(doc.logo_path), 0.62 * inch, height - 0.95 * inch, 0.62 * inch)
+    canvas.setFont("Helvetica-Bold", 8)
+    canvas.setFillColor(OLIVE)
+    canvas.drawString(1.32 * inch, height - 0.65 * inch, "SHETTY'S DESK")
+    canvas.setFont("Helvetica", 7)
+    canvas.setFillColor(MUTED)
+    canvas.drawString(1.32 * inch, height - 0.79 * inch, "SUPPLY-CHAIN OPERATING ARTIFACTS")
     canvas.restoreState()
 
 
-def build_story():
+def build_story(visual_path: Path):
     story = []
-    visual = Image(str(VISUAL), width=2.35 * inch, height=3.525 * inch)
+    visual = Image(str(visual_path), width=2.12 * inch, height=3.18 * inch)
     cover_copy = [
-        para("FREE WORKFLOW PACK - VERSION 1.1.0", "eyebrow"),
+        Spacer(1, 0.52 * inch),
+        para("FREE WORKFLOW PACK / VERSION 1.2.0", "eyebrow"),
         para("Demand Sensing Router", "title"),
         para(
-            "A beginner-safe guide to run the sample, replace it with your own data, and prepare a planner-reviewable routing board.",
+            "Turn demand history and fresh operating signals into a planner-reviewable cadence decision for every SKU-location.",
             "subtitle",
         ),
-        Spacer(1, 0.18 * inch),
-        bullet("Start with synthetic data and two standard-library Python scripts."),
-        bullet("Choose a chat-first, Agent Skill, or Claude Project path."),
-        bullet("Route each SKU-location with traceable evidence and checks."),
-        bullet("Keep final policy and system changes with the planner."),
-        Spacer(1, 0.16 * inch),
-        para("WHO THIS IS FOR", "eyebrow"),
-        para(
-            "Demand planners, supply-chain analysts, planning leaders, and transformation teams trying the workflow for the first time."
+        Spacer(1, 0.08 * inch),
+        callout(
+            "START IN 5 MINUTES",
+            "Run one local command with synthetic data. It profiles four SKUs, validates the known-good board, and shows the exact next files to replace.",
+            PALE_TERRACOTTA,
+            TERRACOTTA,
+            widths=(1.15 * inch, 2.2 * inch),
         ),
+        Spacer(1, 0.12 * inch),
+        para("THE DECISION", "eyebrow"),
+        para("Route each SKU-location to one of three lanes:", "h2"),
+        bullet("SENSE FREQUENTLY when a fresh signal can still change an operating decision.", BLUE, 3.35 * inch),
+        bullet("PLAN MONTHLY when the baseline cadence still fits the decision horizon.", TEAL, 3.35 * inch),
+        bullet("SPECIAL METHOD / REVIEW for intermittent, lumpy, lifecycle, or weak-evidence exceptions.", AMBER, 3.35 * inch),
     ]
-    cover = Table([[cover_copy, visual]], colWidths=[3.65 * inch, 2.45 * inch])
+    cover = Table([[cover_copy, visual]], colWidths=[3.55 * inch, 2.2 * inch])
     cover.setStyle(
         TableStyle(
             [
                 ("VALIGN", (0, 0), (-1, -1), "TOP"),
                 ("LEFTPADDING", (0, 0), (-1, -1), 0),
-                ("RIGHTPADDING", (0, 0), (0, 0), 20),
+                ("RIGHTPADDING", (0, 0), (0, 0), 16),
                 ("RIGHTPADDING", (1, 0), (1, 0), 0),
                 ("TOPPADDING", (0, 0), (-1, -1), 0),
                 ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
             ]
         )
     )
-    story.extend([Spacer(1, 0.45 * inch), cover, Spacer(1, 0.35 * inch)])
-    meta = Table(
+    story.extend([cover, Spacer(1, 0.17 * inch)])
+    metrics = Table(
         [[
-            para("10 MIN SAMPLE", "cover_meta"),
-            para("2 INPUT FILES", "cover_meta"),
-            para("5 REVIEW OUTPUTS", "cover_meta"),
+            para("1 SAFE START", "metric"),
+            para("2 INPUT FILES", "metric"),
+            para("5 REVIEW OUTPUTS", "metric"),
         ]],
-        colWidths=[2.1 * inch, 2.1 * inch, 2.1 * inch],
+        colWidths=[2.05 * inch, 2.05 * inch, 2.05 * inch],
     )
-    meta.setStyle(
+    metrics.setStyle(
         TableStyle(
             [
-                ("BACKGROUND", (0, 0), (0, 0), PALE_INDIGO),
+                ("BACKGROUND", (0, 0), (0, 0), PALE_TERRACOTTA),
                 ("BACKGROUND", (1, 0), (1, 0), PALE_TEAL),
                 ("BACKGROUND", (2, 0), (2, 0), PALE_AMBER),
-                ("BOX", (0, 0), (-1, -1), 0.5, BORDER),
-                ("INNERGRID", (0, 0), (-1, -1), 0.5, BORDER),
-                ("TOPPADDING", (0, 0), (-1, -1), 10),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 10),
+                ("BOX", (0, 0), (-1, -1), 0.5, LINE),
+                ("INNERGRID", (0, 0), (-1, -1), 0.5, LINE),
+                ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
             ]
         )
     )
-    story.extend([meta, PageBreak()])
-
-    story.extend(section_header("1 - Choose a route", "Pick the simplest first-run path"))
+    story.extend([metrics, Spacer(1, 0.15 * inch)])
     story.append(
-        para(
-            "Run the synthetic sample before deciding how deeply to install the workflow. The operating method stays the same; only the tool surface changes."
+        callout(
+            "HUMAN BOUNDARY",
+            "The pack prepares evidence and a recommendation. The planner approves policy, cadence, master data, and every system-of-record change.",
+            PALE_BLUE,
+            NAVY,
         )
     )
+    story.append(PageBreak())
+
+    story.extend(section_header("01 / First run", "Prove the pack before using your data"))
+    story.append(para("Open Terminal in the extracted pack folder and run one command:"))
+    story.append(para("python3 START.py", "code"))
+    story.append(
+        callout(
+            "EXPECTED RESULT",
+            "4 profiles written / known-good routing board passed / next files printed. No external service or production data is used.",
+            PALE_TEAL,
+            TEAL,
+        )
+    )
+    story.extend([Spacer(1, 0.12 * inch), para("What the command proves", "h2")])
+    for item in [
+        "Python can read the included history and calculate ADI, CV2, and demand-pattern evidence.",
+        "The routing-board validator rejects unsupported frequent-sensing recommendations.",
+        "The package structure, examples, and expected output contract are intact.",
+    ]:
+        story.append(bullet(item))
+
+    sample_rows = [
+        ["SKU / location", "Pattern evidence", "Route", "Why it belongs there"],
+        ["A100 / TOR", "Smooth + fresh POS", "Sense frequently", "A 3-day response window can still change replenishment."],
+        ["C310 / VAN", "Stable + long horizon", "Plan monthly", "New information does not change the near-term decision."],
+        ["D440 / MTL", "Intermittent", "Special review", "Long zero gaps need a method decision, not a faster cadence."],
+        ["F660 / TOR", "Phase-in", "Special review", "Lifecycle evidence overrides a simplistic history route."],
+    ]
+    story.extend([
+        Spacer(1, 0.1 * inch),
+        para("Completed sample: what good looks like", "h2"),
+        styled_table(sample_rows, [1.05 * inch, 1.35 * inch, 1.1 * inch, 2.85 * inch], 6.4, PALE_TEAL),
+        Spacer(1, 0.12 * inch),
+        para("Choose the lightest tool path", "h2"),
+    ])
     path_rows = [
-        ["Path", "Use it when", "What to do first"],
-        ["A - Chat first", "You want to understand the method with the least setup.", "Run the profile script, upload four files, and paste the supplied chat prompt."],
-        ["B - Agent Skill", "Your tool supports a skills folder or Agent Skills.", "Install the complete skill folder, then run the sample and validator."],
-        ["C - Project / Cowork", "A business user needs one reusable controlled workspace.", "Attach the skill, workers, and inputs; use the Cowork run prompt manually."],
+        ["Path", "Best first use", "Start with"],
+        ["Chat first", "Learn the method with minimal setup", "Run START.py, attach four files, paste the starter prompt."],
+        ["Agent Skill", "Reuse the method in a compatible tool", "Install the complete skill folder; keep scripts and references together."],
+        ["Claude Project / Cowork", "Give a team one controlled workspace", "Attach the skill, workers, and input files; run manually first."],
     ]
-    story.extend(
-        [
-            styled_table(path_rows, [1.25 * inch, 2.35 * inch, 2.8 * inch]),
-            Spacer(1, 0.18 * inch),
-            callout(
-                "RECOMMENDED FIRST RUN",
-                "Choose Path A. It proves the data shape and routing logic before you install or schedule anything.",
-                PALE_TEAL,
-                TEAL,
-            ),
-            Spacer(1, 0.16 * inch),
-            para("What this workflow builds", "h2"),
-        ]
-    )
-    for item in [
-        "A current routing board for each SKU-location.",
-        "A route-change log showing what moved and why.",
-        "A data-quality exception list for missing or stale evidence.",
-        "A demand-review brief connecting changes to open decisions.",
-        "A run manifest with source dates, policy version, and validation status.",
-    ]:
-        story.append(bullet(item))
+    story.append(styled_table(path_rows, [1.15 * inch, 2.15 * inch, 3.05 * inch], 6.7))
     story.append(PageBreak())
 
-    story.extend(section_header("2 - Run the sample", "Prove the package before using your data"))
-    story.append(para("Open Terminal, move into the extracted package folder, and run:"))
-    story.append(
-        para(
-            "python3 skills/demand-sensing-router/scripts/profile_demand.py<br/>  skills/demand-sensing-router/assets/sample-demand-history.csv<br/>  --output demand-profile.csv",
-            "code",
+    story.extend(section_header("02 / Your data", "Replace two files, preserve the evidence contract"))
+    two_files = Table(
+        [[
+            [
+                para("FILE 1", "eyebrow"),
+                para("Demand history", "h2"),
+                para("Copy <b>sample-demand-history.csv</b> to <b>my-demand-history.csv</b>."),
+                bullet("sku / location: stable planning keys", BLUE, 2.95 * inch),
+                bullet("period: one daily or weekly format", BLUE, 2.95 * inch),
+                bullet("demand: numeric actual demand", BLUE, 2.95 * inch),
+                bullet("one row per SKU-location-period", BLUE, 2.95 * inch),
+            ],
+            [
+                para("FILE 2", "eyebrow"),
+                para("Routing context", "h2"),
+                para("Copy <b>sample-routing-context.csv</b> to <b>my-routing-context.csv</b>."),
+                bullet("dated signal + freshness", TEAL, 2.95 * inch),
+                bullet("open response window", TEAL, 2.95 * inch),
+                bullet("lifecycle + portfolio priority", TEAL, 2.95 * inch),
+                bullet("decision supported + planner comment", TEAL, 2.95 * inch),
+            ],
+        ]],
+        colWidths=[3.08 * inch, 3.08 * inch],
+    )
+    two_files.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (0, 0), PALE_BLUE),
+                ("BACKGROUND", (1, 0), (1, 0), PALE_TEAL),
+                ("BOX", (0, 0), (-1, -1), 0.55, LINE),
+                ("INNERGRID", (0, 0), (-1, -1), 0.55, LINE),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LEFTPADDING", (0, 0), (-1, -1), 10),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 10),
+                ("TOPPADDING", (0, 0), (-1, -1), 9),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 9),
+            ]
         )
     )
-    story.extend(
-        [
-            para("Expected result:", "h2"),
-            para("Wrote 4 demand profiles to demand-profile.csv", "code"),
-            para("Then validate the supplied routing-board example:", "h2"),
-            para(
-                "python3 skills/demand-sensing-router/scripts/validate_routing.py<br/>  examples/routing-board-example.csv",
-                "code",
-            ),
-            para("Expected result:", "h2"),
-            para("Routing validation passed", "code"),
-            para("What success means", "h2"),
-        ]
-    )
-    for item in [
-        "Python can read the sample data and create one profile per SKU-location.",
-        "The validator can read the expected routing-board schema.",
-        "You have not connected production data or changed any planning policy.",
-    ]:
-        story.append(bullet(item))
+    story.extend([two_files, Spacer(1, 0.12 * inch)])
+
+    context_rows = [
+        ["Context field", "What it must answer", "Example"],
+        ["signal_type + signal_date", "What changed, and when was it observed?", "POS / 2026-07-15"],
+        ["signal_freshness_days", "Is the evidence recent enough for this review?", "2"],
+        ["response_window_days", "Can the supported decision still change?", "3"],
+        ["lifecycle", "Does phase-in/out require special treatment?", "ACTIVE"],
+        ["decision_supported", "Which operating decision can move?", "REPLENISHMENT"],
+        ["previous_cadence", "Did the route change since last review?", "PLAN MONTHLY"],
+    ]
+    story.extend([
+        para("Routing context: the fields that stop generic AI output", "h2"),
+        styled_table(context_rows, [1.55 * inch, 2.95 * inch, 1.85 * inch], 6.6, PALE_AMBER),
+        Spacer(1, 0.1 * inch),
+        callout(
+            "NON-NEGOTIABLE",
+            "A frequent-sensing route needs a dated trigger signal, an open response window, and a named operating decision. Missing evidence stays in planner review.",
+            PALE_AMBER,
+            AMBER,
+        ),
+        Spacer(1, 0.1 * inch),
+        para("Run your history", "h2"),
+        para("python3 skills/demand-sensing-router/scripts/profile_demand.py my-demand-history.csv --output my-demand-profile.csv", "code"),
+        para("Then attach the profile, context, routing policy, and data contract with the supplied chat-first or Cowork prompt."),
+    ])
     story.append(PageBreak())
 
-    story.extend(section_header("3 - Replace file one", "Map your demand history"))
-    story.extend(
-        [
-            para("Copy the sample instead of overwriting it:"),
-            para("sample-demand-history.csv  ->  my-demand-history.csv", "code"),
-        ]
-    )
-    history_rows = [
-        ["Column", "Replace with", "Rule"],
-        ["sku", "Your item, material, or product code", "Use one stable identifier."],
-        ["location", "Planning location, plant, DC, or market", "Use the planning grain used in review."],
-        ["period", "Daily or weekly period", "Use one consistent ISO date or week format."],
-        ["demand", "Historical actual demand", "Use numeric demand for that period."],
-    ]
-    story.extend(
-        [
-            styled_table(history_rows, [1.05 * inch, 2.65 * inch, 2.7 * inch]),
-            Spacer(1, 0.18 * inch),
-        ]
-    )
-    for item in [
-        "Keep one row per SKU-location-period.",
-        "Do not mix daily and weekly history for the same SKU-location.",
-        "Use zero for genuine zero demand; do not use zero for missing data.",
-        "Anonymize identifiers before using an external AI service unless your approved enterprise environment permits the data.",
-    ]:
-        story.append(bullet(item, AMBER if item.startswith("Anonymize") else TEAL))
-    story.append(PageBreak())
-
-    story.extend(section_header("4 - Replace file two", "Map the routing context"))
-    story.extend(
-        [
-            para("Copy the sample instead of overwriting it:"),
-            para("sample-routing-context.csv  ->  my-routing-context.csv", "code"),
-        ]
-    )
-    context_rows_a = [
-        ["Column", "Replace with"],
-        ["sku, location", "The same keys used in demand history"],
-        ["signal_type", "POS, orders, promotion, launch plan, or another approved signal"],
-        ["signal_date", "The date the signal was observed or extracted"],
-        ["signal_freshness_days", "Days between the signal date and review date"],
-        ["response_window_days", "Days remaining for the supported decision to change"],
-        ["lifecycle", "Active, phase-in, phase-out, or your governed equivalent"],
-    ]
-    context_rows_b = [
-        ["Column", "Replace with"],
-        ["volume_value_tier", "Your approved portfolio tier"],
-        ["service_priority", "High, medium, low, or your approved service class"],
-        ["decision_supported", "Replenishment, deployment, allocation, capacity, sequence, or method choice"],
-        ["planner_comment", "A short known event, assumption, or one-off explanation"],
-        ["previous_cadence", "The previously approved routing lane"],
-    ]
-    story.extend(
-        [
-            styled_table(context_rows_a, [1.75 * inch, 4.65 * inch]),
-            Spacer(1, 0.14 * inch),
-            styled_table(context_rows_b, [1.75 * inch, 4.65 * inch]),
-            Spacer(1, 0.18 * inch),
-            callout(
-                "NON-NEGOTIABLE",
-                "Use ISO dates such as 2026-07-15. A signal without a date cannot pass the freshness check.",
-                PALE_AMBER,
-                AMBER,
-            ),
-            PageBreak(),
-        ]
-    )
-
-    story.extend(section_header("5 - Run your data", "Create the first routing package"))
-    story.extend(
-        [
-            para("Profile your history:"),
-            para(
-                "python3 skills/demand-sensing-router/scripts/profile_demand.py<br/>  my-demand-history.csv<br/>  --output my-demand-profile.csv",
-                "code",
-            ),
-            para("Give the assistant these four files:", "h2"),
-        ]
-    )
-    for item in [
-        "my-demand-profile.csv",
-        "my-routing-context.csv",
-        "skills/demand-sensing-router/references/routing-policy.md",
-        "skills/demand-sensing-router/references/data-contract.md",
-    ]:
-        story.append(bullet(item))
-    story.append(para("Then paste this instruction:", "h2"))
-    prompt = (
-        "Use the supplied routing policy and data contract. Combine my demand profile with my routing context. "
-        "Produce the routing board, route-change log, data-quality exceptions, demand-review brief, and run manifest. "
-        "Do not invent missing evidence. Do not publish a frequent-sensing route without a dated signal, an open response window, and a supported operating decision. "
-        "Send failed checks to planner review."
-    )
-    story.extend(
-        [
-            para(prompt, "code"),
-            para(
-                "For a tool-specific setup, use the complete prompt in prompts/chat-first-starter.md or prompts/cowork-run-prompt.md."
-            ),
-            PageBreak(),
-        ]
-    )
-
-    story.extend(section_header("6 - Review the outputs", "Start the meeting with exceptions"))
+    story.extend(section_header("03 / Planner review", "Start with the exceptions, not the stable rows"))
     output_rows = [
-        ["Output", "Use it for", "Review first"],
-        ["Routing board", "The current lane and its evidence", "Changed and failed rows"],
-        ["Route-change log", "What moved since last cycle", "Every unexplained move"],
-        ["Data-quality exceptions", "Missing, stale, or conflicting evidence", "All open exceptions"],
-        ["Demand-review brief", "Decision-focused meeting preparation", "Closing response windows"],
-        ["Run manifest", "Traceability and reproducibility", "Source dates and validation status"],
+        ["Review order", "Artifact", "The question it should answer"],
+        ["1", "Route-change log", "Which SKU-location moved, and what new evidence caused it?"],
+        ["2", "Data-quality exceptions", "Which recommendation failed because evidence is missing, stale, or conflicting?"],
+        ["3", "Demand-review brief", "Which open response window or operating decision needs attention now?"],
+        ["4", "Routing board", "Does every lane match the policy and the visible evidence?"],
+        ["5", "Run manifest", "Which sources, dates, policy version, and checks produced this package?"],
     ]
-    story.extend(
-        [
-            styled_table(output_rows, [1.55 * inch, 2.75 * inch, 2.1 * inch]),
-            Spacer(1, 0.18 * inch),
-            para("Planner approval questions", "h2"),
-        ]
+    story.append(styled_table(output_rows, [0.65 * inch, 1.65 * inch, 4.05 * inch], 6.8, PALE_TEAL))
+    story.extend([Spacer(1, 0.1 * inch), para("Four planner questions", "h2")])
+    questions = Table(
+        [[
+            para("1. What evidence caused the route to move?", "callout"),
+            para("2. Is the signal fresh enough to matter?", "callout"),
+        ], [
+            para("3. Which decision can still change?", "callout"),
+            para("4. What evidence still needs to be challenged?", "callout"),
+        ]],
+        colWidths=[3.08 * inch, 3.08 * inch],
     )
-    for item in [
-        "What evidence caused this SKU-location to move?",
-        "Is the trigger signal still fresh enough to matter?",
-        "Can replenishment, deployment, allocation, capacity, or sequence still change?",
-        "What evidence is missing or contradictory?",
-        "Should the proposed lane be approved, rejected, or held for special review?",
-    ]:
-        story.append(bullet(item))
-    story.extend(
-        [
-            Spacer(1, 0.12 * inch),
-            callout(
-                "DECISION BOUNDARY",
-                "The workflow prepares evidence and a recommendation. The planner approves forecast policy, cadence, master data, and every system-of-record change.",
-                PALE_INDIGO,
-                INDIGO,
-            ),
-            PageBreak(),
-        ]
+    questions.setStyle(
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, -1), PALE_BLUE),
+                ("BOX", (0, 0), (-1, -1), 0.5, LINE),
+                ("INNERGRID", (0, 0), (-1, -1), 0.5, LINE),
+                ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                ("TOPPADDING", (0, 0), (-1, -1), 7),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
+            ]
+        )
     )
-
-    story.extend(section_header("7 - Fix common issues", "Troubleshooting and final check"))
+    story.extend([questions, Spacer(1, 0.1 * inch), para("Fast troubleshooting", "h2")])
     trouble_rows = [
-        ["Problem", "What to check"],
-        ["python3: command not found", "Install Python 3 or use a managed company environment."],
-        ["Missing-column error", "Compare your header row with the sample exactly."],
+        ["Problem", "Fix"],
+        ["python3 not found", "Use a managed Python 3 environment; the pack needs only the standard library."],
+        ["Missing-column error", "Copy the supplied CSV header exactly before replacing rows."],
         ["Duplicate-row error", "Keep one row per SKU-location-period."],
-        ["Unsupported frequent-sensing route", "Add a dated signal, open response window, and decision it can still change."],
-        ["Mixed daily and weekly history", "Separate the series or convert it to one consistent bucket."],
+        ["Frequent-sensing route rejected", "Add a dated signal, open window, and supported decision or keep it in review."],
         ["Sensitive data concern", "Anonymize identifiers or use an approved enterprise AI environment."],
     ]
-    story.extend(
-        [
-            styled_table(trouble_rows, [2.25 * inch, 4.15 * inch]),
-            Spacer(1, 0.18 * inch),
-            para("Final checklist", "h2"),
-        ]
-    )
-    for item in [
-        "[ ] The sample scripts run successfully.",
-        "[ ] My two input files preserve the supplied column names.",
-        "[ ] Every signal has a source date.",
-        "[ ] Every frequent-sensing route names an open decision window.",
-        "[ ] Changed routes explain why they moved.",
-        "[ ] Failed checks remain exceptions.",
-        "[ ] A planner approves the final cadence and system update.",
-    ]:
-        story.append(bullet(item))
-    story.extend(
-        [
-            Spacer(1, 0.16 * inch),
-            para("NEXT", "eyebrow"),
-            para(
-                "Run the sample, inspect the five example outputs, and only then make copies of the two CSV input files. Keep the original examples as your known-good reference.",
-                "callout",
-            ),
-        ]
-    )
+    story.append(styled_table(trouble_rows, [1.8 * inch, 4.55 * inch], 6.6, PALE_TERRACOTTA))
+    story.extend([Spacer(1, 0.1 * inch), para("Ready-to-run checklist", "h2")])
+    checklist = [
+        "[ ] START.py passes with the synthetic sample.",
+        "[ ] My two input files preserve the supplied fields and grain.",
+        "[ ] Every frequent-sensing route has dated evidence and an open decision.",
+        "[ ] Changed routes explain why they moved; failed checks stay visible.",
+        "[ ] A planner approves the final cadence and any system update.",
+    ]
+    left = [bullet(item, TERRACOTTA, 3.05 * inch) for item in checklist[:3]]
+    right = [bullet(item, TERRACOTTA, 3.05 * inch) for item in checklist[3:]]
+    check_table = Table([[left, right]], colWidths=[3.08 * inch, 3.08 * inch])
+    check_table.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 6)]))
+    story.extend([
+        check_table,
+        Spacer(1, 0.08 * inch),
+        callout(
+            "NEXT MOVE",
+            "Run the sample, inspect the completed outputs, copy the two input files, and build the first board with governed data. Keep the originals as your known-good reference.",
+            PALE_TERRACOTTA,
+            TERRACOTTA,
+        ),
+    ])
     return story
 
 
@@ -565,28 +536,27 @@ def build_pdf():
     doc = BaseDocTemplate(
         str(OUTPUT),
         pagesize=LETTER,
-        leftMargin=0.72 * inch,
-        rightMargin=0.72 * inch,
-        topMargin=0.72 * inch,
-        bottomMargin=0.68 * inch,
+        leftMargin=0.65 * inch,
+        rightMargin=0.65 * inch,
+        topMargin=0.68 * inch,
+        bottomMargin=0.57 * inch,
         title="Demand Sensing Router - Start Here",
         author="Shetty's Desk",
-        subject="Beginner setup and usage guide for the Demand Sensing Router workflow pack",
+        subject="Four-page field guide for the Demand Sensing Router workflow pack",
+        creator="Shetty's Desk resource pipeline",
+        invariant=1,
     )
+    doc.logo_path = str(LOGO)
     cover_frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="cover")
     body_frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="body")
     doc.addPageTemplates(
         [
-            PageTemplate(
-                id="Cover",
-                frames=[cover_frame],
-                onPage=cover_page,
-                autoNextPageTemplate="Body",
-            ),
+            PageTemplate(id="Cover", frames=[cover_frame], onPage=cover_decor, autoNextPageTemplate="Body"),
             PageTemplate(id="Body", frames=[body_frame], onPage=page_decor),
         ]
     )
-    doc.build(build_story())
+    # Stable document IDs and metadata keep release checksums meaningful.
+    doc.build(build_story(VISUAL))
     print(f"Wrote {OUTPUT}")
 
 

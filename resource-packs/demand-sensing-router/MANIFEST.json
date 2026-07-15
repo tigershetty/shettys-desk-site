@@ -1,0 +1,21 @@
+{
+  "name": "Shetty's Desk Demand Sensing Router",
+  "version": "1.2.0",
+  "released": "2026-07-15",
+  "entrypoint": "START.py",
+  "runtime": "Python 3 standard library",
+  "inputs": [
+    "skills/demand-sensing-router/assets/sample-demand-history.csv",
+    "skills/demand-sensing-router/assets/sample-routing-context.csv"
+  ],
+  "expected_outputs": [
+    "routing board",
+    "route-change log",
+    "data-quality exceptions",
+    "demand-review brief",
+    "run manifest"
+  ],
+  "decision_boundary": "The workflow prepares evidence and a recommendation. A planner approves policy, cadence, master data, and every system-of-record change.",
+  "sample_data": "synthetic",
+  "contact": "https://shettysdesk.vercel.app"
+}

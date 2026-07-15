@@ -1,58 +1,54 @@
 # Quick Start
 
-New to Agent Skills or AI workflow packs? Open `START-HERE.pdf` before using this command reference.
+## 1. Prove The Pack
 
-## 1. Profile The Sample Demand
+From the extracted package folder:
 
-From this package directory, run:
+~~~bash
+python3 START.py
+~~~
 
-```bash
+Expected final line:
+
+~~~text
+FIRST RUN PASSED
+~~~
+
+The command uses synthetic data only and writes sample-run/demand-profile.csv.
+
+## 2. Copy The Two Inputs
+
+~~~text
+sample-demand-history.csv  -> my-demand-history.csv
+sample-routing-context.csv -> my-routing-context.csv
+~~~
+
+Keep the supplied column names. Use one consistent daily or weekly demand bucket and ISO dates such as 2026-07-15.
+
+## 3. Profile Your History
+
+~~~bash
 python3 skills/demand-sensing-router/scripts/profile_demand.py \
-  skills/demand-sensing-router/assets/sample-demand-history.csv \
-  --output demand-profile.csv
-```
+  my-demand-history.csv \
+  --output my-demand-profile.csv
+~~~
 
-This creates one diagnostic profile per SKU-location. ADI and CV2 are evidence, not automatic cadence decisions.
+ADI and CV2 are diagnostic evidence. They do not approve a cadence by themselves.
 
-## 2. Install Or Attach The Skill
+## 4. Choose A Tool Path
 
-### Codex or another Agent Skills-compatible tool
+- **Chat first:** attach the profile, routing context, routing policy, and data contract; paste prompts/chat-first-starter.md.
+- **Agent Skill:** install the complete skills/demand-sensing-router/ folder.
+- **Claude Project or Cowork:** attach the skill, workers/, and inputs; use prompts/cowork-run-prompt.md.
 
-Copy `skills/demand-sensing-router/` into the tool's skills directory, then ask:
+Run manually until the team trusts the outputs and exceptions.
 
-```text
-Use the Demand Sensing Router skill to combine demand-profile.csv with
-skills/demand-sensing-router/assets/sample-routing-context.csv.
+## 5. Review In This Order
 
-Produce the five-artifact package. Do not invent missing data.
-```
+1. route-change log;
+2. data-quality exceptions;
+3. demand-review brief;
+4. routing board;
+5. run manifest.
 
-### Claude Project or Cowork
-
-Attach the skill folder, `workers/`, and the two sample CSV files to one controlled project or plugin. Use `prompts/cowork-run-prompt.md` as the run instruction.
-
-### Chat-first test
-
-Attach the routing policy, data contract, demand profile, and context file. Use `prompts/chat-first-starter.md`. This is suitable for a first manual run, not a scheduled production workflow.
-
-## 3. Validate The Board
-
-After the routing board is created, run:
-
-```bash
-python3 skills/demand-sensing-router/scripts/validate_routing.py \
-  examples/routing-board-example.csv
-```
-
-The validator rejects a frequent-sensing route without a dated signal, an open response window, or a supported decision.
-
-## 4. Review The Exceptions First
-
-Open, in order:
-
-1. `examples/route-change-log-example.csv`
-2. `examples/data-quality-exceptions-example.csv`
-3. `examples/demand-review-brief-example.md`
-4. `examples/routing-board-example.csv`
-
-Do not write an approved cadence back to a planning system until the planner has reviewed the recommendation.
+Do not write an approved cadence back to a planning system until a planner has reviewed the evidence.

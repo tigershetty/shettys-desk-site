@@ -51,10 +51,13 @@ next-env.d.ts
 .claude/
 .playwright-mcp/
 .playwright-cli/
+tmp/
+resource-packs/*/sample-run/
 
 # dev reference screenshots
 *.png
 !public/**/*.png
+!scripts/assets/*.png
 
 # personal assets (not site code)
 Profile.pdf

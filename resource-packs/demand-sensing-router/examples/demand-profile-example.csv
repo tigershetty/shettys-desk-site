@@ -1,0 +1,5 @@
+sku,location,periods,nonzero_periods,adi,cv2,demand_pattern
+A100,TOR,6,6,1.000,0.004,SMOOTH
+C310,VAN,6,6,1.000,0.002,SMOOTH
+D440,MTL,8,2,4.000,0.010,INTERMITTENT
+F660,TOR,6,4,1.500,0.443,INTERMITTENT

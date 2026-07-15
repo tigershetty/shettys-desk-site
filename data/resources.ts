@@ -9,6 +9,7 @@ export type Resource = {
   readTime: string;
   visual: string;
   motion: string;
+  motionMp4: string;
   tags: string[];
   outputs: string[];
 };
@@ -21,17 +22,19 @@ export const resources: Resource[] = [
     promise: "Route each SKU to the planning cadence its evidence deserves.",
     description:
       "A planner-reviewable Claude workflow for separating frequent sensing, monthly planning, and special-method exceptions without treating demand sensing as the answer for every SKU.",
-    version: "1.1.0",
+    version: "1.2.0",
     updated: "July 15, 2026",
-    readTime: "10 min setup",
+    readTime: "5 min first run",
     visual: "/resources/demand-sensing-router/visual.png",
     motion: "/resources/demand-sensing-router/motion.gif",
+    motionMp4: "/resources/demand-sensing-router/motion.mp4",
     tags: ["Claude", "Demand planning", "Agent skill"],
     outputs: [
       "Routing board",
       "Route-change log",
       "Data-quality exceptions",
       "Demand-review brief",
+      "Run manifest",
     ],
   },
 ];

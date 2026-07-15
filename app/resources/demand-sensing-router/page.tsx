@@ -42,7 +42,7 @@ const workflow = [
 ];
 
 const files = [
-  [BookOpenCheck, "Beginner start-here guide", "A branded PDF with setup routes, exact file replacements, field mapping, troubleshooting, and a final review checklist."],
+  [BookOpenCheck, "Four-page field guide", "A compact Shetty's Desk PDF with the safe first run, exact file replacements, evidence fields, review order, and troubleshooting."],
   [FileSpreadsheet, "Sample portfolio data", "Synthetic SKU-location history and context fields, ready for a safe first run."],
   [Route, "Installable agent skill", "A concise routing workflow with policy, schema, deterministic scripts, and output contract."],
   [GitCompareArrows, "Three worker definitions", "Demand profiling, cadence routing, and independent verification responsibilities."],
@@ -89,7 +89,12 @@ export default function DemandSensingRouterPage() {
         </div>
       </header>
 
-      <ResourcePreview title={resource.title} still={resource.visual} motion={resource.motion} />
+      <ResourcePreview
+        title={resource.title}
+        still={resource.visual}
+        motion={resource.motion}
+        motionMp4={resource.motionMp4}
+      />
 
       <section className="mt-12 border-y border-border py-10" aria-labelledby="why-this-exists">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
@@ -211,11 +216,11 @@ export default function DemandSensingRouterPage() {
               Get the complete Demand Sensing Router Pack
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The archive includes a beginner PDF guide, the skill, deterministic profiling scripts, sample data, routing policy, worker definitions, expected outputs, and validation checklist.
+              The archive includes a four-page field guide, one-command sample run, the skill, deterministic profiling scripts, sample data, routing policy, worker definitions, expected outputs, and validation checklist.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-foreground">
               {[
-                "Open START-HERE.pdf before touching the sample files",
+                "Run python3 START.py for the synthetic first-run check",
                 "Synthetic data only; no production access required",
                 "Runs as a skill or as a guided Claude project",
                 "Designed for planner review before any policy change",
@@ -233,7 +238,7 @@ export default function DemandSensingRouterPage() {
               <ol className="mt-3 space-y-3 text-sm text-foreground">
                 <li className="grid grid-cols-[24px_1fr] gap-2">
                   <span className="font-mono text-xs font-semibold text-amber-700">01</span>
-                  <span>Open <code className="font-mono text-xs">START-HERE.pdf</code> and run the synthetic sample.</span>
+                  <span>Run <code className="font-mono text-xs">python3 START.py</code> to prove the package with synthetic data.</span>
                 </li>
                 <li className="grid grid-cols-[24px_1fr] gap-2">
                   <span className="font-mono text-xs font-semibold text-amber-700">02</span>
