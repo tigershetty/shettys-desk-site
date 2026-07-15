@@ -1,5 +1,7 @@
 # Quick Start
 
+New to Agent Skills or AI workflow packs? Open `START-HERE.pdf` before using this command reference.
+
 ## 1. Profile The Sample Demand
 
 From this package directory, run:

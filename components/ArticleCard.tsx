@@ -13,6 +13,9 @@ interface Article {
   title: string;
   hook: string;
   image: string | null;
+  series?: string;
+  sourceWeek?: string;
+  motion?: string | null;
   tags: string[];
   accent?: string;
   linkedinUrl?: string;
@@ -41,20 +44,25 @@ export default function ArticleCard({
       <a href={articleUrl} className={`group block ${wide ? "sm:flex sm:gap-5" : ""}`}>
         {article.image && (
           <div
-            className={`relative overflow-hidden rounded-xl ${
-              wide ? "aspect-[16/10] sm:w-2/5 sm:shrink-0" : "aspect-[16/9]"
+            className={`relative overflow-hidden rounded-lg border border-border/60 bg-white ${
+              wide ? "aspect-[2/3] sm:w-[34%] sm:shrink-0" : "aspect-[2/3]"
             }`}
           >
             <Image
               src={article.image}
               alt={article.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-contain transition-transform duration-500 group-hover:scale-[1.015]"
               sizes="(max-width: 768px) 100vw, 40vw"
             />
           </div>
         )}
         <div className={wide ? "mt-4 sm:mt-0 sm:flex-1" : "mt-3"}>
+          {(article.series || article.sourceWeek) && (
+            <p className="mb-2 text-[11px] font-semibold text-primary">
+              {[article.series, article.sourceWeek].filter(Boolean).join(" • ")}
+            </p>
+          )}
           <div className="mb-2 flex flex-wrap gap-1.5">
             {article.tags.map((tag) => (
               <span
@@ -68,7 +76,7 @@ export default function ArticleCard({
           <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
             {article.title}
           </h3>
-          <p className="mt-1 text-sm text-muted-foreground leading-relaxed line-clamp-3">
+          <p className="mt-1 text-sm text-muted-foreground leading-relaxed line-clamp-4">
             {article.hook}
           </p>
           <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-all group-hover:gap-2.5">

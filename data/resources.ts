@@ -21,7 +21,7 @@ export const resources: Resource[] = [
     promise: "Route each SKU to the planning cadence its evidence deserves.",
     description:
       "A planner-reviewable Claude workflow for separating frequent sensing, monthly planning, and special-method exceptions without treating demand sensing as the answer for every SKU.",
-    version: "1.0.0",
+    version: "1.1.0",
     updated: "July 15, 2026",
     readTime: "10 min setup",
     visual: "/resources/demand-sensing-router/visual.png",

@@ -17,9 +17,10 @@ export default async function ArticlesPage() {
     <>
       <section className="mb-10">
         <ArticlesHeading />
-        <p className="mt-2 text-muted-foreground">
-          Each one starts with a question I couldn&apos;t answer in one
-          sentence.
+        <p className="mt-3 max-w-3xl text-muted-foreground leading-relaxed">
+          The current Shetty&apos;s Desk series: practical supply-chain concepts,
+          AI workflows, approved visuals, and the operating questions behind
+          them. Older case studies have been retired from this view.
         </p>
       </section>
 

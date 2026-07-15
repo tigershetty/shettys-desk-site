@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/workshop",
+        destination: "/approach",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // Article images can be pasted into Notion as external https URLs or kept as
     // local /public paths. Allow remote https sources for the former.
@@ -8,7 +17,7 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingIncludes: {
     "/api/resources/demand-sensing-router/download": [
-      "./private/resources/demand-sensing-router-v1.0.0.zip",
+      "./private/resources/demand-sensing-router-v1.1.0.zip",
     ],
   },
 };

@@ -4,7 +4,7 @@ import path from "node:path";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const FILE_NAME = "shettys-desk-demand-sensing-router-v1.0.0.zip";
+const FILE_NAME = "shettys-desk-demand-sensing-router-v1.1.0.zip";
 
 export async function GET() {
   try {
@@ -12,7 +12,7 @@ export async function GET() {
       process.cwd(),
       "private",
       "resources",
-      "demand-sensing-router-v1.0.0.zip"
+      "demand-sensing-router-v1.1.0.zip"
     );
     const archive = await readFile(filePath);
 

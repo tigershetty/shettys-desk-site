@@ -13,7 +13,6 @@
       { "label": "Experience", "href": "/experience" }
     ],
     "secondary": [
-      { "label": "The Workshop", "href": "/workshop" },
       { "label": "Shetty's Desk", "href": "/shettys-desk" },
       { "label": "Contact", "href": "/contact" }
     ]

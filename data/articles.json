@@ -1,97 +1,302 @@
 [
   {
-    "slug": "maersk-strategic-pivot",
-    "title": "Maersk's Strategic Pivot",
-    "hook": "Why is the world's second-largest shipping company buying warehouses instead of ships?",
-    "date": "2026-02-20",
-    "image": "/images/articles/maersk.png",
-    "tags": ["Strategy", "Logistics", "Integration"],
+    "slug": "supply-chain-resilience-operating-system",
+    "title": "The Supply Chain Resilience Operating System",
+    "hook": "The best supply chains do not avoid every disruption. They respond faster because the rhythm is already clear.",
+    "date": "July 2026",
+    "sourceWeek": "2026-W28",
+    "series": "Supply Chain 101 - Post 37",
+    "readTime": "8 min read",
+    "image": "/images/articles/recent/supply-chain-resilience-os.png",
+    "imageWidth": 1024,
+    "imageHeight": 1536,
+    "motion": null,
+    "tags": ["SC 101", "Resilience", "Operating system"],
     "featured": true,
-    "audienceBadge": "Read by Directors at Maersk, CMA CGM, Hapag-Lloyd",
-    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7430619872558174208",
+    "audienceBadge": "For supply-chain leaders, planners, sourcing teams, and operations teams",
+    "linkedinUrl": "",
     "stats": {
-      "impressions": 55142,
-      "reactions": 361,
-      "comments": 36,
-      "reposts": 30,
-      "saves": 63
-    },
-    "caption": "Why is the world's second-largest shipping company buying warehouses instead of ships?\n\nMaersk used to move boxes. Port to port. That was the model for over a century. Revenue was volatile, margins were thin, and every boom was followed by a bust.\n\nThen they made a bet. Instead of competing on who has the most ships, they decided to control the entire journey. Factory to front door.\n\nThey acquired companies. Logistics firms, customs brokers, warehousing networks. They built a tech platform. They didn't just add services. They rebuilt the business model.\n\nToday, Maersk offers end-to-end supply chain solutions. You don't just book a container. You book the pickup, the customs clearance, the warehouse, the last mile.\n\nThe result? More predictable revenue. Stickier customer relationships. Higher margins. Less exposure to the spot market rollercoaster.\n\nBut it's not without risk. Integration is hard. Culture clashes, system migrations, service consistency across dozens of countries. And the ocean business still matters. You can't ignore the core while building the future.\n\nMy take: Maersk didn't just diversify. They redefined what a shipping company can be. The question now is whether the industry follows, or whether this becomes a competitive moat."
-  },
-  {
-    "slug": "zara-supply-chain-edge",
-    "title": "Zara's Edge",
-    "hook": "How do you get a customer to visit your store 17 times a year without spending 1 euro on advertising?",
-    "date": "2026-02-23",
-    "image": "/images/articles/zara.png",
-    "tags": ["Retail", "Fast Fashion", "Operations"],
-    "featured": false,
-    "audienceBadge": "Read by professionals in Retail & Fashion Supply Chain",
-    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7431664959534764032",
-    "stats": {
-      "impressions": 731,
-      "reactions": 13,
-      "comments": 2,
-      "reposts": 1,
-      "saves": 3
-    },
-    "caption": "How do you get a customer to visit your store 17 times a year without spending 1 euro on advertising?\n\nZara figured it out. And the answer isn't marketing. It's supply chain.\n\nWhile most fashion brands plan collections 6-9 months ahead, Zara designs, produces, and ships in 2-3 weeks. They don't predict trends. They react to them.\n\nThe secret? Vertical integration and small batches. Zara owns most of its production. They make less of each style, ship twice a week, and create artificial scarcity. If you see something you like, buy it now. It won't be there next week.\n\nThe average fashion brand gets 4-5 store visits a year. Zara gets 17. Not because of ads. Because the product changes constantly.\n\nInditex (Zara's parent) reported 35.9 billion euros in revenue in 2023. They spend less than 1% on advertising. Their supply chain IS their marketing.\n\nMy take: Zara didn't win by being the cheapest or the most fashionable. They won by being the fastest. Speed, in supply chain, is a strategy."
-  },
-  {
-    "slug": "nike-turnaround",
-    "title": "Nike's Turnaround",
-    "hook": "$28 billion in market cap, gone in a day. What went wrong?",
-    "date": "2026-02-27",
-    "image": "/images/articles/nike.png",
-    "tags": ["Strategy", "DTC", "Retail"],
-    "featured": false,
-    "audienceBadge": "Read by professionals in Retail & Consumer Goods",
-    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7432706601893056512",
-    "stats": {
-      "impressions": 565,
-      "reactions": 8,
-      "comments": 1,
-      "reposts": 0,
-      "saves": 2
-    },
-    "caption": "$28 billion in market cap, gone in a day. What went wrong?\n\nNike bet big on direct-to-consumer (DTC). Cut wholesale partners. Pulled products from retailers. Built their own digital channels.\n\nOn paper, it made sense. Higher margins. More data. Closer to the customer.\n\nIn practice? They lost shelf space they couldn't replace with apps. Foot Locker, Dick's Sporting Goods, independent retailers. Decades of relationships, reduced to a strategy slide.\n\nWhen the DTC growth slowed, there was no safety net. June 2024: Nike's stock dropped 20% in a single day. $28 billion in market value, gone.\n\nThe new CEO (Elliott Hill, a 32-year Nike veteran) is now reversing course. Rebuilding wholesale. Re-investing in innovation. Getting back to what made Nike, Nike.\n\nMy take: DTC isn't wrong. But treating it as a replacement for wholesale, instead of a complement, was the mistake. Distribution strategy is supply chain strategy. Cut too many channels and you cut your own reach."
-  },
-  {
-    "slug": "mumbai-dabbawalas",
-    "title": "Mumbai Dabbawalas",
-    "hook": "1 error in 16 million deliveries. No software. Since 1890.",
-    "date": "2026-03-01",
-    "image": "/images/articles/dabbawalas.png",
-    "tags": ["Operations", "Simplicity", "Last Mile"],
-    "featured": false,
-    "audienceBadge": "Read by professionals in Logistics & Operations",
-    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7433814989297278977",
-    "stats": {
-      "impressions": 335,
-      "reactions": 5,
+      "impressions": 0,
+      "reactions": 0,
       "comments": 0,
-      "reposts": 0,
-      "saves": 1
-    },
-    "caption": "1 error in 16 million deliveries. No software. Since 1890.\n\nEvery day in Mumbai, around 5,000 dabbawalas pick up 200,000 home-cooked lunch boxes from homes and deliver them to offices across the city. By lunchtime. Every day. Rain or shine.\n\nThey use a simple color-coded system painted on each box. No GPS. No app. No scanning. Just a system everyone understands.\n\nThe result? A Six Sigma-level error rate. Harvard Business School studied them. Prince Charles visited them. And they've been doing this for over 130 years.\n\nHow? The system is simple enough that it doesn't break. No single point of failure. No dependency on technology that can crash. The process is the product.\n\nMy take: We spend billions on supply chain technology. Sometimes the answer isn't better software. It's a better system. The dabbawalas didn't build a tracking system. They built a system that doesn't need tracking."
-  },
-  {
-    "slug": "us-iran-hormuz",
-    "title": "US-Iran Hormuz",
-    "hook": "The world's most critical energy corridor took 48 hours to close.",
-    "date": "2026-03-02",
-    "image": null,
-    "tags": ["Geopolitics", "Energy", "Risk"],
-    "featured": false,
-    "audienceBadge": "Read by professionals in Energy & Logistics",
-    "linkedinUrl": "https://www.linkedin.com/feed/update/urn:li:share:7434176477258080256",
-    "stats": {
-      "impressions": 241,
-      "reactions": 5,
-      "comments": 1,
       "reposts": 0,
       "saves": 0
     },
-    "caption": "The world's most critical energy corridor took 48 hours to close.\n\nThe Strait of Hormuz. 39 kilometers wide at its narrowest. 21% of global oil passes through it daily. That's roughly 21 million barrels.\n\nWhen tensions between the US and Iran escalate, this is the chokepoint everyone watches. It's not a hypothetical. It's happened before. Tankers have been seized. Drones have been shot down. Insurance premiums have spiked overnight.\n\nWhat makes Hormuz different from other supply chain risks? You can't reroute around it easily. The alternatives add weeks and cost billions. And the countries most dependent on it (Japan, South Korea, India, China) have limited leverage over the geopolitics.\n\nMy take: Supply chain risk isn't just about supplier bankruptcies or port congestion. Sometimes it's about 39 kilometers of water and two countries that don't get along. Geopolitical risk is supply chain risk. And most S&OP models don't account for it."
+    "framework": [
+      {
+        "title": "Trust the signal",
+        "detail": "Name what changed, when it changed, and which evidence the response team will use."
+      },
+      {
+        "title": "Expose the constraint",
+        "detail": "Recheck capacity, bottlenecks, inventory, and the assumptions that no longer hold."
+      },
+      {
+        "title": "Create optionality",
+        "detail": "Compare suppliers, routes, allocations, and response choices before escalating one answer."
+      },
+      {
+        "title": "Protect and recover flow",
+        "detail": "Make survival time, recovery time, customer priority, and decision ownership visible."
+      },
+      {
+        "title": "Change the rule",
+        "detail": "Convert what the disruption exposed into a stronger trigger, policy, or operating rhythm."
+      }
+    ],
+    "inputPack": [
+      "Dated disruption signal and affected nodes",
+      "Inventory, capacity, supplier, and route position",
+      "Customer and service priorities",
+      "Time-to-survive and time-to-recover assumptions",
+      "Named decision owners and available response options"
+    ],
+    "reviewPrompts": [
+      "What do we trust first?",
+      "Which assumption or bottleneck changed?",
+      "Which option protects flow with the clearest trade-off?",
+      "Who decides, by when, and what will we learn afterward?"
+    ],
+    "decisionBoundary": "This operating system does not predict or prevent every disruption. It gives the team a shared response rhythm, makes trade-offs explicit, and preserves human ownership of the response decision.",
+    "caption": "The best supply chains do not avoid every disruption. They respond faster because the rhythm is already clear.\n\nBecause in the actual moment, the team is not asking whether resilience is important. Everyone already knows it is important. The question is much more practical:\n\nWhat do we look at first, who needs to decide, what options do we really have, and how quickly can we recover flow?\n\nThat is where most companies get exposed.\n\nThey may have the risk register. They may have the dashboard. They may even have extra inventory sitting somewhere in the network. But if the team does not have a shared way to read the situation and choose the next move, the response still becomes a chain of escalations.\n\nFor me, a stronger resilience conversation looks at the full operating system:\n\n- What signal are we trusting?\n- What capacity assumption just changed?\n- Which supplier or route gives us optionality?\n- Where is the bottleneck now?\n- How long can we survive, and how long will recovery take?\n- What rule needs to change so this does not become the same fire drill next quarter?\n\nThe best supply chains are not the ones that avoid every problem. They are the ones that respond with less confusion, recover with more discipline, and then improve because of what the disruption exposed.\n\nWhich part of this operating system would fail first in your supply chain?"
+  },
+  {
+    "slug": "demand-planning-decision-table",
+    "title": "The Demand Planning Decision Table",
+    "hook": "When demand moves, the first question should not be who was wrong. The useful question is what the miss changes.",
+    "date": "July 2026",
+    "sourceWeek": "2026-W29",
+    "series": "Supply Chain 101 - Demand planning",
+    "readTime": "7 min read",
+    "image": "/images/articles/recent/demand-planning-decision-table.png",
+    "imageWidth": 1024,
+    "imageHeight": 1536,
+    "motion": null,
+    "tags": ["SC 101", "Demand planning", "Decision quality"],
+    "featured": false,
+    "audienceBadge": "For demand planners, S&OP teams, commercial partners, and operations leaders",
+    "linkedinUrl": "",
+    "stats": {
+      "impressions": 0,
+      "reactions": 0,
+      "comments": 0,
+      "reposts": 0,
+      "saves": 0
+    },
+    "framework": [
+      {
+        "title": "Read the signal",
+        "detail": "Separate real demand movement from timing, promotion, order, service, and data effects."
+      },
+      {
+        "title": "Describe the miss",
+        "detail": "Show where actual demand moved away from the baseline without turning the review into blame."
+      },
+      {
+        "title": "Test the assumption",
+        "detail": "Identify the belief behind the forecast that should now be challenged or replaced."
+      },
+      {
+        "title": "Change the decision",
+        "detail": "Connect the miss to inventory, capacity, supply, or the customer promise while action is still possible."
+      }
+    ],
+    "inputPack": [
+      "Forecast and actual by item, family, customer, and period",
+      "Planner overrides and documented assumptions",
+      "Promotion, order, service, and lifecycle events",
+      "Inventory, capacity, supply, and customer-commitment position"
+    ],
+    "reviewPrompts": [
+      "What signal changed?",
+      "Where did the forecast miss?",
+      "Which assumption needs to be tested?",
+      "Which operating decision changes next?"
+    ],
+    "decisionBoundary": "The table does not replace the statistical forecast or automatically choose the demand plan. It makes the assumption and downstream decision visible so the business can choose its operating commitment deliberately.",
+    "caption": "When demand moves, the first question should not be \"who was wrong?\"\n\nThat sounds obvious, but it happens more often than people admit.\n\nThe team explains the variance, the baseline was too high, a promotion did not lift the way it was expected to, orders moved between weeks, a customer pulled back.\n\nAll of that is useful, but it is still only the diagnostic layer.\n\nThe real value starts when the team asks what the miss changes.\nDoes inventory need to move? Does capacity need to shift? Does supply need to be expedited, delayed, or rebalanced? Does the customer promise still hold?\n\nThis is where demand planning becomes more than a forecast review. The forecast is an input, but the demand plan is the operating commitment the business chooses to make after looking at the signal, the assumption, the risk, and the trade-off.\n\nA stronger demand review separates four things very clearly:\n- what signal changed\n- where the forecast missed\n- which assumption needs to be tested\n- which decision changes next\n\nAnd if the same miss keeps coming back, the answer is not always to tune the model harder. Sometimes the team needs to update the assumption the model is built around.\n\nThat is the idea behind this decision lens: read the miss, test the assumption, and then change the decision with discipline.\n\nIf actual demand moved away from the forecast tomorrow, which decision would your team change first?"
+  },
+  {
+    "slug": "demand-review-to-sequence-board",
+    "title": "From Demand Review to Production Sequence",
+    "hook": "Power BI can show you the error, but Claude can help turn it into the questions the planner needs on the table.",
+    "date": "July 2026",
+    "sourceWeek": "2026-W30",
+    "series": "AI for Supply Chain - Claude",
+    "readTime": "9 min read",
+    "image": "/images/articles/recent/demand-review-to-sequence-board.png",
+    "imageWidth": 1024,
+    "imageHeight": 1536,
+    "motion": null,
+    "tags": ["AI for SC", "Claude", "Production planning"],
+    "featured": false,
+    "audienceBadge": "For demand planners, master planners, production planners, and AI transformation teams",
+    "linkedinUrl": "",
+    "stats": {
+      "impressions": 0,
+      "reactions": 0,
+      "comments": 0,
+      "reposts": 0,
+      "saves": 0
+    },
+    "framework": [
+      {
+        "title": "Demand miss",
+        "detail": "Identify the family, customer, period, and magnitude that can still affect the factory plan."
+      },
+      {
+        "title": "Root-cause hypothesis",
+        "detail": "Draft the most likely explanation and show which evidence would confirm or reject it."
+      },
+      {
+        "title": "Family and promise impact",
+        "detail": "Connect the miss to the line, material, product family, and customer commitment."
+      },
+      {
+        "title": "Constraint checks",
+        "detail": "Recheck material, capacity, service priority, frozen window, and changeover consequences."
+      },
+      {
+        "title": "Sequence options",
+        "detail": "Prepare two or three different sequences with trade-offs and questions for planner review."
+      }
+    ],
+    "inputPack": [
+      "Forecast versus actual by product family",
+      "Open orders and customer promise dates",
+      "Current production plan and frozen window",
+      "Line constraints and changeover rules",
+      "Material status, service priority, and planner comments"
+    ],
+    "reviewPrompts": [
+      "Which miss still changes a production decision?",
+      "Which family, line, or customer promise is exposed?",
+      "What constraint moved?",
+      "Which sequence option creates the clearest trade-off?"
+    ],
+    "decisionBoundary": "Claude prepares the first operating artifact and the questions behind it. The planner validates the cause, chooses the sequence, and owns every production-system change.",
+    "caption": "Power BI can show you the error, but Claude can help turn it into the questions the planner needs on the table.\n\nThat is where a lot of planning meetings quietly lose momentum.\n\nA variance table can tell you actual demand moved away from forecast. It can show the product family, the order movement, the customer pullback, or the promotion that behaved differently than expected.\n\nBut the factory still needs the next layer.\n\nWhich family is exposed? Which material check changed? Which line is now tighter? Which customer promise are we protecting? Which sequence creates the least unnecessary changeover?\n\nThis is where Claude becomes useful if we stop treating it like a summarizer and start using it to build the first draft of the operating artifact.\n\nGive it the actual planning context: forecast vs actual by product family, open orders, current production plan, frozen window, line constraints, changeover rules, material status, service priority, and planner comments.\n\nThen ask Claude for a demand-to-sequence board.\n\nThe useful output is not a generic paragraph. It is a meeting artifact:\n\n- what demand miss matters\n- which root cause looks most likely\n- which family, line, or customer promise is affected\n- which material, capacity, service, or changeover check moved\n- which 2-3 sequence options are worth discussing\n\nThis is the capability that makes Claude shine. It can take scattered planning inputs and turn them into a structured board that the planner can challenge, improve, and use to focus the conversation.\n\nFor me, that is a much stronger AI use case than asking for another dashboard summary. The value is the team starting the meeting with the miss, the assumption, the affected family, the constraint check, and the sequence options already visible.\n\nIf demand moved tomorrow, would your review show which production sequence decision changes first?"
+  },
+  {
+    "slug": "optimal-batch-size-decision-board",
+    "title": "The Optimal Batch Size Decision Board",
+    "hook": "Excel can calculate EOQ, but ChatGPT can help turn the calculation into a planner-reviewable decision board.",
+    "date": "July 2026",
+    "sourceWeek": "2026-W30",
+    "series": "AI for Supply Chain - ChatGPT",
+    "readTime": "9 min read",
+    "image": "/images/articles/recent/optimal-batch-size-decision-board.png",
+    "imageWidth": 1003,
+    "imageHeight": 1568,
+    "motion": "/images/articles/recent/optimal-batch-size-decision-board.gif",
+    "tags": ["AI for SC", "ChatGPT", "Batch size"],
+    "featured": false,
+    "audienceBadge": "For production planners, inventory teams, manufacturing leaders, and AI practitioners",
+    "linkedinUrl": "",
+    "stats": {
+      "impressions": 0,
+      "reactions": 0,
+      "comments": 0,
+      "reposts": 0,
+      "saves": 0
+    },
+    "framework": [
+      {
+        "title": "Calculate the first pass",
+        "detail": "Use EOQ as a reference point, not as an automatic master-data answer."
+      },
+      {
+        "title": "Compare real options",
+        "detail": "Place smaller, current, and larger batch sizes side by side instead of debating one number."
+      },
+      {
+        "title": "Expose setup burden",
+        "detail": "Show the setups, changeovers, production loss, and planning noise each option creates."
+      },
+      {
+        "title": "Expose inventory cost",
+        "detail": "Show trapped cash, shelf-life, obsolescence, and response-speed consequences."
+      },
+      {
+        "title": "Verify fit",
+        "detail": "Check MOQ, pack size, production rate, capacity calendar, service priority, and variability."
+      }
+    ],
+    "inputPack": [
+      "Demand rate by SKU or family",
+      "Setup or changeover cost and holding cost",
+      "Current batch, MOQ, and pack-size rules",
+      "Production rate, shelf life, and capacity calendar",
+      "Service priority, demand variability, and planner comments"
+    ],
+    "reviewPrompts": [
+      "What does the EOQ omit in our operating environment?",
+      "What do we gain and carry with each batch option?",
+      "Which constraint makes an option infeasible?",
+      "Which assumptions must be verified before master data changes?"
+    ],
+    "decisionBoundary": "ChatGPT can structure the option board and surface assumptions. It should not approve a batch-size or master-data change; the planner and manufacturing owners choose the trade-off.",
+    "caption": "Excel can calculate EOQ, but ChatGPT can help turn the calculation into a planner-reviewable decision board.\n\nThat matters because batch size can look like a clean calculation from the outside.\n\nBut in a real planning conversation, that number is only the first draft.\n\nIf the batch gets smaller, the business may carry less inventory and respond faster, but it may also create more setups, more changeovers, and more planning noise.\n\nIf the batch gets larger, the production run can look efficient because setup frequency drops, but the cost can come back later through trapped cash, shelf-life risk, slower response, or capacity used on the wrong product.\n\nThis is where ChatGPT becomes useful if we stop treating it like a calculator and start using it to build the first version of the decision artifact.\n\nGive it the actual planning context: demand rate by SKU or family, setup or changeover cost, holding cost, current batch size, MOQ or pack-size rule, production rate, shelf life, capacity calendar, service priority, demand variability, and planner comments.\n\nThen ask for a batch-size decision board.\n\nThe useful output is a review table that shows:\n\n- first-pass EOQ\n- smaller, current, and larger batch options\n- setup or changeover burden\n- inventory exposure\n- capacity fit\n- service risk\n- assumptions that need to be verified\n\nBatch size decisions often hide behind the word efficiency. Bigger runs feel efficient because setup drops, but the planner still has to ask what the business is choosing to carry in return.\n\nThe value of AI here is not that it decides the perfect batch, the value is that it makes the trade-off visible before the planner changes the plan or master data.\n\nIf demand changed next week, would your team know which batch size is still carrying the right trade-off?"
+  },
+  {
+    "slug": "mps-as-production-commitment",
+    "title": "The MPS as a Production Commitment",
+    "hook": "The closer a requirement gets to the factory, the more expensive a casual change becomes.",
+    "date": "July 2026",
+    "sourceWeek": "2026-W31",
+    "series": "Supply Chain 101 - Production planning",
+    "readTime": "8 min read",
+    "image": "/images/articles/recent/mps-production-commitment.png",
+    "imageWidth": 864,
+    "imageHeight": 1821,
+    "motion": "/images/articles/recent/mps-production-commitment.gif",
+    "tags": ["SC 101", "MPS", "Production planning"],
+    "featured": false,
+    "audienceBadge": "For master planners, production planners, material planners, and operations leaders",
+    "linkedinUrl": "",
+    "stats": {
+      "impressions": 0,
+      "reactions": 0,
+      "comments": 0,
+      "reposts": 0,
+      "saves": 0
+    },
+    "framework": [
+      {
+        "title": "Item",
+        "detail": "Name the exact finished good or planning item affected by the requirement."
+      },
+      {
+        "title": "Quantity",
+        "detail": "Show how much is moving and whether the change is additive, delayed, or rebalanced."
+      },
+      {
+        "title": "Period",
+        "detail": "Place the requirement inside the correct time bucket and planning fence."
+      },
+      {
+        "title": "Status",
+        "detail": "Distinguish planned, firmed, and released work before changing the commitment."
+      },
+      {
+        "title": "Controlled consequence",
+        "detail": "Recheck material, rough-cut capacity, production orders, and the customer promise that moves with it."
+      }
+    ],
+    "inputPack": [
+      "Item, quantity, required period, and current MPS status",
+      "Planning time fences and firming rules",
+      "Material availability and rough-cut capacity",
+      "Planned, firmed, and released order position",
+      "Customer promise and exception ownership"
+    ],
+    "reviewPrompts": [
+      "What exactly are we changing?",
+      "What has already been protected or firmed?",
+      "Which material, capacity, order, or promise moves with it?",
+      "Who owns the exception inside this horizon?"
+    ],
+    "decisionBoundary": "The MPS defines an item-time commitment; it is not the detailed machine sequence. Protected does not mean impossible to change. It means the consequence and owner must be visible before the schedule moves.",
+    "caption": "The closer a requirement gets to the factory, the more expensive a casual change becomes.\n\nThat is why I find it useful to think about the Master Production Schedule as the line between planning intent and factory commitment.\n\nAt forecast level, a new signal is information. Inside the near-term production horizon, the same signal may require material checks, rough-cut capacity review, changes to planned or released orders, and a decision about which customer commitment the team is still protecting.\n\nA stronger MPS review makes four things explicit:\n- which item is affected\n- what quantity is moving\n- which period changes\n- whether the line is planned, firm, or already released\n\nAnd then it applies a different level of control depending on where the change sits.\n\nFirming converts planned orders into actual production or purchase orders. The exact configuration will vary between systems and businesses, but the operating principle is the same: the closer the plan gets to execution, the more deliberate the change needs to become.\n\nThe MPS is not the detailed production sequence either, it does not decide every machine slot or changeover. It creates the item-time commitment that material planning, capacity checks, production orders, and detailed scheduling can work from.\n\nSo when demand moves, the useful conversation is not only \"can we change the plan?\"\nIt is:\n- What exactly are we changing?\n- What has already been protected or firmed?\n- Which material, capacity, order, or customer commitment moves with it?\n- Who owns the exception?\n\nProtected does not mean impossible to change, it means the business understands that responsiveness has a cost, and the trade-off should be visible before the schedule moves.\n\nWhen demand changes inside your near-term horizon, who owns the decision to change the MPS?"
   }
 ]

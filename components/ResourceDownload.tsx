@@ -13,8 +13,8 @@ export default function ResourceDownload() {
             The complete pack is ready.
           </h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-            Download v1.0.0 as a 20 KB ZIP. No email address, account, or
-            newsletter signup is required.
+            Download v1.1.0 as a ZIP. No email address, account, or newsletter
+            signup is required.
           </p>
           <a
             href="/api/resources/demand-sensing-router/download"

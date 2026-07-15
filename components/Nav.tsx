@@ -8,7 +8,6 @@ import {
   Compass,
   User,
   Briefcase,
-  Wrench,
   BookOpen,
   PackageOpen,
   Mail,
@@ -26,7 +25,6 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
   "/approach": Compass,
   "/about": User,
   "/experience": Briefcase,
-  "/workshop": Wrench,
   "/shettys-desk": BookOpen,
   "/contact": Mail,
 };

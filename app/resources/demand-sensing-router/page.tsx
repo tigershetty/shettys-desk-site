@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpenCheck,
   Check,
   Clock3,
   FileCheck2,
@@ -41,6 +42,7 @@ const workflow = [
 ];
 
 const files = [
+  [BookOpenCheck, "Beginner start-here guide", "A branded PDF with setup routes, exact file replacements, field mapping, troubleshooting, and a final review checklist."],
   [FileSpreadsheet, "Sample portfolio data", "Synthetic SKU-location history and context fields, ready for a safe first run."],
   [Route, "Installable agent skill", "A concise routing workflow with policy, schema, deterministic scripts, and output contract."],
   [GitCompareArrows, "Three worker definitions", "Demand profiling, cadence routing, and independent verification responsibilities."],
@@ -209,10 +211,11 @@ export default function DemandSensingRouterPage() {
               Get the complete Demand Sensing Router Pack
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The archive includes the skill, deterministic profiling scripts, sample data, routing policy, worker definitions, expected outputs, and validation checklist.
+              The archive includes a beginner PDF guide, the skill, deterministic profiling scripts, sample data, routing policy, worker definitions, expected outputs, and validation checklist.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-foreground">
               {[
+                "Open START-HERE.pdf before touching the sample files",
                 "Synthetic data only; no production access required",
                 "Runs as a skill or as a guided Claude project",
                 "Designed for planner review before any policy change",
@@ -223,6 +226,25 @@ export default function DemandSensingRouterPage() {
                 </li>
               ))}
             </ul>
+            <div className="mt-6 border-t border-amber-200 pt-5">
+              <p className="text-xs font-semibold uppercase text-amber-700">
+                Your first run
+              </p>
+              <ol className="mt-3 space-y-3 text-sm text-foreground">
+                <li className="grid grid-cols-[24px_1fr] gap-2">
+                  <span className="font-mono text-xs font-semibold text-amber-700">01</span>
+                  <span>Open <code className="font-mono text-xs">START-HERE.pdf</code> and run the synthetic sample.</span>
+                </li>
+                <li className="grid grid-cols-[24px_1fr] gap-2">
+                  <span className="font-mono text-xs font-semibold text-amber-700">02</span>
+                  <span>Copy the two CSVs in <code className="font-mono text-xs">skills/demand-sensing-router/assets/</code> and replace the sample rows with your governed fields.</span>
+                </li>
+                <li className="grid grid-cols-[24px_1fr] gap-2">
+                  <span className="font-mono text-xs font-semibold text-amber-700">03</span>
+                  <span>Build the five outputs, validate the board, and review changed or failed routes before any system update.</span>
+                </li>
+              </ol>
+            </div>
           </div>
           <ResourceDownload />
         </div>
