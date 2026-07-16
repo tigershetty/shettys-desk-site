@@ -1,43 +1,63 @@
 # Shetty's Desk Demand Sensing Router
 
-Version `1.1.0` | July 15, 2026
+Version 1.2.0 | July 15, 2026
 
-Route SKU-location combinations to `SENSE FREQUENTLY`, `PLAN MONTHLY`, or `SPECIAL METHOD / REVIEW`, then make every recommendation prove its evidence, response window, and operating decision.
+Route SKU-location combinations to **SENSE FREQUENTLY**, **PLAN MONTHLY**, or **SPECIAL METHOD / REVIEW**, then make every recommendation prove its evidence, response window, and operating decision.
+
+## Run The Safe Sample
+
+Open Terminal in this extracted folder and run:
+
+~~~bash
+python3 START.py
+~~~
+
+The first run uses synthetic data only. It creates four demand profiles, compares them with the known-good example, validates the supplied routing board, and prints the next files to replace.
 
 ## What You Get
 
-- an installable Agent Skill under `skills/demand-sensing-router/`;
-- a branded `START-HERE.pdf` for a first-time user;
+- a four-page branded field guide in START-HERE.pdf;
+- a one-command synthetic first run;
 - deterministic ADI, CV2, and demand-pattern profiling;
-- a routing policy and fixed data contract;
-- three role definitions for profiling, routing, and verification;
-- synthetic sample inputs and planner-reviewable expected outputs;
-- Claude Cowork, Claude Code, and chat-first setup paths;
-- a validation checklist that blocks unsupported routes.
+- a routing policy, data contract, and validator;
+- an installable Agent Skill and three worker definitions;
+- sample inputs plus five planner-reviewable output examples;
+- Claude Project, Cowork, Agent Skill, and chat-first paths;
+- a package manifest, validation checklist, and release record.
 
-## Start Here
+## Use Your Data
 
-Open `START-HERE.pdf` first. It explains which route to choose, how to run the sample, exactly which two CSV files to copy, and what to replace in every column. `QUICKSTART.md` remains the concise command reference.
+Do not overwrite the samples. Copy:
+
+~~~text
+skills/demand-sensing-router/assets/sample-demand-history.csv
+  -> my-demand-history.csv
+
+skills/demand-sensing-router/assets/sample-routing-context.csv
+  -> my-routing-context.csv
+~~~
+
+Preserve the supplied headers and grain. Open START-HERE.pdf for the exact field map, evidence contract, output review order, and troubleshooting.
 
 ## The Important Boundary
 
-This pack prepares a first-pass operating artifact. It does not approve the forecast policy, update master data, release orders, or replace planner judgment.
+This pack prepares a first-pass operating artifact. It does not approve forecast policy, update master data, release orders, or replace planner judgment.
 
 ## Folder Map
 
-```text
+~~~text
 demand-sensing-router/
-├── README.md
-├── START-HERE.pdf
-├── START-HERE.md
-├── QUICKSTART.md
-├── VERSION.md
-├── LICENSE.md
-├── skills/demand-sensing-router/
-├── workers/
-├── prompts/
-├── examples/
-└── validation-checklist.md
-```
+|-- START.py
+|-- START-HERE.pdf
+|-- START-HERE.md
+|-- QUICKSTART.md
+|-- MANIFEST.json
+|-- VERSION.md
+|-- skills/demand-sensing-router/
+|-- workers/
+|-- prompts/
+|-- examples/
++-- validation-checklist.md
+~~~
 
 Created by [Shetty's Desk](https://shettysdesk.vercel.app).

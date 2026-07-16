@@ -10,10 +10,12 @@ export default function ResourcePreview({
   title,
   still,
   motion,
+  motionMp4,
 }: {
   title: string;
   still: string;
   motion: string;
+  motionMp4: string;
 }) {
   const [mode, setMode] = useState<PreviewMode>("motion");
 
@@ -58,13 +60,20 @@ export default function ResourcePreview({
 
       <div className="relative mx-auto w-full max-w-[760px] overflow-hidden rounded-lg border border-border bg-white shadow-[0_24px_70px_-36px_rgba(15,23,42,0.45)]">
         {mode === "motion" ? (
-          // A GIF is retained here because LinkedIn readers receive the same approved asset.
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={motion}
-            alt={`${title} animated workflow preview`}
+          <video
+            src={motionMp4}
+            poster={still}
+            aria-label={`${title} animated workflow preview`}
+            autoPlay
+            muted
+            loop
+            playsInline
             className="block h-auto w-full"
-          />
+          >
+            {/* The GIF remains the fallback and the approved LinkedIn motion asset. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={motion} alt={`${title} animated workflow preview`} />
+          </video>
         ) : (
           <Image
             src={still}

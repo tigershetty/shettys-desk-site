@@ -25,6 +25,7 @@ export interface Article {
   imageWidth: number;
   imageHeight: number;
   motion: string | null;
+  motionMp4: string | null;
   tags: string[];
   featured: boolean;
   audienceBadge: string;
@@ -35,6 +36,9 @@ export interface Article {
   reviewPrompts: string[];
   decisionBoundary: string;
   caption: string;
+  resourceUrl?: string;
+  resourceLabel?: string;
+  resourceDescription?: string;
 }
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
@@ -96,6 +100,7 @@ function mapPage(page: NotionPage): Article {
     imageWidth: 1024,
     imageHeight: 1536,
     motion: plain(p["Motion"]) || null,
+    motionMp4: plain(p["Motion MP4"]) || null,
     tags: (p["Tags"]?.multi_select ?? []).map((option) => option.name),
     featured: p["Featured"]?.checkbox ?? false,
     audienceBadge: plain(p["Audience Badge"]),
@@ -112,6 +117,9 @@ function mapPage(page: NotionPage): Article {
     reviewPrompts: [],
     decisionBoundary: plain(p["Decision Boundary"]),
     caption: plain(p["Caption"]),
+    resourceUrl: p["Resource URL"]?.url ?? undefined,
+    resourceLabel: plain(p["Resource Label"]) || undefined,
+    resourceDescription: plain(p["Resource Description"]) || undefined,
   };
 }
 

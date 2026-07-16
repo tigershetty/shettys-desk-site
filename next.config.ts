@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingIncludes: {
     "/api/resources/demand-sensing-router/download": [
-      "./private/resources/demand-sensing-router-v1.1.0.zip",
+      "./private/resources/demand-sensing-router-v1.2.0.zip",
     ],
   },
 };

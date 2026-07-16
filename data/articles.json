@@ -11,6 +11,7 @@
     "imageWidth": 1024,
     "imageHeight": 1536,
     "motion": null,
+    "motionMp4": null,
     "tags": ["SC 101", "Resilience", "Operating system"],
     "featured": true,
     "audienceBadge": "For supply-chain leaders, planners, sourcing teams, and operations teams",
@@ -72,6 +73,7 @@
     "imageWidth": 1024,
     "imageHeight": 1536,
     "motion": null,
+    "motionMp4": null,
     "tags": ["SC 101", "Demand planning", "Decision quality"],
     "featured": false,
     "audienceBadge": "For demand planners, S&OP teams, commercial partners, and operations leaders",
@@ -128,6 +130,7 @@
     "imageWidth": 1024,
     "imageHeight": 1536,
     "motion": null,
+    "motionMp4": null,
     "tags": ["AI for SC", "Claude", "Production planning"],
     "featured": false,
     "audienceBadge": "For demand planners, master planners, production planners, and AI transformation teams",
@@ -189,6 +192,7 @@
     "imageWidth": 1003,
     "imageHeight": 1568,
     "motion": "/images/articles/recent/optimal-batch-size-decision-board.gif",
+    "motionMp4": "/images/articles/recent/optimal-batch-size-decision-board.mp4",
     "tags": ["AI for SC", "ChatGPT", "Batch size"],
     "featured": false,
     "audienceBadge": "For production planners, inventory teams, manufacturing leaders, and AI practitioners",
@@ -250,6 +254,7 @@
     "imageWidth": 864,
     "imageHeight": 1821,
     "motion": "/images/articles/recent/mps-production-commitment.gif",
+    "motionMp4": "/images/articles/recent/mps-production-commitment.mp4",
     "tags": ["SC 101", "MPS", "Production planning"],
     "featured": false,
     "audienceBadge": "For master planners, production planners, material planners, and operations leaders",
@@ -298,5 +303,70 @@
     ],
     "decisionBoundary": "The MPS defines an item-time commitment; it is not the detailed machine sequence. Protected does not mean impossible to change. It means the consequence and owner must be visible before the schedule moves.",
     "caption": "The closer a requirement gets to the factory, the more expensive a casual change becomes.\n\nThat is why I find it useful to think about the Master Production Schedule as the line between planning intent and factory commitment.\n\nAt forecast level, a new signal is information. Inside the near-term production horizon, the same signal may require material checks, rough-cut capacity review, changes to planned or released orders, and a decision about which customer commitment the team is still protecting.\n\nA stronger MPS review makes four things explicit:\n- which item is affected\n- what quantity is moving\n- which period changes\n- whether the line is planned, firm, or already released\n\nAnd then it applies a different level of control depending on where the change sits.\n\nFirming converts planned orders into actual production or purchase orders. The exact configuration will vary between systems and businesses, but the operating principle is the same: the closer the plan gets to execution, the more deliberate the change needs to become.\n\nThe MPS is not the detailed production sequence either, it does not decide every machine slot or changeover. It creates the item-time commitment that material planning, capacity checks, production orders, and detailed scheduling can work from.\n\nSo when demand moves, the useful conversation is not only \"can we change the plan?\"\nIt is:\n- What exactly are we changing?\n- What has already been protected or firmed?\n- Which material, capacity, order, or customer commitment moves with it?\n- Who owns the exception?\n\nProtected does not mean impossible to change, it means the business understands that responsiveness has a cost, and the trade-off should be visible before the schedule moves.\n\nWhen demand changes inside your near-term horizon, who owns the decision to change the MPS?"
+  },
+  {
+    "slug": "demand-sensing-sku-routing",
+    "title": "The Demand Sensing Router",
+    "hook": "A faster forecast cycle can create more planner activity without creating a better decision.",
+    "date": "July 2026",
+    "sourceWeek": "2026-W31",
+    "series": "AI for Supply Chain - Claude",
+    "readTime": "9 min read",
+    "image": "/resources/demand-sensing-router/visual.png",
+    "imageWidth": 1024,
+    "imageHeight": 1536,
+    "motion": "/resources/demand-sensing-router/motion.gif",
+    "motionMp4": "/resources/demand-sensing-router/motion.mp4",
+    "tags": ["AI for SC", "Claude", "Demand sensing"],
+    "featured": false,
+    "audienceBadge": "For supply planners, demand planners, S&OP teams, and AI transformation leaders",
+    "linkedinUrl": "",
+    "stats": {
+      "impressions": 0,
+      "reactions": 0,
+      "comments": 0,
+      "reposts": 0,
+      "saves": 0
+    },
+    "framework": [
+      {
+        "title": "Bring the evidence",
+        "detail": "Combine demand history with recent orders, POS, promotions, inventory, lead time, service, lifecycle, and planner context."
+      },
+      {
+        "title": "Profile the demand",
+        "detail": "Separate regularity from order-size variability and keep intermittent or lifecycle demand visible."
+      },
+      {
+        "title": "Test the decision window",
+        "detail": "Check whether the signal is fresh, the response window is open, and a named operating decision can still move."
+      },
+      {
+        "title": "Route the cadence",
+        "detail": "Recommend frequent sensing, monthly planning, or special-method review using one visible routing policy."
+      },
+      {
+        "title": "Verify before changing policy",
+        "detail": "Reject missing or unsupported evidence and bring changed lanes, exceptions, and open decisions to the planner."
+      }
+    ],
+    "inputPack": [
+      "Demand history by SKU-location and period",
+      "Recent order, POS, promotion, and inventory signals",
+      "Lead time, service priority, lifecycle, and portfolio value",
+      "Current cadence, response window, and supported operating decision",
+      "Planner comments and the approved routing policy"
+    ],
+    "reviewPrompts": [
+      "What evidence caused this SKU-location to change lanes?",
+      "Is the signal fresh enough and the response window still open?",
+      "Which replenishment, deployment, allocation, or production decision can move?",
+      "Which route should the planner reject, approve, or send to special review?"
+    ],
+    "decisionBoundary": "Claude prepares the profile, first-pass routing board, change log, exceptions, review brief, and run manifest. The planner approves the method, cadence, master data, and every system-of-record change.",
+    "caption": "A faster forecast cycle can create more planner activity without creating a better decision.\n\nYou can use Claude to build it, to test whether a fresh signal exists, whether the response window is still open, and whether an operating decision can actually move.\n\nFor each SKU-location, the workflow reads demand history alongside recent order, POS, promotion, inventory, lead-time, service, lifecycle, and planner context. It then tests regularity, variability, volume and value, signal freshness, and the remaining response window.\n\nFrom there, it recommends one of three lanes:\n• SENSE FREQUENTLY when a fresh signal can still change replenishment, deployment, allocation, or production\n• PLAN MONTHLY when the baseline cadence still fits the decision horizon\n• SPECIAL METHOD / REVIEW when intermittent demand, lifecycle status, or weak evidence makes the choice less straightforward\n\nClaude becomes useful here because the method does not need to be reconstructed in every conversation.\n\nOne worker profiles the demand, one applies the routing policy. A third tries to reject the recommendation when evidence is missing, stale, conflicting, or disconnected from an open decision.\n\nThe result is not another forecast summary. It is a review package:\n• the current routing board\n• a route-change log showing what moved and why\n• data-quality and validation exceptions\n• a demand-review brief focused on the decisions still open\n• a run manifest showing which evidence and policy produced the output\n\nThe planner still approves the method, cadence, master data, and every system-of-record change. But the meeting can start with the SKUs that changed lanes, failed a check, or still have a decision worth discussing.\n\nI have packaged the complete workflow with a four-page field guide, synthetic sample data, completed outputs, the reusable skill, and a one-command safe first run.\n\nDownload the free Demand Sensing Router Pack here - https://shettysdesk.vercel.app/resources/demand-sensing-router",
+    "resourceUrl": "/resources/demand-sensing-router",
+    "resourceLabel": "Open the free router pack",
+    "resourceDescription": "Download the four-page field guide, synthetic sample data, completed outputs, reusable skill, validation controls, and one-command safe first run. No email or account required."
   }
 ]
