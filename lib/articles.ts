@@ -36,6 +36,9 @@ export interface Article {
   reviewPrompts: string[];
   decisionBoundary: string;
   caption: string;
+  resourceUrl?: string;
+  resourceLabel?: string;
+  resourceDescription?: string;
 }
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
@@ -114,6 +117,9 @@ function mapPage(page: NotionPage): Article {
     reviewPrompts: [],
     decisionBoundary: plain(p["Decision Boundary"]),
     caption: plain(p["Caption"]),
+    resourceUrl: p["Resource URL"]?.url ?? undefined,
+    resourceLabel: plain(p["Resource Label"]) || undefined,
+    resourceDescription: plain(p["Resource Description"]) || undefined,
   };
 }
 

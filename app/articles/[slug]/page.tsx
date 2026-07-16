@@ -218,6 +218,39 @@ export default async function ArticlePage({
         </div>
       </section>
 
+      {article.resourceUrl && (
+        <section
+          className="border-y border-border bg-[#fffbeb] py-10"
+          aria-labelledby="resource-heading"
+        >
+          <div className="grid gap-5 px-1 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold text-amber-700">
+                Downloadable workflow
+              </p>
+              <h2
+                id="resource-heading"
+                className="mt-2 text-2xl font-bold text-foreground"
+              >
+                Take the operating artifact into your own demand review
+              </h2>
+              {article.resourceDescription && (
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {article.resourceDescription}
+                </p>
+              )}
+            </div>
+            <Link
+              href={article.resourceUrl}
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            >
+              {article.resourceLabel ?? "Open the resource"}
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </section>
+      )}
+
       {hasStats && <ArticleStats stats={article.stats} />}
 
       <footer className="flex flex-col gap-4 border-t border-border py-8 sm:flex-row sm:items-center sm:justify-between">
