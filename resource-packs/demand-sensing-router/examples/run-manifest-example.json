@@ -1,0 +1,20 @@
+{
+  "resource": "demand-sensing-router",
+  "policy_version": "1.0.0",
+  "run_timestamp": "2026-07-14T16:00:00-04:00",
+  "inputs": [
+    {
+      "file": "sample-demand-history.csv",
+      "extract_date": "2026-06-30"
+    },
+    {
+      "file": "sample-routing-context.csv",
+      "extract_date": "2026-07-14"
+    }
+  ],
+  "rows_received": 4,
+  "rows_routed": 4,
+  "rows_rejected": 0,
+  "validation_status": "PASS",
+  "unresolved_exceptions": 1
+}

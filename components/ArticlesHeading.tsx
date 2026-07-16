@@ -6,7 +6,7 @@ export default function ArticlesHeading() {
     <h1 className="text-3xl font-bold text-foreground">
       Supply chain, one{" "}
       <AnimatedTextCycle
-        words={["breakdown", "question", "story"]}
+        words={["decision", "framework", "artifact"]}
         interval={3500}
         className="text-primary"
       />{" "}

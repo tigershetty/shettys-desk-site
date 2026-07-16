@@ -1,0 +1,5 @@
+sku,location,signal_type,signal_date,signal_freshness_days,response_window_days,lifecycle,volume_value_tier,service_priority,decision_supported,planner_comment,previous_cadence
+A100,TOR,POS,2026-07-13,1,3,ACTIVE,A,HIGH,REPLENISH,Promotion signal moved daily demand,PLAN MONTHLY
+C310,VAN,ORDERS,2026-07-07,7,45,ACTIVE,B,MEDIUM,CAPACITY,No material near-term movement,PLAN MONTHLY
+D440,MTL,ORDERS,2026-06-20,24,21,ACTIVE,C,LOW,METHOD CHOICE,Long zero-demand gaps,SPECIAL METHOD / REVIEW
+F660,TOR,LAUNCH PLAN,2026-07-12,2,14,PHASE-IN,B,HIGH,ALLOCATION,History is not yet representative,SPECIAL METHOD / REVIEW

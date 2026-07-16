@@ -7,12 +7,12 @@
     "primary": [
       { "label": "Home", "href": "/" },
       { "label": "Published Posts", "href": "/articles" },
+      { "label": "Resources", "href": "/resources" },
       { "label": "My Approach", "href": "/approach" },
       { "label": "About Me", "href": "/about" },
       { "label": "Experience", "href": "/experience" }
     ],
     "secondary": [
-      { "label": "The Workshop", "href": "/workshop" },
       { "label": "Shetty's Desk", "href": "/shettys-desk" },
       { "label": "Contact", "href": "/contact" }
     ]

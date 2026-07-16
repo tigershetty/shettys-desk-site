@@ -8,8 +8,8 @@ import {
   Compass,
   User,
   Briefcase,
-  Wrench,
   BookOpen,
+  PackageOpen,
   Mail,
 } from "lucide-react";
 
@@ -21,10 +21,10 @@ interface NavItem {
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
   "/": Home,
   "/articles": FileText,
+  "/resources": PackageOpen,
   "/approach": Compass,
   "/about": User,
   "/experience": Briefcase,
-  "/workshop": Wrench,
   "/shettys-desk": BookOpen,
   "/contact": Mail,
 };

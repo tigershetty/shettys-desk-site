@@ -8,17 +8,32 @@ export interface ArticleStats {
   saves: number;
 }
 
+export interface ArticleFrameworkItem {
+  title: string;
+  detail: string;
+}
+
 export interface Article {
   slug: string;
   title: string;
   hook: string;
   date: string;
+  sourceWeek: string;
+  series: string;
+  readTime: string;
   image: string | null;
+  imageWidth: number;
+  imageHeight: number;
+  motion: string | null;
   tags: string[];
   featured: boolean;
   audienceBadge: string;
   linkedinUrl: string;
   stats: ArticleStats;
+  framework: ArticleFrameworkItem[];
+  inputPack: string[];
+  reviewPrompts: string[];
+  decisionBoundary: string;
   caption: string;
 }
 
@@ -74,7 +89,13 @@ function mapPage(page: NotionPage): Article {
     title,
     hook: plain(p["Hook"]),
     date: p["Date"]?.date?.start ?? "",
+    sourceWeek: plain(p["Source Week"]),
+    series: plain(p["Series"]),
+    readTime: plain(p["Read Time"]) || "8 min read",
     image: image || null,
+    imageWidth: 1024,
+    imageHeight: 1536,
+    motion: plain(p["Motion"]) || null,
     tags: (p["Tags"]?.multi_select ?? []).map((option) => option.name),
     featured: p["Featured"]?.checkbox ?? false,
     audienceBadge: plain(p["Audience Badge"]),
@@ -86,6 +107,10 @@ function mapPage(page: NotionPage): Article {
       reposts: toNumber(p["Reposts"]),
       saves: toNumber(p["Saves"]),
     },
+    framework: [],
+    inputPack: [],
+    reviewPrompts: [],
+    decisionBoundary: plain(p["Decision Boundary"]),
     caption: plain(p["Caption"]),
   };
 }

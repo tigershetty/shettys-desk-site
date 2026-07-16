@@ -1,0 +1,5 @@
+sku,location,demand_pattern,adi,cv2,signal_freshness_days,response_window_days,lifecycle,recommended_cadence,routing_reason,trigger_signal,decision_supported,review_flag
+A100,TOR,SMOOTH,1.000,0.004,1,3,ACTIVE,SENSE FREQUENTLY,Daily POS moved materially and replenishment remains open,POS,REPLENISH,YES - LANE CHANGE
+C310,VAN,SMOOTH,1.000,0.002,7,45,ACTIVE,PLAN MONTHLY,Stable demand and longer capacity horizon do not require a near-term adjustment,ORDERS,CAPACITY,NO
+D440,MTL,INTERMITTENT,4.000,0.010,24,21,ACTIVE,SPECIAL METHOD / REVIEW,Long zero-demand gaps require intermittent-demand method review,ORDERS,METHOD CHOICE,YES - METHOD REVIEW
+F660,TOR,INTERMITTENT,1.500,0.443,2,14,PHASE-IN,SPECIAL METHOD / REVIEW,Phase-in history is not representative enough for a standard cadence,LAUNCH PLAN,ALLOCATION,YES - LIFECYCLE
