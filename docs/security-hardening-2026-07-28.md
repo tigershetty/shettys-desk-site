@@ -118,7 +118,7 @@ WAF rate limiting remains an optional additional control.
 - CSP/header checks: passed
 - Contact validation, origin, honeypot, size, and burst checks: passed
 - Revalidation method/fail-closed checks: passed
-- Vercel preview headers, CSP, favicon, and manifest: passed
+- Local final-build headers, CSP, favicon, and manifest: passed
 - Final-build visual check: passed locally with zero browser-console errors;
   the protected preview redirects unauthenticated browsers to Vercel login
 
