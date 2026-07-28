@@ -19,7 +19,7 @@ import ResourceDownload from "@/components/ResourceDownload";
 import { getResource } from "@/data/resources";
 
 const resource = getResource("demand-sensing-router")!;
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://shettysdesk.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tigershetty.com";
 
 export const metadata: Metadata = {
   title: "Demand Sensing Router | Shetty's Desk",

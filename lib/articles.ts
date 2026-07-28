@@ -1,3 +1,4 @@
+import "server-only";
 import localArticles from "@/data/articles.json";
 
 export interface ArticleStats {
@@ -84,10 +85,30 @@ function toNumber(prop: NotionProperty | undefined): number {
   return typeof prop?.number === "number" ? prop.number : 0;
 }
 
+function safeLocalAsset(value: string): string | null {
+  const trimmed = value.trim();
+  return trimmed.startsWith("/") && !trimmed.startsWith("//")
+    ? trimmed
+    : null;
+}
+
+function safePublicUrl(value: string | null | undefined): string {
+  const trimmed = value?.trim() ?? "";
+  if (!trimmed) return "";
+  if (trimmed.startsWith("/") && !trimmed.startsWith("//")) return trimmed;
+
+  try {
+    const parsed = new URL(trimmed);
+    return parsed.protocol === "https:" ? parsed.toString() : "";
+  } catch {
+    return "";
+  }
+}
+
 function mapPage(page: NotionPage): Article {
   const p = page.properties;
   const title = plain(p["Title"]);
-  const image = plain(p["Image"]);
+  const image = safeLocalAsset(plain(p["Image"]));
   return {
     slug: plain(p["Slug"]) || slugify(title),
     title,
@@ -96,15 +117,15 @@ function mapPage(page: NotionPage): Article {
     sourceWeek: plain(p["Source Week"]),
     series: plain(p["Series"]),
     readTime: plain(p["Read Time"]) || "8 min read",
-    image: image || null,
+    image,
     imageWidth: 1024,
     imageHeight: 1536,
-    motion: plain(p["Motion"]) || null,
-    motionMp4: plain(p["Motion MP4"]) || null,
+    motion: safeLocalAsset(plain(p["Motion"])),
+    motionMp4: safeLocalAsset(plain(p["Motion MP4"])),
     tags: (p["Tags"]?.multi_select ?? []).map((option) => option.name),
     featured: p["Featured"]?.checkbox ?? false,
     audienceBadge: plain(p["Audience Badge"]),
-    linkedinUrl: p["LinkedIn URL"]?.url ?? "",
+    linkedinUrl: safePublicUrl(p["LinkedIn URL"]?.url),
     stats: {
       impressions: toNumber(p["Impressions"]),
       reactions: toNumber(p["Reactions"]),
@@ -117,7 +138,7 @@ function mapPage(page: NotionPage): Article {
     reviewPrompts: [],
     decisionBoundary: plain(p["Decision Boundary"]),
     caption: plain(p["Caption"]),
-    resourceUrl: p["Resource URL"]?.url ?? undefined,
+    resourceUrl: safePublicUrl(p["Resource URL"]?.url) || undefined,
     resourceLabel: plain(p["Resource Label"]) || undefined,
     resourceDescription: plain(p["Resource Description"]) || undefined,
   };
