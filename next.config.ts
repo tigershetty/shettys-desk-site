@@ -24,6 +24,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // Keep a single public origin so links, cookies, and search indexing
+        // consistently use the secure www domain.
+        source: "/:path*",
+        has: [{ type: "host", value: "tigershetty.com" }],
+        destination: "https://www.tigershetty.com/:path*",
+        permanent: true,
+      },
+      {
         source: "/workshop",
         destination: "/approach",
         permanent: true,
