@@ -17,6 +17,7 @@ export default function ContactForm() {
   const [topic, setTopic] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState("");
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
@@ -29,7 +30,9 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic, email, message }),
+        body: JSON.stringify({ topic, email, message, company }),
+        cache: "no-store",
+        credentials: "same-origin",
       });
 
       if (res.ok) {
@@ -90,6 +93,18 @@ export default function ContactForm() {
           onSubmit={handleSubmit}
           className="space-y-4"
         >
+          <div className="absolute -left-[9999px]" aria-hidden="true">
+            <label htmlFor="company">Company</label>
+            <input
+              id="company"
+              name="company"
+              type="text"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -133,6 +148,7 @@ export default function ContactForm() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              maxLength={254}
               required
               placeholder="you@example.com"
               className={inputClasses}
@@ -154,6 +170,8 @@ export default function ContactForm() {
               id="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              minLength={10}
+              maxLength={4000}
               required
               rows={5}
               placeholder="What's on your mind?"

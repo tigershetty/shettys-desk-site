@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Source_Code_Pro } from "next/font/google";
 import "./globals.css";
@@ -26,11 +26,36 @@ const sourceCodePro = Source_Code_Pro({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://shettysdesk.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.tigershetty.com"
   ),
   title: "Shetty's Desk",
   description: "Supply chain, one breakdown at a time.",
+  icons: {
+    icon: [
+      {
+        url: "/images/favicon-mark-32.png",
+        type: "image/png",
+        sizes: "32x32",
+      },
+    ],
+    shortcut: "/images/favicon-mark-32.png",
+    apple: [
+      {
+        url: "/images/apple-touch-icon.png",
+        type: "image/png",
+        sizes: "180x180",
+      },
+    ],
+  },
 };
+
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#fffaf0",
+};
+
+// A fresh CSP nonce is generated for every page request in proxy.ts.
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,
