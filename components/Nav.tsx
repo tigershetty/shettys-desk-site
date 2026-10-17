@@ -10,6 +10,7 @@ import {
   BookOpen,
   PackageOpen,
   Mail,
+  FlaskConical,
 } from "lucide-react";
 
 interface NavItem {
@@ -25,6 +26,7 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
   "/experience": Briefcase,
   "/shettys-desk": BookOpen,
   "/contact": Mail,
+  "/lab/supply-chain-twin": FlaskConical,
 };
 
 export default function Nav({
