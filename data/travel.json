@@ -1,0 +1,41 @@
+{
+  "_source": "Compiled from airline booking confirmations (2016-2026) and approved by Poornajith. City-level only: no dates, booking references, or companions.",
+  "places": [
+    { "city": "Bangalore", "country": "India", "continent": "Asia", "lat": 12.97, "lng": 77.59, "kind": "home" },
+    { "city": "Malmö", "country": "Sweden", "continent": "Europe", "lat": 55.6, "lng": 13.0, "kind": "home" },
+
+    { "city": "Copenhagen", "country": "Denmark", "continent": "Europe", "lat": 55.68, "lng": 12.57, "kind": "visited" },
+    { "city": "Stockholm", "country": "Sweden", "continent": "Europe", "lat": 59.33, "lng": 18.07, "kind": "visited" },
+    { "city": "Gdańsk", "country": "Poland", "continent": "Europe", "lat": 54.35, "lng": 18.65, "kind": "visited" },
+    { "city": "London", "country": "United Kingdom", "continent": "Europe", "lat": 51.51, "lng": -0.13, "kind": "visited" },
+    { "city": "Amsterdam", "country": "Netherlands", "continent": "Europe", "lat": 52.37, "lng": 4.9, "kind": "visited" },
+    { "city": "Brussels", "country": "Belgium", "continent": "Europe", "lat": 50.85, "lng": 4.35, "kind": "visited" },
+    { "city": "Paris", "country": "France", "continent": "Europe", "lat": 48.86, "lng": 2.35, "kind": "visited" },
+    { "city": "Marseille", "country": "France", "continent": "Europe", "lat": 43.3, "lng": 5.37, "kind": "visited" },
+    { "city": "Nice", "country": "France", "continent": "Europe", "lat": 43.7, "lng": 7.27, "kind": "visited" },
+    { "city": "Geneva", "country": "Switzerland", "continent": "Europe", "lat": 46.2, "lng": 6.14, "kind": "visited" },
+    { "city": "Barcelona", "country": "Spain", "continent": "Europe", "lat": 41.39, "lng": 2.17, "kind": "visited" },
+    { "city": "Palma de Mallorca", "country": "Spain", "continent": "Europe", "lat": 39.57, "lng": 2.65, "kind": "visited" },
+    { "city": "Lisbon", "country": "Portugal", "continent": "Europe", "lat": 38.72, "lng": -9.14, "kind": "visited" },
+    { "city": "Funchal", "country": "Portugal", "continent": "Europe", "lat": 32.65, "lng": -16.91, "kind": "visited" },
+    { "city": "Venice", "country": "Italy", "continent": "Europe", "lat": 45.44, "lng": 12.32, "kind": "visited" },
+    { "city": "Trieste", "country": "Italy", "continent": "Europe", "lat": 45.65, "lng": 13.78, "kind": "visited" },
+    { "city": "Rome", "country": "Italy", "continent": "Europe", "lat": 41.9, "lng": 12.5, "kind": "visited" },
+    { "city": "Naples", "country": "Italy", "continent": "Europe", "lat": 40.85, "lng": 14.27, "kind": "visited" },
+    { "city": "Sardinia", "country": "Italy", "continent": "Europe", "lat": 40.92, "lng": 9.5, "kind": "visited" },
+    { "city": "Vienna", "country": "Austria", "continent": "Europe", "lat": 48.21, "lng": 16.37, "kind": "visited" },
+    { "city": "Podgorica", "country": "Montenegro", "continent": "Europe", "lat": 42.44, "lng": 19.26, "kind": "visited" },
+    { "city": "Tirana", "country": "Albania", "continent": "Europe", "lat": 41.33, "lng": 19.82, "kind": "visited" },
+    { "city": "Athens", "country": "Greece", "continent": "Europe", "lat": 37.98, "lng": 23.73, "kind": "visited" },
+    { "city": "Santorini", "country": "Greece", "continent": "Europe", "lat": 36.39, "lng": 25.46, "kind": "visited" },
+    { "city": "Toronto", "country": "Canada", "continent": "North America", "lat": 43.65, "lng": -79.38, "kind": "visited" },
+    { "city": "Singapore", "country": "Singapore", "continent": "Asia", "lat": 1.35, "lng": 103.82, "kind": "visited" },
+    { "city": "New Delhi", "country": "India", "continent": "Asia", "lat": 28.61, "lng": 77.21, "kind": "visited" },
+    { "city": "Goa", "country": "India", "continent": "Asia", "lat": 15.3, "lng": 74.12, "kind": "visited" },
+    { "city": "Mumbai", "country": "India", "continent": "Asia", "lat": 19.08, "lng": 72.88, "kind": "visited" },
+
+    { "city": "Doha", "country": "Qatar", "continent": "Asia", "lat": 25.29, "lng": 51.53, "kind": "transit" },
+    { "city": "Abu Dhabi", "country": "United Arab Emirates", "continent": "Asia", "lat": 24.45, "lng": 54.38, "kind": "transit" },
+    { "city": "Dubai", "country": "United Arab Emirates", "continent": "Asia", "lat": 25.2, "lng": 55.27, "kind": "transit" }
+  ]
+}
