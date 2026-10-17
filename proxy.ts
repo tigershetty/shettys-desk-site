@@ -14,10 +14,11 @@ export function proxy(request: NextRequest) {
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : " 'wasm-unsafe-eval'"};
     script-src-attr 'none';
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://prod.spline.design;
+    img-src 'self' blob: data: https://prod.spline.design https://i.scdn.co;
     media-src 'self' blob: https://prod.spline.design;
     font-src 'self' data:;
     connect-src ${connectSources};
+    frame-src https://open.spotify.com;
     worker-src 'self' blob:;
     object-src 'none';
     base-uri 'self';

@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TasteIsAllYouNeed } from "@/components/ui/taste-pong";
 import ControlTower from "@/components/ControlTower";
+import VinylPlayer from "@/components/VinylPlayer";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
@@ -126,45 +127,34 @@ export default function AboutPage() {
           <h2 className="font-semibold text-foreground">On Rotation</h2>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-3">
-          {/* Reading */}
-          <div>
-            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Reading</p>
-            <div className="space-y-3">
-              {onRotation.reading.map((item) => (
-                <div key={item.title} className="rounded-xl border border-border/50 p-3">
-                  <p className="text-sm font-medium text-foreground">{item.title}</p>
-                  <p className="text-xs text-muted-foreground">{item.author}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Listening */}
-          <div>
+        <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+          {/* Vinyl player: live Spotify top tracks, playlist fallback */}
+          <div className="rounded-2xl border border-border/60 p-4">
             <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Listening</p>
-            <div className="space-y-3">
-              {onRotation.listening.map((item) => (
-                <div key={item.title} className="rounded-xl border border-border/50 p-3">
-                  <p className="text-sm font-medium text-foreground">{item.title}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
-                </div>
-              ))}
-            </div>
+            <VinylPlayer />
           </div>
 
-          {/* Watching */}
-          <div>
-            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Watching</p>
-            <div className="space-y-3">
-              {onRotation.watching.map((item) => (
-                <div key={item.title} className="rounded-xl border border-border/50 p-3">
-                  <p className="text-sm font-medium text-foreground">{item.title}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
-                </div>
-              ))}
-            </div>
+          <div className="space-y-5">
+            {[
+              { label: "Reading", items: onRotation.reading },
+              { label: "Podcasts", items: onRotation.listening },
+              { label: "Watching", items: onRotation.watching },
+            ].map(({ label, items }) => (
+              <div key={label}>
+                <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">{label}</p>
+                <ul className="space-y-2">
+                  {items.map((item) => (
+                    <li key={item.title} className="rounded-xl border border-border/50 px-3 py-2">
+                      <p className="text-sm font-medium text-foreground">
+                        {item.title}
+                        {"author" in item && <span className="font-normal text-muted-foreground"> · {String(item.author)}</span>}
+                      </p>
+                      <p className="text-xs italic text-muted-foreground/70">{item.note}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
