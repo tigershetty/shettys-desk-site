@@ -1,11 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TasteIsAllYouNeed } from "@/components/ui/taste-pong";
-import BeliefCard from "@/components/BeliefCard";
+import ControlTower from "@/components/ControlTower";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
 import JourneyBoard from "@/components/JourneyBoard";
-import beliefs from "@/data/beliefs.json";
 import siteData from "@/data/site.json";
 
 const onRotation = {
@@ -21,29 +20,6 @@ const onRotation = {
     { title: "How I Built This", note: "Founder stories, operational lessons" },
   ],
 };
-
-const workingWithMe = [
-  {
-    icon: "📐",
-    title: "I default to structure",
-    body: "I think in frameworks and systems. If something can be structured, I'll structure it before discussing it.",
-  },
-  {
-    icon: "🎯",
-    title: "I lead with questions",
-    body: "My first instinct in any room is to ask what problem we're actually solving. Not what tool we're buying.",
-  },
-  {
-    icon: "📝",
-    title: "I write to think",
-    body: "LinkedIn posts, internal documents, this site. Writing is how I process complex topics and test whether I actually understand them.",
-  },
-  {
-    icon: "🤝",
-    title: "I value directness",
-    body: "Say what you mean. Disagree openly. I'd rather have an honest 'no' than a polite delay.",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -136,43 +112,8 @@ export default function AboutPage() {
         <JourneyBoard />
       </div>
 
-      {/* Working With Me */}
-      <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          Working with me
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {workingWithMe.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-sm"
-            >
-              <div className="mb-2 flex items-center gap-2.5">
-                <span className="text-lg">{item.icon}</span>
-                <h3 className="font-medium text-foreground">{item.title}</h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Beliefs in grid */}
-      <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          What I believe
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {beliefs.map((belief, i) => (
-            <BeliefCard
-              key={belief.title}
-              title={belief.title}
-              body={belief.body}
-              index={i}
-            />
-          ))}
-        </div>
-      </section>
+      {/* Control tower: career KPIs, network, capabilities */}
+      <ControlTower />
 
       {/* On Rotation */}
       <section className="mb-12 rounded-3xl border border-border bg-card p-6">
