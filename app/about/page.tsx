@@ -4,7 +4,7 @@ import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
-import BoardingPass from "@/components/BoardingPass";
+import JourneyBoard from "@/components/JourneyBoard";
 import beliefs from "@/data/beliefs.json";
 import siteData from "@/data/site.json";
 
@@ -128,13 +128,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Globe - places I've lived */}
+      {/* Globe - places I've travelled */}
       <GlobeSection />
 
-      {/* Boarding Pass */}
-      <section className="mb-12">
-        <BoardingPass />
-      </section>
+      {/* Journey: departures board / metro map */}
+      <div className="mb-12">
+        <JourneyBoard />
+      </div>
 
       {/* Working With Me */}
       <section className="mb-12">
