@@ -34,8 +34,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // My Approach was folded into the Resources method strip.
+        source: "/approach",
+        destination: "/resources#method",
+        permanent: true,
+      },
+      {
         source: "/workshop",
-        destination: "/approach",
+        destination: "/resources#method",
         permanent: true,
       },
     ];

@@ -143,7 +143,7 @@ interface Paddle {
   isVertical: boolean
 }
 
-export function PromptingIsAllYouNeed() {
+export function TasteIsAllYouNeed() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pixelsRef = useRef<Pixel[]>([])
   const ballRef = useRef<Ball>({ x: 0, y: 0, dx: 0, dy: 0, radius: 0 })
@@ -174,7 +174,7 @@ export function PromptingIsAllYouNeed() {
       const SMALL_PIXEL_SIZE = 4 * scale
 
       pixelsRef.current = []
-      const words = ["PROMPTING", "IS ALL YOU NEED"]
+      const words = ["TASTE", "IS ALL YOU NEED"]
 
       const calculateWordWidth = (word: string, pixelSize: number) => {
         return (
@@ -421,9 +421,9 @@ export function PromptingIsAllYouNeed() {
     <canvas
       ref={canvasRef}
       className="block h-full w-full"
-      aria-label="Prompting Is All You Need: a tiny Pong game spelling out the words in pixels"
+      aria-label="Taste Is All You Need: a tiny Pong game spelling out the words in pixels"
     />
   )
 }
 
-export default PromptingIsAllYouNeed
+export default TasteIsAllYouNeed

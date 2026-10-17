@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { PromptingIsAllYouNeed } from "@/components/ui/prompting-pong";
+import { TasteIsAllYouNeed } from "@/components/ui/taste-pong";
 import BeliefCard from "@/components/BeliefCard";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
@@ -84,10 +84,10 @@ export default function AboutPage() {
           </a>
         </div>
 
-        {/* Tiny themed Pong that spells "Prompting is all you need" */}
+        {/* Tiny themed Pong that spells "Taste is all you need" */}
         <div className="w-full sm:ml-auto sm:w-[32.5rem]">
           <div className="relative h-[16.25rem] w-full overflow-hidden rounded-xl border border-border shadow-sm">
-            <PromptingIsAllYouNeed />
+            <TasteIsAllYouNeed />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download, PackageOpen, Sparkles } from "lucide-react";
+import ApproachFlow from "@/components/ApproachFlow";
 import { resources } from "@/data/resources";
 
 export const metadata: Metadata = {
@@ -13,16 +14,16 @@ export const metadata: Metadata = {
 export default function ResourcesPage() {
   return (
     <div className="mx-auto w-full max-w-6xl">
-      <header className="max-w-3xl pb-9 pt-2">
+      <header className="max-w-3xl pb-7 pt-2">
         <div className="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
           <PackageOpen className="h-4 w-4" aria-hidden />
           Shetty&apos;s Desk workflow packs
         </div>
-        <h1 className="text-4xl font-bold leading-tight text-foreground sm:text-5xl">
+        <h1 className="text-3xl font-bold leading-tight text-foreground sm:text-5xl">
           Take the artifact. Build the workflow.
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Free, versioned resources that turn supply-chain ideas into planner-reviewable tools. Each pack includes the method, sample data, expected outputs, and the controls needed to challenge the result.
+          Free, versioned packs with the method, sample data, and expected output. No email required.
         </p>
       </header>
 
@@ -32,7 +33,7 @@ export default function ResourcesPage() {
             Available now
           </h2>
           <span className="text-sm text-muted-foreground">
-            {resources.length} complete pack
+            {resources.length} {resources.length === 1 ? "pack" : "packs"}
           </span>
         </div>
 
@@ -89,18 +90,15 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="mt-6 border-y border-border py-8">
-        <div className="grid gap-6 sm:grid-cols-3">
-          {[
-            ["Built to run", "Not a screenshot or isolated prompt. Every pack includes a working method and an expected output."],
-            ["Planner-reviewable", "AI prepares the evidence and artifact. The operating decision remains visible and owned."],
-            ["Versioned in public", "Each release records what changed, which assumptions matter, and when the method was tested."],
-          ].map(([title, copy]) => (
-            <div key={title}>
-              <h3 className="font-semibold text-foreground">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{copy}</p>
-            </div>
-          ))}
+      <section id="method" aria-labelledby="method-heading" className="scroll-mt-20 border-t border-border py-8">
+        <h2 id="method-heading" className="text-xl font-bold text-foreground">
+          How these get made
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          The same six steps behind every post and pack. AI handles the repetition; the judgment and the final approval stay with me.
+        </p>
+        <div className="mt-5">
+          <ApproachFlow />
         </div>
       </section>
     </div>

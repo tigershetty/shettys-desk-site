@@ -56,14 +56,16 @@ export default async function Home() {
         />
       </div>
 
-      {/* Secondary articles - 4 compact cards */}
-      {secondary.map((article) => (
-        <div key={article.slug} className="lg:col-span-1">
-          <Reveal>
-            <ArticleCard article={article} bento />
-          </Reveal>
-        </div>
-      ))}
+      {/* Secondary articles: swipeable row on mobile, 4-up grid on desktop */}
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 lg:col-span-4 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0">
+        {secondary.map((article) => (
+          <div key={article.slug} className="w-[80%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
+            <Reveal className="h-full">
+              <ArticleCard article={article} bento />
+            </Reveal>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
