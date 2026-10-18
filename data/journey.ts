@@ -215,7 +215,7 @@ export const milestones: Milestone[] = [
     place: "Digital twin · network modelling",
     code: "LAB",
     status: "SCHEDULED",
-    summary: "A playable 3D supply-chain digital twin: simulate disruptions, compare policies and watch the KPIs move in real time.",
+    summary: "A playable 3D supply chain game: run five European sites for a shift, dock trucks, keep forklifts charged and handle incidents while the KPIs move live.",
     metrics: ["In development"],
   },
 ];

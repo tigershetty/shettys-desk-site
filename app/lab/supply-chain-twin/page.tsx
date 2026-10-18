@@ -1,46 +1,51 @@
 import type { Metadata } from "next";
-import TwinLab from "@/components/twin/TwinLab";
+import CommandApp from "@/components/command/CommandApp";
 
 export const metadata: Metadata = {
-  title: "Supply Chain Twin Lab | Shetty's Desk",
+  title: "Supply Chain Command | Shetty's Desk",
   description:
-    "A playable supply chain digital twin: simulate supplier outages, demand spikes and port closures, compare replenishment policies with Monte Carlo, and watch fill rate, cost and CO2 react in real time.",
+    "A playable 3D supply chain game: run five European sites for one shift. Dock trucks, keep forklifts charged, accept or rush customer orders, and handle incidents while stock, bays and on-time delivery update live.",
 };
 
-export default function SupplyChainTwinPage() {
+export default function SupplyChainCommandPage() {
   return (
-    <article className="mx-auto w-full max-w-6xl">
-      <header className="max-w-3xl pb-6">
-        <p className="text-sm font-semibold text-primary">Lab · V1</p>
-        <h1 className="mt-2 text-3xl font-bold leading-tight text-foreground sm:text-5xl">Supply Chain Twin</h1>
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-          A live digital twin of a two-echelon network: suppliers, plants, distribution centres and markets. Break it with a
-          disruption, change the policy or the parameters while it runs, and see what it does to service, cost and carbon.
+    <article className="mx-auto w-full max-w-[1600px]">
+      <header className="flex flex-col gap-1 pb-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold text-primary">Lab · playable</p>
+          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl">Supply Chain Command</h1>
+        </div>
+        <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+          Industrial software that plays like a strategy game. Five sites, one shift, live trucks, forklifts and orders. Click
+          anything to inspect it.
         </p>
       </header>
 
-      <TwinLab />
+      <CommandApp />
 
-      <section className="mt-10 grid gap-6 border-t border-border pt-8 text-sm leading-relaxed text-muted-foreground md:grid-cols-3" aria-labelledby="method-heading">
+      <section className="mt-10 grid gap-6 border-t border-border pt-8 text-sm leading-relaxed text-muted-foreground md:grid-cols-3" aria-labelledby="how-heading">
         <div>
-          <h2 id="method-heading" className="font-semibold text-foreground">How it works</h2>
+          <h2 id="how-heading" className="font-semibold text-foreground">The network</h2>
           <p className="mt-2">
-            A discrete-event simulation with a daily clock. Shipments are scheduled events; markets draw demand from a normal
-            distribution; plants are capacity- and component-constrained; every run is seeded and reproducible.
+            A Lund plant feeds DCs in Hamburg and Milan. Rotterdam is the cold-chain port for the Asia sea lane, and Gdańsk
+            cross-docks for the Baltic. Each site has its own bays, forklift fleet, chargers and stock. Every figure is
+            synthetic.
           </p>
         </div>
         <div>
-          <h2 className="font-semibold text-foreground">Policies</h2>
+          <h2 className="font-semibold text-foreground">How it is built</h2>
           <p className="mt-2">
-            (s, Q) reorders a batch at a reorder point, (R, S) reviews weekly and orders up to a target, and expedite adds air
-            spot-buys when component cover is about to run out. Monte Carlo compares them on identical seeds.
+            A typed world model and a seeded simulation run in a Zustand store that ticks ten times a second. The React Three
+            Fiber scene only reads from that store, and so does the interface around it, so the 3D layer stays display-only and
+            the rules are unit-tested on their own. The canvas renders on the client; this text renders on the server.
           </p>
         </div>
         <div>
           <h2 className="font-semibold text-foreground">Limits</h2>
           <p className="mt-2">
-            Synthetic, illustrative network with one product and a 1:1 bill of materials. It teaches the dynamics of buffers,
-            lead time and recovery; it is not a planning tool. Optimisation and multi-SKU come in later versions.
+            It is a game, not a planning tool. Travel and handling times are compressed so that an eight-hour shift fits into
+            about eight minutes, and there is one pallet type per SKU. Credit for the format goes to Dilum Sanjaya&apos;s
+            WareTrack demo.
           </p>
         </div>
       </section>
