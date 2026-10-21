@@ -215,7 +215,7 @@ export const milestones: Milestone[] = [
     place: "Digital twin · network modelling",
     code: "LAB",
     status: "SCHEDULED",
-    summary: "One Quarter: run a supply chain for 13 weeks through four crises, graded on service, profit, cash and resilience, with a what-if replay of every choice.",
+    summary: "A playable 3D supply chain game: run five European sites for a shift, dock trucks, keep forklifts charged and handle incidents while the KPIs move live.",
     metrics: ["In development"],
   },
 ];
