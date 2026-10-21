@@ -1,34 +1,13 @@
 "use client";
 
-import type { ThreeEvent } from "@react-three/fiber";
 import { memo, useMemo } from "react";
-import { useShallow } from "zustand/react/shallow";
-import { siteById } from "@/lib/command/data";
+import { siteById, stagedPallets } from "@/lib/command/data";
 import { layouts, ROAD_Z } from "@/lib/command/layout";
-import { useCommand } from "@/lib/command/store";
-import type { Selection, SiteId } from "@/lib/command/types";
+import type { SiteId } from "@/lib/command/types";
 import { Instances, type Inst } from "./Instances";
 import { C, corrugatedTexture, signTexture } from "./look";
 
 const H = 7;
-
-export function clickSelect(sel: Selection) {
-  return (e: ThreeEvent<MouseEvent>) => {
-    e.stopPropagation();
-    if (e.delta > 6) return;
-    useCommand.getState().select(sel);
-  };
-}
-
-export const hover = {
-  onPointerOver: (e: ThreeEvent<PointerEvent>) => {
-    e.stopPropagation();
-    document.body.style.cursor = "pointer";
-  },
-  onPointerOut: () => {
-    document.body.style.cursor = "";
-  },
-};
 
 function useStatic(site: SiteId, lite: boolean) {
   return useMemo(() => {
@@ -115,16 +94,15 @@ function Building({ site }: { site: SiteId }) {
   const whiteRoof = def.type === "cold" || def.type === "robotics";
   const h = def.type === "cold" ? H + 1 : H;
   const sign = useMemo(() => signTexture(def.name, `${def.id} · ${def.typeLabel}`), [def]);
-  const wallClick = clickSelect({ kind: "site", id: site });
 
   return (
     <group>
-      <mesh position={[0, h / 2, l.centerZ]} castShadow receiveShadow onClick={wallClick} {...hover}>
+      <mesh position={[0, h / 2, l.centerZ]} castShadow receiveShadow>
         <boxGeometry args={[l.width, h, l.depth]} />
         <meshStandardMaterial color={C.wall} map={tex ?? undefined} roughness={0.8} />
       </mesh>
       {/* Roof slab and trim */}
-      <mesh position={[0, h + 0.2, l.centerZ]} castShadow onClick={wallClick}>
+      <mesh position={[0, h + 0.2, l.centerZ]} castShadow>
         <boxGeometry args={[l.width + 0.8, 0.4, l.depth + 0.8]} />
         <meshStandardMaterial color={whiteRoof ? C.white : C.roof} roughness={0.7} />
       </mesh>
@@ -180,11 +158,10 @@ function Dock({ site, index }: { site: SiteId; index: number }) {
   const l = layouts[site];
   const x = l.dockX[index];
   const f = l.frontZ;
-  const id = `${site}-D${index + 1}`;
-  const status: string = useCommand((s) => s.docks[id]?.status ?? "locked");
+  // The yard is a read-only stage: open bays are busy or free, spare slots stay shut.
+  const status: string = index >= siteById[site].docks ? "locked" : index % 2 === 0 ? "busy" : "available";
   const open = status === "available" || status === "busy";
   const light = status === "available" ? C.green : status === "busy" ? C.amber : status === "out" ? C.red : "#9ca3af";
-  const select = clickSelect({ kind: "dock", id });
   return (
     <group position={[x, 0, f]}>
       {/* frame */}
@@ -199,7 +176,7 @@ function Dock({ site, index }: { site: SiteId; index: number }) {
         <meshStandardMaterial color={C.roof} />
       </mesh>
       {/* opening or closed shutter */}
-      <mesh position={[0, 2.1, 0.02]} onClick={status === "locked" ? undefined : select} {...(status === "locked" ? {} : hover)}>
+      <mesh position={[0, 2.1, 0.02]}>
         <planeGeometry args={[3.5, 4.1]} />
         <meshStandardMaterial color={open ? C.doorDark : "#c3c8d4"} roughness={0.9} />
       </mesh>
@@ -235,15 +212,13 @@ function Dock({ site, index }: { site: SiteId; index: number }) {
 }
 
 function StagedPallets({ site }: { site: SiteId }) {
-  const ids = useCommand(useShallow((s) => Object.values(s.pallets).filter((p) => p.site === site).map((p) => p.id)));
-  const pallets = useCommand.getState().pallets;
+  const slots = layouts[site].staging;
   return (
     <>
-      {ids.map((id) => {
-        const p = pallets[id];
-        if (!p) return null;
+      {stagedPallets[site].map((p, i) => {
+        const slot = slots[i * 2 + 1];
         return (
-          <group key={id} position={[p.slot[0], 0, p.slot[1]]} onClick={clickSelect({ kind: "pallet", id })} {...hover}>
+          <group key={p.lot} position={[slot[0], 0, slot[1]]}>
             <mesh position={[0, 0.08, 0]} castShadow>
               <boxGeometry args={[1.2, 0.16, 1.2]} />
               <meshStandardMaterial color={C.wood} />
@@ -282,13 +257,13 @@ export function Pin({ y }: { y: number }) {
 function Chargers({ site }: { site: SiteId }) {
   const def = siteById[site];
   const l = layouts[site];
-  const busy = useCommand(useShallow((s) => Array.from({ length: def.chargers }, (_, i) => !!s.chargers[`${site}-C${i + 1}`]?.forklift)));
+  const busy = Array.from({ length: def.chargers }, (_, i) => i === 0);
   return (
     <>
       {busy.map((inUse, i) => {
         const [x, z] = l.chargers[i];
         return (
-          <group key={i} position={[x, 0, z]} onClick={clickSelect({ kind: "charger", id: `${site}-C${i + 1}` })} {...hover}>
+          <group key={i} position={[x, 0, z]}>
             <mesh position={[0, 0.9, 0]} castShadow>
               <boxGeometry args={[0.7, 1.8, 0.5]} />
               <meshStandardMaterial color={C.white} />

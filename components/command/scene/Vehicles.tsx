@@ -1,25 +1,12 @@
 "use client";
 
 import { useFrame } from "@react-three/fiber";
-import { memo, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import type { Group } from "three";
-import { useShallow } from "zustand/react/shallow";
-import { carriers } from "@/lib/command/data";
-import { forkliftPose, truckPose } from "@/lib/command/poses";
-import { useCommand } from "@/lib/command/store";
+import { carriers, siteById } from "@/lib/command/data";
+import { dockInsidePoint, dockPaths, dockWorkPoint, layouts } from "@/lib/command/layout";
 import type { Carrier, SiteId } from "@/lib/command/types";
 import { C, liveryTexture } from "./look";
-import { clickSelect, hover } from "./Yard";
-
-// Vehicles are display-only: each one reads its pose from the store every
-// frame instead of re-rendering React on every simulation tick.
-
-function smoothAngle(from: number, to: number, k: number) {
-  let d = to - from;
-  while (d > Math.PI) d -= Math.PI * 2;
-  while (d < -Math.PI) d += Math.PI * 2;
-  return from + d * k;
-}
 
 export function TruckModel({ carrier }: { carrier: Carrier }) {
   const c = carriers[carrier];
@@ -67,31 +54,6 @@ export function TruckModel({ carrier }: { carrier: Carrier }) {
     </group>
   );
 }
-
-const Truck = memo(function Truck({ id }: { id: string }) {
-  const ref = useRef<Group>(null);
-  const carrier = useCommand((s) => s.trucks[id]?.carrier ?? "house");
-  const first = useRef(true);
-  useFrame((_, dt) => {
-    const g = ref.current;
-    const w = useCommand.getState();
-    const t = w.trucks[id];
-    if (!g || !t) return;
-    const p = truckPose(w, t);
-    g.visible = p.visible;
-    if (!p.visible) return;
-    const k = first.current ? 1 : 1 - Math.exp(-dt * 10);
-    first.current = false;
-    g.position.x += (p.x - g.position.x) * k;
-    g.position.z += (p.z - g.position.z) * k;
-    g.rotation.y = smoothAngle(g.rotation.y, p.heading, k);
-  });
-  return (
-    <group ref={ref} visible={false} onClick={clickSelect({ kind: "truck", id })} {...hover}>
-      <TruckModel carrier={carrier} />
-    </group>
-  );
-});
 
 export function ForkliftModel({ carrying }: { carrying: boolean }) {
   return (
@@ -164,42 +126,51 @@ export function ForkliftModel({ carrying }: { carrying: boolean }) {
   );
 }
 
-const Forklift = memo(function Forklift({ id }: { id: string }) {
-  const ref = useRef<Group>(null);
-  const carrying = useCommand((s) => s.forklifts[id]?.carrying ?? false);
-  const first = useRef(true);
-  useFrame((_, dt) => {
-    const g = ref.current;
-    const f = useCommand.getState().forklifts[id];
-    if (!g || !f) return;
-    const p = forkliftPose(f);
-    const k = first.current ? 1 : 1 - Math.exp(-dt * 14);
-    first.current = false;
-    g.position.x += (p.x - g.position.x) * k;
-    g.position.z += (p.z - g.position.z) * k;
-    if (f.t < 1 || first.current) g.rotation.y = smoothAngle(g.rotation.y, p.heading, Math.min(1, k * 1.2));
+/** Ambient life for a drilled-in yard: docked trucks and forklifts shuttling pallets. No game state. */
+export function AmbientYard({ site }: { site: SiteId }) {
+  const def = siteById[site];
+  const l = layouts[site];
+  const o = def.origin;
+  const lifts = useRef<(Group | null)[]>([]);
+  const carriersList = ["house", "nordline", "cargovia", "bluepeak"] as const;
+  const docked = l.dockX.slice(0, def.docks).map((_, i) => i).filter((i) => i % 2 === 0);
+  useFrame(({ clock }) => {
+    docked.forEach((d, i) => {
+      const g = lifts.current[i];
+      if (!g) return;
+      const a = dockWorkPoint(site, d);
+      const b = dockInsidePoint(site, d, i);
+      const t = (clock.elapsedTime * 0.25 + i * 0.37) % 2;
+      const u = t < 1 ? t : 2 - t;
+      const e = u * u * (3 - 2 * u);
+      g.position.set(o[0] + a[0] + (b[0] - a[0]) * e, 0, o[1] + a[1] + (b[1] - a[1]) * e);
+      g.rotation.y = Math.atan2(b[0] - a[0], b[1] - a[1]) + (t < 1 ? 0 : Math.PI);
+    });
   });
   return (
-    <group ref={ref} onClick={clickSelect({ kind: "forklift", id })} {...hover}>
-      <ForkliftModel carrying={carrying} />
-    </group>
-  );
-});
-
-/** Vehicles for the sites near the camera. */
-export function Vehicles({ sites }: { sites: SiteId[] }) {
-  const key = sites.join(",");
-  const trucks = useCommand(
-    useShallow((s) => Object.values(s.trucks).filter((t) => key.includes(t.site) && t.phase !== "enroute" && t.phase !== "gone").map((t) => t.id))
-  );
-  const forklifts = useCommand(useShallow((s) => Object.values(s.forklifts).filter((f) => key.includes(f.site)).map((f) => f.id)));
-  return (
     <>
-      {trucks.map((id) => (
-        <Truck key={id} id={id} />
+      {docked.map((d) => {
+        const p = dockPaths[site][d].docked;
+        return (
+          <group key={`t${d}`} position={[o[0] + p[0], 0, o[1] + p[1]]}>
+            <TruckModel carrier={carriersList[(d + site.charCodeAt(0)) % 4]} />
+          </group>
+        );
+      })}
+      {docked.map((d, i) => (
+        <group
+          key={`f${d}`}
+          ref={(g) => {
+            lifts.current[i] = g;
+          }}
+        >
+          <ForkliftModel carrying={i % 2 === 0} />
+        </group>
       ))}
-      {forklifts.map((id) => (
-        <Forklift key={id} id={id} />
+      {l.forkliftHome.slice(0, Math.max(0, def.forklifts - docked.length)).map(([x, z], i) => (
+        <group key={`p${i}`} position={[o[0] + x, 0, o[1] + z]} rotation={[0, Math.PI, 0]}>
+          <ForkliftModel carrying={false} />
+        </group>
       ))}
     </>
   );
