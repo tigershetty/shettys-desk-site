@@ -1,6 +1,6 @@
 import HeroBento from "@/components/HeroBento";
 import ArticleCard from "@/components/ArticleCard";
-import StatsGrid from "@/components/StatsGrid";
+import ShippingManifest from "@/components/ShippingManifest";
 import RadarSection from "@/components/RadarSection";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
@@ -34,7 +34,7 @@ export default async function Home() {
       <div className="lg:col-span-2">
         <Reveal>
           <FolderCard label="My numbers" color="amber">
-            <StatsGrid bare />
+            <ShippingManifest />
           </FolderCard>
         </Reveal>
       </div>
