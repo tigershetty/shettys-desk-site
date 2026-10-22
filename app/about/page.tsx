@@ -6,6 +6,7 @@ import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
 import JourneyBoard from "@/components/JourneyBoard";
+import Bookshelf from "@/components/bookshelf/Bookshelf";
 import siteData from "@/data/site.json";
 
 const onRotation = {
@@ -140,7 +141,6 @@ export default function AboutPage() {
 
           <div className="space-y-5">
             {[
-              { label: "Reading", items: onRotation.reading },
               { label: "Watching", items: onRotation.watching },
             ].map(({ label, items }) => (
               <div key={label}>
@@ -160,6 +160,15 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Books I love, on a shelf you can browse */}
+      <section className="mb-12 rounded-3xl border border-border bg-card p-6" aria-labelledby="shelf-heading">
+        <div className="mb-4">
+          <h2 id="shelf-heading" className="font-semibold text-foreground">On the shelf</h2>
+          <p className="text-xs text-muted-foreground">Books I love. Pick one off the shelf to see the front, the back and what it&apos;s about.</p>
+        </div>
+        <Bookshelf />
       </section>
     </>
   );
