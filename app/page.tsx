@@ -5,6 +5,7 @@ import RadarSection from "@/components/RadarSection";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
 import FolderCard from "@/components/FolderCard";
+import DeskFolders from "@/components/DeskFolders";
 import { getArticles } from "@/lib/articles";
 
 export const revalidate = 600;
@@ -19,6 +20,11 @@ export default async function Home() {
       {/* Hero - full width */}
       <div className="lg:col-span-4">
         <HeroBento />
+      </div>
+
+      {/* Glass folders on the desk: navigation into the site */}
+      <div className="min-w-0 lg:col-span-4">
+        <DeskFolders articles={articles.map((a) => ({ slug: a.slug, title: a.title, date: a.date }))} />
       </div>
 
       {/* Latest articles - folder */}
