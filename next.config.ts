@@ -34,14 +34,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        // My Approach was folded into the Resources method strip.
+        // My Approach lives on as the method strip on the Shetty's Desk page.
         source: "/approach",
-        destination: "/resources#method",
+        destination: "/shettys-desk#method",
         permanent: true,
       },
       {
         source: "/workshop",
-        destination: "/resources#method",
+        destination: "/shettys-desk#method",
         permanent: true,
       },
     ];
