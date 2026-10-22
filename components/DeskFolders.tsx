@@ -54,7 +54,7 @@ export default function DeskFolders({ articles }: Props) {
           </div>
         ))}
       </div>
-      <p className="mt-1 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Hover to lean · click to open · pick a file</p>
+      <p className="mt-1 text-center text-xs text-muted-foreground">Open a folder to see what’s inside.</p>
     </section>
   );
 }

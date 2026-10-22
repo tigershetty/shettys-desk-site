@@ -42,20 +42,20 @@ export default function FolderCard({ label, color = "indigo", children, classNam
       </div>
 
       {/* tab, sitting on the artwork */}
-      <div className="relative z-10 px-3 py-2.5">
-        <span className="inline-flex items-center gap-2 rounded-full bg-[#0b0b1a]/55 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-md">
-        <svg className="h-3.5 w-3.5 opacity-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
-        </svg>
-        {label}
+      <div className="relative z-10 px-5 pb-2.5 pt-3">
+        <span className={cn("inline-flex items-center gap-2 text-sm font-medium", color === "dark" ? "text-white" : "text-foreground/80")}>
+          <svg className="h-4 w-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+          </svg>
+          {label}
         </span>
       </div>
 
       {/* frosted front panel, hinged on its bottom edge */}
       <div
         className={cn(
-          "relative z-10 mx-1.5 mb-1.5 flex-1 origin-bottom rounded-[24px] border border-white/70 bg-white/[0.86] p-5 backdrop-blur-xl backdrop-saturate-150",
-          "shadow-[inset_0_1px_0_rgba(255,255,255,.95),0_18px_40px_-18px_rgba(15,10,60,.45)]",
+          "relative z-10 mx-1.5 mb-1.5 flex-1 origin-bottom rounded-[24px] border border-white/70 bg-white/[0.9] p-5 backdrop-blur-xl backdrop-saturate-150",
+          "shadow-[inset_0_1px_0_rgba(255,255,255,.95),0_12px_32px_-20px_rgba(30,27,75,.35)]",
           "transition-transform duration-700 ease-[cubic-bezier(.34,1.36,.5,1)] group-hover:[transform:rotateX(3deg)_translateY(-2px)] motion-reduce:transition-none"
         )}
       >
