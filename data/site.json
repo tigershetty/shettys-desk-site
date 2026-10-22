@@ -9,8 +9,7 @@
       { "label": "Published Posts", "href": "/articles" },
       { "label": "Resources", "href": "/resources" },
       { "label": "About Me", "href": "/about" },
-      { "label": "Experience", "href": "/experience" },
-      { "label": "Twin Lab", "href": "/lab/supply-chain-twin" }
+      { "label": "Experience", "href": "/experience" }
     ],
     "secondary": [
       { "label": "Shetty's Desk", "href": "/shettys-desk" },

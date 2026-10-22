@@ -75,10 +75,14 @@ export default function AboutPage() {
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
             Originally from Bangalore. Moved to Sweden for a master&apos;s in
-            Logistics &amp; Supply Chain at Lund University, and stayed. I&apos;ve
-            spent 7+ years at Tetra Pak, starting as a thesis student and now
-            managing replenishment for capital equipment supply chains worth 180M+
-            euros annually.
+            Logistics &amp; Supply Chain Management at Lund University, and
+            stayed. I&apos;ve spent 7+ years at Tetra Pak, starting as a thesis
+            student. Today I&apos;m Replenishment Manager in the Services Supply
+            Network, leading a team of ten purchasing and sourcing specialists who
+            keep 150,000+ spare parts moving to customers worldwide: 450M+ euros a
+            year, across 1,000+ suppliers. Before that I spent four years in
+            supply planning for capital equipment, leading a team across Sweden,
+            Italy and China.
           </p>
           <p>
             Supply chain decisions go wrong not because the data wasn&apos;t
@@ -137,7 +141,6 @@ export default function AboutPage() {
           <div className="space-y-5">
             {[
               { label: "Reading", items: onRotation.reading },
-              { label: "Podcasts", items: onRotation.listening },
               { label: "Watching", items: onRotation.watching },
             ].map(({ label, items }) => (
               <div key={label}>
