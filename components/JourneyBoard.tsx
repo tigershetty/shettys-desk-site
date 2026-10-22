@@ -29,11 +29,11 @@ const END = 2027.7;
 function Board({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 text-neutral-100 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.6)]">
-      <div className="flex items-center justify-between border-b border-neutral-800 px-4 py-3">
-        <SplitFlap text="Departures" className="text-sm sm:text-base" />
+      <div className="flex items-center justify-between border-b border-neutral-800 px-4 py-4 sm:px-6">
+        <SplitFlap text="Departures" className="text-lg sm:text-2xl" />
         <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">BLR → MMX → ∞</span>
       </div>
-      <div className="hidden grid-cols-[72px_1fr_64px_120px] gap-3 border-b border-neutral-800 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500 sm:grid">
+      <div className="hidden grid-cols-[92px_1fr_80px_150px] gap-4 border-b border-neutral-800 px-6 py-2.5 font-mono text-[11px] uppercase tracking-widest text-neutral-500 sm:grid">
         <span>Time</span>
         <span>Destination</span>
         <span>Gate</span>
@@ -49,19 +49,19 @@ function Board({ selected, onSelect }: { selected: string; onSelect: (id: string
                 onClick={() => onSelect(m.id)}
                 aria-pressed={active}
                 className={cn(
-                  "grid w-full grid-cols-[64px_1fr_auto] items-center gap-3 border-b border-neutral-900 px-4 py-2.5 text-left font-mono text-xs transition-colors sm:grid-cols-[72px_1fr_64px_120px]",
+                  "grid w-full grid-cols-[64px_1fr_auto] items-center gap-3 border-b border-neutral-900 px-4 py-3.5 text-left font-mono text-sm transition-colors sm:grid-cols-[92px_1fr_80px_150px] sm:gap-4 sm:px-6 sm:py-4 sm:text-base",
                   active ? "bg-neutral-800/80" : "hover:bg-neutral-900"
                 )}
               >
                 <span className="text-amber-300">{m.time}</span>
                 <span className="min-w-0">
-                  <span className="block truncate uppercase text-neutral-100">{m.destination}</span>
-                  <span className="block truncate text-[10px] text-neutral-500 sm:hidden">{lines[m.line].gate} · {m.status}</span>
+                  <span className="block truncate uppercase text-neutral-100 sm:whitespace-normal">{m.destination}</span>
+                  <span className="block truncate text-[11px] text-neutral-500 sm:hidden">{lines[m.line].gate} · {m.status}</span>
                 </span>
                 <span className="hidden sm:inline" style={{ color: lines[m.line].color }}>
                   {lines[m.line].gate}
                 </span>
-                <span className={cn("hidden text-right text-[11px] sm:inline", statusStyle[m.status])}>{m.status}</span>
+                <span className={cn("hidden text-right text-xs tracking-wider sm:inline", statusStyle[m.status])}>{m.status}</span>
                 <span className="text-neutral-600 sm:hidden" aria-hidden>›</span>
               </button>
             </li>
@@ -230,8 +230,8 @@ function Detail({ m }: { m: Milestone }) {
  * Career journey as a split-flap departures board or a four-line metro map.
  * Both views share one selection and a flap-animated detail card.
  */
-export default function JourneyBoard() {
-  const [view, setView] = useState<"board" | "metro">("board");
+export default function JourneyBoard({ views = ["board", "metro"] }: { views?: ("board" | "metro")[] }) {
+  const [view, setView] = useState<"board" | "metro">(views[0]);
   const [selected, setSelected] = useState("manager");
   const current = milestones.find((m) => m.id === selected) ?? milestones[0];
   const detailRef = useRef<HTMLDivElement>(null);
@@ -251,6 +251,7 @@ export default function JourneyBoard() {
           <h2 id="journey-heading" className="font-semibold text-foreground">The journey so far</h2>
           <p className="text-xs text-muted-foreground">Education, roles, projects and ventures. Tap any stop for the details.</p>
         </div>
+        {views.length > 1 && (
         <div className="inline-flex rounded-lg border border-border bg-card p-1 text-xs font-medium" role="group" aria-label="Journey view">
           {(
             [
@@ -269,10 +270,11 @@ export default function JourneyBoard() {
             </button>
           ))}
         </div>
+        )}
       </div>
 
-      <div className={cn("grid gap-4 lg:items-start", view === "board" && "lg:grid-cols-[1.35fr_1fr]")}>
-        <div ref={detailRef} className={cn("scroll-mt-20", view === "board" && "lg:sticky lg:top-6 lg:order-2")}>
+      <div className={cn("grid gap-4 lg:items-start", view === "board" && "xl:grid-cols-[1.7fr_1fr]")}>
+        <div ref={detailRef} className={cn("scroll-mt-20", view === "board" && "xl:sticky xl:top-6 xl:order-2")}>
           <Detail m={current} />
         </div>
         {view === "board" ? <Board selected={selected} onSelect={select} /> : <MetroMap selected={selected} onSelect={select} />}

@@ -114,7 +114,7 @@ export default function AboutPage() {
 
       {/* Journey: departures board / metro map */}
       <div className="mb-12">
-        <JourneyBoard />
+        <JourneyBoard views={["board"]} />
       </div>
 
       {/* Control tower: career KPIs, network, capabilities */}

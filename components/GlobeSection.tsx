@@ -6,21 +6,7 @@ import travel from "@/data/travel.json"
 const places = travel.places as (GlobePlace & { country: string; continent: string })[]
 const destinations = places.filter((p) => p.kind !== "transit")
 
-const countries = Array.from(new Set(destinations.map((p) => p.country)))
-const continents = new Set(destinations.map((p) => p.continent))
-
-const byCountry = countries
-  .map((country) => ({
-    country,
-    cities: destinations.filter((p) => p.country === country).map((p) => p.city),
-  }))
-  .sort((a, b) => b.cities.length - a.cities.length || a.country.localeCompare(b.country))
-
-const stats = [
-  { value: destinations.length, label: "Cities" },
-  { value: countries.length, label: "Countries" },
-  { value: continents.size, label: "Continents" },
-]
+const countries = Array.from(new Set(destinations.map((p) => p.country))).sort((a, b) => a.localeCompare(b))
 
 export default function GlobeSection() {
   return (
@@ -37,42 +23,28 @@ export default function GlobeSection() {
         </div>
       </div>
 
-      <div className="grid items-center gap-6 md:grid-cols-[minmax(0,340px)_1fr]">
-        <div className="relative mx-auto w-full max-w-[340px]">
-          <Globe places={places} />
-        </div>
-
-        <div>
-          <dl className="grid grid-cols-3 divide-x divide-border rounded-xl border border-border">
-            {stats.map((s) => (
-              <div key={s.label} className="px-3 py-3 text-center">
-                <dd className="font-mono text-2xl font-bold text-foreground">{s.value}</dd>
-                <dt className="text-[11px] uppercase tracking-wider text-muted-foreground">{s.label}</dt>
-              </div>
-            ))}
-          </dl>
-
-          <div className="mt-4 flex flex-wrap gap-3 text-[11px] text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[rgb(251,100,21)]" />Home: Bangalore, Malmö</span>
-            <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-primary" />Visited</span>
-            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-slate-400" />Transit hub</span>
-          </div>
-
-          <ul className="mt-4 flex flex-wrap gap-1.5">
-            {byCountry.map(({ country, cities }) => (
-              <li
-                key={country}
-                title={cities.join(", ")}
-                className="rounded-full border border-border bg-background px-2.5 py-1 text-xs text-foreground"
-              >
-                {country}
-                <span className="sr-only">: {cities.join(", ")}</span>
-                {cities.length > 1 && <span className="ml-1 font-mono text-[10px] text-muted-foreground">×{cities.length}</span>}
-              </li>
-            ))}
-          </ul>
-        </div>
+      {/* One big globe: the places, and a single flight hopping between them. */}
+      <div className="relative mx-auto w-full max-w-[680px]">
+        <Globe places={places} className="max-w-[680px]" />
       </div>
+
+      <div className="mt-2 flex flex-wrap justify-center gap-4 text-[11px] text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[rgb(251,100,21)]" />Home: Bangalore, Malmö</span>
+        <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-primary" />Visited</span>
+        <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-slate-400" />Transit hub</span>
+      </div>
+
+      {/* The same places as text, for screen readers and search. */}
+      <p className="mx-auto mt-4 max-w-2xl text-center text-xs leading-relaxed text-muted-foreground">
+        {countries.join(" · ")}
+      </p>
+      <ul className="sr-only">
+        {destinations.map((p) => (
+          <li key={p.city}>
+            {p.city}, {p.country}
+          </li>
+        ))}
+      </ul>
     </section>
   )
 }
