@@ -7,7 +7,6 @@
     "primary": [
       { "label": "Home", "href": "/" },
       { "label": "Published Posts", "href": "/articles" },
-      { "label": "Resources", "href": "/resources" },
       { "label": "About Me", "href": "/about" },
       { "label": "Experience", "href": "/experience" }
     ],

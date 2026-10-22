@@ -6,6 +6,8 @@ import ApproachFlow from "@/components/ApproachFlow";
 import { resources } from "@/data/resources";
 
 export const metadata: Metadata = {
+  // Hidden while the library grows: reachable by link, not listed or indexed.
+  robots: { index: false, follow: false },
   title: "Resources | Shetty's Desk",
   description:
     "Free supply-chain workflow packs, planning tools, and AI operating artifacts from Shetty's Desk.",

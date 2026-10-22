@@ -254,13 +254,7 @@ export default async function ArticlePage({
       {hasStats && <ArticleStats stats={article.stats} />}
 
       <footer className="flex flex-col gap-4 border-t border-border py-8 sm:flex-row sm:items-center sm:justify-between">
-        <Link
-          href="/resources"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-        >
-          Explore downloadable resources
-          <ArrowRight className="h-4 w-4" aria-hidden />
-        </Link>
+        <span />
         {article.linkedinUrl && (
           <a
             href={article.linkedinUrl}

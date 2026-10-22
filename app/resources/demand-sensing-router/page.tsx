@@ -9,6 +9,8 @@ const resource = getResource("demand-sensing-router")!;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tigershetty.com";
 
 export const metadata: Metadata = {
+  // Hidden while the library grows: reachable by link, not listed or indexed.
+  robots: { index: false, follow: false },
   title: "Demand Sensing Router | Shetty's Desk",
   description: resource.description,
   alternates: { canonical: `${siteUrl}/resources/${resource.slug}` },
