@@ -1,6 +1,6 @@
 import HeroBento from "@/components/HeroBento";
 import ArticleCard from "@/components/ArticleCard";
-import ShippingManifest from "@/components/ShippingManifest";
+import InNumbers from "@/components/InNumbers";
 import RadarSection from "@/components/RadarSection";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
@@ -28,7 +28,7 @@ export default async function Home() {
       </div>
 
       {/* Latest articles - folder */}
-      <div className="lg:col-span-2 lg:row-span-2 min-h-0">
+      <div className="lg:col-span-2 min-h-0">
         <Reveal className="h-full">
           <FolderCard label="Latest articles" color="indigo" className="h-full">
             {featured[0] && <ArticleCard article={featured[0]} featured />}
@@ -36,17 +36,17 @@ export default async function Home() {
         </Reveal>
       </div>
 
-      {/* My numbers - folder */}
+      {/* In numbers - folder */}
       <div className="lg:col-span-2">
-        <Reveal>
-          <FolderCard label="My numbers" color="amber">
-            <ShippingManifest />
+        <Reveal className="h-full">
+          <FolderCard label="In numbers" color="amber" className="h-full">
+            <InNumbers />
           </FolderCard>
         </Reveal>
       </div>
 
       {/* Supply chain radar - folder */}
-      <div className="lg:col-span-2">
+      <div className="lg:col-span-4">
         <Reveal>
           <FolderCard label="Supply chain radar" color="teal">
             <RadarSection bare />

@@ -332,3 +332,6 @@ html.intro-active body {
   .footer-dot { animation: footer-dot linear infinite; }
   .footer-stop { animation: footer-stop linear infinite; }
 }
+@media (prefers-reduced-motion: no-preference) {
+  .numbers-dot { animation: footer-dot 6s cubic-bezier(.45,0,.2,1) infinite alternate; }
+}
