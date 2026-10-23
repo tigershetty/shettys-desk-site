@@ -2,7 +2,24 @@
 
 This audit reviews every page at 1440 px and 390 px. The goal is to keep the editorial look (white field, black borders, indigo, teal and amber) and remove the parts that make the site feel generated or "printed".
 
-Note: carmen-elena.space cannot be reached from the build sandbox (DNS fails), so it was not checked directly. The principles below are the ones we have used for it so far: oversized type, a few quiet surfaces and rhythm through spacing.
+## Reference: carmen-elena.space (pulled with Firecrawl)
+
+Here is what makes that page feel premium:
+
+- **Restraint in type.**
+  - Plus Jakarta Sans is used for headings and DM Sans for body text.
+  - The h1 is only 22 px and body text is 15 px. Everything is in sentence case.
+  - Mono appears only inside the terminal widget.
+- **Soft, warm surfaces.**
+  - The background is a warm off-white (#FFFEFC), and panels are beige (#F7F2EE) with soft borders (#DFD8D0).
+  - White cards sit inside those panels.
+  - There are no black outlines, and corners have a 12–16 px radius.
+- **One accent.** Electric blue (#2216FF) is used for buttons and figures, with a lavender tint (#EEEDFF) behind it. Body text is warm grey (#64645F).
+- **Numbers carry a small graphic.** Each figure sits on a white card with a faint icon in the top right and a tiny graphic showing the number: timeline dots, a dot grid, or an avatar stack.
+- **Radar as glossy orbs.** Soft, lit spheres in pastel tints with one label each.
+- **Footer.** A single faded marquee row with the text in italic.
+
+**Caution:** our homepage already follows her structure almost one-for-one: the greeting, "Open to experiences", the "Peek inside" buttons, "My numbers", "Design Radar", the sidebar terminal widget and the "Made with" footer. We should borrow her restraint, not more of her layout, and our own supply-chain identity has to carry the difference. We keep Geist and the indigo/teal/amber identity.
 
 ## What is working
 
@@ -37,6 +54,8 @@ Note: carmen-elena.space cannot be reached from the build sandbox (DNS fails), s
 - **Restraint:** one moving thing at a time, ambient motion under 10% speed, and a static fallback for reduced motion.
 
 ## Done in this pass
+
+- In numbers: white figure cards with a faint icon and a small graphic each (a year track, role blocks shaded by organisation, a city grid, a continent bar, and the Bangalore → Lund route).
 
 - Folders: calm, single-colour brand streaks replace the marble art. Folder text uses Geist (it was using system fonts), and metadata is no longer set in mono. Tabs are in sentence case.
 - Footer: a single row at the original height. The stack sits on a hairline route, and one indigo dot travels along it.
