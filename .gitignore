@@ -65,3 +65,6 @@ Analytics/
 Development photos/
 Frontend/
 Infographic Render/
+
+# private source material (Tetra Pak internal docs, personal profiles): never commit
+private/reference/

@@ -14,35 +14,53 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed top-4 left-4 z-50 rounded-xl p-2 border border-border bg-card shadow-sm lg:hidden"
-        aria-label="Toggle menu"
-      >
-        <svg
-          className="h-5 w-5 text-foreground"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      {/* Mobile top bar: keeps the menu reachable without floating over content */}
+      <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-border bg-background/90 px-4 backdrop-blur-md lg:hidden">
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          aria-label="Go to homepage"
+          className="flex items-center gap-2"
         >
-          {open ? (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          ) : (
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          )}
-        </svg>
-      </button>
+          <Image
+            src="/images/logo-full.png"
+            alt="Shetty's Desk"
+            width={150}
+            height={150}
+            priority
+            className="h-11 w-auto"
+          />
+        </Link>
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card shadow-sm"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+        >
+          <svg
+            className="h-5 w-5 text-foreground"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            {open ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
+      </header>
 
       {/* Overlay */}
       {open && (
@@ -59,7 +77,7 @@ export default function Sidebar() {
         }`}
       >
 
-        <div className="relative z-10 flex h-full flex-col p-6">
+        <div className="relative z-10 flex h-full flex-col p-6 pt-20 lg:pt-6">
           {/* Brand */}
           <div className="mb-8 flex flex-col items-center">
             <Link

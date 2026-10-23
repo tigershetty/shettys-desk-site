@@ -333,7 +333,7 @@ export default function HeroParticles() {
     <div
       ref={containerRef}
       aria-hidden
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 overflow-hidden opacity-30 sm:opacity-100"
     />
   );
 }

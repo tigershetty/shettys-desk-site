@@ -1,11 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { PromptingIsAllYouNeed } from "@/components/ui/prompting-pong";
-import BeliefCard from "@/components/BeliefCard";
+import { TasteIsAllYouNeed } from "@/components/ui/taste-pong";
+import ControlTower from "@/components/ControlTower";
+import VinylPlayer from "@/components/VinylPlayer";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
-import BoardingPass from "@/components/BoardingPass";
-import beliefs from "@/data/beliefs.json";
+import JourneyBoard from "@/components/JourneyBoard";
+import Bookshelf from "@/components/bookshelf/Bookshelf";
 import siteData from "@/data/site.json";
 
 const onRotation = {
@@ -21,29 +22,6 @@ const onRotation = {
     { title: "How I Built This", note: "Founder stories, operational lessons" },
   ],
 };
-
-const workingWithMe = [
-  {
-    icon: "📐",
-    title: "I default to structure",
-    body: "I think in frameworks and systems. If something can be structured, I'll structure it before discussing it.",
-  },
-  {
-    icon: "🎯",
-    title: "I lead with questions",
-    body: "My first instinct in any room is to ask what problem we're actually solving. Not what tool we're buying.",
-  },
-  {
-    icon: "📝",
-    title: "I write to think",
-    body: "LinkedIn posts, internal documents, this site. Writing is how I process complex topics and test whether I actually understand them.",
-  },
-  {
-    icon: "🤝",
-    title: "I value directness",
-    body: "Say what you mean. Disagree openly. I'd rather have an honest 'no' than a polite delay.",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -84,10 +62,10 @@ export default function AboutPage() {
           </a>
         </div>
 
-        {/* Tiny themed Pong that spells "Prompting is all you need" */}
+        {/* Tiny themed Pong that spells "Taste is all you need" */}
         <div className="w-full sm:ml-auto sm:w-[32.5rem]">
           <div className="relative h-[16.25rem] w-full overflow-hidden rounded-xl border border-border shadow-sm">
-            <PromptingIsAllYouNeed />
+            <TasteIsAllYouNeed />
           </div>
         </div>
       </div>
@@ -98,10 +76,14 @@ export default function AboutPage() {
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
             Originally from Bangalore. Moved to Sweden for a master&apos;s in
-            Logistics &amp; Supply Chain at Lund University, and stayed. I&apos;ve
-            spent 7+ years at Tetra Pak, starting as a thesis student and now
-            managing replenishment for capital equipment supply chains worth 180M+
-            euros annually.
+            Logistics &amp; Supply Chain Management at Lund University, and
+            stayed. I&apos;ve spent 7+ years at Tetra Pak, starting as a thesis
+            student. Today I&apos;m Replenishment Manager in the Services Supply
+            Network, leading a team of ten purchasing and sourcing specialists who
+            keep 150,000+ spare parts moving to customers worldwide: 450M+ euros a
+            year, across 1,000+ suppliers. Before that I spent four years in
+            supply planning for capital equipment, leading a team across Sweden,
+            Italy and China.
           </p>
           <p>
             Supply chain decisions go wrong not because the data wasn&apos;t
@@ -128,51 +110,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Globe - places I've lived */}
+      {/* Globe - places I've travelled */}
       <GlobeSection />
 
-      {/* Boarding Pass */}
-      <section className="mb-12">
-        <BoardingPass />
-      </section>
+      {/* Journey: departures board / metro map */}
+      <div className="mb-12">
+        <JourneyBoard views={["board"]} />
+      </div>
 
-      {/* Working With Me */}
-      <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          Working with me
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {workingWithMe.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-sm"
-            >
-              <div className="mb-2 flex items-center gap-2.5">
-                <span className="text-lg">{item.icon}</span>
-                <h3 className="font-medium text-foreground">{item.title}</h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Beliefs in grid */}
-      <section className="mb-12">
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          What I believe
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {beliefs.map((belief, i) => (
-            <BeliefCard
-              key={belief.title}
-              title={belief.title}
-              body={belief.body}
-              index={i}
-            />
-          ))}
-        </div>
-      </section>
+      {/* Control tower: career KPIs, network, capabilities */}
+      <ControlTower />
 
       {/* On Rotation */}
       <section className="mb-12 rounded-3xl border border-border bg-card p-6">
@@ -185,47 +132,43 @@ export default function AboutPage() {
           <h2 className="font-semibold text-foreground">On Rotation</h2>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-3">
-          {/* Reading */}
-          <div>
-            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Reading</p>
-            <div className="space-y-3">
-              {onRotation.reading.map((item) => (
-                <div key={item.title} className="rounded-xl border border-border/50 p-3">
-                  <p className="text-sm font-medium text-foreground">{item.title}</p>
-                  <p className="text-xs text-muted-foreground">{item.author}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Listening */}
-          <div>
+        <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+          {/* Vinyl player: live Spotify top tracks, playlist fallback */}
+          <div className="rounded-2xl border border-border/60 p-4">
             <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Listening</p>
-            <div className="space-y-3">
-              {onRotation.listening.map((item) => (
-                <div key={item.title} className="rounded-xl border border-border/50 p-3">
-                  <p className="text-sm font-medium text-foreground">{item.title}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
-                </div>
-              ))}
-            </div>
+            <VinylPlayer />
           </div>
 
-          {/* Watching */}
-          <div>
-            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">Watching</p>
-            <div className="space-y-3">
-              {onRotation.watching.map((item) => (
-                <div key={item.title} className="rounded-xl border border-border/50 p-3">
-                  <p className="text-sm font-medium text-foreground">{item.title}</p>
-                  <p className="mt-1 text-xs text-muted-foreground/70 italic">{item.note}</p>
-                </div>
-              ))}
-            </div>
+          <div className="space-y-5">
+            {[
+              { label: "Watching", items: onRotation.watching },
+            ].map(({ label, items }) => (
+              <div key={label}>
+                <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground/60">{label}</p>
+                <ul className="space-y-2">
+                  {items.map((item) => (
+                    <li key={item.title} className="rounded-xl border border-border/50 px-3 py-2">
+                      <p className="text-sm font-medium text-foreground">
+                        {item.title}
+                        {"author" in item && <span className="font-normal text-muted-foreground"> · {String(item.author)}</span>}
+                      </p>
+                      <p className="text-xs italic text-muted-foreground/70">{item.note}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
+
+      {/* Books I love, on a shelf you can browse */}
+      <section className="mb-12 rounded-3xl border border-border bg-card p-6" aria-labelledby="shelf-heading">
+        <div className="mb-4">
+          <h2 id="shelf-heading" className="font-semibold text-foreground">On the shelf</h2>
+          <p className="text-xs text-muted-foreground">Books I love. Pick one off the shelf to see the front, the back and what it&apos;s about.</p>
+        </div>
+        <Bookshelf />
       </section>
     </>
   );

@@ -34,8 +34,14 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // My Approach lives on as the method strip on the Shetty's Desk page.
+        source: "/approach",
+        destination: "/shettys-desk#method",
+        permanent: true,
+      },
+      {
         source: "/workshop",
-        destination: "/approach",
+        destination: "/shettys-desk#method",
         permanent: true,
       },
     ];

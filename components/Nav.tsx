@@ -5,11 +5,9 @@ import { usePathname } from "next/navigation";
 import {
   Home,
   FileText,
-  Compass,
   User,
   Briefcase,
   BookOpen,
-  PackageOpen,
   Mail,
 } from "lucide-react";
 
@@ -21,8 +19,6 @@ interface NavItem {
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
   "/": Home,
   "/articles": FileText,
-  "/resources": PackageOpen,
-  "/approach": Compass,
   "/about": User,
   "/experience": Briefcase,
   "/shettys-desk": BookOpen,

@@ -317,3 +317,21 @@ html.intro-active body {
   0%, 50%, 100% { transform: rotate(0); }
 }
 
+
+/* Footer route: one dot travels the hairline, each stop warms as it passes. */
+@keyframes footer-dot {
+  from { left: 0; }
+  to { left: calc(100% - 6px); }
+}
+@keyframes footer-stop {
+  0%, 100% { color: var(--muted-foreground); }
+  6% { color: var(--primary); }
+  16% { color: var(--muted-foreground); }
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .footer-dot { animation: footer-dot linear infinite; }
+  .footer-stop { animation: footer-stop linear infinite; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .numbers-dot { animation: footer-dot 6s cubic-bezier(.45,0,.2,1) infinite alternate; }
+}
