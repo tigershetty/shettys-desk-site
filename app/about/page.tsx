@@ -1,11 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TasteIsAllYouNeed } from "@/components/ui/taste-pong";
-import CareerBento from "@/components/CareerBento";
+import ControlTower from "@/components/ControlTower";
 import VinylPlayer from "@/components/VinylPlayer";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
-import JourneyBoard from "@/components/JourneyBoard";
+import BoardingPasses from "@/components/BoardingPasses";
 import Bookshelf from "@/components/bookshelf/Bookshelf";
 import siteData from "@/data/site.json";
 
@@ -113,13 +113,11 @@ export default function AboutPage() {
       {/* Globe - places I've travelled */}
       <GlobeSection />
 
-      {/* Journey: departures board / metro map */}
-      <div className="mb-12">
-        <JourneyBoard views={["board"]} />
-      </div>
+      {/* The journey, one boarding pass per leg */}
+      <BoardingPasses />
 
-      {/* Career at a glance: the bento of the work */}
-      <CareerBento />
+      {/* Control tower: career KPIs, network, capabilities */}
+      <ControlTower />
 
       {/* On Rotation */}
       <section className="mb-12 rounded-3xl border border-border bg-card p-6">

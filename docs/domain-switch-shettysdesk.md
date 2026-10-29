@@ -5,20 +5,25 @@ The code now treats **https://www.shettysdesk.com** as the site's address
 address keeps working until you switch the redirect on, so merging this branch
 cannot take the site down.
 
+## Where it stands (29 Oct)
+
+- `www.shettysdesk.com` and `shettysdesk.com` are attached to the Vercel
+  project and verified. `www` serves the site (HTTP 200, no DNS warning).
+- **The apex `shettysdesk.com` has no DNS records, so it does not resolve.**
+  Vercel flags it as misconfigured. In Cloudflare → DNS add, **DNS only**
+  (grey cloud):
+  - `A` · `@` · `216.198.79.1`
+  - `A` · `@` · `64.29.17.1`
+
+  (Vercel's other accepted value for the apex is `76.76.21.21`.) `www` is
+  already a `CNAME` to `3fe7a64a9ae8d951.vercel-dns-017.com`.
+- `tigershetty.com` still serves the site, as intended, until the switch below.
+
 ## Order of operations
 
-1. **Attach the domain in Vercel.** Project → Settings → Domains → add
-   `www.shettysdesk.com` (production) and `shettysdesk.com` (redirect to www,
-   308), the same way `tigershetty.com` is set up today.
-2. **Point DNS at Vercel** (Cloudflare, since that is where the domain lives).
-   Vercel shows the exact values when you add the domain; the standard ones are:
-   - `A` record, name `@`, value `76.76.21.21`
-   - `CNAME` record, name `www`, value `cname.vercel-dns.com`
-   - Set both to **DNS only** (grey cloud). The site's bot protection runs in
-     Vercel, and Cloudflare's proxy in front of it adds a second place for
-     things to fail.
-3. **Wait until Vercel shows both domains as verified**, and
-   `https://www.shettysdesk.com` loads the site.
+1. **Attach the domain in Vercel.** Done.
+2. **Point DNS at Vercel.** `www` is done; add the two apex records above.
+3. **Wait until `https://shettysdesk.com` redirects to `https://www.shettysdesk.com`.**
 4. **In Vercel → Settings → Environment Variables (Production)** add
    `NEXT_PUBLIC_SITE_URL = https://www.shettysdesk.com` (if one already exists
    for the old address, change it) and `REDIRECT_LEGACY_DOMAIN = 1`, then

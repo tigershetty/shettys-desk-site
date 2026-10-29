@@ -4,7 +4,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import TextTypewriter from "./TextTypewriter";
 import { GlassIconReveal, preloadGlassLogo } from "./ui/liquid-glass-logo-reveal";
 
 const SESSION_KEY = "agent-intro-played";
@@ -66,8 +65,6 @@ export default function Preloader() {
   const [active, setActive] = useState(true);
   // The glass (and its WebGL context) only mounts when the intro really plays.
   const [play, setPlay] = useState(false);
-  // The caption's typing begins with the reveal, not at mount.
-  const [started, setStarted] = useState(false);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -120,8 +117,6 @@ export default function Preloader() {
       if (prefersReduced) {
         // Minimal, accessible version: the glass shows one still frame; hold
         // briefly, then fade out.
-        setStarted(true);
-        gsap.set(contentRef.current, { opacity: 1, y: 0 });
         setProgress(1);
         gsap.to(rootRef.current, {
           opacity: 0,
@@ -163,12 +158,6 @@ export default function Preloader() {
         if (began) return;
         began = true;
         window.clearTimeout(failsafe);
-        setStarted(true);
-        gsap.fromTo(
-          contentRef.current,
-          { autoAlpha: 0, y: 10 },
-          { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.7, ease: "power2.out" }
-        );
       };
 
       hooks.current = { ready: begin, progress: setProgress, complete: leave };
@@ -207,9 +196,13 @@ export default function Preloader() {
       ref={rootRef}
       aria-label="Loading"
       role="status"
-      className="fixed inset-0 z-[10000] overflow-hidden"
+      className="preloader-root fixed inset-0 z-[10000] overflow-hidden"
       style={{ clipPath: "inset(0 0 0% 0)", backgroundColor: PRELOADER_BG }}
     >
+      {/* Without JavaScript the intro could never end, so it steps aside. */}
+      <noscript>
+        <style>{".preloader-root{display:none!important}"}</style>
+      </noscript>
       {play && (
         <GlassIconReveal
           logo={LOGO}
@@ -236,25 +229,15 @@ export default function Preloader() {
         />
       )}
 
-      {/* Caption sits under the glass tile, whatever the screen size. */}
+      {/* The caption is plain markup, typed by CSS: it is in the server HTML, so
+          it shows on the very first paint, before any script has run. */}
       <div
         className="pointer-events-none absolute inset-x-0 flex justify-center"
         style={{ top: "calc(50% + min(222px, 47vmin))" }}
       >
-        <div
-          ref={contentRef}
-          className="flex w-[min(78vw,320px)] flex-col items-center"
-          style={{ opacity: 0 }}
-        >
-          <div className="min-h-7 text-center">
-            {started && (
-              <TextTypewriter
-                duration={2}
-                className="text-center font-mono text-base text-white/90 sm:text-lg"
-              >
-                a(gent) is thinking....
-              </TextTypewriter>
-            )}
+        <div ref={contentRef} className="flex w-[min(78vw,320px)] flex-col items-center">
+          <div className="w-[23ch] text-left font-mono text-base text-white/90 sm:text-lg">
+            <span className="preloader-type">a(gent) is thinking....</span>
           </div>
 
           <div className="mt-6 flex w-full items-center gap-3">

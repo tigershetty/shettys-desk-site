@@ -2,6 +2,7 @@
 
 import GlassFolder, { type FolderFile } from "@/components/ui/glass-folder-cards";
 import experience from "@/data/experience.json";
+import { passes } from "@/data/passes";
 import { brandArt } from "@/lib/brand-art";
 
 // A row of glass folders on the desk: open one and its files fan out, each
@@ -24,7 +25,7 @@ export default function DeskFolders({ articles }: Props) {
   }));
   const aboutFiles: FolderFile[] = [
     { name: "Personal note", meta: "Bangalore → Lund", href: "/about" },
-    { name: "The journey so far", meta: "16 stops", href: "/about#journey-heading" },
+    { name: "The journey so far", meta: `${passes.length} boarding passes`, href: "/about#journey-heading" },
     { name: "Where I've travelled", meta: "globe", href: "/about#travel-heading", art: brandArt.teal },
     { name: "On rotation", meta: "music & books", href: "/about", art: brandArt.amber },
   ];

@@ -336,7 +336,23 @@ html.intro-active body {
   .numbers-dot { animation: footer-dot 6s cubic-bezier(.45,0,.2,1) infinite alternate; }
 }
 
-/* Career bento: dashes travelling along the network lanes. */
-@keyframes bento-flow {
-  to { stroke-dashoffset: -36; }
+/* Loading caption: typed in pure CSS so it is on screen from the first paint. */
+.preloader-type {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  width: 0;
+  border-right: 2px solid rgba(255, 255, 255, 0.85);
+  animation: preloader-type 1.6s steps(23, end) 0.1s forwards, preloader-caret 0.8s step-end infinite;
+}
+@keyframes preloader-type {
+  to { width: 23ch; }
+}
+@keyframes preloader-caret {
+  50% { border-right-color: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader-type { width: 23ch; animation: none; border-right-color: transparent; }
 }
