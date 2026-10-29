@@ -1,11 +1,8 @@
 import FlowingMenu from "@/components/FlowingMenu";
 import DecryptedText from "@/components/DecryptedText";
-import { InteractiveRobotSpline } from "@/components/InteractiveRobotSpline";
+import ScorExplorer from "@/components/scor/ScorExplorer";
+import JourneyBoard from "@/components/JourneyBoard";
 import experienceData from "@/data/experience.json";
-
-// Public Spline "interactive robot" scene (follows the cursor). Swap this for a
-// custom scene URL any time; single source of truth.
-const ROBOT_SCENE = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
 export default function ExperiencePage() {
   const primary = experienceData.primary[0];
@@ -32,15 +29,21 @@ export default function ExperiencePage() {
         </a>
       </section>
 
-      {/* Summary + interactive robot (free-standing, no card chrome) */}
-      <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
-        <p className="max-w-2xl text-muted-foreground leading-relaxed">
-          {experienceData.summary}
-        </p>
-        <div className="relative h-72 w-full shrink-0 sm:h-80 lg:h-96 lg:w-96">
-          <InteractiveRobotSpline scene={ROBOT_SCENE} className="h-full w-full" />
-        </div>
-      </div>
+      <p className="mb-8 max-w-3xl leading-relaxed text-muted-foreground">{experienceData.summary}</p>
+
+      {/* The career as the SCOR model: islands joined by the red thread */}
+      <section className="mb-14" aria-labelledby="scor-heading">
+        <h2 id="scor-heading" className="mb-1 text-lg font-semibold text-foreground">
+          My supply chain, process by process
+        </h2>
+        <p className="mb-4 text-sm text-muted-foreground">Pick an island, or follow the red thread through the career in order.</p>
+        <ScorExplorer />
+      </section>
+
+      {/* The same journey as a metro map */}
+      <section className="mb-14">
+        <JourneyBoard views={["metro"]} />
+      </section>
 
       {/* Core competencies */}
       <section className="mb-12">

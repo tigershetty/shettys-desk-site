@@ -6,8 +6,8 @@ import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import SmoothScroll from "@/components/SmoothScroll";
-import SpotlightBackground from "@/components/SpotlightBackground";
 import { BGPattern } from "@/components/BGPattern";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +25,7 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.tigershetty.com"
-  ),
+  metadataBase: new URL(SITE_URL),
   title: "Shetty's Desk",
   description: "Supply chain, one breakdown at a time.",
   icons: {
@@ -76,10 +74,9 @@ export default function RootLayout({
           fill="rgba(0,0,0,0.15)"
           className="fixed inset-0 -z-10"
         />
-        <SpotlightBackground />
         <Sidebar />
         <main className="w-full flex flex-col min-h-screen">
-          <div className="flex-1 overflow-y-auto overflow-x-hidden px-6 pt-16 pb-8 lg:pl-[calc(16rem+2rem)] lg:pr-12 lg:pt-10 lg:pb-10">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 pt-[4.5rem] pb-8 sm:px-6 lg:pl-[calc(16rem+2rem)] lg:pr-12 lg:pt-10 lg:pb-10">
             {children}
           </div>
           <Footer />

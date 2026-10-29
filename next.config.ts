@@ -21,6 +21,13 @@ const securityHeaders = [
   },
 ];
 
+// The site is moving from tigershetty.com to shettysdesk.com. The old address
+// keeps serving the site until shettysdesk.com is attached to the Vercel
+// project and its DNS resolves; set REDIRECT_LEGACY_DOMAIN=1 in Vercel then,
+// and the old hosts redirect to the new one. See docs/domain-switch-shettysdesk.md.
+const NEW_SITE = "https://www.shettysdesk.com";
+const moved = process.env.REDIRECT_LEGACY_DOMAIN === "1";
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   async redirects() {
@@ -29,13 +36,36 @@ const nextConfig: NextConfig = {
         // Keep a single public origin so links, cookies, and search indexing
         // consistently use the secure www domain.
         source: "/:path*",
+        has: [{ type: "host", value: "shettysdesk.com" }],
+        destination: `${NEW_SITE}/:path*`,
+        permanent: true,
+      },
+      {
+        source: "/:path*",
         has: [{ type: "host", value: "tigershetty.com" }],
-        destination: "https://www.tigershetty.com/:path*",
+        destination: moved ? `${NEW_SITE}/:path*` : "https://www.tigershetty.com/:path*",
+        permanent: true,
+      },
+      // The old www host follows once the move is switched on.
+      ...(moved
+        ? [
+            {
+              source: "/:path*",
+              has: [{ type: "host" as const, value: "www.tigershetty.com" }],
+              destination: `${NEW_SITE}/:path*`,
+              permanent: true,
+            },
+          ]
+        : []),
+      {
+        // My Approach lives on as the method strip on the Shetty's Desk page.
+        source: "/approach",
+        destination: "/shettys-desk#method",
         permanent: true,
       },
       {
         source: "/workshop",
-        destination: "/approach",
+        destination: "/shettys-desk#method",
         permanent: true,
       },
     ];

@@ -1,10 +1,11 @@
 import HeroBento from "@/components/HeroBento";
 import ArticleCard from "@/components/ArticleCard";
-import StatsGrid from "@/components/StatsGrid";
+import InNumbers from "@/components/InNumbers";
 import RadarSection from "@/components/RadarSection";
 import Reveal from "@/components/Reveal";
 import SplitHeading from "@/components/SplitHeading";
 import FolderCard from "@/components/FolderCard";
+import DeskFolders from "@/components/DeskFolders";
 import { getArticles } from "@/lib/articles";
 
 export const revalidate = 600;
@@ -21,8 +22,13 @@ export default async function Home() {
         <HeroBento />
       </div>
 
+      {/* Glass folders on the desk: navigation into the site */}
+      <div className="min-w-0 lg:col-span-4">
+        <DeskFolders articles={articles.map((a) => ({ slug: a.slug, title: a.title, date: a.date }))} />
+      </div>
+
       {/* Latest articles - folder */}
-      <div className="lg:col-span-2 lg:row-span-2 min-h-0">
+      <div className="lg:col-span-2 min-h-0">
         <Reveal className="h-full">
           <FolderCard label="Latest articles" color="indigo" className="h-full">
             {featured[0] && <ArticleCard article={featured[0]} featured />}
@@ -30,17 +36,17 @@ export default async function Home() {
         </Reveal>
       </div>
 
-      {/* My numbers - folder */}
+      {/* In numbers - folder */}
       <div className="lg:col-span-2">
-        <Reveal>
-          <FolderCard label="My numbers" color="amber">
-            <StatsGrid bare />
+        <Reveal className="h-full">
+          <FolderCard label="In numbers" color="amber" className="h-full">
+            <InNumbers />
           </FolderCard>
         </Reveal>
       </div>
 
       {/* Supply chain radar - folder */}
-      <div className="lg:col-span-2">
+      <div className="lg:col-span-4">
         <Reveal>
           <FolderCard label="Supply chain radar" color="teal">
             <RadarSection bare />
@@ -56,14 +62,16 @@ export default async function Home() {
         />
       </div>
 
-      {/* Secondary articles - 4 compact cards */}
-      {secondary.map((article) => (
-        <div key={article.slug} className="lg:col-span-1">
-          <Reveal>
-            <ArticleCard article={article} bento />
-          </Reveal>
-        </div>
-      ))}
+      {/* Secondary articles: swipeable row on mobile, 4-up grid on desktop */}
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 lg:col-span-4 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:px-0 lg:pb-0">
+        {secondary.map((article) => (
+          <div key={article.slug} className="w-[80%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
+            <Reveal className="h-full">
+              <ArticleCard article={article} bento />
+            </Reveal>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

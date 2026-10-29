@@ -4,8 +4,8 @@ export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const isDev = process.env.NODE_ENV === "development";
   const connectSources = isDev
-    ? "'self' https://prod.spline.design https://unpkg.com ws: wss:"
-    : "'self' https://prod.spline.design https://unpkg.com";
+    ? "'self' https://unpkg.com ws: wss:"
+    : "'self' https://unpkg.com";
   const upgradeInsecureRequests = isDev ? "" : "upgrade-insecure-requests;";
 
   // Existing React components use inline style attributes. Scripts remain nonce-protected.
@@ -14,10 +14,11 @@ export function proxy(request: NextRequest) {
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : " 'wasm-unsafe-eval'"};
     script-src-attr 'none';
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://prod.spline.design;
-    media-src 'self' blob: https://prod.spline.design;
+    img-src 'self' blob: data: https://i.scdn.co https://covers.openlibrary.org https://*.archive.org;
+    media-src 'self' blob:;
     font-src 'self' data:;
     connect-src ${connectSources};
+    frame-src https://open.spotify.com;
     worker-src 'self' blob:;
     object-src 'none';
     base-uri 'self';

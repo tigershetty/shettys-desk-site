@@ -317,3 +317,69 @@ html.intro-active body {
   0%, 50%, 100% { transform: rotate(0); }
 }
 
+
+/* Footer route: one dot travels the hairline, each stop warms as it passes. */
+@keyframes footer-dot {
+  from { left: 0; }
+  to { left: calc(100% - 6px); }
+}
+@keyframes footer-stop {
+  0%, 100% { color: var(--muted-foreground); }
+  6% { color: var(--primary); }
+  16% { color: var(--muted-foreground); }
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .footer-dot { animation: footer-dot linear infinite; }
+  .footer-stop { animation: footer-stop linear infinite; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .numbers-dot { animation: footer-dot 6s cubic-bezier(.45,0,.2,1) infinite alternate; }
+}
+
+/* Loading caption: typed in pure CSS so it is on screen from the first paint. */
+.preloader-type {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  width: 0;
+  border-right: 2px solid rgba(255, 255, 255, 0.85);
+  animation: preloader-type 1.6s steps(23, end) 0.1s forwards, preloader-caret 0.8s step-end infinite;
+}
+@keyframes preloader-type {
+  to { width: 23ch; }
+}
+@keyframes preloader-caret {
+  50% { border-right-color: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader-type { width: 23ch; animation: none; border-right-color: transparent; }
+}
+
+/* Orbiting circles: rings turn, icons counter-turn to stay upright. */
+.orbit-rot { transform: rotate(var(--start-angle, 0deg)); }
+.orbit-chip { transform: rotate(var(--counter-offset, 0deg)); }
+@keyframes orbit-cw {
+  from { transform: rotate(var(--start-angle)); }
+  to { transform: rotate(calc(var(--start-angle) + 360deg)); }
+}
+@keyframes orbit-ccw {
+  from { transform: rotate(var(--start-angle)); }
+  to { transform: rotate(calc(var(--start-angle) - 360deg)); }
+}
+@keyframes counter-cw {
+  from { transform: rotate(var(--counter-offset, 0deg)); }
+  to { transform: rotate(calc(var(--counter-offset, 0deg) - 360deg)); }
+}
+@keyframes counter-ccw {
+  from { transform: rotate(var(--counter-offset, 0deg)); }
+  to { transform: rotate(calc(var(--counter-offset, 0deg) + 360deg)); }
+}
+.orbit-rot:has(.orbit-chip:hover),
+.orbit-rot:has(.orbit-chip:focus),
+.orbit-chip:hover,
+.orbit-chip:focus { animation-play-state: paused !important; } /* inline animation shorthand would otherwise win */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-rot, .orbit-chip { animation: none !important; }
+}
