@@ -55,6 +55,8 @@ interface GlassTuning {
   sheen: number
   /** How far the light turns round the rim while the glass holds, radians */
   lightTurn: number
+  /** Colour lift of the light the glass bends. Lower keeps the glass closer to its backdrop */
+  vivid: number
 }
 
 interface Settings extends GlassTuning {
@@ -65,6 +67,9 @@ interface Settings extends GlassTuning {
   iconPlate: boolean
   keepPlate: boolean
   originalColors: boolean
+  /** Take the logo's coverage from its pixels instead of a distance field. Right for grainy or
+   * painted marks, whose fine speckle a distance field would thin out. Needs `originalColors` */
+  rasterAlpha: boolean
   background: string
   plateColor: string
   logoColor: string
@@ -72,12 +77,12 @@ interface Settings extends GlassTuning {
 }
 
 const LIGHT: Settings = {
-  tileSize: 256, logoScale: 0.7, finalScale: 0.69, logoOffset: [0, 0], iconPlate: false, keepPlate: false, originalColors: false,
+  tileSize: 256, logoScale: 0.7, finalScale: 0.69, logoOffset: [0, 0], iconPlate: false, keepPlate: false, originalColors: false, rasterAlpha: false,
   opticalDepth: 1.1, dispersion: 1.7, colorBleed: 1.25, doubleBevel: 1, bevelWidth: 0.14, corner: 4.8,
   cornerPull: 2.1, cornerWidth: 2.2, cornerFocus: 0.58, edgeSmear: 2.85, stretch: 0, tilt: 0.35, bulge: 1,
   specular: 1, halo: 0, shadow: 1, ripple: 1,
   bounce: 0, response: 0.42, startSize: 0.2, startZoom: 2.6, glide: 2.3, present: 2.4, drift: 0.12, swell: 0.5, focus: 1,
-  sheen: 1, lightTurn: 0.9,
+  sheen: 1, lightTurn: 0.9, vivid: 0.85,
   hold: 1, background: "#e9e9eb", plateColor: "#ffffff", logoColor: "#0e1428",
 }
 
@@ -185,8 +190,12 @@ function fitToTexture(source: CanvasImageSource, sw: number, sh: number) {
   return out
 }
 
+// Lets the browser paint and handle input between slices of heavy work.
+const yieldToMain = () => new Promise<void>((resolve) => setTimeout(resolve, 0))
+
 // Signed distance field from alpha (TinySDF method): + outside, − inside, in texture units.
-function buildSdf(canvas: HTMLCanvasElement) {
+// Built in slices with a yield between them, so a page that is still hydrating never freezes.
+async function buildSdf(canvas: HTMLCanvasElement) {
   const n = TEX * TEX
   const alpha = canvas.getContext("2d", { willReadFrequently: true })!.getImageData(0, 0, TEX, TEX).data
   const INF = 1e20
@@ -205,16 +214,22 @@ function buildSdf(canvas: HTMLCanvasElement) {
   const f = new Float64Array(TEX)
   const z = new Float64Array(TEX + 1)
   const v = new Uint16Array(TEX)
-  edt(outer, f, v, z, INF)
-  edt(inner, f, v, z, INF)
+  await edt(outer, f, v, z, INF)
+  await edt(inner, f, v, z, INF)
   const sdf = new Float32Array(n)
   for (let i = 0; i < n; i++) sdf[i] = (Math.sqrt(outer[i]) - Math.sqrt(inner[i])) / TEX
   return sdf
 }
 
-function edt(grid: Float64Array, f: Float64Array, v: Uint16Array, z: Float64Array, INF: number) {
-  for (let x = 0; x < TEX; x++) edt1d(grid, x, TEX, f, v, z, INF)
-  for (let y = 0; y < TEX; y++) edt1d(grid, y * TEX, 1, f, v, z, INF)
+async function edt(grid: Float64Array, f: Float64Array, v: Uint16Array, z: Float64Array, INF: number) {
+  for (let x = 0; x < TEX; x++) {
+    edt1d(grid, x, TEX, f, v, z, INF)
+    if ((x & 127) === 127) await yieldToMain()
+  }
+  for (let y = 0; y < TEX; y++) {
+    edt1d(grid, y * TEX, 1, f, v, z, INF)
+    if ((y & 127) === 127) await yieldToMain()
+  }
 }
 
 function edt1d(grid: Float64Array, offset: number, stride: number, f: Float64Array, v: Uint16Array, z: Float64Array, INF: number) {
@@ -248,14 +263,20 @@ const logoCache = new Map<string, Promise<LogoData>>()
 function loadLogo(logo: string) {
   let job = logoCache.get(logo)
   if (!job) {
-    job = loadImage(logoUrl(logo)).then((img) => {
+    job = loadImage(logoUrl(logo)).then(async (img) => {
       const canvas = fitToTexture(img, img.naturalWidth || TEX, img.naturalHeight || TEX)
-      return { canvas, sdf: buildSdf(canvas) }
+      await yieldToMain()
+      return { canvas, sdf: await buildSdf(canvas) }
     })
     logoCache.set(logo, job)
     job.catch(() => logoCache.delete(logo))
   }
   return job
+}
+
+/** Starts fetching the logo and building its distance field now, so a later mount finds it ready. */
+export function preloadGlassLogo(logo: string) {
+  loadLogo(logo).catch(() => {})
 }
 
 /* ------------------------------------------------------------------ *
@@ -319,6 +340,7 @@ uniform float uBevelW;
 uniform float uSpec;
 uniform float uIconPlate;
 uniform float uUseColor;
+uniform float uRaster;     // 1 = coverage comes from the colour texture, not the distance field
 uniform float uLightScene; // 1 = light backdrop, 0 = dark
 uniform float uLightGlass; // the same for what the glass sits on (the plate, when there is one)
 uniform float uKeep;       // 1 = the glass settles into a flat plate instead of letting go of it
@@ -351,6 +373,7 @@ vec4 logoAt(vec2 q, float blur, float aa) {
     c = c2.rgb / max(c2.a, 1e-4);
     c = mix(c, c1.rgb / max(c1.a, 1e-4), smoothstep(0.0, 0.06, c1.a));
     c = mix(c, c0.rgb / max(c0.a, 1e-4), smoothstep(0.02, 0.3, c0.a));
+    if (uRaster > 0.5) a = c0.a;
   }
   return vec4(c, a);
 }
@@ -633,11 +656,16 @@ function createRenderer(canvas: HTMLCanvasElement) {
     gl!.drawArrays(gl!.TRIANGLES, 0, 3)
   }
 
+  // Waits for the GPU, so the first (shader-compiling) draw is paid before the clock starts.
+  function sync() {
+    gl!.finish()
+  }
+
   function dispose() {
     gl!.getExtension("WEBGL_lose_context")?.loseContext()
   }
 
-  return { setLogo, render, dispose }
+  return { setLogo, render, sync, dispose }
 }
 
 /* ------------------------------------------------------------------ *
@@ -758,7 +786,7 @@ function frameAt(T: number, P: Settings, outro = 0) {
     uCornerOn: smooth(0.35, 1, morph),
     uGlow: 0.012 * P.colorBleed,
     uFaceDisp: 0.012 * P.dispersion,
-    uVivid: 0.85,
+    uVivid: P.vivid,
     uDissolve: release,
     uDisp: P.dispersion,
     uDouble: P.doubleBevel,
@@ -766,6 +794,7 @@ function frameAt(T: number, P: Settings, outro = 0) {
     uSpec: P.specular,
     uIconPlate: P.iconPlate ? 1 : 0,
     uUseColor: P.originalColors ? 1 : 0,
+    uRaster: P.originalColors && P.rasterAlpha ? 1 : 0,
     uLightScene: luminance(bg) > 0.5 ? 1 : 0,
     uLightGlass: luminance(P.iconPlate ? hexToRgb(P.plateColor) : bg) > 0.5 ? 1 : 0,
     uBg: bg,
@@ -792,6 +821,8 @@ interface GlassIconRevealProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   keepPlate?: boolean
   /** Keep the logo's own colours instead of `logoColor` */
   originalColors?: boolean
+  /** Coverage from the logo's pixels instead of a distance field (grainy or painted marks) */
+  rasterAlpha?: boolean
   /** Largest tile size in px; it shrinks to fit the container */
   tileSize?: number
   /** Logo half size relative to the tile's half size */
@@ -812,6 +843,18 @@ interface GlassIconRevealProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   tuning?: Partial<GlassTuning>
   /** Accessible name of the logo */
   label?: string
+  /** Called once the logo is on the GPU and the first frame is drawn, just before the reveal starts */
+  onReady?: () => void
+  /** Called every frame while the reveal plays, with how far along it is (0 to 1) */
+  onRevealProgress?: (progress: number) => void
+  /** Called once when a non-looping reveal has finished */
+  onRevealComplete?: () => void
+  /** Whether a click replays the reveal */
+  interactive?: boolean
+  /** Highest device pixel ratio the canvas renders at (it also lowers itself if frames run slow) */
+  maxDpr?: number
+  /** The tile is at most the container's short side divided by this */
+  fit?: number
 }
 
 export function GlassIconReveal({
@@ -823,6 +866,7 @@ export function GlassIconReveal({
   iconPlate,
   keepPlate,
   originalColors,
+  rasterAlpha,
   tileSize,
   logoScale,
   finalScale,
@@ -833,6 +877,12 @@ export function GlassIconReveal({
   time,
   tuning,
   label = "Logo",
+  onReady,
+  onRevealProgress,
+  onRevealComplete,
+  interactive = true,
+  maxDpr = 2,
+  fit = 1.75,
   className,
   style,
   onClick,
@@ -846,14 +896,14 @@ export function GlassIconReveal({
   const tuningKey = JSON.stringify(tuning ?? {})
   const offsetKey = logoOffset ? logoOffset.join(",") : ""
   const settings = React.useMemo<Settings>(() => {
-    const own = { background, logoColor, plateColor, iconPlate, keepPlate, originalColors, tileSize, logoScale, finalScale, hold }
+    const own = { background, logoColor, plateColor, iconPlate, keepPlate, originalColors, rasterAlpha, tileSize, logoScale, finalScale, hold }
     const set: Partial<Settings> = Object.fromEntries(Object.entries(own).filter(([, v]) => v !== undefined))
     if (offsetKey) set.logoOffset = offsetKey.split(",").map(Number) as [number, number]
     return { ...LOOKS[look], ...set, ...(JSON.parse(tuningKey) as Partial<GlassTuning>) }
-  }, [look, background, logoColor, plateColor, iconPlate, keepPlate, originalColors, tileSize, logoScale, finalScale, hold, offsetKey, tuningKey])
+  }, [look, background, logoColor, plateColor, iconPlate, keepPlate, originalColors, rasterAlpha, tileSize, logoScale, finalScale, hold, offsetKey, tuningKey])
 
-  const live = React.useRef({ settings, loop, speed, time })
-  live.current = { settings, loop, speed, time }
+  const live = React.useRef({ settings, loop, speed, time, onReady, onRevealProgress, onRevealComplete, maxDpr, fit })
+  live.current = { settings, loop, speed, time, onReady, onRevealProgress, onRevealComplete, maxDpr, fit }
 
   React.useEffect(() => {
     const wrap = wrapRef.current
@@ -872,7 +922,7 @@ export function GlassIconReveal({
 
   React.useEffect(() => {
     engineRef.current?.invalidate()
-  }, [settings, loop, speed, time])
+  }, [settings, loop, speed, time, maxDpr, fit])
 
   React.useEffect(() => {
     let cancelled = false
@@ -895,10 +945,10 @@ export function GlassIconReveal({
       ref={wrapRef}
       role="img"
       aria-label={label}
-      className={cn("relative isolate cursor-pointer overflow-hidden select-none", className)}
+      className={cn("relative isolate overflow-hidden select-none", interactive && "cursor-pointer", className)}
       style={{ backgroundColor: settings.background, ...style }}
       onClick={(e) => {
-        engineRef.current?.replay()
+        if (interactive) engineRef.current?.replay()
         onClick?.(e)
       }}
       {...props}
@@ -932,7 +982,17 @@ export function GlassIconReveal({
 // drawn only while on screen and only when something changed.
 function startEngine(
   wrap: HTMLDivElement,
-  live: React.RefObject<{ settings: Settings; loop: boolean; speed: number; time?: number }>,
+  live: React.RefObject<{
+    settings: Settings
+    loop: boolean
+    speed: number
+    time?: number
+    onReady?: () => void
+    onRevealProgress?: (progress: number) => void
+    onRevealComplete?: () => void
+    maxDpr: number
+    fit: number
+  }>,
 ) {
   const canvas = document.createElement("canvas")
   canvas.setAttribute("aria-hidden", "true")
@@ -961,11 +1021,44 @@ function startEngine(
   let lost = false
   let raf = 0
   let last = 0
+  // Resolution scale: starts at 1 and steps down if frames keep arriving late.
+  let completed = false
+  let quality = 1
+  let slowEma = 1 / 60
+  let slowCount = 0
+
+  function paint(T: number) {
+    if (!logo || !renderer || lost) return
+    const { settings: P, maxDpr, fit } = live.current
+    const dpr = Math.min(window.devicePixelRatio || 1, maxDpr) * quality
+    const cw = canvas.clientWidth
+    const ch = canvas.clientHeight
+    const w = Math.max(1, Math.round(cw * dpr))
+    const h = Math.max(1, Math.round(ch * dpr))
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w
+      canvas.height = h
+    }
+    const tile = Math.min(P.tileSize, Math.min(cw, ch) / fit)
+    renderer.render(frameAt(Math.min(T, endOf(P)), P, outro), w, h, tile * dpr)
+  }
 
   function tick(now: number) {
     raf = 0
-    const dt = Math.min(0.1, (now - last) / 1000)
+    const raw = (now - last) / 1000
+    // A late frame shows the next one a little further on, not a jump: the clock never leaps more than 50 ms.
+    const dt = Math.min(0.05, raw)
     last = now
+    if (playing && raw < 0.25) {
+      slowEma += (raw - slowEma) * 0.15
+      if (slowEma > 0.03 && quality > 0.5) {
+        if (++slowCount > 10) {
+          quality = Math.max(0.5, quality * 0.8)
+          slowCount = 0
+          slowEma = 1 / 60
+        }
+      } else slowCount = 0
+    }
     const { settings: P, loop, speed, time: fixed } = live.current
     const end = endOf(P)
     if (fixed !== undefined) {
@@ -994,20 +1087,15 @@ function startEngine(
           else playing = false
         }
         dirty = true
+        live.current.onRevealProgress?.(clamp01(time / end))
+        if (!playing && !completed) {
+          completed = true
+          live.current.onRevealComplete?.()
+        }
       }
     }
     if (dirty && logo && renderer && !lost) {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      const cw = canvas.clientWidth
-      const ch = canvas.clientHeight
-      const w = Math.max(1, Math.round(cw * dpr))
-      const h = Math.max(1, Math.round(ch * dpr))
-      if (canvas.width !== w || canvas.height !== h) {
-        canvas.width = w
-        canvas.height = h
-      }
-      const tile = Math.min(P.tileSize, Math.min(cw, ch) / 1.75)
-      renderer.render(frameAt(Math.min(time, end), P, outro), w, h, tile * dpr)
+      paint(time)
       dirty = false
     }
     if (visible && playing && logo && !lost) raf = requestAnimationFrame(tick)
@@ -1061,8 +1149,14 @@ function startEngine(
         playing = true
         pauseLeft = 0
         outro = 0
+        completed = false
       }
+      // Draw the first frame and wait for the GPU now: shader compile and texture upload are paid
+      // here, while nothing is moving, instead of eating the start of the reveal.
+      paint(time)
+      renderer?.sync()
       dirty = true
+      live.current.onReady?.()
       kick()
     },
     replay() {
@@ -1070,6 +1164,7 @@ function startEngine(
       playing = true
       pauseLeft = 0
       outro = 0
+      completed = false
       dirty = true
       kick()
     },
