@@ -4,9 +4,10 @@ import { ArrowLeft, ArrowRight, Clock3, Sparkles } from "lucide-react";
 import ResourcePreview from "@/components/ResourcePreview";
 import ResourceDownload from "@/components/ResourceDownload";
 import { getResource } from "@/data/resources";
+import { SITE_URL } from "@/lib/site";
 
 const resource = getResource("demand-sensing-router")!;
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tigershetty.com";
+const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
   // Hidden while the library grows: reachable by link, not listed or indexed.

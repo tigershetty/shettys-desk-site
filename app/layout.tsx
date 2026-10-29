@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 import SmoothScroll from "@/components/SmoothScroll";
 import { BGPattern } from "@/components/BGPattern";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,9 +25,7 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.tigershetty.com"
-  ),
+  metadataBase: new URL(SITE_URL),
   title: "Shetty's Desk",
   description: "Supply chain, one breakdown at a time.",
   icons: {
