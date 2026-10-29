@@ -356,3 +356,30 @@ html.intro-active body {
 @media (prefers-reduced-motion: reduce) {
   .preloader-type { width: 23ch; animation: none; border-right-color: transparent; }
 }
+
+/* Orbiting circles: rings turn, icons counter-turn to stay upright. */
+.orbit-rot { transform: rotate(var(--start-angle, 0deg)); }
+.orbit-chip { transform: rotate(var(--counter-offset, 0deg)); }
+@keyframes orbit-cw {
+  from { transform: rotate(var(--start-angle)); }
+  to { transform: rotate(calc(var(--start-angle) + 360deg)); }
+}
+@keyframes orbit-ccw {
+  from { transform: rotate(var(--start-angle)); }
+  to { transform: rotate(calc(var(--start-angle) - 360deg)); }
+}
+@keyframes counter-cw {
+  from { transform: rotate(var(--counter-offset, 0deg)); }
+  to { transform: rotate(calc(var(--counter-offset, 0deg) - 360deg)); }
+}
+@keyframes counter-ccw {
+  from { transform: rotate(var(--counter-offset, 0deg)); }
+  to { transform: rotate(calc(var(--counter-offset, 0deg) + 360deg)); }
+}
+.orbit-rot:has(.orbit-chip:hover),
+.orbit-rot:has(.orbit-chip:focus),
+.orbit-chip:hover,
+.orbit-chip:focus { animation-play-state: paused !important; } /* inline animation shorthand would otherwise win */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-rot, .orbit-chip { animation: none !important; }
+}

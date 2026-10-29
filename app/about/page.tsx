@@ -1,13 +1,11 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TasteIsAllYouNeed } from "@/components/ui/taste-pong";
 import ControlTower from "@/components/ControlTower";
 import VinylPlayer from "@/components/VinylPlayer";
-import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
+import AboutHero from "@/components/AboutHero";
 import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
 import BoardingPasses from "@/components/BoardingPasses";
 import Bookshelf from "@/components/bookshelf/Bookshelf";
-import siteData from "@/data/site.json";
 
 const onRotation = {
   reading: [
@@ -30,43 +28,13 @@ export default function AboutPage() {
         <AboutHeading />
       </section>
 
-      {/* Intro + Orbiting Skills */}
-      <div className="mb-10 flex flex-col items-center gap-6 sm:flex-row sm:items-center">
-        <div className="shrink-0 w-full sm:w-auto">
-          <OrbitingSkillsLoader />
-        </div>
-        <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-          <Avatar className="mb-3 h-20 w-20 border-2 border-primary/30 shadow-md ring-4 ring-background">
-            <AvatarImage
-              src="/images/profile.png"
-              alt="Poornajith Shetty"
-              className="object-cover"
-            />
-            <AvatarFallback className="bg-primary/10 text-sm font-semibold text-primary">
-              PS
-            </AvatarFallback>
-          </Avatar>
-          <p className="text-lg font-medium text-foreground">Poornajith Shetty</p>
-          <p className="text-sm text-muted-foreground">Replenishment Manager at Tetra Pak, Malm&ouml;</p>
-          <p className="mt-2 text-xs text-muted-foreground/60">Hover the orbits to explore tools &amp; domains</p>
-          <a
-            href={siteData.social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-          >
-            Connect on LinkedIn
-            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-            </svg>
-          </a>
-        </div>
+      {/* The person, at the foot of a globe with the work in orbit */}
+      <AboutHero />
 
-        {/* Tiny themed Pong that spells "Taste is all you need" */}
-        <div className="w-full sm:ml-auto sm:w-[32.5rem]">
-          <div className="relative h-[16.25rem] w-full overflow-hidden rounded-xl border border-border shadow-sm">
-            <TasteIsAllYouNeed />
-          </div>
+      {/* Tiny themed Pong that spells "Taste is all you need" */}
+      <div className="mb-10">
+        <div className="relative mx-auto h-[13rem] w-full max-w-[32.5rem] overflow-hidden rounded-xl border border-border shadow-sm sm:h-[16.25rem]">
+          <TasteIsAllYouNeed />
         </div>
       </div>
 

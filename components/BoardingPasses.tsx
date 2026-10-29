@@ -59,6 +59,7 @@ function PassCard({ index }: { index: number }) {
   const line = lines[m.line];
   const live = m.status === "NOW BOARDING";
   const next = m.status === "SCHEDULED";
+  const chips = leg.chips ?? m.metrics.slice(0, 2);
 
   return (
     <motion.article
@@ -109,10 +110,10 @@ function PassCard({ index }: { index: number }) {
           </div>
 
           <p className="mt-3 text-sm font-medium leading-snug text-foreground">{m.destination}</p>
-          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{m.summary}</p>
-          {m.metrics.length > 0 && (
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{leg.summary ?? m.summary}</p>
+          {chips.length > 0 && (
             <ul className="mt-3 flex flex-wrap gap-1.5">
-              {m.metrics.slice(0, 2).map((x) => (
+              {chips.map((x) => (
                 <li key={x} className="rounded-full border border-foreground/10 bg-white px-2.5 py-1 text-[11px] text-foreground/80">
                   {x}
                 </li>
