@@ -1047,7 +1047,7 @@ function startEngine(
     raf = 0
     const raw = (now - last) / 1000
     // A late frame shows the next one a little further on, not a jump: the clock never leaps more than 50 ms.
-    const dt = Math.min(0.05, raw)
+    const dt = Math.max(0, Math.min(0.05, raw))
     last = now
     if (playing && raw < 0.25) {
       slowEma += (raw - slowEma) * 0.15
