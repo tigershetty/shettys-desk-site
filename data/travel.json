@@ -1,5 +1,5 @@
 {
-  "_source": "Compiled from airline booking confirmations (2016-2026) and approved by Poornajith. City-level only: no dates, booking references, or companions.",
+  "_source": "Compiled from airline booking confirmations (2016-2026), then added to and approved by Poornajith (Oct 2026). City-level only: no dates, booking references, or companions.",
   "places": [
     { "city": "Bangalore", "country": "India", "continent": "Asia", "lat": 12.97, "lng": 77.59, "kind": "home" },
     { "city": "Malmö", "country": "Sweden", "continent": "Europe", "lat": 55.6, "lng": 13.0, "kind": "home" },
@@ -34,8 +34,20 @@
     { "city": "Goa", "country": "India", "continent": "Asia", "lat": 15.3, "lng": 74.12, "kind": "visited" },
     { "city": "Mumbai", "country": "India", "continent": "Asia", "lat": 19.08, "lng": 72.88, "kind": "visited" },
 
-    { "city": "Doha", "country": "Qatar", "continent": "Asia", "lat": 25.29, "lng": 51.53, "kind": "transit" },
-    { "city": "Abu Dhabi", "country": "United Arab Emirates", "continent": "Asia", "lat": 24.45, "lng": 54.38, "kind": "transit" },
-    { "city": "Dubai", "country": "United Arab Emirates", "continent": "Asia", "lat": 25.2, "lng": 55.27, "kind": "transit" }
+
+    { "city": "Hamburg", "country": "Germany", "continent": "Europe", "lat": 53.55, "lng": 9.99, "kind": "visited" },
+    { "city": "Berlin", "country": "Germany", "continent": "Europe", "lat": 52.52, "lng": 13.4, "kind": "visited" },
+    { "city": "Frankfurt", "country": "Germany", "continent": "Europe", "lat": 50.11, "lng": 8.68, "kind": "visited" },
+    { "city": "Prague", "country": "Czechia", "continent": "Europe", "lat": 50.08, "lng": 14.44, "kind": "visited" },
+    { "city": "Budapest", "country": "Hungary", "continent": "Europe", "lat": 47.5, "lng": 19.04, "kind": "visited" },
+    { "city": "Zadar", "country": "Croatia", "continent": "Europe", "lat": 44.12, "lng": 15.23, "kind": "visited" },
+    { "city": "Split", "country": "Croatia", "continent": "Europe", "lat": 43.51, "lng": 16.44, "kind": "visited" },
+    { "city": "Dubrovnik", "country": "Croatia", "continent": "Europe", "lat": 42.65, "lng": 18.09, "kind": "visited" },
+    { "city": "Istanbul", "country": "Turkey", "continent": "Europe", "lat": 41.01, "lng": 28.98, "kind": "visited" },
+    { "city": "Niagara Falls", "country": "United States", "continent": "North America", "lat": 43.09, "lng": -79.05, "kind": "visited" },
+    { "city": "Bali", "country": "Indonesia", "continent": "Asia", "lat": -8.65, "lng": 115.17, "kind": "visited" },
+    { "city": "Doha", "country": "Qatar", "continent": "Asia", "lat": 25.29, "lng": 51.53, "kind": "visited" },
+    { "city": "Abu Dhabi", "country": "United Arab Emirates", "continent": "Asia", "lat": 24.45, "lng": 54.38, "kind": "visited" },
+    { "city": "Dubai", "country": "United Arab Emirates", "continent": "Asia", "lat": 25.2, "lng": 55.27, "kind": "visited" }
   ]
 }

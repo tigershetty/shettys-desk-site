@@ -31,7 +31,9 @@ export default function GlobeSection() {
       <div className="mt-2 flex flex-wrap justify-center gap-4 text-[11px] text-muted-foreground">
         <span className="inline-flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[rgb(251,100,21)]" />Home: Bangalore, Malmö</span>
         <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-primary" />Visited</span>
-        <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-slate-400" />Transit hub</span>
+        {places.some((p) => p.kind === "transit") && (
+          <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-slate-400" />Transit hub</span>
+        )}
       </div>
 
       {/* The same places as text, for screen readers and search. */}
