@@ -1,19 +1,18 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import TextTypewriter from "./TextTypewriter";
+import { GlassIconReveal } from "./ui/liquid-glass-logo-reveal";
 
 const SESSION_KEY = "agent-intro-played";
 
-// Intro backdrop: the page's primary accent (indigo `--primary`). Keeping the
-// loading screen on-brand with the rest of the site, the white wordmark and
-// scribble mark stay crisp and legible against it. Single source of truth;
-// tweak here.
-const PRELOADER_BG = "#4f46e5";
+// Intro backdrop: the site's own light field (`--background`). The logo keeps
+// its own colours, and the glass reveal paints this colour behind it, so the
+// curtain lifts onto a page that already matches. Single source of truth.
+const PRELOADER_BG = "#f7f9f3";
 
 // useLayoutEffect warns during SSR; fall back to useEffect on the server.
 const useIsoLayoutEffect =
@@ -34,10 +33,6 @@ export default function Preloader() {
   const [active, setActive] = useState(true);
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const logoBoxRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const logoTopRef = useRef<HTMLImageElement>(null);
-  const logoBottomRef = useRef<HTMLImageElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
@@ -68,11 +63,7 @@ export default function Preloader() {
     const ctx = gsap.context(() => {
       if (prefersReduced) {
         // Minimal, accessible version: hold briefly, then fade out.
-        gsap.set(
-          [logoTopRef.current, logoBottomRef.current, contentRef.current],
-          { opacity: 1, y: 0 }
-        );
-        if (glowRef.current) gsap.set(glowRef.current, { autoAlpha: 0 });
+        gsap.set(contentRef.current, { opacity: 1, y: 0 });
         if (barRef.current) gsap.set(barRef.current, { scaleX: 1 });
         if (counterRef.current) counterRef.current.textContent = "100";
         gsap.to(rootRef.current, {
@@ -88,58 +79,13 @@ export default function Preloader() {
       const counter = { v: 0 };
       const tl = gsap.timeline();
 
-      // Dramatic assembly: the two halves fly in (offset, rotated, blurred,
-      // scaled) and lock together, with a soft glow flash and an elastic settle.
+      // The logo itself is revealed by the glass (its own WebGL timeline,
+      // about 3.5 s); this timeline runs the caption, the counter and the exit.
       tl.from(
-        logoTopRef.current,
-        {
-          yPercent: -85,
-          rotation: -12,
-          scale: 0.82,
-          autoAlpha: 0,
-          filter: "blur(12px)",
-          duration: 0.95,
-          ease: "power4.out",
-        },
-        0
+        contentRef.current,
+        { autoAlpha: 0, y: 10, duration: 0.5, ease: "power2.out" },
+        1.0
       )
-        .from(
-          logoBottomRef.current,
-          {
-            yPercent: 85,
-            rotation: 10,
-            scale: 0.82,
-            autoAlpha: 0,
-            filter: "blur(12px)",
-            duration: 0.95,
-            ease: "power4.out",
-          },
-          0
-        )
-        // Glow flash as the halves meet.
-        .fromTo(
-          glowRef.current,
-          { scale: 0.4, autoAlpha: 0 },
-          { scale: 1.15, autoAlpha: 0.7, duration: 0.45, ease: "power2.out" },
-          0.6
-        )
-        .to(
-          glowRef.current,
-          { autoAlpha: 0, scale: 1.4, duration: 0.6, ease: "power2.in" },
-          1.0
-        )
-        // Snap-together pulse with an elastic settle.
-        .to(logoBoxRef.current, { scale: 1.05, duration: 0.16, ease: "power2.out" }, 0.86)
-        .to(
-          logoBoxRef.current,
-          { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.5)" },
-          1.02
-        )
-        .from(
-          contentRef.current,
-          { autoAlpha: 0, y: 10, duration: 0.5, ease: "power2.out" },
-          1.0
-        )
         .to(
           counter,
           {
@@ -177,16 +123,6 @@ export default function Preloader() {
           },
           "<0.1"
         );
-
-      // Gentle continuous float once the mark has assembled.
-      gsap.to(logoBoxRef.current, {
-        y: -6,
-        duration: 2.2,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        delay: 1.3,
-      });
     }, rootRef);
 
     return () => {
@@ -205,62 +141,42 @@ export default function Preloader() {
       className="fixed inset-0 z-[10000] flex flex-col items-center justify-center"
       style={{ clipPath: "inset(0 0 0% 0)", backgroundColor: PRELOADER_BG }}
     >
-      <div
-        ref={logoBoxRef}
-        className="relative aspect-square w-[clamp(150px,40vw,208px)]"
-      >
-        {/* Glow that flashes as the halves meet */}
-        <div
-          ref={glowRef}
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-0"
-          style={{
-            background:
-              "radial-gradient(circle at center, rgba(255,255,255,0.6) 0%, rgba(199,210,254,0.3) 35%, transparent 65%)",
-            filter: "blur(8px)",
-          }}
-        />
-        <Image
-          ref={logoTopRef}
-          src="/images/logo-mark-top.png"
-          alt="Shetty's Desk"
-          fill
-          priority
-          sizes="208px"
-          className="relative select-none object-contain"
-          draggable={false}
-        />
-        <Image
-          ref={logoBottomRef}
-          src="/images/logo-mark-bottom.png"
-          alt=""
-          fill
-          sizes="208px"
-          className="relative select-none object-contain"
-          draggable={false}
-        />
-      </div>
+      <GlassIconReveal
+        logo="/images/logo-full.png"
+        label="Shetty's Desk"
+        look="light"
+        originalColors
+        background={PRELOADER_BG}
+        loop={false}
+        tileSize={240}
+        logoScale={0.8}
+        finalScale={0.95}
+        // A gentle start: at the default zoom the grainy scribble fills the
+        // droplet as a flat orange blob before it reads as the mark.
+        tuning={{ startZoom: 1.45, swell: 0 }}
+        className="aspect-square w-[min(86vw,440px)] cursor-default"
+      />
 
       <div
         ref={contentRef}
-        className="mt-2 flex w-[min(78vw,320px)] flex-col items-center"
+        className="-mt-6 flex w-[min(78vw,320px)] flex-col items-center"
       >
         <TextTypewriter
           duration={2}
-          className="text-center font-mono text-base text-white/90 sm:text-lg"
+          className="text-center font-mono text-base text-foreground/80 sm:text-lg"
         >
           a(gent) is thinking....
         </TextTypewriter>
 
         <div className="mt-6 flex w-full items-center gap-3">
-          <div className="h-px flex-1 overflow-hidden bg-white/25">
+          <div className="h-px flex-1 overflow-hidden bg-foreground/15">
             <div
               ref={barRef}
-              className="h-full w-full origin-left bg-white"
+              className="h-full w-full origin-left bg-primary"
               style={{ transform: "scaleX(0)" }}
             />
           </div>
-          <span className="font-mono text-[11px] tabular-nums text-white/70">
+          <span className="font-mono text-[11px] tabular-nums text-muted-foreground">
             <span ref={counterRef}>0</span>
           </span>
         </div>
