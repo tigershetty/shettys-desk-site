@@ -83,10 +83,7 @@ function PassCard({ index }: { index: number }) {
       <div className="min-w-0 flex-1 overflow-hidden rounded-l-2xl">
         <div className="h-1 w-full" style={{ background: line.color }} />
         <div className="p-4 pb-3.5 sm:p-5 sm:pb-4">
-          <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-            <span className="font-medium text-foreground/80">Shetty&apos;s Desk</span>
-            <span>Boarding pass</span>
-          </div>
+          <p className="text-[11px] text-muted-foreground">Boarding pass</p>
 
           <div className="mt-4 flex items-center gap-3">
             <div className="min-w-0">

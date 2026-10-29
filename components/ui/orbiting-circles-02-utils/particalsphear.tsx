@@ -50,7 +50,7 @@ function buildPoints(count: number) {
   return pts;
 }
 
-export default function ParticleSphereAnimation({ className, count = 1500 }: { className?: string; count?: number }) {
+export default function ParticleSphereAnimation({ className, count }: { className?: string; count?: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -59,7 +59,8 @@ export default function ParticleSphereAnimation({ className, count = 1500 }: { c
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const pts = buildPoints(count);
+    // A small globe needs fewer dots to look as dense as a large one.
+    const pts = buildPoints(count ?? Math.round(Math.min(1500, Math.max(450, canvas.clientWidth ** 2 / 45))));
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let yaw = 4.1; // starts with Bangalore turning into view
     let t = 0;
