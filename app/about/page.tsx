@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TasteIsAllYouNeed } from "@/components/ui/taste-pong";
-import ControlTower from "@/components/ControlTower";
+import CareerBento from "@/components/CareerBento";
 import VinylPlayer from "@/components/VinylPlayer";
 import OrbitingSkillsLoader from "@/components/OrbitingSkillsLoader";
 import AboutHeading from "@/components/AboutHeading";
@@ -118,8 +118,8 @@ export default function AboutPage() {
         <JourneyBoard views={["board"]} />
       </div>
 
-      {/* Control tower: career KPIs, network, capabilities */}
-      <ControlTower />
+      {/* Career at a glance: the bento of the work */}
+      <CareerBento />
 
       {/* On Rotation */}
       <section className="mb-12 rounded-3xl border border-border bg-card p-6">

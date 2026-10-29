@@ -335,3 +335,8 @@ html.intro-active body {
 @media (prefers-reduced-motion: no-preference) {
   .numbers-dot { animation: footer-dot 6s cubic-bezier(.45,0,.2,1) infinite alternate; }
 }
+
+/* Career bento: dashes travelling along the network lanes. */
+@keyframes bento-flow {
+  to { stroke-dashoffset: -36; }
+}

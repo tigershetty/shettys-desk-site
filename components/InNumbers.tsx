@@ -2,7 +2,7 @@
 
 import { Briefcase, CalendarDays, Globe2, MapPin, Route } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import CountFigure from "@/components/CountFigure";
 import experience from "@/data/experience.json";
 import travel from "@/data/travel.json";
 
@@ -27,45 +27,12 @@ const countries = byContinent.reduce((s, c) => s + c.n, 0);
 const roleOrgs = [...experience.earlier.map((r) => r.company).reverse(), ...experience.primary.flatMap((c) => c.roles.map(() => c.company))];
 const orgs = [...new Set(roleOrgs)];
 
-/** Shows the real figure from the first render (for readers and parsers),
- * then counts up once when it scrolls into view. */
-function Figure({ n }: { n: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const fmt = (v: number) => Math.round(v).toLocaleString("en-US");
-    let raf = 0;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting) return;
-        io.disconnect();
-        const t0 = performance.now();
-        const step = (t: number) => {
-          const k = Math.min(1, (t - t0) / 1200);
-          el.textContent = fmt(n * (1 - Math.pow(1 - k, 4)));
-          if (k < 1) raf = requestAnimationFrame(step);
-        };
-        el.textContent = "0";
-        raf = requestAnimationFrame(step);
-      },
-      { threshold: 0.5 }
-    );
-    io.observe(el);
-    return () => {
-      io.disconnect();
-      cancelAnimationFrame(raf);
-    };
-  }, [n]);
-  return <span ref={ref}>{n.toLocaleString("en-US")}</span>;
-}
-
 function Card({ n, label, note, icon: Icon, children, className = "" }: { n: number; label: string; note?: string; icon: typeof Globe2; children: React.ReactNode; className?: string }) {
   return (
     <div className={`relative flex flex-col rounded-2xl border border-foreground/10 bg-white p-4 ${className}`}>
       <Icon aria-hidden className="absolute right-4 top-4 h-5 w-5 text-foreground/15" strokeWidth={1.5} />
       <p className="text-2xl font-semibold leading-none tracking-[-0.03em] text-primary tabular-nums">
-        <Figure n={n} />
+        <CountFigure n={n} />
       </p>
       <p className="mt-1.5 text-sm text-foreground">{label}</p>
       {note && <p className="text-xs text-muted-foreground">{note}</p>}
