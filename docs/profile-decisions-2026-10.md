@@ -75,7 +75,7 @@ Confirmed line by line by Poornajith against `data/experience.json`:
 | B.Eng. RVCE 2013-17, M.Sc. LTH 2017-19 | Verified |
 | Thesis, Jan to Jun 2019 | Verified (see Thesis) |
 
-Not yet confirmed: whether Tetra Pak has cleared any exact figure for the CV; the DE&I Europe panelist and Culture Champion wording; the competency list.
+Confirmed since: the CV tier is softened rather than exact (cleared by Poornajith); DE&I Europe panelist and Culture Champion served 2022 to 2025; all six competencies verified line by line, with Claude Code, Codex and GitHub added to Systems & Data.
 
 ## DE&I Europe Panelist and Culture Champion
 

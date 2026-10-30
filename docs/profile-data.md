@@ -29,7 +29,7 @@
 
 ## Not yet covered
 
-The competency list is unverified. The Home rebuild and `/resume` page (Step 3) will read the `cv` tier.
+The Home rebuild and `/resume` page (Step 3) will read the `cv` tier.
 
 ## Outside the website
 

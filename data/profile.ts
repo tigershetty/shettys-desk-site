@@ -209,13 +209,13 @@ export const education = [
   { institution: "R. V. College of Engineering, Bangalore", degree: "B.Eng. Industrial Engineering & Management", period: "2013 - 2017" },
 ];
 
-/** Unverified: not yet confirmed line by line. */
+/** Verified line by line by Poornajith, 30 Oct 2026. */
 export const competencies = [
   { area: "Supply & Production Planning", detail: "IBP/S&OP, mid- and short-term planning, scenario modelling" },
   { area: "Purchasing & Sourcing", detail: "Operational purchasing, supplier and PO management, delivery expediting, sourcing strategy" },
   { area: "Team Leadership", detail: "People development, budget ownership, performance management, KPI design" },
   { area: "Process Improvement", detail: "WCM/LEAN, root-cause analysis, continuous improvement" },
-  { area: "Systems & Data", detail: "SAP ECC, SAP IBP, Microsoft Copilot Studio, Power BI, Excel" },
+  { area: "Systems & Data", detail: "SAP ECC, SAP IBP, Microsoft Copilot Studio, Power BI, Excel, Claude Code, Codex, GitHub" },
   { area: "Cross-functional Collaboration", detail: "Commercial, finance, procurement, suppliers" },
 ];
 

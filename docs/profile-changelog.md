@@ -4,6 +4,8 @@ One line per change to `data/profile.ts`, newest first. Say what changed and whe
 
 ## 2026-10-30
 
+- Competencies verified line by line; Systems & Data now also lists Claude Code, Codex and GitHub. Source: Poornajith.
+
 - Created `data/profile.ts` as the single source of truth. Replaced `data/experience.json`, `data/beliefs.json` and `data/projects.json`; figures in journey, passes, SCOR, control tower, About and Shetty's Desk now read from it. Source: content inventory and Q&A with Poornajith.
 - Career verified line by line by Poornajith: three Tetra Pak roles, five earlier roles, both degrees.
 - Scope figures banded for the web (400M+ EUR, 200,000+ POs, 150M+ EUR); CV tier softened but closer to real. Source: Poornajith, 30 Oct 2026.
