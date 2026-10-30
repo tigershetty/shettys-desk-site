@@ -43,6 +43,12 @@ Whether Tetra Pak has cleared any figure is not confirmed. The profile file ther
 | Supply Chain Twin Lab | Planned | Separate from the two others |
 | Supply Chain Command (hidden 3D game) | Paused | Separate build. Page is noindex; code kept in `components/command` |
 
+| Die with Zero Planner | WIP | Interactive financial planner for Sweden |
+| ShettysDesk.com | WIP | This website |
+| Shetty's Desk workflow (was "Workflow Engine") | WIP | The LinkedIn workflow behind Shetty's Desk, framed as a product |
+| Bucket List Compiler | Planned | Not started |
+| Hyrox setup (Hyrox training, Strava and Hevy MCP connections) | Not listed yet | To be added later as a separate project |
+
 ## Travel
 
 Added Colombo, Cape Town, Cairo and Addis Ababa: 31 countries, 4 continents. Norway is skipped for now.
