@@ -219,13 +219,13 @@ export const competencies = [
   { area: "Cross-functional Collaboration", detail: "Commercial, finance, procurement, suppliers" },
 ];
 
-/** DE&I Europe panelist and Culture Champion: a fixed two-year term from the day it was listed on the site. */
+/** DE&I Europe panelist and Culture Champion. Confirmed by year only; no months recorded. */
 export const dei = {
   title: "DE&I Europe Panelist & Culture Champion",
   org: "Tetra Pak",
-  start: "2026-03",
-  end: "2028-03",
-  period: "Mar 2026 - Mar 2028",
+  start: "2022",
+  end: "2025",
+  period: "2022 - 2025",
 } as const;
 
 // ---------------------------------------------------------------------------

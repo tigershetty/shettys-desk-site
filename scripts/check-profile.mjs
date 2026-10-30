@@ -62,7 +62,9 @@ if (idx(profile.dates.thesisEnd) >= idx(profile.dates.tetraPakStart)) fail("thes
 if (roles.length && sorted[0].start !== profile.dates.tetraPakStart) {
   fail(`dates.tetraPakStart (${profile.dates.tetraPakStart}) must equal the first Tetra Pak role start (${sorted[0].start})`);
 }
-if (idx(profile.dei.end) - idx(profile.dei.start) !== 24) fail("the DE&I term must be exactly 24 months");
+if (!/^\d{4}$/.test(profile.dei.start) || !/^\d{4}$/.test(profile.dei.end) || Number(profile.dei.end) < Number(profile.dei.start)) {
+  fail("dei.start and dei.end must be years (YYYY), end not before start");
+}
 
 for (const [id, fig] of Object.entries(profile.figures)) {
   if (!fig.web || !fig.cv) fail(`figure "${id}" needs a web and a cv value`);

@@ -21,7 +21,7 @@ export const beliefs: { title: string; body: string }[] = [
   },
   {
     title: "Inclusion is operational",
-    body: "DE&I isn't a side project. As a Culture Champion and DE&I Europe Panelist at Tetra Pak, I've seen the same pattern: the information exists, the execution doesn't. Inclusion gaps and supply chain gaps have the same root cause.",
+    body: "DE&I isn't a side project. As a former Culture Champion and DE&I Europe Panelist at Tetra Pak, I saw the same pattern: the information exists, the execution doesn't. Inclusion gaps and supply chain gaps have the same root cause.",
   },
   {
     title: "Simplicity is the hard part",

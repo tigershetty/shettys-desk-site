@@ -135,7 +135,7 @@ export const islands: Record<IslandId, Island> = {
         org: "Tetra Pak · Shetty's Desk",
         points: [
           `Built 'Optimus Prime at P&Q', an AI agent over the Quality Management System and ${fig("workInstructions")} work instructions for ${fig("agentUsers")} global users, cutting query and review time by ${fig("agentTimeCut")}.`,
-          `Shetty's Desk: an agentic content workflow built on Claude Code. ${dei.title} (${dei.period}).`,
+          `Shetty's Desk: an agentic content workflow built on Claude Code. Before that, ${dei.title} (${dei.period}).`,
         ],
       },
     ],

@@ -79,4 +79,4 @@ Not yet confirmed: whether Tetra Pak has cleared any exact figure for the CV; th
 
 ## DE&I Europe Panelist and Culture Champion
 
-A fixed two-year term, recorded from the day it was first listed on the site (7 Mar 2026) to two years after: **Mar 2026 to Mar 2028**. Nothing earlier and nothing beyond it is claimed. If the real start date differs, change `dei.start` and `dei.end` in `data/profile.ts`; the check enforces exactly 24 months.
+Served 2022 to 2025 (confirmed by year only, no months). Earlier notes assumed a two-year term from Mar 2026; that was wrong and is superseded. The site words it in the past tense.

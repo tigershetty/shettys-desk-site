@@ -6,7 +6,7 @@ import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
 import BoardingPasses from "@/components/BoardingPasses";
 import Bookshelf from "@/components/bookshelf/Bookshelf";
-import { fig, roleYears, tetraPakRoles, yearsAtTetraPak } from "@/data/profile";
+import { dei, fig, roleYears, tetraPakRoles, yearsAtTetraPak } from "@/data/profile";
 import travel from "@/data/travel.json";
 
 const origin = travel.places.find((p) => p.kind === "home")?.city ?? "Bangalore";
@@ -64,8 +64,8 @@ export default function AboutPage() {
             the first place. That gap is why I started Shetty&apos;s Desk.
           </p>
           <p>
-            Outside of operations: DE&amp;I Europe Panelist, Culture Champion at
-            Tetra Pak. I believe the same thing about inclusion that I believe
+            Outside of operations: I was a DE&amp;I Europe Panelist and Culture
+            Champion at Tetra Pak ({dei.period}). I believe the same thing about inclusion that I believe
             about supply chains. The information exists. The gap is always in the
             translation and execution.
           </p>
