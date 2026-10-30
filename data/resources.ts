@@ -12,11 +12,14 @@ export type Resource = {
   motionMp4: string;
   tags: string[];
   outputs: string[];
+  /** Hidden resources return 404 on every route and are listed nowhere. Files stay in git. */
+  hidden?: boolean;
 };
 
 export const resources: Resource[] = [
   {
     slug: "demand-sensing-router",
+    hidden: true,
     title: "Demand Sensing Router",
     eyebrow: "AI for Supply Chain",
     promise: "Route each SKU to the planning cadence its evidence deserves.",
@@ -39,6 +42,15 @@ export const resources: Resource[] = [
   },
 ];
 
+/** Resources that may be listed and served. */
+export const visibleResources = resources.filter((resource) => !resource.hidden);
+
+/** A visible resource by slug, or undefined when it is hidden or unknown. */
 export function getResource(slug: string) {
+  return visibleResources.find((resource) => resource.slug === slug);
+}
+
+/** Any resource, hidden or not. For build-time metadata only. */
+export function getAnyResource(slug: string) {
   return resources.find((resource) => resource.slug === slug);
 }

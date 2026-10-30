@@ -6,6 +6,8 @@
 // figures. The current legs (and the one still scheduled) keep their full
 // detail from data/journey.ts.
 
+import { fig } from "@/data/profile";
+
 export type Stop = { code: string; name: string };
 
 export type Pass = {
@@ -45,7 +47,7 @@ export const passes: Pass[] = [
     milestone: "thesis",
     from: { code: "LTH", name: "Lund University" },
     to: { code: "TPK", name: "Tetra Pak" },
-    summary: "Thesis student at Tetra Pak, then a full-time offer.",
+    summary: "Co-authored master's thesis on planning for built-to-order machines at Tetra Pak, then a full-time offer.",
     chips: ["Thesis → full-time offer"],
   },
   {
@@ -67,7 +69,7 @@ export const passes: Pass[] = [
     from: { code: "MPS", name: "Master Scheduler" },
     to: { code: "LDR", name: "Team Leader" },
     summary: "Led the supply planning team across Sweden, Italy and China.",
-    chips: ["Team of 8"],
+    chips: [`Team of ${fig("teamBefore")}`],
   },
   // Now, and what is next: these keep their full detail.
   { milestone: "manager", from: { code: "LDR", name: "Team Leader" }, to: { code: "MGR", name: "Replenishment Manager" } },

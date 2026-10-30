@@ -1,7 +1,8 @@
 "use client";
 
 import GlassFolder, { type FolderFile } from "@/components/ui/glass-folder-cards";
-import experience from "@/data/experience.json";
+import experience from "@/data/experience";
+import { yearsAtTetraPak } from "@/data/profile";
 import { passes } from "@/data/passes";
 import { brandArt } from "@/lib/brand-art";
 
@@ -32,7 +33,7 @@ export default function DeskFolders({ articles }: Props) {
 
   const folders = [
     { label: "Articles", files: articleFiles, art: brandArt.indigo, seed: 3, meta: `${articles.length} published` },
-    { label: "Experience", files: roleFiles, art: brandArt.ink, seed: 11, meta: "7+ years · Tetra Pak", tone: "dark" as const },
+    { label: "Experience", files: roleFiles, art: brandArt.ink, seed: 11, meta: `${yearsAtTetraPak()}+ years · Tetra Pak`, tone: "dark" as const },
     { label: "About me", files: aboutFiles, art: brandArt.amber, seed: 7, meta: "the person behind it" },
   ];
 

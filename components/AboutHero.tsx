@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import OrbitingCirclesGlobe, { type Orbit } from "@/components/ui/orbiting-circles-02";
-import siteData from "@/data/site.json";
+import { identity } from "@/data/profile";
 
 // The top of About: the tools of the work as real logos, in orbit around a
 // small particle globe that links Bangalore to Malmö, with the person at its
@@ -42,7 +42,7 @@ const tools = orbits.flatMap((o) => o.icons.map((i) => i.label));
 export default function AboutHero() {
   return (
     <section
-      aria-label="Poornajith Shetty"
+      aria-label={identity.name}
       className="relative mb-10 overflow-hidden rounded-3xl border border-border bg-card bg-[radial-gradient(ellipse_70%_50%_at_50%_70%,rgba(79,70,229,0.08),transparent)]"
     >
       <OrbitingCirclesGlobe orbits={orbits} className="h-[16.5rem] md:h-[19.5rem]">
@@ -53,10 +53,10 @@ export default function AboutHero() {
       </OrbitingCirclesGlobe>
 
       <div className="px-4 pb-6 text-center">
-        <p className="text-lg font-semibold tracking-tight text-foreground">Poornajith Shetty</p>
-        <p className="text-sm text-muted-foreground">Replenishment Manager at Tetra Pak, Lund &middot; based in Malm&ouml;</p>
+        <p className="text-lg font-semibold tracking-tight text-foreground">{identity.name}</p>
+        <p className="text-sm text-muted-foreground">Replenishment Manager at {identity.employer}, {identity.workplace} &middot; based in {identity.home}</p>
         <a
-          href={siteData.social.linkedin}
+          href={identity.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"

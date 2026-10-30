@@ -6,6 +6,10 @@ import AboutHeading from "@/components/AboutHeading";
 import GlobeSection from "@/components/GlobeSection";
 import BoardingPasses from "@/components/BoardingPasses";
 import Bookshelf from "@/components/bookshelf/Bookshelf";
+import { fig, roleYears, tetraPakRoles, yearsAtTetraPak } from "@/data/profile";
+import travel from "@/data/travel.json";
+
+const origin = travel.places.find((p) => p.kind === "home")?.city ?? "Bangalore";
 
 const onRotation = {
   reading: [
@@ -43,13 +47,13 @@ export default function AboutPage() {
         <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary">Personal note</p>
         <div className="space-y-4 text-foreground/90 leading-relaxed">
           <p>
-            Originally from Bangalore. Moved to Sweden for a master&apos;s in
+            Originally from {origin}. Moved to Sweden for a master&apos;s in
             Logistics &amp; Supply Chain Management at Lund University, and
-            stayed. I&apos;ve spent 7+ years at Tetra Pak, starting as a thesis
+            stayed. I&apos;ve spent {yearsAtTetraPak()}+ years at Tetra Pak, starting as a thesis
             student. Today I&apos;m Replenishment Manager in the Services Supply
-            Network, leading a team of ten purchasing and sourcing specialists who
-            keep 150,000+ spare parts moving to customers worldwide: 450M+ euros a
-            year, across 1,000+ suppliers. Before that I spent four years in
+            Network, leading a team of {fig("teamNow")} purchasing and sourcing specialists who
+            keep {fig("spareParts")} spare parts moving to customers worldwide, with {fig("purchasingVolume")} a
+            year in purchasing volume across {fig("suppliers")} suppliers. Before that I spent {roleYears(tetraPakRoles[1])} years in
             supply planning for capital equipment, leading a team across Sweden,
             Italy and China.
           </p>

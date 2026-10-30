@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download, PackageOpen, Sparkles } from "lucide-react";
 import ApproachFlow from "@/components/ApproachFlow";
-import { resources } from "@/data/resources";
+import { notFound } from "next/navigation";
+import { visibleResources as resources } from "@/data/resources";
 
 export const metadata: Metadata = {
   // Hidden while the library grows: reachable by link, not listed or indexed.
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function ResourcesPage() {
+  // The whole library is hidden while no resource is public.
+  if (resources.length === 0) notFound();
   return (
     <div className="mx-auto w-full max-w-6xl">
       <header className="max-w-3xl pb-7 pt-2">

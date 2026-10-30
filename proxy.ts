@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { visibleResources } from "@/data/resources";
+
+// Hidden resources (and the library when none is public) answer with a real 404.
+function isHiddenResourcePath(pathname: string) {
+  if (pathname !== "/resources" && !pathname.startsWith("/resources/")) return false;
+  const slug = pathname.split("/")[2];
+  return slug ? !visibleResources.some((resource) => resource.slug === slug) : visibleResources.length === 0;
+}
 
 export function proxy(request: NextRequest) {
+  if (isHiddenResourcePath(request.nextUrl.pathname)) {
+    return NextResponse.rewrite(new URL("/404", request.url), { status: 404 });
+  }
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const isDev = process.env.NODE_ENV === "development";
   const connectSources = isDev

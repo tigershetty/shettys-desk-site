@@ -2,20 +2,21 @@
 
 import { useEffect, useState } from "react";
 import CountUp from "./CountUp";
-import experience from "@/data/experience.json";
-import beliefs from "@/data/beliefs.json";
+import experience from "@/data/experience";
+import beliefs from "@/data/beliefs";
+import { fig, figures, identity } from "@/data/profile";
 
 const kpis = [
-  { prefix: "", value: 450, suffix: "M+", unit: "EUR", label: "Annual purchasing volume" },
-  { prefix: "", value: 98, suffix: "%", unit: "from 85%", label: "Supply availability, chip shortage" },
-  { prefix: "−", value: 20, suffix: "%", unit: "1,500+ parts / yr", label: "Sourcing lead time" },
-  { prefix: "~", value: 2200, suffix: "", unit: "hours / yr", label: "Saved by automation" },
-  { prefix: "", value: 1000, suffix: "+", unit: "suppliers", label: "Global supply base" },
-  { prefix: "", value: 10, suffix: "", unit: "specialists", label: "Team, with budget ownership" },
+  { prefix: "", value: figures.purchasingVolume.n ?? 0, suffix: "M+", unit: "EUR", label: "Annual purchasing volume in scope" },
+  { prefix: "", value: figures.availabilityTo.n ?? 0, suffix: "%", unit: `from ${fig("availabilityFrom")}`, label: "Supply availability, chip shortage" },
+  { prefix: "−", value: figures.leadTimeCut.n ?? 0, suffix: "%", unit: `${fig("leadTimeParts")} parts / yr`, label: "Sourcing lead time" },
+  { prefix: "~", value: figures.hoursPerYear.n ?? 0, suffix: "", unit: "hours / yr", label: "Saved by automation" },
+  { prefix: "", value: figures.suppliers.n ?? 0, suffix: "+", unit: "suppliers", label: "Supply base in scope" },
+  { prefix: "", value: figures.teamNow.n ?? 0, suffix: "", unit: "specialists", label: "Team, with budget ownership" },
 ];
 
 // Schematic (not geographic) layout of the network I have planned across.
-const hub = { name: "Lund", x: 300, y: 112 };
+const hub = { name: identity.workplace, x: 300, y: 112 };
 const nodes = [
   { name: "Sweden", x: 210, y: 46, role: "Factory" },
   { name: "Italy", x: 330, y: 218, role: "Factory" },
@@ -26,11 +27,11 @@ const nodes = [
 ];
 
 const log = [
-  { tag: "RESOLVED", text: "Order-confirmation automation through an SAP defect: ~9 h saved per day" },
-  { tag: "SHIPPED", text: "Optimus Prime AI agent: query and review time cut by over 90% for 50+ users" },
-  { tag: "RECOVERED", text: "Semiconductor shortage: availability back from 85% to 98%" },
-  { tag: "IMPROVED", text: "On-time delivery +25% through capacity scenario modelling" },
-  { tag: "CLEARED", text: "Sourcing backlog −45% after automating case creation" },
+  { tag: "RESOLVED", text: `Order-confirmation automation through an SAP defect: ${fig("hoursPerDay")} h saved per day` },
+  { tag: "SHIPPED", text: `Optimus Prime AI agent: query and review time cut by ${fig("agentTimeCut")} for ${fig("agentUsers")} users` },
+  { tag: "RECOVERED", text: `Semiconductor shortage: availability back from ${fig("availabilityFrom")} to ${fig("availabilityTo")}` },
+  { tag: "IMPROVED", text: `On-time delivery +${fig("onTimeGain")} through capacity scenario modelling` },
+  { tag: "CLEARED", text: `Sourcing backlog −${fig("backlogCut")} after automating case creation` },
   { tag: "STANDARDISED", text: "Global S&OP planning model, the foundation for IBP" },
   ...beliefs.map((b) => ({ tag: "PRINCIPLE", text: b.title })),
 ];
@@ -45,13 +46,13 @@ function Clock() {
     const id = window.setInterval(() => setTime(fmt()), 1000);
     return () => window.clearInterval(id);
   }, []);
-  return <span suppressHydrationWarning>{time ?? "--:--:--"} · MALMÖ</span>;
+  return <span suppressHydrationWarning>{time ?? "--:--:--"} · {identity.home.toUpperCase()}</span>;
 }
 
 function NetworkMap() {
   const h = hub;
   return (
-    <svg viewBox="0 0 600 260" className="h-auto w-full" role="img" aria-label={`Schematic of the supply network planned across ${nodes.map((n) => n.name).join(", ")}, coordinated from Lund`}>
+    <svg viewBox="0 0 600 260" className="h-auto w-full" role="img" aria-label={`Schematic of the supply network planned across ${nodes.map((n) => n.name).join(", ")}, coordinated from ${identity.workplace}`}>
       <defs>
         <pattern id="ct-grid" width="20" height="20" patternUnits="userSpaceOnUse">
           <circle cx="1" cy="1" r="0.8" fill="rgba(255,255,255,0.12)" />
@@ -77,7 +78,7 @@ function NetworkMap() {
       <circle cx={h.x} cy={h.y} r={10} fill="none" stroke="#fbbf24" strokeWidth={1.5} className="motion-safe:animate-ping" style={{ transformOrigin: `${h.x}px ${h.y}px` }} />
       <circle cx={h.x} cy={h.y} r={6} fill="#fbbf24" stroke="#0a0a0a" strokeWidth={2} />
       <text x={h.x + 12} y={h.y + 4} className="fill-amber-300 font-mono text-[12px] font-semibold">
-        LUND · CONTROL
+        {identity.workplace.toUpperCase()} · CONTROL
       </text>
     </svg>
   );
@@ -86,7 +87,7 @@ function NetworkMap() {
 /**
  * "Planning cockpit" that replaces the old working-with-me and beliefs cards:
  * headline KPIs, the network I plan across, an event log of career wins and
- * principles, and the capability stack. All numbers come from experience.json.
+ * principles, and the capability stack. All figures come from data/profile.ts.
  */
 export default function ControlTower() {
   return (
@@ -140,7 +141,7 @@ export default function ControlTower() {
           </div>
           <NetworkMap />
           <p className="mt-2 text-xs text-neutral-400">
-            9 key products, 2 internal factories and 12+ external suppliers across 6 countries, scheduled from Lund.
+            {fig("keyProducts")} key products, {fig("factories")} internal factories and {fig("externalSuppliers")} external suppliers across {fig("countriesPlanned")} countries, scheduled from {identity.workplace}.
           </p>
         </div>
 

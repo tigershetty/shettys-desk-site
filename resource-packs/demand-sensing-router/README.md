@@ -60,4 +60,4 @@ demand-sensing-router/
 +-- validation-checklist.md
 ~~~
 
-Created by [Shetty's Desk](https://shettysdesk.vercel.app).
+Created by [Shetty's Desk](https://www.shettysdesk.com).

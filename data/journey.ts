@@ -1,5 +1,7 @@
 // Career journey shown on the About page as a departures board and a metro
-// map. Facts mirror data/experience.json; keep the two in sync.
+// map. Dates are narrative positions; every figure comes from data/profile.ts.
+
+import { brandLine, dei, fig, thesis } from "@/data/profile";
 
 export type JourneyLine = "education" | "career" | "projects" | "ventures";
 export type JourneyStatus = "LANDED" | "NOW BOARDING" | "IN FLIGHT" | "SCHEDULED";
@@ -83,8 +85,8 @@ export const milestones: Milestone[] = [
     place: "Tetra Pak, Lund",
     code: "TPK",
     status: "LANDED",
-    summary: "Thesis student at Tetra Pak. The interchange where education became a full-time career.",
-    metrics: ["Thesis → full-time offer"],
+    summary: `${thesis.publicLine} The interchange where education became a full-time career.`,
+    metrics: ["Thesis → full-time offer", thesis.period],
   },
   {
     id: "analyst",
@@ -96,7 +98,7 @@ export const milestones: Milestone[] = [
     code: "TPK",
     status: "LANDED",
     summary: "Junior specialist and analyst in global supply planning: long-term supply plans through product introductions and phase-outs.",
-    metrics: ["25+ products planned long-term", "Sep 2019 - Sep 2021"],
+    metrics: [`${fig("longTermProducts")} products planned long-term`, "Sep 2019 - Sep 2021"],
   },
   {
     id: "sop",
@@ -119,8 +121,8 @@ export const milestones: Milestone[] = [
     place: "Tetra Pak Supply Planning",
     code: "MPS",
     status: "LANDED",
-    summary: "Mid-term master scheduling across factories and external suppliers in six countries.",
-    metrics: ["9 key products · 6 countries", "2 factories · 12+ suppliers", "On-time delivery +25%"],
+    summary: `Mid-term master scheduling across factories and external suppliers in ${fig("countriesPlanned")} countries.`,
+    metrics: [`${fig("keyProducts")} key products · ${fig("countriesPlanned")} countries`, `${fig("factories")} factories · ${fig("externalSuppliers")} suppliers`, `On-time delivery +${fig("onTimeGain")}`],
   },
   {
     id: "chips",
@@ -132,7 +134,7 @@ export const milestones: Milestone[] = [
     code: "SEMI",
     status: "LANDED",
     summary: "Kept supply intact through the semiconductor shortage with scenario planning and rapid replanning.",
-    metrics: ["Availability 85% → 98%"],
+    metrics: [`Availability ${fig("availabilityFrom")} → ${fig("availabilityTo")}`],
   },
   {
     id: "leader",
@@ -143,8 +145,8 @@ export const milestones: Milestone[] = [
     place: "Sweden · Italy · China",
     code: "LDR",
     status: "LANDED",
-    summary: "Led a cross-functional planning team of 8 across three countries, protecting 180M+ EUR in annual revenue.",
-    metrics: ["Team of 8", "15+ critical deviations / month", "180M+ EUR protected"],
+    summary: `Led a cross-functional planning team of ${fig("teamBefore")} across three countries, in a capital-equipment scope worth ${fig("revenueScope")} in annual revenue.`,
+    metrics: [`Team of ${fig("teamBefore")}`, `${fig("deviationsPerMonth")} critical deviations / month`, `${fig("revenueScope")} revenue in scope`],
   },
   {
     id: "desk",
@@ -152,23 +154,11 @@ export const milestones: Milestone[] = [
     at: 2025.1,
     time: "2025",
     destination: "Shetty's Desk",
-    place: "Supply chain, one breakdown at a time",
+    place: brandLine,
     code: "DSK",
     status: "IN FLIGHT",
     summary: "An agentic supply-chain content studio built on Claude Code: research, visuals and reusable workflow packs.",
     metrics: ["Weekly breakdowns", "Free workflow packs"],
-  },
-  {
-    id: "dei",
-    line: "ventures",
-    at: 2025.6,
-    time: "ONGOING",
-    destination: "DE&I Europe Panelist",
-    place: "Culture Champion at Tetra Pak",
-    code: "DEI",
-    status: "IN FLIGHT",
-    summary: "Panelist for DE&I Europe and Culture Champion: the same translation-and-execution gap as in supply chains.",
-    metrics: ["People leadership", "Public speaking"],
   },
   {
     id: "manager",
@@ -180,7 +170,7 @@ export const milestones: Milestone[] = [
     code: "P&Q",
     status: "NOW BOARDING",
     summary: "Leading purchasing and sourcing specialists with full headcount and budget ownership for a global service network.",
-    metrics: ["Team of 10", "450M+ EUR purchasing volume", "150,000+ parts · 1,000+ suppliers"],
+    metrics: [`Team of ${fig("teamNow")}`, `${fig("purchasingVolume")} purchasing volume in scope`, `${fig("spareParts")} parts · ${fig("suppliers")} suppliers`],
   },
   {
     id: "automation",
@@ -192,7 +182,19 @@ export const milestones: Milestone[] = [
     code: "AUTO",
     status: "LANDED",
     summary: "Drove a stalled order-confirmation automation through an SAP defect to go-live.",
-    metrics: ["~9 hours saved per day", "~2,200 hours / year (≈1 FTE)", "Sourcing backlog −45%"],
+    metrics: [`${fig("hoursPerDay")} hours saved per day`, `${fig("hoursPerYear")} hours / year (≈1 FTE)`, `Sourcing backlog −${fig("backlogCut")}`],
+  },
+  {
+    id: "dei",
+    line: "ventures",
+    at: 2026.18,
+    time: "2026-28",
+    destination: dei.title,
+    place: dei.org,
+    code: "DEI",
+    status: "IN FLIGHT",
+    summary: "Panelist for DE&I Europe and Culture Champion: the same translation-and-execution gap as in supply chains.",
+    metrics: ["Two-year term", dei.period],
   },
   {
     id: "optimus",
@@ -203,8 +205,8 @@ export const milestones: Milestone[] = [
     place: "Microsoft Copilot Studio",
     code: "AI",
     status: "LANDED",
-    summary: "An AI agent over the Quality Management System and 200+ work instructions for 50+ global users.",
-    metrics: ["Query and review time cut by over 90%", "50+ global users"],
+    summary: `An AI agent over the Quality Management System and ${fig("workInstructions")} work instructions for ${fig("agentUsers")} global users.`,
+    metrics: [`Query and review time cut by ${fig("agentTimeCut")}`, `${fig("agentUsers")} global users`],
   },
   {
     id: "twin",

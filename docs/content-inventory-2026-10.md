@@ -165,3 +165,7 @@ Verified: `tsc`, `eslint`, production build, and the rendered `/`, `/about`, `/p
 | G3 | Apex `shettysdesk.com` has no A records (Vercel: `misconfigured: true`, DNS is at Cloudflare). Add DNS-only `A @ 216.198.79.1` and `A @ 64.29.17.1` | Poornajith, in Cloudflare |
 | G4 | `NEXT_PUBLIC_SITE_URL=https://www.shettysdesk.com` and `REDIRECT_LEGACY_DOMAIN=1` in Vercel Production, after G3 works. The Vercel connector gets 403 on env variables, so this cannot be read or set from here | Poornajith, in Vercel |
 | G8 | `shettysdesk.vercel.app` and `shettys-desk-site.vercel.app` still redirect to `www.tigershetty.com`; repoint to `www.shettysdesk.com` after G3 and G4 | Poornajith / approved change |
+
+## 8. Status after the profile build (30 Oct 2026)
+
+C1 to C15, D1 (competencies still shown on two pages, now from one source), D3 to D6 are resolved by `data/profile.ts` and the build check (`docs/profile-data.md`). C14 (thesis) is recorded. G1 is done (four cities added); G2 (Norway) is deliberately skipped. The Demand Sensing Router is hidden with its URL corrected. Still open: G3 and G4 (Cloudflare DNS, Vercel env flags), G8 (vercel.app redirects), D2 and D4 (radar topics and career story shown twice) and the Home rebuild (Step 3).

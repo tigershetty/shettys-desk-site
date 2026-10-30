@@ -2,7 +2,7 @@ import FlowingMenu from "@/components/FlowingMenu";
 import DecryptedText from "@/components/DecryptedText";
 import ScorExplorer from "@/components/scor/ScorExplorer";
 import JourneyBoard from "@/components/JourneyBoard";
-import experienceData from "@/data/experience.json";
+import experienceData from "@/data/experience";
 
 export default function ExperiencePage() {
   const primary = experienceData.primary[0];

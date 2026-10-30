@@ -14,7 +14,7 @@ Answers from Poornajith that the single profile file (Step 2.2) must encode. Eac
 
 ## Two tiers of figures
 
-Every metric in the profile file holds an `exact` value and a `public` value. The website and social copy use `public` (banded, rounded down). The CV and `/resume` download use `exact`, with the exact figures shown only where Poornajith chooses to share them.
+Every figure in the profile file holds a `web` value and a `cv` value. The website and social copy use `web` (banded, rounded down). The CV and `/resume` use `cv`: softened but closer to the real figure (for example `~450M EUR`), never to-the-digit. Poornajith cleared this on 30 Oct 2026. Exact internal figures are deliberately not stored in the repo.
 
 Role 1 (Replenishment Manager, Oct 2025 to now) is confirmed accurate as written, with website figures softened.
 
@@ -76,3 +76,7 @@ Confirmed line by line by Poornajith against `data/experience.json`:
 | Thesis, Jan to Jun 2019 | Verified (see Thesis) |
 
 Not yet confirmed: whether Tetra Pak has cleared any exact figure for the CV; the DE&I Europe panelist and Culture Champion wording; the competency list.
+
+## DE&I Europe Panelist and Culture Champion
+
+A fixed two-year term, recorded from the day it was first listed on the site (7 Mar 2026) to two years after: **Mar 2026 to Mar 2028**. Nothing earlier and nothing beyond it is claimed. If the real start date differs, change `dei.start` and `dei.end` in `data/profile.ts`; the check enforces exactly 24 months.
