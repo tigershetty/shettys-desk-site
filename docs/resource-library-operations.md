@@ -1,3 +1,5 @@
+> **Note (Oct 2026):** the canonical address is now https://www.shettysdesk.com, not the `vercel.app` address below. The Demand Sensing Router is hidden: set `hidden: true` in `data/resources.ts` (all routes return 404); remove the flag to re-open it.
+
 # Resource Library Operations
 
 ## Phase 1 Release Gate

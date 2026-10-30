@@ -48,6 +48,10 @@
     { "city": "Bali", "country": "Indonesia", "continent": "Asia", "lat": -8.65, "lng": 115.17, "kind": "visited" },
     { "city": "Doha", "country": "Qatar", "continent": "Asia", "lat": 25.29, "lng": 51.53, "kind": "visited" },
     { "city": "Abu Dhabi", "country": "United Arab Emirates", "continent": "Asia", "lat": 24.45, "lng": 54.38, "kind": "visited" },
-    { "city": "Dubai", "country": "United Arab Emirates", "continent": "Asia", "lat": 25.2, "lng": 55.27, "kind": "visited" }
+    { "city": "Dubai", "country": "United Arab Emirates", "continent": "Asia", "lat": 25.2, "lng": 55.27, "kind": "visited" },
+    { "city": "Colombo", "country": "Sri Lanka", "continent": "Asia", "lat": 6.93, "lng": 79.86, "kind": "visited" },
+    { "city": "Cape Town", "country": "South Africa", "continent": "Africa", "lat": -33.92, "lng": 18.42, "kind": "visited" },
+    { "city": "Cairo", "country": "Egypt", "continent": "Africa", "lat": 30.04, "lng": 31.24, "kind": "visited" },
+    { "city": "Addis Ababa", "country": "Ethiopia", "continent": "Africa", "lat": 9.03, "lng": 38.74, "kind": "visited" }
   ]
 }

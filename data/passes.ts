@@ -6,6 +6,8 @@
 // figures. The current legs (and the one still scheduled) keep their full
 // detail from data/journey.ts.
 
+import { fig } from "@/data/profile";
+
 export type Stop = { code: string; name: string };
 
 export type Pass = {
@@ -30,13 +32,13 @@ export const passes: Pass[] = [
   {
     milestone: "lth",
     from: { code: "BLR", name: "Bangalore" },
-    to: { code: "MMX", name: "Malmö · Lund" },
+    to: { code: "MMX", name: "Malmö" },
     summary: "Moved to Sweden for a master's in Logistics & Supply Chain Management, and stayed.",
     chips: ["2017 – 2019"],
   },
   {
     milestone: "citadel",
-    from: { code: "MMX", name: "Lund" },
+    from: { code: "MMX", name: "Malmö" },
     to: { code: "BLR", name: "Bangalore" },
     summary: "A summer as a supply chain analyst between the two master's years.",
     chips: ["Summer 2018"],
@@ -45,19 +47,19 @@ export const passes: Pass[] = [
     milestone: "thesis",
     from: { code: "LTH", name: "Lund University" },
     to: { code: "TPK", name: "Tetra Pak" },
-    summary: "Thesis student at Tetra Pak, then a full-time offer.",
+    summary: "Co-authored master's thesis on planning for built-to-order machines at Tetra Pak, then a full-time offer.",
     chips: ["Thesis → full-time offer"],
   },
   {
     milestone: "analyst",
     from: { code: "THS", name: "Thesis student" },
-    to: { code: "ANA", name: "Supply Chain Analyst" },
+    to: { code: "ANA", name: "Jr. Specialist / Analyst" },
     summary: "Junior specialist in Global Supply Planning.",
     chips: ["Sep 2019 – Sep 2021"],
   },
   {
     milestone: "scheduler",
-    from: { code: "ANA", name: "Analyst" },
+    from: { code: "ANA", name: "Jr. Specialist" },
     to: { code: "MPS", name: "Master Scheduler" },
     summary: "Master scheduling in supply planning for capital equipment.",
     chips: ["From Oct 2021"],
@@ -66,8 +68,8 @@ export const passes: Pass[] = [
     milestone: "leader",
     from: { code: "MPS", name: "Master Scheduler" },
     to: { code: "LDR", name: "Team Leader" },
-    summary: "Leading the supply planning team across Sweden, Italy and China.",
-    chips: ["Team of 8"],
+    summary: "Led the supply planning team across Sweden, Italy and China.",
+    chips: [`Team of ${fig("teamBefore")}`],
   },
   // Now, and what is next: these keep their full detail.
   { milestone: "manager", from: { code: "LDR", name: "Team Leader" }, to: { code: "MGR", name: "Replenishment Manager" } },

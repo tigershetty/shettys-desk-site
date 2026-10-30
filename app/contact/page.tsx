@@ -3,7 +3,7 @@
 import ContactForm from "@/components/ContactForm";
 import DecryptedText from "@/components/DecryptedText";
 import ProfileCard from "@/components/ProfileCard";
-import siteData from "@/data/site.json";
+import { identity } from "@/data/profile";
 
 export default function ContactPage() {
   return (
@@ -43,13 +43,13 @@ export default function ContactPage() {
             </h2>
             <div className="flex flex-col gap-3 text-sm">
               <a
-                href={`mailto:${siteData.social.email}`}
+                href={`mailto:${identity.email}`}
                 className="text-primary hover:underline"
               >
-                {siteData.social.email}
+                {identity.email}
               </a>
               <a
-                href={siteData.social.linkedin}
+                href={identity.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
@@ -64,10 +64,10 @@ export default function ContactPage() {
         <div className="mb-8 lg:mb-0 lg:sticky lg:top-10 shrink-0">
           <ProfileCard
             avatarUrl="/images/profile.png"
-            name="Poornajith Shetty"
-            title="Supply Chain Leader"
+            name={identity.name}
+            title={identity.headline}
             handle="Shetty's Desk"
-            status="Open to collaborations"
+            status={identity.availability[1]}
             contactText="Contact"
             showUserInfo={false}
           />

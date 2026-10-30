@@ -1,3 +1,4 @@
+import { brandLine } from "@/data/profile";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Source_Code_Pro } from "next/font/google";
@@ -27,7 +28,7 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Shetty's Desk",
-  description: "Supply chain, one breakdown at a time.",
+  description: brandLine,
   icons: {
     icon: [
       {

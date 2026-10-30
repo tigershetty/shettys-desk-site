@@ -17,5 +17,5 @@
   ],
   "decision_boundary": "The workflow prepares evidence and a recommendation. A planner approves policy, cadence, master data, and every system-of-record change.",
   "sample_data": "synthetic",
-  "contact": "https://shettysdesk.vercel.app"
+  "contact": "https://www.shettysdesk.com"
 }

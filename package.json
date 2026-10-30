@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test --experimental-strip-types --no-warnings --import ./scripts/test/ts-resolve.mjs \"lib/**/*.test.ts\""
+    "test": "node --test --experimental-strip-types --no-warnings --import ./scripts/test/ts-resolve.mjs \"lib/**/*.test.ts\"",
+    "check:profile": "node --experimental-strip-types --no-warnings scripts/check-profile.mjs",
+    "prebuild": "npm run check:profile"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

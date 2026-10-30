@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export type Flight = {
   callsign: string;
   name: string;
-  status: "IN SERVICE" | "CRUISING" | "ON APPROACH" | "HOLDING";
+  status: "IN SERVICE" | "CRUISING" | "ON APPROACH" | "HOLDING" | "WIP";
   /** Bearing in degrees (0 = up, clockwise) and range 0–1 on the scope. */
   bearing: number;
   range: number;
@@ -25,6 +25,7 @@ const tone: Record<Flight["status"], { text: string; blip: string; strip: string
   CRUISING: { text: "text-indigo-600", blip: "#a5b4fc", strip: "border-l-indigo-500" },
   "ON APPROACH": { text: "text-amber-600", blip: "#fbbf24", strip: "border-l-amber-500" },
   HOLDING: { text: "text-sky-600", blip: "#7dd3fc", strip: "border-l-sky-500" },
+  WIP: { text: "text-teal-600", blip: "#5eead4", strip: "border-l-teal-500" },
 };
 
 export default function AtcRadar({ flights }: { flights: Flight[] }) {

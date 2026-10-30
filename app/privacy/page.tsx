@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { identity } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: "Privacy | Shetty's Desk",
@@ -25,7 +26,7 @@ export default function PrivacyPage() {
         </section>
         <section>
           <h2 className="text-xl font-semibold text-foreground">Your choices</h2>
-          <p className="mt-2">You can request access, correction, or deletion of information submitted through the contact form by contacting poornajithshetty@gmail.com.</p>
+          <p className="mt-2">You can request access, correction, or deletion of information submitted through the contact form by contacting {identity.email}.</p>
         </section>
       </div>
     </article>

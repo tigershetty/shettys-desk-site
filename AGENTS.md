@@ -20,6 +20,12 @@ Next.js website for the Shetty's Desk brand. Git-connected Vercel previews are t
 - Serve MP4 for website motion previews when a master exists; retain GIF as the LinkedIn publishing asset and fallback.
 - Test new pages at desktop and mobile widths before requesting deployment approval.
 
+## Profile Facts
+
+- Career facts, figures, project statuses and dates live only in `data/profile.ts`. Read them with `fig()` and the date helpers; never type them into a page. See `docs/profile-data.md`.
+- `npm run check:profile` runs before every build and fails on a hand-typed figure or a stale one. Log every profile change in `docs/profile-changelog.md`.
+- Website copy uses the `web` tier of a figure; the CV and `/resume` use `cv`. Exact internal figures stay out of the repo.
+
 ## Resource Library
 
 - Index: `app/resources/page.tsx`

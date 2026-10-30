@@ -3,17 +3,25 @@
 import { Briefcase, CalendarDays, Globe2, MapPin, Route } from "lucide-react";
 import Link from "next/link";
 import CountFigure from "@/components/CountFigure";
-import experience from "@/data/experience.json";
+import experience from "@/data/experience";
 import travel from "@/data/travel.json";
+import { dates, yearsInSupplyChain } from "@/data/profile";
 
 // The person in figures, not the team: the career arc from Bangalore and the
 // world around it. Each figure sits on a small card with a quiet graphic that
 // shows the number rather than restating it. Everything is derived from the
 // site's own data, so it stays true as the data changes.
 
-const FIRST_ROLE_YEAR = 2016; // first role, Bangalore (see experience.earlier)
-const thisYear = new Date().getFullYear();
-const years = thisYear - FIRST_ROLE_YEAR;
+const FIRST_ROLE_YEAR = Number(dates.firstRole.slice(0, 4));
+// Whole years since the first role, so the figure rolls over on the anniversary, not on 1 January.
+const years = yearsInSupplyChain();
+
+const [origin, home] = travel.places.filter((p) => p.kind === "home");
+const km = (() => {
+  const r = Math.PI / 180;
+  const a = Math.sin(((home.lat - origin.lat) * r) / 2) ** 2 + Math.cos(origin.lat * r) * Math.cos(home.lat * r) * Math.sin(((home.lng - origin.lng) * r) / 2) ** 2;
+  return Math.round((2 * 6371 * Math.asin(Math.sqrt(a))) / 100) * 100;
+})();
 
 const places = travel.places.filter((p) => p.kind !== "transit");
 const cities = new Set(places.map((p) => p.city)).size;
@@ -47,7 +55,7 @@ export default function InNumbers() {
   return (
     <div>
       <div className="grid grid-cols-2 gap-3">
-        <Card n={years} label="years in supply chain" icon={CalendarDays}>
+        <Card n={years} label="years in supply chain" note="Since my first role in 2016" icon={CalendarDays}>
           <div className="relative flex items-center justify-between">
             <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-primary/25" />
             {Array.from({ length: years + 1 }, (_, i) => (
@@ -92,13 +100,13 @@ export default function InNumbers() {
           </div>
         </Card>
 
-        <Card n={7200} label="km from where it started" note={`${experience.languages.length} languages along the way: ${experience.languages.join(", ")}`} icon={Route} className="col-span-2">
+        <Card n={km} label="km from where it started" note={`${experience.languages.length} languages along the way: ${experience.languages.join(", ")}`} icon={Route} className="col-span-2">
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
-            <span>Bangalore</span>
+            <span>{origin.city}</span>
             <span className="relative h-px flex-1 bg-primary/25">
               <span className="numbers-dot absolute -top-[2.5px] left-0 h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
-            <span>Lund</span>
+            <span>{home.city}</span>
           </div>
         </Card>
       </div>

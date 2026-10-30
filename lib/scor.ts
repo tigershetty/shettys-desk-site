@@ -1,6 +1,8 @@
 // The Experience page as the SCOR model: each process is an island, and the
 // roles and results that belong to it live there. Every line comes from
-// data/experience.json.
+// data/profile.ts.
+
+import { dei, fig } from "@/data/profile";
 
 export type IslandId = "plan" | "source" | "make" | "deliver" | "enable";
 
@@ -34,7 +36,7 @@ export const islands: Record<IslandId, Island> = {
         period: "2021–2025",
         role: "Master Scheduler, Supply Planning",
         org: "Tetra Pak, Lund",
-        points: ["Paced 2 internal factories and 12+ external suppliers in Sweden, Italy, Portugal, Austria, China and the USA."],
+        points: [`Paced ${fig("factories")} internal factories and ${fig("externalSuppliers")} external suppliers in Sweden, Italy, Portugal, Austria, China and the USA.`],
       },
     ],
   },
@@ -57,7 +59,7 @@ export const islands: Record<IslandId, Island> = {
         org: "Tetra Pak, Lund",
         points: [
           "Standardised the S&OP planning model globally across Commercial, Supply and Operations, the foundation for the 2020 S&OP rollout and later IBP.",
-          "Built long-term supply plans for 25+ products through introduction and phase-out.",
+          `Built long-term supply plans for ${fig("longTermProducts")} products through introduction and phase-out.`,
         ],
       },
       {
@@ -65,9 +67,9 @@ export const islands: Record<IslandId, Island> = {
         role: "Team Leader & Master Scheduler",
         org: "Tetra Pak, Lund",
         points: [
-          "Mid-term master scheduling for 9 key products across 6 countries.",
-          "Lifted supply availability from 85% to 98% through the semiconductor shortage with scenario planning and rapid replanning.",
-          "Improved on-time delivery 25% through capacity scenarios, master-data work and demand/supply alignment.",
+          `Mid-term master scheduling for ${fig("keyProducts")} key products across ${fig("countriesPlanned")} countries.`,
+          `Lifted supply availability from ${fig("availabilityFrom")} to ${fig("availabilityTo")} through the semiconductor shortage with scenario planning and rapid replanning.`,
+          `Improved on-time delivery ${fig("onTimeGain")} through capacity scenarios, master-data work and demand/supply alignment.`,
         ],
       },
     ],
@@ -84,8 +86,8 @@ export const islands: Record<IslandId, Island> = {
         role: "Replenishment Manager, Planning & Quality",
         org: "Tetra Pak Services Supply Network",
         points: [
-          "450M+ EUR annual purchasing volume and 250,000+ purchase orders across 1,000+ suppliers.",
-          "Cut average sourcing lead time 20% on 1,500+ parts a year by securing direct CAD-drawing access; sourcing-case automation cut the backlog 45%.",
+          `Scope: ${fig("purchasingVolume")} annual purchasing volume and ${fig("purchaseOrders")} purchase orders across ${fig("suppliers")} suppliers.`,
+          `Cut average sourcing lead time ${fig("leadTimeCut")} on ${fig("leadTimeParts")} parts a year (of ${fig("partsSourced")} sourced) by securing direct CAD-drawing access; sourcing-case automation cut the backlog ${fig("backlogCut")}.`,
         ],
       },
     ],
@@ -102,8 +104,8 @@ export const islands: Record<IslandId, Island> = {
         role: "Replenishment Manager, Planning & Quality",
         org: "Tetra Pak Services Supply Network",
         points: [
-          "150,000+ spare parts kept moving to customers worldwide.",
-          "Rescued a stalled order-confirmation automation blocked by an SAP defect; it now saves ~9 hours a day, ~2,200 hours a year (≈1 FTE).",
+          `${fig("spareParts")} spare parts kept moving to customers worldwide.`,
+          `Rescued a stalled order-confirmation automation blocked by an SAP defect; it now saves ${fig("hoursPerDay")} hours a day, ${fig("hoursPerYear")} hours a year (≈1 FTE).`,
         ],
       },
     ],
@@ -125,15 +127,15 @@ export const islands: Record<IslandId, Island> = {
         period: "2024–now",
         role: "Leading teams",
         org: "Tetra Pak",
-        points: ["A planning team of 8 across Sweden, Italy and China, then a team of 10 purchasing and sourcing specialists with full headcount and budget ownership."],
+        points: [`A planning team of ${fig("teamBefore")} across Sweden, Italy and China, then a team of ${fig("teamNow")} (${fig("teamNowSplit")}) with full headcount and budget ownership.`],
       },
       {
         period: "2025–now",
         role: "AI and automation",
         org: "Tetra Pak · Shetty's Desk",
         points: [
-          "Built 'Optimus Prime at P&Q', an AI agent over the Quality Management System and 200+ work instructions for 50+ global users, cutting query and review time by over 90%.",
-          "Shetty's Desk: an agentic content workflow built on Claude Code. DE&I Europe Panelist and Culture Champion.",
+          `Built 'Optimus Prime at P&Q', an AI agent over the Quality Management System and ${fig("workInstructions")} work instructions for ${fig("agentUsers")} global users, cutting query and review time by ${fig("agentTimeCut")}.`,
+          `Shetty's Desk: an agentic content workflow built on Claude Code. Before that, ${dei.title} (${dei.period}).`,
         ],
       },
     ],

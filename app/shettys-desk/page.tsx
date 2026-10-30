@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Megaphone, Rocket, Workflow } from "lucide-react";
-import siteData from "@/data/site.json";
+import { fig, identity, yearsAtTetraPak } from "@/data/profile";
 import radarData from "@/data/radar.json";
 import articles from "@/data/articles.json";
 import ShettysAnimation from "@/components/ShettysAnimation";
@@ -18,7 +18,7 @@ const pillars = [
   {
     Icon: Megaphone,
     title: "An expert voice",
-    body: "Long-form breakdowns of real planning problems (S&OP, availability, sourcing lead times, allocation) written from 7+ years inside a global supply network. Depth for practitioners, plain language for everyone else.",
+    body: `Long-form breakdowns of real planning problems (S&OP, availability, sourcing lead times, allocation) written from ${yearsAtTetraPak()}+ years inside a global supply network. Depth for practitioners, plain language for everyone else.`,
     link: { href: "/articles", label: "Read the articles" },
   },
   {
@@ -61,16 +61,16 @@ const flights: Flight[] = [
     bearing: 150,
     range: 0.55,
     route: "From one QMS agent to planning agents",
-    note: "After Optimus Prime (an agent over 200+ work instructions that cut query time by over 90%) and the order-confirmation automation, the next step is agents that prepare planning and purchasing decisions for a human to approve. Shared here as it's built.",
+    note: `After Optimus Prime (an agent over ${fig("workInstructions")} work instructions that cut query time by ${fig("agentTimeCut")}) and the order-confirmation automation, the next step is agents that prepare planning and purchasing decisions for a human to approve. Shared here as it's built.`,
   },
   {
     callsign: "LAB-03",
-    name: "Product-journey lab",
-    status: "HOLDING",
+    name: "Product Journey Lab",
+    status: "WIP",
     bearing: 235,
     range: 0.86,
-    route: "Parked · separate build",
-    note: "3D walkthroughs of how everyday products move: a burger order through a restaurant, a part picked and packed in a fulfilment centre. Holding until the research is done properly.",
+    route: "WIP · separate build",
+    note: "3D walkthroughs of how everyday products move: a burger order through a restaurant, a part picked and packed in a fulfilment centre. In progress as its own build, with the research done properly first.",
   },
 ];
 
@@ -143,7 +143,7 @@ export default function ShettysDesk() {
       </section>
 
       <a
-        href={siteData.social.linkedin}
+        href={identity.linkedin}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex min-h-11 items-center rounded-md bg-primary px-5 text-sm font-medium text-white transition-all hover:bg-primary/80"

@@ -1,3 +1,5 @@
+> **Superseded** by `docs/domain-switch-shettysdesk.md` (Oct 2026). Kept for history; the canonical address is now https://www.shettysdesk.com.
+
 # Custom Domain Status - July 14, 2026
 
 ## Current State

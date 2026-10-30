@@ -3,10 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Clock3, Sparkles } from "lucide-react";
 import ResourcePreview from "@/components/ResourcePreview";
 import ResourceDownload from "@/components/ResourceDownload";
-import { getResource } from "@/data/resources";
+import { notFound } from "next/navigation";
+import { getAnyResource } from "@/data/resources";
 import { SITE_URL } from "@/lib/site";
 
-const resource = getResource("demand-sensing-router")!;
+const resource = getAnyResource("demand-sensing-router")!;
 const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ const limits = [
 ];
 
 export default function DemandSensingRouterPage() {
+  if (resource.hidden) notFound();
   return (
     <article className="mx-auto w-full max-w-6xl">
       <Link
