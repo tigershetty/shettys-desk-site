@@ -61,3 +61,18 @@ Added Colombo, Cape Town, Cairo and Addis Ababa: 31 countries, 4 continents. Nor
 ## Demand Sensing Router resource pack
 
 Correct the URL in the pack (`README.md`, `MANIFEST.json`, regenerate checksums and PDF), then hide the resource everywhere: off the library index, home and nav, with its page and download returning 404 and noindexed. Pack files stay in git. No new public version is released.
+
+## Career verification (30 Oct 2026)
+
+Confirmed line by line by Poornajith against `data/experience.json`:
+
+| Entry | Status |
+| --- | --- |
+| Replenishment Manager, Oct 2025 to now | Verified. Web figures banded, CV exact |
+| Team Leader / Coordinator & Master Scheduler, Oct 2021 to Sep 2025 | Verified. Web figures banded, CV exact |
+| Jr. Supply Chain Specialist / Analyst, Sep 2019 to Sep 2021 | Verified as written |
+| Citadel, Jigsaw Thinking, ITC, SELCO, Biz Sherpa (2016 to 2018) | Verified |
+| B.Eng. RVCE 2013-17, M.Sc. LTH 2017-19 | Verified |
+| Thesis, Jan to Jun 2019 | Verified (see Thesis) |
+
+Not yet confirmed: whether Tetra Pak has cleared any exact figure for the CV; the DE&I Europe panelist and Culture Champion wording; the competency list.
