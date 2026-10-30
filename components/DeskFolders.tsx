@@ -24,7 +24,7 @@ export default function DeskFolders({ articles }: Props) {
     href: "/experience",
   }));
   const aboutFiles: FolderFile[] = [
-    { name: "Personal note", meta: "Bangalore → Lund", href: "/about" },
+    { name: "Personal note", meta: "Bangalore → Malmö", href: "/about" },
     { name: "The journey so far", meta: `${passes.length} boarding passes`, href: "/about#journey-heading" },
     { name: "Where I've travelled", meta: "globe", href: "/about#travel-heading", art: brandArt.teal },
     { name: "On rotation", meta: "music & books", href: "/about", art: brandArt.amber },

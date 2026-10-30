@@ -135,3 +135,33 @@ One typed module, `data/profile.ts`, exporting:
 - `projects`: with an explicit status of `live`, `in-progress`, `planned` or `parked`
 
 `experience.json`, `journey.ts`, `passes.ts`, `scor.ts` and `ControlTower.tsx` become views over this file, and the inline copy on About, Shetty's Desk, DeskFolders, Footer and Privacy reads from it.
+
+## 7. Resolutions applied (30 Oct 2026, branch `codex/content-inventory`, not pushed)
+
+| # | Resolution | Files |
+| --- | --- | --- |
+| C1 | Malmö is home, Lund is the Tetra Pak role location. About hero reads "Replenishment Manager at Tetra Pak, Lund · based in Malmö"; footer, desk folder and the 7,200 km card say Malmö; boarding pass "Malmö · Lund" is now "Malmö" | `AboutHero`, `Footer`, `DeskFolders`, `InNumbers`, `data/passes.ts` |
+| C2, C10 | "Years in supply chain" is computed from Jun 2016 and rolls over on the anniversary, not 1 January. The card now says "Since my first role in 2016", so it no longer reads as a conflict with "7+ years at Tetra Pak" | `InNumbers` |
+| C3 | Twin Lab is "planned" on the journey and passes (status label "Planned"). `/lab/supply-chain-twin` is now a noindex "planned" notice; the game code is kept in `components/command` and git history | `data/journey.ts`, `BoardingPasses`, `app/lab/supply-chain-twin/page.tsx` |
+| C9 | Availability lives in `data/site.json` (`availability`) and the hero badge reads it: speaking, collaborations, roles, brainstorming. The old `availabilityBadge` key was unused | `data/site.json`, `HeroBento` |
+| C11 | Optimus Prime: "query and review time cut by over 90%" everywhere | `data/journey.ts`, `ControlTower` |
+| C12 | Team Leader pass is past tense | `data/passes.ts` |
+| C13 | Analyst title is "Jr. Supply Chain Specialist / Analyst" (short form "Jr. Specialist / Analyst" on passes) | `data/journey.ts`, `data/passes.ts` |
+| C15 | Early roles: four organisations in 2016-17 including Jigsaw Thinking | `data/journey.ts` |
+| D6 | Privacy page reads the contact email from `data/site.json` | `app/privacy/page.tsx` |
+
+Verified: `tsc`, `eslint`, production build, and the rendered `/`, `/about`, `/privacy`, `/lab/supply-chain-twin` pages.
+
+### Still open
+
+| # | Item | Needed from |
+| --- | --- | --- |
+| C14 | Thesis entry in `experience.json`: title, end date, scope | Poornajith |
+| C8 | `resumeUrl` is still a LinkedIn link until `/resume` exists (Step 3) | Step 3 |
+| D1-D5 | Duplicated blocks and the single profile file | Step 2.2 |
+| LAB-03 | "Product-journey lab" on Shetty's Desk (parked, burger and fulfilment-centre walkthroughs): same project as the Twin Lab or a separate one? | Poornajith |
+| G1 | Cities for Sri Lanka, South Africa, Egypt, Ethiopia | Poornajith |
+| G2 | Whether Norway was entered | Poornajith |
+| G3 | Apex `shettysdesk.com` has no A records (Vercel: `misconfigured: true`, DNS is at Cloudflare). Add DNS-only `A @ 216.198.79.1` and `A @ 64.29.17.1` | Poornajith, in Cloudflare |
+| G4 | `NEXT_PUBLIC_SITE_URL=https://www.shettysdesk.com` and `REDIRECT_LEGACY_DOMAIN=1` in Vercel Production, after G3 works. The Vercel connector gets 403 on env variables, so this cannot be read or set from here | Poornajith, in Vercel |
+| G8 | `shettysdesk.vercel.app` and `shettys-desk-site.vercel.app` still redirect to `www.tigershetty.com`; repoint to `www.shettysdesk.com` after G3 and G4 | Poornajith / approved change |

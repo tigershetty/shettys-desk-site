@@ -16,7 +16,7 @@ const statusLabel: Record<JourneyStatus, string> = {
   LANDED: "Landed",
   "NOW BOARDING": "Now boarding",
   "IN FLIGHT": "In flight",
-  SCHEDULED: "Scheduled",
+  SCHEDULED: "Planned",
 };
 
 /** A short barcode, the same every render for the same pass. */

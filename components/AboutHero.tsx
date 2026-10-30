@@ -54,7 +54,7 @@ export default function AboutHero() {
 
       <div className="px-4 pb-6 text-center">
         <p className="text-lg font-semibold tracking-tight text-foreground">Poornajith Shetty</p>
-        <p className="text-sm text-muted-foreground">Replenishment Manager at Tetra Pak, Malm&ouml;</p>
+        <p className="text-sm text-muted-foreground">Replenishment Manager at Tetra Pak, Lund &middot; based in Malm&ouml;</p>
         <a
           href={siteData.social.linkedin}
           target="_blank"

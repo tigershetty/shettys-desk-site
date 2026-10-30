@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border bg-background">
       <div className="flex flex-col gap-2 px-4 py-4 text-xs text-muted-foreground sm:px-6 lg:flex-row lg:items-center lg:gap-8 lg:pl-[calc(16rem+2rem)] lg:pr-12">
-        <p className="shrink-0">© {new Date().getFullYear()} Shetty&apos;s Desk · Lund, Sweden</p>
+        <p className="shrink-0">© {new Date().getFullYear()} Shetty&apos;s Desk · Malm&ouml;, Sweden</p>
 
         <div className="relative min-w-0 flex-1" aria-label={`Made with ${stops.join(", ")}`}>
           <ol className="flex flex-wrap gap-x-4 gap-y-1 lg:flex-nowrap lg:justify-between lg:gap-0">

@@ -9,6 +9,7 @@ import AnimatedTextCycle from "./AnimatedTextCycle";
 import { MorphingText } from "./MorphingText";
 import DecryptedText from "./DecryptedText";
 import Magnetic from "./Magnetic";
+import siteData from "@/data/site.json";
 
 const HeroParticles = dynamic(() => import("./HeroParticles"), { ssr: false });
 
@@ -138,13 +139,7 @@ export default function HeroBento() {
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
               <MorphingText
-                texts={[
-                  "Open to networking",
-                  "Open to partnerships",
-                  "Open to experiences",
-                  "Open to brainstorming",
-                  "Available for collaborations",
-                ]}
+                texts={siteData.availability}
                 className="text-xs font-medium text-primary"
               />
             </span>

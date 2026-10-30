@@ -2,7 +2,7 @@
   "name": "Shetty's.",
   "subtitle": "Supply Chain | Content",
   "greeting": "This is Shetty's Desk. I break down how supply chains actually work. One real topic at a time, for anyone curious enough to ask why.",
-  "availabilityBadge": "Open to speaking & collaborations",
+  "availability": ["Open to speaking", "Open to collaborations", "Open to roles", "Open to brainstorming"],
   "nav": {
     "primary": [
       { "label": "Home", "href": "/" },

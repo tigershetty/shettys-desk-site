@@ -11,9 +11,11 @@ import travel from "@/data/travel.json";
 // shows the number rather than restating it. Everything is derived from the
 // site's own data, so it stays true as the data changes.
 
-const FIRST_ROLE_YEAR = 2016; // first role, Bangalore (see experience.earlier)
-const thisYear = new Date().getFullYear();
-const years = thisYear - FIRST_ROLE_YEAR;
+const FIRST_ROLE_YEAR = 2016; // first role, Bangalore (Biz Sherpa, Jun 2016; see experience.earlier)
+const FIRST_ROLE_START = new Date(2016, 5, 1);
+const now = new Date();
+// Whole years since the first role, so the figure rolls over on the anniversary, not on 1 January.
+const years = now.getFullYear() - FIRST_ROLE_START.getFullYear() - (now < new Date(now.getFullYear(), 5, 1) ? 1 : 0);
 
 const places = travel.places.filter((p) => p.kind !== "transit");
 const cities = new Set(places.map((p) => p.city)).size;
@@ -47,7 +49,7 @@ export default function InNumbers() {
   return (
     <div>
       <div className="grid grid-cols-2 gap-3">
-        <Card n={years} label="years in supply chain" icon={CalendarDays}>
+        <Card n={years} label="years in supply chain" note="Since my first role in 2016" icon={CalendarDays}>
           <div className="relative flex items-center justify-between">
             <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-primary/25" />
             {Array.from({ length: years + 1 }, (_, i) => (
@@ -98,7 +100,7 @@ export default function InNumbers() {
             <span className="relative h-px flex-1 bg-primary/25">
               <span className="numbers-dot absolute -top-[2.5px] left-0 h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
-            <span>Lund</span>
+            <span>Malmö</span>
           </div>
         </Card>
       </div>

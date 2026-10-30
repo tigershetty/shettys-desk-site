@@ -27,7 +27,7 @@ const nodes = [
 
 const log = [
   { tag: "RESOLVED", text: "Order-confirmation automation through an SAP defect: ~9 h saved per day" },
-  { tag: "SHIPPED", text: "Optimus Prime AI agent: 90% faster QMS queries for 50+ users" },
+  { tag: "SHIPPED", text: "Optimus Prime AI agent: query and review time cut by over 90% for 50+ users" },
   { tag: "RECOVERED", text: "Semiconductor shortage: availability back from 85% to 98%" },
   { tag: "IMPROVED", text: "On-time delivery +25% through capacity scenario modelling" },
   { tag: "CLEARED", text: "Sourcing backlog −45% after automating case creation" },
