@@ -12,6 +12,12 @@ Answers from Poornajith that the single profile file (Step 2.2) must encode. Eac
 | Scope figures | Public wording is rounded down to floors and labelled as scope, never as an achievement (see below) |
 | Availability | Speaking, collaborations, roles and brainstorming |
 
+## Two tiers of figures
+
+Every metric in the profile file holds an `exact` value and a `public` value. The website and social copy use `public` (banded, rounded down). The CV and `/resume` download use `exact`, with the exact figures shown only where Poornajith chooses to share them.
+
+Role 1 (Replenishment Manager, Oct 2025 to now) is confirmed accurate as written, with website figures softened.
+
 ## Scope figures (manager role, Oct 2025 to now)
 
 The team is 8 purchasing specialists plus 2 sourcing specialists. The sourcing specialists work on about 4,000 parts a year. The lead-time improvement from direct CAD-drawing access covers a subset of 1,500+ of those parts.
@@ -42,7 +48,6 @@ Whether Tetra Pak has cleared any figure is not confirmed. The profile file ther
 | Product Journey Lab (LAB-03 on Shetty's Desk) | WIP | Replaces "Parked / Holding" |
 | Supply Chain Twin Lab | Planned | Separate from the two others |
 | Supply Chain Command (hidden 3D game) | Paused | Separate build. Page is noindex; code kept in `components/command` |
-
 | Die with Zero Planner | WIP | Interactive financial planner for Sweden |
 | ShettysDesk.com | WIP | This website |
 | Shetty's Desk workflow (was "Workflow Engine") | WIP | The LinkedIn workflow behind Shetty's Desk, framed as a product |
