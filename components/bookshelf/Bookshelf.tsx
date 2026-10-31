@@ -1,7 +1,8 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
-import { useCallback, useEffect, useId, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { getImageProps } from "next/image";
 import { createPortal } from "react-dom";
 import { books as allBooks, coverUrl, type Book } from "@/data/books";
 import { cn } from "@/lib/utils";
@@ -33,6 +34,9 @@ const M = N * COPIES;
 const TILT = -4.5; // degrees: the pulled-out book leans slightly anticlockwise
 const EASE = "cubic-bezier(.2,.8,.2,1)";
 
+/** A resized, cached copy of the cover, served from this site. */
+const coverSrc = (isbn: string, w: number) => getImageProps({ src: coverUrl(isbn), alt: "", width: w, height: Math.round(w * 1.5) }).props.src;
+
 const mod = (a: number, n: number) => ((a % n) + n) % n;
 const smooth = (x: number) => x * x * (3 - 2 * x);
 const B = (r: number) => (Math.abs(r) < 1 ? (r + Math.sin(Math.PI * r) / Math.PI) / 2 : Math.sign(r) * 0.5);
@@ -62,22 +66,26 @@ function DesignedCover({ b }: { b: Book }) {
 }
 
 function CoverFace({ b }: { b: Book }) {
-  const [failed, setFailed] = useState(!b.isbn);
+  // 0: resized copy from this site, 1: the original on Open Library, 2: designed cover
+  const [stage, setStage] = useState<0 | 1 | 2>(b.isbn ? 0 : 2);
   const [loaded, setLoaded] = useState(false);
+  if (stage === 2 || !b.isbn) return <DesignedCover b={b} />;
   return (
-    <>
-      {failed || !b.isbn ? (
-        <DesignedCover b={b} />
-      ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={coverUrl(b.isbn)} alt="" draggable={false} decoding="async" className="h-full w-full object-cover" style={{ visibility: loaded ? "visible" : "hidden" }} onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
-      )}
-    </>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={stage === 0 ? coverSrc(b.isbn, 384) : coverUrl(b.isbn)}
+      alt=""
+      draggable={false}
+      decoding="async"
+      className="h-full w-full object-cover"
+      style={{ visibility: loaded ? "visible" : "hidden" }}
+      onLoad={() => setLoaded(true)}
+      onError={() => setStage((x) => (x === 0 ? 1 : 2))}
+    />
   );
 }
 
 export default function Bookshelf() {
-  const uid = useId().replace(/:/g, "");
   // False on the server and during hydration, true afterwards (the detail sheet is a portal).
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -100,7 +108,8 @@ export default function Bookshelf() {
   const indicatorRef = useRef<HTMLSpanElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const blobRefs = useRef<(SVGCircleElement | null)[]>([]);
+  const posterRef = useRef<HTMLCanvasElement>(null);
+  const drawRef = useRef<(radii: number[]) => void>(() => {});
   const api = useRef<{ open: () => void; close: () => void; go: (dir: 1 | -1) => void; goTo: (i: number) => void }>({
     open: () => {},
     close: () => {},
@@ -125,6 +134,79 @@ export default function Bookshelf() {
     window.addEventListener("resize", place);
     return () => window.removeEventListener("resize", place);
   }, [themeIdx]);
+
+  // The poster: the cover painted through ragged ink blots that spread. Plain
+  // canvas drawing, so it behaves the same in Safari and costs little.
+  useEffect(() => {
+    const cv = posterRef.current;
+    if (!cv) return;
+    const ctx = cv.getContext("2d");
+    if (!ctx) return;
+    const W = 474, PH = 711;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = W * dpr;
+    cv.height = PH * dpr;
+    const family = getComputedStyle(document.body).fontFamily;
+    let ready = false;
+    let last = BLOBS.map(() => 0);
+    const paint = () => {
+      ctx.fillStyle = book.color;
+      ctx.fillRect(0, 0, W, PH);
+      if (ready) {
+        ctx.drawImage(img, 0, 0, W, PH);
+        return;
+      }
+      ctx.fillStyle = book.ink;
+      ctx.font = `700 44px ${family}`;
+      ctx.fillText(book.title.length > 18 ? book.title.slice(0, 18) + "…" : book.title, 40, 560);
+      ctx.font = `500 22px ${family}`;
+      ctx.globalAlpha = 0.8;
+      ctx.fillText(book.author, 40, 600);
+      ctx.globalAlpha = 1;
+    };
+    const draw = (radii: number[]) => {
+      last = radii;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, PH);
+      if (radii.every((r) => r <= 0)) return;
+      ctx.save();
+      ctx.beginPath();
+      BLOBS.forEach((bl, i) => {
+        const R = radii[i];
+        if (R <= 0) return;
+        for (let k = 0; k <= 56; k++) {
+          const a = (k / 56) * Math.PI * 2;
+          const wob = 1 + 0.26 * (Math.sin(3 * a + i * 1.7) * 0.5 + Math.sin(5 * a + i * 2.3) * 0.3 + Math.sin(9 * a + i * 0.9) * 0.2);
+          const x = bl.cx + Math.cos(a) * R * wob;
+          const y = bl.cy + Math.sin(a) * R * wob;
+          if (k === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+      });
+      ctx.clip();
+      paint();
+      ctx.restore();
+    };
+    const img = new window.Image();
+    img.onload = () => {
+      ready = true;
+      draw(last);
+    };
+    // The resized copy first; if that fails, the original.
+    let tried = 0;
+    img.onerror = () => {
+      if (book.isbn && tried++ === 0) img.src = coverUrl(book.isbn);
+    };
+    if (book.isbn) img.src = coverSrc(book.isbn, 828);
+    drawRef.current = draw;
+    draw(last);
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+      drawRef.current = () => {};
+    };
+  }, [book]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -171,6 +253,7 @@ export default function Bookshelf() {
     const lastTf: string[] = new Array(M).fill("");
     const lastZ = new Int16Array(M).fill(-1);
     const lastO = new Float32Array(M).fill(-1);
+    const lastNear: boolean[] = new Array(M).fill(false);
     const parts = tapeRefs.current.map((t) => ({
       sp: t?.querySelector<HTMLElement>("[data-sh='sp']") ?? null,
       cv: t?.querySelector<HTMLElement>("[data-sh='cv']") ?? null,
@@ -257,15 +340,17 @@ export default function Bookshelf() {
       dialog.querySelectorAll<HTMLElement>("[data-rise]").forEach((el, i) => {
         anims.push(el.animate([{ transform: "translateY(110%)" }, { transform: "translateY(0%)" }], { duration: reduced ? 1 : 900, delay: reduced ? 0 : 620 + i * 75, easing: EASE, fill: "both" }));
       });
-      blobRefs.current.forEach((c) => c?.setAttribute("r", "0"));
+      drawRef.current(BLOBS.map(() => 0));
       const t0 = performance.now() + (reduced ? -5000 : 520);
       cancelAnimationFrame(inkRaf);
       const ink = (now: number) => {
         const el = now - t0;
-        BLOBS.forEach((bl, i) => {
-          const p = Math.min(1, Math.max(0, (el - bl.delay) / 1250));
-          blobRefs.current[i]?.setAttribute("r", String(720 * (1 - Math.pow(1 - p, 3))));
-        });
+        drawRef.current(
+          BLOBS.map((bl) => {
+            const p = Math.min(1, Math.max(0, (el - bl.delay) / 1250));
+            return 720 * (1 - Math.pow(1 - p, 3));
+          })
+        );
         if (el < 2400) inkRaf = requestAnimationFrame(ink);
       };
       inkRaf = requestAnimationFrame(ink);
@@ -360,10 +445,18 @@ export default function Bookshelf() {
         const r = mod(v - s + M / 2, M) - M / 2;
         const x = r * step + (d - ws + 1.6 * gap) * B(r);
         if (Math.abs(x) > limit) {
-          if (el.style.visibility !== "hidden") el.style.visibility = "hidden";
+          if (el.style.display !== "none") el.style.display = "none";
           continue;
         }
-        if (el.style.visibility !== "visible") el.style.visibility = "visible";
+        if (el.style.display === "none") el.style.display = "";
+        // Only books at the centre need a cover and a shadow; the rest are plain spines.
+        const near = Math.abs(r) < 1.6;
+        if (near !== lastNear[v]) {
+          lastNear[v] = near;
+          const p = parts[v];
+          if (p.cv) p.cv.style.display = near ? "" : "none";
+          if (p.gs) p.gs.style.display = near ? "" : "none";
+        }
         const o = smooth(Math.max(0, 1 - Math.abs(r)));
         const target = hover === v && Math.abs(r) > 0.5 ? 1 : 0;
         lift[v] += (target - lift[v]) * (reduced ? 1 : 1 - Math.exp(-12 * dt));
@@ -542,11 +635,11 @@ export default function Bookshelf() {
             data-v={v}
             aria-hidden
             className="absolute left-0 top-0 h-0 w-0 cursor-pointer [transform-style:preserve-3d]"
-            style={{ visibility: "hidden" }}
+            style={{ display: "none" }}
           >
             {/* spine: the front of the box */}
             <div
-              className="shelf-sp absolute overflow-hidden rounded-[2px] [backface-visibility:hidden]"
+              className="shelf-sp absolute overflow-hidden [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
               style={{ width: "var(--ws)", height: "var(--H)", left: "calc(var(--ws) / -2)", top: "calc(var(--H) / -2)", transform: "translateZ(calc(var(--d) / 2))", background: b.color, color: b.ink }}
             >
               <div className="flex h-full w-full flex-col items-center justify-between py-[7%]" style={{ boxShadow: "inset 2px 0 0 rgba(255,255,255,.18), inset -2px 0 0 rgba(0,0,0,.2)" }}>
@@ -563,8 +656,8 @@ export default function Bookshelf() {
             </div>
             {/* cover: the right-hand side of the box */}
             <div
-              className="shelf-cv absolute overflow-hidden rounded-[2px] bg-neutral-200 [backface-visibility:hidden]"
-              style={{ width: "var(--d)", height: "var(--H)", left: "calc(var(--d) / -2)", top: "calc(var(--H) / -2)", transform: "rotateY(90deg) translateZ(calc(var(--ws) / 2))" }}
+              className="shelf-cv absolute overflow-hidden bg-neutral-200 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]"
+              style={{ display: "none", width: "var(--d)", height: "var(--H)", left: "calc(var(--d) / -2)", top: "calc(var(--H) / -2)", transform: "rotateY(90deg) translateZ(calc(var(--ws) / 2))" }}
             >
               <CoverFace b={b} />
               <span data-sh="cv" className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: 0.5 }} />
@@ -574,6 +667,7 @@ export default function Bookshelf() {
               data-gs
               className="pointer-events-none absolute"
               style={{
+                display: "none",
                 width: "var(--d)",
                 height: "calc(var(--H) * .12)",
                 left: "calc(var(--d) / -2)",
@@ -706,39 +800,7 @@ export default function Bookshelf() {
             </button>
             <div className="mx-auto grid min-h-full max-w-[1200px] grid-cols-1 items-center gap-6 px-[22px] pb-10 pt-[84px] md:grid-cols-2 md:gap-[4vw] md:px-[6vw] md:pb-14 md:pt-[110px]">
               <div className="order-first mx-auto flex h-[46svh] max-h-[78vh] justify-center md:order-last md:h-[min(78vh,100%)]" style={{ aspectRatio: "2/3" }}>
-                <svg viewBox="0 0 474 711" className="h-full w-full" aria-hidden>
-                  <defs>
-                    <filter id={`ink-${uid}`} x="-50%" y="-50%" width="200%" height="200%">
-                      <feTurbulence type="fractalNoise" baseFrequency=".011" numOctaves="3" seed="7" result="n" />
-                      <feDisplacementMap in="SourceGraphic" in2="n" scale="120" xChannelSelector="R" yChannelSelector="G" />
-                    </filter>
-                    <mask id={`m-${uid}`} maskUnits="userSpaceOnUse" x="-200" y="-200" width="874" height="1100">
-                      <g filter={`url(#ink-${uid})`} fill="#fff">
-                        {BLOBS.map((bl, i) => (
-                          <circle
-                            key={i}
-                            ref={(el) => {
-                              blobRefs.current[i] = el;
-                            }}
-                            cx={bl.cx}
-                            cy={bl.cy}
-                            r="0"
-                          />
-                        ))}
-                      </g>
-                    </mask>
-                  </defs>
-                  <g mask={`url(#m-${uid})`}>
-                    <rect width="474" height="711" fill={book.color} />
-                    <text x="40" y="560" fill={book.ink} fontSize="44" fontWeight="700">
-                      {book.title.length > 18 ? book.title.slice(0, 18) + "…" : book.title}
-                    </text>
-                    <text x="40" y="600" fill={book.ink} fontSize="22" opacity=".8">
-                      {book.author}
-                    </text>
-                    {book.isbn && <image href={coverUrl(book.isbn)} x="0" y="0" width="474" height="711" preserveAspectRatio="xMidYMid slice" />}
-                  </g>
-                </svg>
+                <canvas ref={posterRef} aria-hidden className="h-full w-full" />
               </div>
               <div className="flex max-w-[520px] flex-col gap-[18px] md:justify-self-end">
                 <div className="overflow-hidden">
