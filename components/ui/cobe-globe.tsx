@@ -126,6 +126,8 @@ export function Globe({
     const canvas = canvasRef.current
     let globe: ReturnType<typeof createGlobe> | null = null
     let animationId = 0
+    let onScreen = true
+    let io: IntersectionObserver | null = null
     let phi = 0
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
@@ -190,9 +192,15 @@ export function Globe({
           markers: toMarkers(),
           arcs: toArcs(),
         })
-        animationId = requestAnimationFrame(animate)
+        // site: no frames are spent while the globe is scrolled out of view
+        animationId = onScreen ? requestAnimationFrame(animate) : 0
       }
       animate()
+      io = new IntersectionObserver(([e]) => {
+        onScreen = e.isIntersecting
+        if (onScreen && !animationId) animate()
+      })
+      io.observe(canvas)
       setTimeout(() => canvas && (canvas.style.opacity = "1"))
     }
 
@@ -211,6 +219,7 @@ export function Globe({
 
     return () => {
       ro?.disconnect()
+      io?.disconnect()
       if (animationId) cancelAnimationFrame(animationId)
       if (globe) globe.destroy()
     }

@@ -28,7 +28,7 @@ const TAB_LABEL: Record<Book["theme"], string> = {
 // Grouped by theme so each tab jumps to a run of books.
 const books: Book[] = THEMES.flatMap((t) => allBooks.filter((b) => b.theme === t));
 const N = books.length;
-const COPIES = 3;
+const COPIES = 2;
 const M = N * COPIES;
 const TILT = -4.5; // degrees: the pulled-out book leans slightly anticlockwise
 const EASE = "cubic-bezier(.2,.8,.2,1)";
@@ -70,7 +70,7 @@ function CoverFace({ b }: { b: Book }) {
         <DesignedCover b={b} />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={coverUrl(b.isbn)} alt="" draggable={false} className="h-full w-full object-cover" style={{ visibility: loaded ? "visible" : "hidden" }} onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
+        <img src={coverUrl(b.isbn)} alt="" draggable={false} decoding="async" className="h-full w-full object-cover" style={{ visibility: loaded ? "visible" : "hidden" }} onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
       )}
     </>
   );
@@ -135,7 +135,13 @@ export default function Bookshelf() {
     const finePointer = window.matchMedia("(pointer: fine)").matches;
 
     let H = 0, ws = 0, d = 0, gap = 0, step = 1;
+    let areaRect = area.getBoundingClientRect();
+    let rectDirty = true;
+    const markRect = () => {
+      rectDirty = true;
+    };
     const measure = () => {
+      markRect();
       H = Math.max(160, area.clientHeight - 80);
       ws = H * 0.135;
       d = H * 0.64;
@@ -145,6 +151,7 @@ export default function Bookshelf() {
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(area);
+    window.addEventListener("scroll", markRect, { passive: true });
 
     // state
     let s = N + 0; // current position, in tape units
@@ -160,6 +167,17 @@ export default function Bookshelf() {
     let dragging = false, dragStartX = 0, dragT0 = 0, suppressClick = false, pressed = false;
     let wheelTimer = 0;
     const lift = new Float32Array(M);
+    // Per-tape caches, so a frame only writes to the DOM what actually changed.
+    const lastTf: string[] = new Array(M).fill("");
+    const lastZ = new Int16Array(M).fill(-1);
+    const lastO = new Float32Array(M).fill(-1);
+    const parts = tapeRefs.current.map((t) => ({
+      sp: t?.querySelector<HTMLElement>("[data-sh='sp']") ?? null,
+      cv: t?.querySelector<HTMLElement>("[data-sh='cv']") ?? null,
+      gs: t?.querySelector<HTMLElement>("[data-gs]") ?? null,
+    }));
+    const GS = "rotateY(90deg) translateZ(calc(var(--ws) / 2)) scale(";
+    let curX = -1, curY = -1, curState = "", lastRing = -1;
     let raf = 0, last = 0, visible = true;
     const anims: Animation[] = [];
 
@@ -301,7 +319,11 @@ export default function Bookshelf() {
       }
 
       // cursor + tilt
-      const rect = area.getBoundingClientRect();
+      if (rectDirty) {
+        areaRect = area.getBoundingClientRect();
+        rectDirty = false;
+      }
+      const rect = areaRect;
       const midX = rect.left + rect.width / 2;
       const midY = rect.top + rect.height / 2;
       const settled = Math.abs(T - s) < 0.3;
@@ -317,9 +339,17 @@ export default function Bookshelf() {
       cy += (my - cy) * ck;
       const cur = cursorRef.current;
       if (cur) {
-        cur.style.transform = `translate3d(${cx}px,${cy}px,0)`;
+        if (Math.abs(cx - curX) > 0.05 || Math.abs(cy - curY) > 0.05) {
+          curX = cx;
+          curY = cy;
+          cur.style.transform = `translate3d(${cx}px,${cy}px,0)`;
+        }
         const overSpine = inside && hover >= 0 && Math.abs(mod(hover - s + M / 2, M) - M / 2) > 0.5;
-        cur.dataset.state = !inside || !finePointer ? "off" : onCover ? "open" : overBtn ? "btn" : overSpine ? "spine" : "default";
+        const st = !inside || !finePointer ? "off" : onCover ? "open" : overBtn ? "btn" : overSpine ? "spine" : "default";
+        if (st !== curState) {
+          curState = st;
+          cur.dataset.state = st;
+        }
       }
 
       // tapes
@@ -339,18 +369,34 @@ export default function Bookshelf() {
         lift[v] += (target - lift[v]) * (reduced ? 1 : 1 - Math.exp(-12 * dt));
         const ry = -90 * o + tiltY * o;
         const y = -o * 0.025 * H - lift[v] * 0.045 * H;
-        el.style.transform = `translate3d(${x}px,${y}px,${o * 0.2 * H}px) rotateZ(${TILT * o}deg) rotateX(${tiltX * o}deg) rotateY(${ry}deg)`;
-        el.style.zIndex = String(Math.round(100 - Math.abs(r) * 4));
-        el.style.setProperty("--o", String(o));
-        el.style.setProperty("--shade-sp", String(o * 0.55));
-        el.style.setProperty("--shade-cv", String((1 - o) * 0.5));
+        const tf = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,${(o * 0.2 * H).toFixed(2)}px) rotateZ(${(TILT * o).toFixed(3)}deg) rotateX(${(tiltX * o).toFixed(3)}deg) rotateY(${ry.toFixed(3)}deg)`;
+        if (tf !== lastTf[v]) {
+          lastTf[v] = tf;
+          el.style.transform = tf;
+        }
+        const z = Math.round(100 - Math.abs(r) * 4);
+        if (z !== lastZ[v]) {
+          lastZ[v] = z;
+          el.style.zIndex = String(z);
+        }
+        // Shading and the soft shadow only change for the few books mid-turn.
+        if (Math.abs(o - lastO[v]) > 0.004) {
+          lastO[v] = o;
+          const p = parts[v];
+          if (p.sp) p.sp.style.opacity = String(o * 0.55);
+          if (p.cv) p.cv.style.opacity = String((1 - o) * 0.5);
+          if (p.gs) p.gs.style.transform = GS + o.toFixed(3) + ")";
+        }
       }
 
       const ring = ringRef.current;
       if (ring) {
         const sc = isOpen ? 0 : smooth(Math.max(0, 1 - Math.abs(T - s) * 3));
-        ring.style.transform = `translate(-50%,-50%) scale(${sc})`;
-        ring.tabIndex = sc > 0.5 ? 0 : -1;
+        if (Math.abs(sc - lastRing) > 0.004) {
+          lastRing = sc;
+          ring.style.transform = `translate(-50%,-50%) scale(${sc.toFixed(3)})`;
+          ring.tabIndex = sc > 0.5 ? 0 : -1;
+        }
       }
     };
     last = performance.now();
@@ -466,6 +512,7 @@ export default function Bookshelf() {
       clearTimeout(wheelTimer);
       io.disconnect();
       ro.disconnect();
+      window.removeEventListener("scroll", markRect);
       stopAnims();
       document.documentElement.style.overflow = "";
       window.removeEventListener("pointermove", onMove);
@@ -480,6 +527,66 @@ export default function Bookshelf() {
       root.removeEventListener("keydown", onKey);
     };
   }, [mounted]);
+
+  // Built once: the loop moves the tapes by hand, so React never needs to touch them again.
+  const tapes = useMemo(
+    () =>
+      Array.from({ length: M }, (_, v) => {
+        const b = books[v % N];
+        return (
+          <div
+            key={v}
+            ref={(el) => {
+              tapeRefs.current[v] = el;
+            }}
+            data-v={v}
+            aria-hidden
+            className="absolute left-0 top-0 h-0 w-0 cursor-pointer [transform-style:preserve-3d]"
+            style={{ visibility: "hidden" }}
+          >
+            {/* spine: the front of the box */}
+            <div
+              className="shelf-sp absolute overflow-hidden rounded-[2px] [backface-visibility:hidden]"
+              style={{ width: "var(--ws)", height: "var(--H)", left: "calc(var(--ws) / -2)", top: "calc(var(--H) / -2)", transform: "translateZ(calc(var(--d) / 2))", background: b.color, color: b.ink }}
+            >
+              <div className="flex h-full w-full flex-col items-center justify-between py-[7%]" style={{ boxShadow: "inset 2px 0 0 rgba(255,255,255,.18), inset -2px 0 0 rgba(0,0,0,.2)" }}>
+                <span className="font-mono text-[max(7px,calc(var(--ws)*.2))] tracking-wider opacity-70">{b.year}</span>
+                <span
+                  className="min-h-0 flex-1 overflow-hidden px-1 py-2 text-center font-semibold leading-none tracking-[-0.01em] [text-orientation:mixed] [writing-mode:vertical-rl]"
+                  style={{ fontSize: "max(9px, calc(var(--ws) * .3))", textOverflow: "ellipsis" }}
+                >
+                  {b.title}
+                </span>
+                <span className="max-w-full truncate px-0.5 text-[max(7px,calc(var(--ws)*.2))] font-medium uppercase tracking-[.08em] opacity-80 [writing-mode:vertical-rl] [height:22%]">{surname(b.author)}</span>
+              </div>
+              <span data-sh="sp" className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: 0 }} />
+            </div>
+            {/* cover: the right-hand side of the box */}
+            <div
+              className="shelf-cv absolute overflow-hidden rounded-[2px] bg-neutral-200 [backface-visibility:hidden]"
+              style={{ width: "var(--d)", height: "var(--H)", left: "calc(var(--d) / -2)", top: "calc(var(--H) / -2)", transform: "rotateY(90deg) translateZ(calc(var(--ws) / 2))" }}
+            >
+              <CoverFace b={b} />
+              <span data-sh="cv" className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: 0.5 }} />
+            </div>
+            {/* soft shadow under a pulled-out book; scaled by how far it is open */}
+            <div
+              data-gs
+              className="pointer-events-none absolute"
+              style={{
+                width: "var(--d)",
+                height: "calc(var(--H) * .12)",
+                left: "calc(var(--d) / -2)",
+                top: "calc(var(--H) * .46)",
+                transform: "rotateY(90deg) translateZ(calc(var(--ws) / 2)) scale(0)",
+                background: "radial-gradient(ellipse at center, rgba(20,16,10,.4) 0%, rgba(20,16,10,0) 70%)",
+              }}
+            />
+          </div>
+        );
+      }),
+    []
+  );
 
   const goTheme = useCallback((i: number) => api.current.goTo(firstOfTheme[i]), [firstOfTheme]);
   const findUrl = book.isbn ? `https://openlibrary.org/isbn/${book.isbn}` : null;
@@ -519,47 +626,7 @@ export default function Bookshelf() {
       {/* the shelf */}
       <section ref={areaRef} aria-label="Bookshelf" className="shelf-area relative overflow-hidden [perspective:2200px] [perspective-origin:50%_50%] [touch-action:pan-y]" style={{ height: "calc(var(--H) + 80px)" }}>
         <div className="absolute left-1/2 top-1/2 h-0 w-0 [transform-style:preserve-3d]">
-          {Array.from({ length: M }, (_, v) => {
-            const b = books[v % N];
-            return (
-              <div
-                key={v}
-                ref={(el) => {
-                  tapeRefs.current[v] = el;
-                }}
-                data-v={v}
-                aria-hidden
-                className="absolute left-0 top-0 h-0 w-0 cursor-pointer [transform-style:preserve-3d] [will-change:transform]"
-                style={{ visibility: "hidden" }}
-              >
-                {/* spine: the front of the box */}
-                <div
-                  className="shelf-sp absolute overflow-hidden rounded-[2px] [backface-visibility:hidden]"
-                  style={{ width: "var(--ws)", height: "var(--H)", left: "calc(var(--ws) / -2)", top: "calc(var(--H) / -2)", transform: "translateZ(calc(var(--d) / 2))", background: b.color, color: b.ink }}
-                >
-                  <div className="flex h-full w-full flex-col items-center justify-between py-[7%]" style={{ boxShadow: "inset 2px 0 0 rgba(255,255,255,.18), inset -2px 0 0 rgba(0,0,0,.2)" }}>
-                    <span className="font-mono text-[max(7px,calc(var(--ws)*.2))] tracking-wider opacity-70">{b.year}</span>
-                    <span
-                      className="min-h-0 flex-1 overflow-hidden px-1 py-2 text-center font-semibold leading-none tracking-[-0.01em] [text-orientation:mixed] [writing-mode:vertical-rl]"
-                      style={{ fontSize: "max(9px, calc(var(--ws) * .3))", textOverflow: "ellipsis" }}
-                    >
-                      {b.title}
-                    </span>
-                    <span className="max-w-full truncate px-0.5 text-[max(7px,calc(var(--ws)*.2))] font-medium uppercase tracking-[.08em] opacity-80 [writing-mode:vertical-rl] [height:22%]">{surname(b.author)}</span>
-                  </div>
-                  <span className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: "var(--shade-sp, .55)" }} />
-                </div>
-                {/* cover: the right-hand side of the box */}
-                <div
-                  className="shelf-cv absolute overflow-hidden rounded-[2px] bg-neutral-200 [backface-visibility:hidden]"
-                  style={{ boxShadow: "0 calc(30px * var(--o, 0)) calc(60px * var(--o, 0)) calc(-28px * var(--o, 0)) rgba(20,16,10,calc(.55 * var(--o, 0)))", width: "var(--d)", height: "var(--H)", left: "calc(var(--d) / -2)", top: "calc(var(--H) / -2)", transform: "rotateY(90deg) translateZ(calc(var(--ws) / 2))" }}
-                >
-                  <CoverFace b={b} />
-                  <span className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: "var(--shade-cv, .5)" }} />
-                </div>
-              </div>
-            );
-          })}
+          {tapes}
         </div>
 
         {/* play ring on the active cover's lower-left corner */}
