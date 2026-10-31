@@ -400,19 +400,27 @@ export function TasteIsAllYouNeed() {
     }
 
     let frameId = 0
+    let onScreen = true
     const gameLoop = () => {
       updateGame()
       drawGame()
-      frameId = requestAnimationFrame(gameLoop)
+      // no frames are spent while the strip is scrolled out of view
+      frameId = onScreen ? requestAnimationFrame(gameLoop) : 0
     }
 
     resizeCanvas()
     const observer = new ResizeObserver(resizeCanvas)
     if (canvas.parentElement) observer.observe(canvas.parentElement)
     gameLoop()
+    const io = new IntersectionObserver(([e]) => {
+      onScreen = e.isIntersecting
+      if (onScreen && !frameId) gameLoop()
+    })
+    io.observe(canvas)
 
     return () => {
       cancelAnimationFrame(frameId)
+      io.disconnect()
       observer.disconnect()
     }
   }, [])

@@ -30,6 +30,16 @@ const moved = process.env.REDIRECT_LEGACY_DOMAIN === "1";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Book covers are resized and cached by Vercel instead of fetched at full
+  // size from Open Library on every visit.
+  images: {
+    formats: ["image/webp"],
+    remotePatterns: [
+      { protocol: "https", hostname: "covers.openlibrary.org" },
+      { protocol: "https", hostname: "archive.org" },
+      { protocol: "https", hostname: "*.archive.org" },
+    ],
+  },
   async redirects() {
     return [
       {

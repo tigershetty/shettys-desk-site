@@ -14,7 +14,7 @@ export function proxy(request: NextRequest) {
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : " 'wasm-unsafe-eval'"};
     script-src-attr 'none';
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://i.scdn.co https://covers.openlibrary.org https://*.archive.org;
+    img-src 'self' blob: data: https://i.scdn.co https://covers.openlibrary.org https://archive.org https://*.archive.org;
     media-src 'self' blob:;
     font-src 'self' data:;
     connect-src ${connectSources};

@@ -16,8 +16,11 @@ export default function CountFigure({ n }: { n: number }) {
         if (!e.isIntersecting) return;
         io.disconnect();
         const t0 = performance.now();
-        const step = (t: number) => {
-          const k = Math.min(1, (t - t0) / 1200);
+        const step = () => {
+          // performance.now(), not the frame timestamp: the two clocks can
+          // disagree (a negative or huge step flashes wrong figures). Clamped
+          // so the figure never counts below 0 or past n.
+          const k = Math.max(0, Math.min(1, (performance.now() - t0) / 1200));
           el.textContent = fmt(n * (1 - Math.pow(1 - k, 4)));
           if (k < 1) raf = requestAnimationFrame(step);
         };

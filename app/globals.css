@@ -383,3 +383,80 @@ html.intro-active body {
 @media (prefers-reduced-motion: reduce) {
   .orbit-rot, .orbit-chip { animation: none !important; }
 }
+
+/* Bookshelf (About): geometry comes from one variable, --H. */
+.shelf-root {
+  --H: clamp(210px, min(44vh, 26vw), 400px);
+  --ws: calc(var(--H) * 0.135);
+  --d: calc(var(--H) * 0.64);
+}
+@media (max-width: 767px) {
+  .shelf-root {
+    --H: min(60vw, 40svh);
+  }
+}
+.shelf-cursor {
+  display: none;
+}
+@media (pointer: fine) {
+  .shelf-root,
+  .shelf-root * {
+    cursor: none !important;
+  }
+  .shelf-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 150;
+    display: block;
+    width: 58px;
+    height: 58px;
+    margin: -29px 0 0 -29px;
+    pointer-events: none;
+  }
+}
+.shelf-cursor-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1.5px solid var(--foreground);
+  transform: scale(0);
+  transition: transform 0.5s var(--shelf-ease, cubic-bezier(0.2, 0.8, 0.2, 1)), background-color 0.4s, border-color 0.4s;
+}
+.shelf-cursor-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 9999px;
+  background: var(--foreground);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.shelf-cursor-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: scale(0);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.shelf-cursor[data-state="default"] .shelf-cursor-ring { transform: scale(1); }
+.shelf-cursor[data-state="default"] .shelf-cursor-dot { transform: scale(1); }
+.shelf-cursor[data-state="spine"] .shelf-cursor-ring { transform: scale(0.72); }
+.shelf-cursor[data-state="spine"] .shelf-cursor-dot { transform: scale(1); }
+.shelf-cursor[data-state="btn"] .shelf-cursor-ring { transform: scale(0.55); }
+.shelf-cursor[data-state="open"] .shelf-cursor-ring {
+  transform: scale(1.75);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.shelf-cursor[data-state="open"] .shelf-cursor-label { transform: scale(1); }
